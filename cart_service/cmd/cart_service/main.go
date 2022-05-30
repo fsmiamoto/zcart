@@ -15,12 +15,12 @@ func main() {
 		// requested upgrade to the WebSocket protocol.
 		if websocket.IsWebSocketUpgrade(c) {
 			c.Locals("allowed", true)
-			return c.Redirect("/ws/1")
+			return c.Next()
 		}
 		return fiber.ErrUpgradeRequired
 	})
 
-	app.Get("/ws/:id", websocket.New(func(c *websocket.Conn) {
+	app.Get("/ws", websocket.New(func(c *websocket.Conn) {
 		// c.Locals is added to the *websocket.Conn
 		log.Println(c.Locals("allowed"))  // true
 		log.Println(c.Params("id"))       // 123
