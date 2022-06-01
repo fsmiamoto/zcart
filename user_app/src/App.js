@@ -1,10 +1,31 @@
+import { Layout, List, Avatar, Typography, Button, Statistic } from 'antd';
+import "./App.css"
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
+const defaultCart = [
+  {
+    title: 'Coca-Cola 500ml',
+    price: 6.00,
+  },
+  {
+    title: 'Batata Ruffles',
+    price: 7.00,
+  },
+  {
+    title: 'Pringles',
+    price: 10.00
+  },
+];
+
+const { Title } = Typography;
+const { Header, Footer } = Layout;
+
 const App = () => {
-  //Public API that will echo messages sent to it back to the client
-  const [socketUrl, setSocketUrl] = useState('ws://localhost:3333/ws');
-  const [messageHistory, setMessageHistory] = useState([]);
+  const [socketUrl, _setSocketUrl] = useState('ws://localhost:3333/ws');
+  const [cartProducts, setMessageHistory] = useState(defaultCart);
+
+  const [subtotal, setSubtotal] = useState(0.0);
 
   const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
@@ -14,8 +35,12 @@ const App = () => {
     }
   }, [lastMessage, setMessageHistory]);
 
-  const handleClickChangeSocketUrl = useCallback(
-    () => setSocketUrl('wss://demos.kaazing.com/echo'),
+  useEffect(() => {
+    setSubtotal(cartProducts.reduce((total,item) => total + item.price,0.0))
+  }, [cartProducts])
+
+  const handleEmptyCart = useCallback(
+    () => setMessageHistory([]),
     []
   );
 
@@ -30,24 +55,40 @@ const App = () => {
   }[readyState];
 
   return (
-    <div>
-      <button onClick={handleClickChangeSocketUrl}>
-        Click Me to change Socket Url
-      </button>
-      <button
+    <Layout style={{minHeight: '100vh'}}>
+      <Header>
+        <Title level={2} style={{color: 'white'}}>zCart</Title>
+      </Header>
+      <List
+        itemLayout="horizontal"
+        dataSource={cartProducts}
+        locale={{emptyText: "Carrinho vazio"}}
+        renderItem={item => (
+          <List.Item>
+            <List.Item.Meta
+              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+              title={item.title}
+              description={item.description || "Produto"}
+            />
+          <Statistic value={item.price} precision={2} prefix="R$" decimalSeparator=","/>
+          </List.Item>
+        )}
+      />
+      <div>Subtotal: <Statistic value={subtotal} prefix="R$" precision={2} decimalSeparator=","/></div>
+      <Button onClick={handleEmptyCart}>
+        Click Me to empty the cart
+      </Button>
+      <Button
         onClick={handleClickSendMessage}
         disabled={readyState !== ReadyState.OPEN}
       >
-        Click Me to send 'Hello'
-      </button>
-      <span>The WebSocket is currently {connectionStatus}</span>
-      {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
-      <ul>
-        {messageHistory.map((message, idx) => (
-          <span key={idx}>{message ? message.data : null}</span>
-        ))}
-      </ul>
-    </div>
+        Click Me to add a new product
+      </Button>
+      <Footer>
+        <span>The WebSocket is currently {connectionStatus}</span>
+        {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}
+      </Footer>
+    </Layout>
   );
 };
 
