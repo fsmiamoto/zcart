@@ -19,7 +19,7 @@ const defaultCart = [
 ];
 
 const { Title } = Typography;
-const { Header, Footer } = Layout;
+const { Header, Content, Footer } = Layout;
 
 const App = () => {
   const [socketUrl, _setSocketUrl] = useState('ws://localhost:3333/ws');
@@ -36,7 +36,7 @@ const App = () => {
   }, [lastMessage, setMessageHistory]);
 
   useEffect(() => {
-    setSubtotal(cartProducts.reduce((total,item) => total + item.price,0.0))
+    setSubtotal(cartProducts.reduce((total, item) => total + item.price, 0.0))
   }, [cartProducts])
 
   const handleEmptyCart = useCallback(
@@ -55,35 +55,37 @@ const App = () => {
   }[readyState];
 
   return (
-    <Layout style={{minHeight: '100vh'}}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Header>
-        <Title level={2} style={{color: 'white'}}>zCart</Title>
+         <Title level={3} style={{ color: 'white' }}>zCart</Title>
       </Header>
-      <List
-        itemLayout="horizontal"
-        dataSource={cartProducts}
-        locale={{emptyText: "Carrinho vazio"}}
-        renderItem={item => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-              title={item.title}
-              description={item.description || "Produto"}
-            />
-          <Statistic value={item.price} precision={2} prefix="R$" decimalSeparator=","/>
-          </List.Item>
-        )}
-      />
-      <div>Subtotal: <Statistic value={subtotal} prefix="R$" precision={2} decimalSeparator=","/></div>
-      <Button onClick={handleEmptyCart}>
-        Click Me to empty the cart
-      </Button>
-      <Button
-        onClick={handleClickSendMessage}
-        disabled={readyState !== ReadyState.OPEN}
-      >
-        Click Me to add a new product
-      </Button>
+      <Content>
+        <List
+          itemLayout="horizontal"
+          dataSource={cartProducts}
+          locale={{ emptyText: "Carrinho vazio" }}
+          renderItem={item => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                title={item.title}
+                description={item.description || "Produto"}
+              />
+              <Statistic value={item.price} precision={2} prefix="R$" decimalSeparator="," />
+            </List.Item>
+          )}
+        />
+        <div>Subtotal: <Statistic value={subtotal} prefix="R$" precision={2} decimalSeparator="," /></div>
+        <Button onClick={handleEmptyCart}>
+          Click Me to empty the cart
+        </Button>
+        <Button
+          onClick={handleClickSendMessage}
+          disabled={readyState !== ReadyState.OPEN}
+        >
+          Click Me to add a new product
+        </Button>
+      </Content>
       <Footer>
         <span>The WebSocket is currently {connectionStatus}</span>
         {lastMessage ? <span>Last message: {lastMessage.data}</span> : null}

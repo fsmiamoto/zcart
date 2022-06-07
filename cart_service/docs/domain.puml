@@ -1,0 +1,21 @@
+@startuml
+
+!theme materia
+
+class Cart {
+    + List() []CartProducts
+    + Add(p CartProduct)
+    + Remove(p CartProduct)
+}
+
+Cart --- CartProduct : contains <
+
+class CartProduct {
+}
+
+CartProduct --- Product
+
+class Product {
+}
+
+@end

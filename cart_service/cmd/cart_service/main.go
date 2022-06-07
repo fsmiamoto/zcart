@@ -34,6 +34,7 @@ func main() {
 			err error
 		)
 		for {
+			// Echo
 			if mt, msg, err = c.ReadMessage(); err != nil {
 				log.Println("read:", err)
 				break
