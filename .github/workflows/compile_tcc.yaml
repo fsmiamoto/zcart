@@ -1,0 +1,15 @@
+name: Compile TCC document
+on: [push]
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: docs/tcc
+          root_file: |
+            main.tex
