@@ -13,3 +13,8 @@ jobs:
           working_directory: docs/tcc
           root_file: |
             main.tex
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: TCC PDF
+          path: ./docs/tcc/main.pdf
