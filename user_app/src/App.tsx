@@ -10,23 +10,26 @@ type CartItem = {
     image_url?: string
 }
 
-const PLACEHOLDER_PRODUCT_URL = "./images/placeholder.png"
+const IMAGE_BASE_URL = "https://zcart-test-images.s3.amazonaws.com"
 
 const defaultCart: CartItem[] = [
     {
         title: 'Coca-Cola 2L',
         price: 6.00,
         quantity: 1,
+        image_url: `${IMAGE_BASE_URL}/coca2l.png`
     },
     {
         title: 'Batata Ruffles',
         price: 7.00,
         quantity: 2,
+        image_url: `${IMAGE_BASE_URL}/ruffles.png`
     },
     {
-        title: 'Pringles',
-        price: 10.00,
-        quantity: 3,
+        title: 'Chamyto',
+        price: 5.99,
+        quantity: 5,
+        image_url: `${IMAGE_BASE_URL}/chamyto.png`
     },
 ];
 
@@ -34,16 +37,13 @@ const { Header, Content, Footer } = Layout;
 
 function App() {
     const [cartProducts, setCartProducts] = useState(defaultCart);
-    const [subtotal, setSubtotal] = useState(1.0);
+    const [subtotal, setSubtotal] = useState(0.5);
 
     useEffect(() => {
         setSubtotal(cartProducts.reduce((total, item) => total + item.price * item.quantity, 0.0))
     }, [cartProducts])
 
-    const handleEmptyCart = useCallback(
-        () => setCartProducts([]),
-        []
-    );
+    const handleEmptyCart = useCallback(() => setCartProducts([]), []);
 
     return (
         <Layout style={{ minHeight: '100vh' }}>
@@ -58,7 +58,7 @@ function App() {
                     renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
-                                avatar={<Avatar src={item.image_url ?? PLACEHOLDER_PRODUCT_URL} />}
+                                avatar={<Avatar src={item.image_url} />}
                                 title={`${item.quantity}x ${item.title}`}
                                 description={item.description ?? "Produto"}
                             />
