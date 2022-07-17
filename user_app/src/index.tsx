@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { StubCartProvider } from './CartProvider/StubCartProvider';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+// TODO: For testing
+const provider = new StubCartProvider()
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App cartProvider={provider}/>
   </React.StrictMode>
 );
 

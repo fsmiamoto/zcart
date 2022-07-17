@@ -35,10 +35,6 @@
 
 }
 
-.app .buy-button {
-    font-size: 1.1rem;
-}
-
 .app .buttons {
     display: flex;
     justify-content: flex-start;

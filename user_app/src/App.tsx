@@ -1,50 +1,34 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Layout, List, Avatar, Button, Statistic } from 'antd';
+import { useState, useCallback, useEffect } from 'react';
+import { Layout, List, message, Avatar, Button, Statistic, Modal } from 'antd';
 import { ShoppingCartOutlined } from "@ant-design/icons"
+
+import { CartProvider } from './CartProvider/CartProvider';
+
 import "./App.css"
 
-type CartItem = {
-    title: string
-    price: number
-    quantity: number
-    description?: string
-    image_url?: string
+// FIXME: Remove this, used for testing
+import { StubCartProvider } from './CartProvider/StubCartProvider';
+
+export interface Props {
+    cartProvider: CartProvider
 }
-
-const IMAGE_BASE_URL = "https://zcart-test-images.s3.amazonaws.com"
-
-const defaultCart: CartItem[] = [
-    {
-        title: 'Coca-Cola 2L',
-        price: 6.00,
-        quantity: 1,
-        image_url: `${IMAGE_BASE_URL}/coca2l.png`
-    },
-    {
-        title: 'Batata Ruffles',
-        price: 7.00,
-        quantity: 2,
-        image_url: `${IMAGE_BASE_URL}/ruffles.png`
-    },
-    {
-        title: 'Chamyto',
-        price: 5.99,
-        quantity: 5,
-        image_url: `${IMAGE_BASE_URL}/chamyto.png`
-    },
-];
 
 const { Header, Content, Footer } = Layout;
 
-function App() {
-    const [cartProducts, setCartProducts] = useState(defaultCart);
+function App(props: Props) {
+    const [cartProducts, setCartProducts] = useState(props.cartProvider.ListCartItems());
     const [subtotal, setSubtotal] = useState(0.0);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         setSubtotal(cartProducts.reduce((total, item) => total + item.price * item.quantity, 0.0))
     }, [cartProducts])
 
-    const handleEmptyCart = useCallback(() => setCartProducts([]), []);
+    const handleFinalize = useCallback(() => {
+        setModalVisible(false)
+        setCartProducts([])
+        message.success("Obrigado!")
+    }, [])
 
     return (
         <Layout className="app">
@@ -71,7 +55,7 @@ function App() {
                     )}
                 />
                 <div className="subtotal">
-                    <Button type="primary" className="buy-button">
+                    <Button type="primary" size="large" onClick={() => setModalVisible(true)} disabled={cartProducts.length === 0} >
                         Finalizar compra
                     </Button>
                     <span>Subtotal: <Statistic value={subtotal} prefix="R$" precision={2} decimalSeparator="," /></span>
@@ -79,14 +63,18 @@ function App() {
             </Content>
             <Footer>
                 <div className="buttons">
-                    <Button onClick={handleEmptyCart}>
-                        Click Me to empty the cart
+                    {/* TODO: Debug this, not triggering re-render */}
+                    <Button onClick={() => { (props.cartProvider as StubCartProvider).AddItem(); console.log(props.cartProvider.ListCartItems()); setCartProducts(props.cartProvider.ListCartItems()) }}>
+                        Click Me to add a item
                     </Button>
-                    <Button>
-                        Click Me to add a new product
+                    <Button onClick={() => { (props.cartProvider as StubCartProvider).RemoveItem(); setCartProducts(props.cartProvider.ListCartItems()) }}>
+                        Click Me to remove a item
                     </Button>
                 </div>
             </Footer>
+            <Modal visible={modalVisible} onOk={handleFinalize} onCancel={() => setModalVisible(false)} okText={"Finalizar"} cancelText={"Cancelar"}>
+                Deseja finalizar a compra?
+            </Modal>
         </Layout>
     );
 };
