@@ -1,20 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { StubCartProvider } from './CartProvider/StubCartProvider';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { CartServiceCartProvider } from "./CartProvider/CartServiceCartProvider";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
-// TODO: For testing
-const provider = new StubCartProvider()
+const provider = new CartServiceCartProvider(process.env.REACT_APP_CART_SERVICE_URL || "");
 
 root.render(
   <React.StrictMode>
-    <App cartProvider={provider}/>
+    <App cartProvider={provider} />
   </React.StrictMode>
 );
 
