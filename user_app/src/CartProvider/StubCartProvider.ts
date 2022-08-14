@@ -57,9 +57,31 @@ export class StubCartProvider implements CartProvider {
   ];
 
   private cartItems: CartItem[];
+  private addHandler?: ItemHandler;
+  private removeHandler?: ItemHandler;
 
-  constructor() {
+  private readonly interval: number;
+
+  constructor(interval: number = 10000, maxQuantity: number = 4) {
+    this.interval = interval;
     this.cartItems = this.generateRandomCartItemList();
+    setInterval(() => {
+      const randomItem = this.ITEMS[this.randomIndex()];
+      const shouldAdd = Math.round(Math.random());
+      if (shouldAdd) {
+        this.addHandler &&
+          this.addHandler({
+            quantity: Math.round((maxQuantity - 1) * Math.random()) + 1,
+            ...randomItem,
+          });
+      } else {
+        this.removeHandler &&
+          this.removeHandler({
+            quantity: Math.round((maxQuantity - 1) * Math.random()) + 1,
+            ...randomItem,
+          });
+      }
+    }, this.interval);
   }
 
   async ListCartItems(): Promise<CartItem[]> {
@@ -67,13 +89,11 @@ export class StubCartProvider implements CartProvider {
   }
 
   OnAddProduct(handler: ItemHandler) {
-    const randomItem = this.ITEMS[this.randomIndex()];
-    handler(randomItem);
+    this.addHandler = handler;
   }
 
   OnRemoveProduct(handler: ItemHandler) {
-    const randomItem = this.ITEMS[this.randomIndex()];
-    handler(randomItem);
+    this.removeHandler = handler;
   }
 
   AddItem() {

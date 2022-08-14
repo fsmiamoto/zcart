@@ -3,13 +3,17 @@ CREATE TABLE IF NOT EXISTS products (
     name VARCHAR(255) NOT NULL,
     price REAL NOT NULL,
     description VARCHAR(255),
-    image_url VARCHAR(255)
+    image_url VARCHAR(255),
+    created_at DATETIME DEFAULT current_timestamp,
+    updated_at DATETIME DEFAULT current_timestamp
 );
 
 CREATE TABLE IF NOT EXISTS cart_products (
     cart_id VARCHAR(255),
     product_id VARCHAR(255),
     quantity INTEGER,
+    created_at DATETIME DEFAULT current_timestamp,
+    updated_at DATETIME DEFAULT current_timestamp,
     PRIMARY KEY (cart_id, product_id),
     FOREIGN KEY (product_id) REFERENCES products (id)
 );

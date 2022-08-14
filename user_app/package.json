@@ -24,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "start:stub": "REACT_APP_CART_SERVICE_URL='' npm run start"
   },
   "eslintConfig": {
     "extends": [

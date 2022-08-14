@@ -18,13 +18,17 @@ func main() {
 	os.Remove("./zcart.db")
 
 	db, err := sql.Open("sqlite3", "./zcart.db")
-	if err != nil {
-		log.Fatal(err)
-	}
+	fatalIfErr(err)
 
 	uihandler := uihandler.New(db, log.New(os.Stdout, "", 0))
 
-	uihandler.RegisterEndpoints(app)
+	fatalIfErr(uihandler.RegisterEndpoints(app))
 
 	log.Fatal(app.Listen(":3333"))
+}
+
+func fatalIfErr(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
 }
