@@ -6,9 +6,6 @@ import { CartProvider, CartItem } from "./CartProvider/CartProvider";
 
 import "./App.css";
 
-// FIXME: Remove this, used for testing
-// import { StubCartProvider } from "./CartProvider/StubCartProvider";
-
 export interface Props {
   cartProvider: CartProvider;
 }
@@ -91,8 +88,7 @@ function App(props: Props) {
           </span>
         </div>
       </Content>
-      <Footer>
-      </Footer>
+      <Footer></Footer>
       <Modal
         visible={modalVisible}
         onOk={handleFinalize}

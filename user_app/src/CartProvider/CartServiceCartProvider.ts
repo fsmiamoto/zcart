@@ -2,22 +2,22 @@ import axios, { AxiosInstance } from "axios";
 import { CartProvider, CartItem, ItemHandler } from "./CartProvider";
 
 interface CartServiceResponse {
-  id: string
-  products: CartServiceCartProduct[]
+  id: string;
+  products: CartServiceCartProduct[];
 }
 
 interface CartServiceCartProduct {
-    cart_id: string
-    product_id: string
-    quantity: number
-    product: {
-      id: string
-      name: string
-      price: number
-      image_url?: string
-      description?: string
-    }
-  }
+  cart_id: string;
+  product_id: string;
+  quantity: number;
+  product: {
+    id: string;
+    name: string;
+    price: number;
+    image_url?: string;
+    description?: string;
+  };
+}
 
 export class CartServiceCartProvider implements CartProvider {
   private axios: AxiosInstance;
@@ -30,11 +30,10 @@ export class CartServiceCartProvider implements CartProvider {
 
   async ListCartItems(): Promise<CartItem[]> {
     const items = (await this.axios.get("/cart/2")).data as CartServiceResponse;
-    return items.products.map(this.adapter)
+    return items.products.map(this.adapter);
   }
 
-  OnAddProduct(handler: ItemHandler) {
-  }
+  OnAddProduct(handler: ItemHandler) {}
 
   OnRemoveProduct(handler: ItemHandler) {}
 
@@ -45,6 +44,6 @@ export class CartServiceCartProvider implements CartProvider {
       price: cartProduct.product.price,
       image_url: cartProduct.product.image_url,
       description: cartProduct.product.description,
-    }
+    };
   }
 }

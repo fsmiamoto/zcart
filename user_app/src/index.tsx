@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { CartServiceCartProvider } from "./CartProvider/CartServiceCartProvider";
+import { StubCartProvider } from "./CartProvider/StubCartProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const provider = new CartServiceCartProvider(process.env.REACT_APP_CART_SERVICE_URL || "");
+const provider = process.env.REACT_APP_CART_SERVICE_URL
+  ? new CartServiceCartProvider(process.env.REACT_APP_CART_SERVICE_URL)
+  : new StubCartProvider();
 
 root.render(
   <React.StrictMode>
