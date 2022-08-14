@@ -3,7 +3,9 @@ package uihandler
 import (
 	"database/sql"
 	_ "embed"
+	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
@@ -12,33 +14,49 @@ import (
 )
 
 var (
-	ErrInvalidId    = errors.New("invalid cart id")
-	ErrCartNotFound = errors.New("cart not found")
+	ErrInvalidId       = errors.New("invalid cart id")
+	ErrCartNotFound    = errors.New("cart not found")
+	ErrProductNotFound = errors.New("product not found")
 )
 
 //go:embed migration.sql
 var migrations string
 
+const (
+	Add ActionType = iota
+	Remove
+)
+
+type ActionType uint
+
+type Action struct {
+	CartProduct *CartProduct `json:"cart_product"`
+	Type        ActionType   `json:"type"`
+}
+
 type Handler struct {
 	db       *sql.DB
 	logger   *log.Logger
-	channels map[string]chan struct{}
+	channels map[string]chan Action
 }
 
 func New(db *sql.DB, logger *log.Logger) *Handler {
 	return &Handler{
 		db:       db,
 		logger:   logger,
-		channels: make(map[string]chan struct{}),
+		channels: make(map[string]chan Action),
 	}
 }
 
-func (h *Handler) RegisterEndpoints(app *fiber.App) {
+func (h *Handler) RegisterEndpoints(app *fiber.App) error {
 	app.Get("/cart/:id/ws", h.WebsocketHandler, websocket.New(h.WebsocketManager))
 	app.Get("/cart/:id", h.GetCart)
 	app.Post("/cart/:id/products/:product_id", h.AddProduct)
 
-	h.applyMigration()
+	if err := h.applyMigration(); err != nil {
+		return fmt.Errorf("failed to apply migration: %w", err)
+	}
+	return nil
 }
 
 func (h *Handler) WebsocketHandler(ctx *fiber.Ctx) error {
@@ -54,12 +72,15 @@ func (h *Handler) WebsocketHandler(ctx *fiber.Ctx) error {
 
 func (h *Handler) setupUpdateChannel(cartId string) {
 	if _, found := h.channels[cartId]; !found {
-		h.channels[cartId] = make(chan struct{}, 10)
+		h.channels[cartId] = make(chan Action, 10)
 	}
 }
 
 func (h *Handler) WebsocketManager(c *websocket.Conn) {
 	cartId := c.Params("id")
+
+	h.logger.Printf("creating new websocket connection")
+	defer h.logger.Printf("closing websocket connection")
 
 	type websocketMessage struct {
 		messageType int
@@ -98,9 +119,15 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 				log.Println("write:", err)
 				return
 			}
-		case <-h.channels[cartId]:
-			h.logger.Printf("update for cart %s", cartId)
-			if err = c.WriteMessage(websocket.TextMessage, []byte("howdy hey")); err != nil {
+		case action := <-h.channels[cartId]:
+			h.logger.Printf("update for cart %s", action.CartProduct.CartID)
+
+			payload, err := json.Marshal(action)
+			if err != nil {
+				log.Printf("failed to notify cart %s: %s", action.CartProduct.CartID, err)
+			}
+
+			if err = c.WriteMessage(websocket.TextMessage, payload); err != nil {
 				log.Println("write:", err)
 				return
 			}
@@ -111,34 +138,65 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 func (h *Handler) AddProduct(ctx *fiber.Ctx) error {
 	cartId := ctx.Params("id")
 	productId := ctx.Params("product_id")
-	quantity := 1
+	quantity := uint(1)
+
+	product, err := h.getProduct(productId)
+	if err != nil {
+		return err
+	}
 
 	if err := h.addProduct(cartId, productId, quantity); err != nil {
 		return err
 	}
 
-	h.notify(cartId)
+	cp := &CartProduct{
+		CartID:    cartId,
+		ProductID: productId,
+		Quantity:  quantity,
+		Product:   product,
+	}
+	h.notify(cp)
 
 	return nil
 }
 
-func (h *Handler) notify(cartId string) {
+func (h *Handler) notify(cartProduct *CartProduct) {
+	if cartProduct == nil {
+		return
+	}
+
 	select {
-	case h.channels[cartId] <- struct{}{}:
+	case h.channels[cartProduct.CartID] <- Action{Type: Add, CartProduct: cartProduct}:
 		// success
-		h.logger.Printf("notified cart %s", cartId)
+		h.logger.Printf("notified cart %s", cartProduct.CartID)
 	default:
 		// blocked
-		h.logger.Printf("ignoring notification for cart %s: channel full", cartId)
+		h.logger.Printf("ignoring notification for cart %s: channel full", cartProduct.CartID)
 	}
 }
 
-func (h *Handler) addProduct(cartId string, productId string, quantity int) error {
+func (h *Handler) addProduct(cartId string, productId string, quantity uint) error {
 	const query = `INSERT INTO cart_products (cart_id,product_id,quantity) VALUES (?,?,?)`
 
 	_, err := h.db.Exec(query, cartId, productId, quantity)
 
 	return err
+}
+
+func (h *Handler) getProduct(productId string) (Product, error) {
+	const query = `SELECT id, name, price, description, image_url FROM products WHERE id = ?`
+	var product Product
+
+	row := h.db.QueryRow(query, productId)
+
+	if err := row.Scan(&product.ID, &product.Name, &product.Price, &product.Description, &product.ImageURL); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return product, ErrProductNotFound
+		}
+		return product, err
+	}
+
+	return product, nil
 }
 
 func (h *Handler) RemoveProduct(ctx *fiber.Ctx) error {
@@ -199,7 +257,8 @@ func (h *Handler) getCart(cartId string) ([]*CartProduct, error) {
         p.name, p.price, p.id, p.description, p.image_url
         FROM cart_products cp 
         JOIN products p ON cp.product_id = p.id 
-        WHERE cart_id = ?;
+        WHERE cart_id = ?
+        ORDER BY cp.updated_at;
     `
 
 	var result []*CartProduct
@@ -231,7 +290,8 @@ func (h *Handler) applyMigration() error {
 
 	_, err = tx.Exec(migrations)
 	if err != nil {
-		return tx.Rollback()
+		defer tx.Rollback()
+		return err
 	}
 
 	return tx.Commit()
