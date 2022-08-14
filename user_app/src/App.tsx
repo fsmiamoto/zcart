@@ -21,6 +21,18 @@ function App(props: Props) {
     props.cartProvider.ListCartItems().then((items) => {
       setCartProducts(items);
     });
+
+    props.cartProvider.OnAddProduct((item) => {
+      message.success(
+        `Produto ${item.quantity}x ${item.title} adicionado ao carrinho`
+      );
+    });
+
+    props.cartProvider.OnRemoveProduct((item) => {
+      message.success(
+        `Produto ${item.quantity}x ${item.title} removido do carrinho`
+      );
+    });
   }, [props.cartProvider]);
 
   useEffect(() => {

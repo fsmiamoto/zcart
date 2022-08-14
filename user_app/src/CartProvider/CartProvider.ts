@@ -15,4 +15,4 @@ export interface CartProvider {
   OnRemoveProduct(handler: ItemHandler): void;
 }
 
-export type ItemHandler = (item: Item) => void;
+export type ItemHandler = (item: CartItem) => void;
