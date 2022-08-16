@@ -2,12 +2,11 @@ package uihandler
 
 import (
 	"database/sql"
-	_ "embed"
 	"encoding/json"
 	"errors"
-	"fmt"
 
 	"github.com/fsmiamoto/zcart/cart_service/internal/models"
+	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
 	_ "github.com/mattn/go-sqlite3"
@@ -15,13 +14,9 @@ import (
 )
 
 var (
-	ErrInvalidId       = errors.New("invalid cart id")
-	ErrCartNotFound    = errors.New("cart not found")
-	ErrProductNotFound = errors.New("product not found")
+	ErrInvalidId    = errors.New("invalid cart id")
+	ErrCartNotFound = errors.New("cart not found")
 )
-
-//go:embed migration.sql
-var migrations string
 
 const (
 	Add ActionType = iota
@@ -36,28 +31,25 @@ type Action struct {
 }
 
 type Handler struct {
-	db       *sql.DB
-	logger   zerolog.Logger
-	channels map[string]chan Action
+	logger      zerolog.Logger
+	channels    map[string]chan Action
+	cartRepo    repository.CartRepository
+	productRepo repository.ProductRepository
 }
 
-func New(db *sql.DB, logger zerolog.Logger) *Handler {
+func New(db *sql.DB, logger zerolog.Logger, cartRepo repository.CartRepository, productRepo repository.ProductRepository) *Handler {
 	return &Handler{
-		db:       db,
-		logger:   logger,
-		channels: make(map[string]chan Action),
+		logger:      logger,
+		channels:    make(map[string]chan Action),
+		cartRepo:    cartRepo,
+		productRepo: productRepo,
 	}
 }
 
-func (h *Handler) RegisterEndpoints(app *fiber.App) error {
+func (h *Handler) RegisterEndpoints(app *fiber.App) {
 	app.Get("/cart/:id/ws", h.WebsocketHandler, websocket.New(h.WebsocketManager))
 	app.Get("/cart/:id", h.GetCart)
 	app.Post("/cart/:id/products/:product_id", h.AddProduct)
-
-	if err := h.applyMigration(); err != nil {
-		return fmt.Errorf("failed to apply migration: %w", err)
-	}
-	return nil
 }
 
 func (h *Handler) WebsocketHandler(ctx *fiber.Ctx) error {
@@ -141,12 +133,12 @@ func (h *Handler) AddProduct(ctx *fiber.Ctx) error {
 	productId := ctx.Params("product_id")
 	quantity := uint(1)
 
-	product, err := h.getProduct(productId)
+	product, err := h.productRepo.GetProduct(productId)
 	if err != nil {
 		return err
 	}
 
-	if err := h.addProduct(cartId, productId, quantity); err != nil {
+	if err := h.cartRepo.AddProduct(cartId, productId, quantity); err != nil {
 		return err
 	}
 
@@ -176,30 +168,6 @@ func (h *Handler) notify(cartProduct *models.CartProduct) {
 	}
 }
 
-func (h *Handler) addProduct(cartId string, productId string, quantity uint) error {
-	const query = `INSERT INTO cart_products (cart_id,product_id,quantity) VALUES (?,?,?)`
-
-	_, err := h.db.Exec(query, cartId, productId, quantity)
-
-	return err
-}
-
-func (h *Handler) getProduct(productId string) (models.Product, error) {
-	const query = `SELECT id, name, price, description, image_url FROM products WHERE id = ?`
-	var product models.Product
-
-	row := h.db.QueryRow(query, productId)
-
-	if err := row.Scan(&product.ID, &product.Name, &product.Price, &product.Description, &product.ImageURL); err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
-			return product, ErrProductNotFound
-		}
-		return product, err
-	}
-
-	return product, nil
-}
-
 func (h *Handler) RemoveProduct(ctx *fiber.Ctx) error {
 	panic("not implemented")
 }
@@ -212,7 +180,7 @@ func (h *Handler) GetCart(ctx *fiber.Ctx) error {
 
 	h.logger.Printf("GetCart: %s", id)
 
-	products, err := h.getCart(id)
+	products, err := h.cartRepo.GetCart(id)
 	if err != nil {
 		return err
 	}
@@ -229,51 +197,4 @@ func (h *Handler) GetCart(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.JSON(cart)
-}
-
-func (h *Handler) getCart(cartId string) ([]*models.CartProduct, error) {
-	const query = `
-    SELECT 
-        cp.cart_id, cp.product_id, cp.quantity, 
-        p.name, p.price, p.id, p.description, p.image_url
-        FROM cart_products cp 
-        JOIN products p ON cp.product_id = p.id 
-        WHERE cart_id = ?
-        ORDER BY cp.updated_at;
-    `
-
-	var result []*models.CartProduct
-
-	rows, err := h.db.Query(query, cartId)
-	if err != nil {
-		return nil, err
-	}
-
-	for rows.Next() {
-		cp := &models.CartProduct{}
-		if err := rows.Scan(
-			&cp.CartID, &cp.ProductID, &cp.Quantity, &cp.Product.Name,
-			&cp.Product.Price, &cp.Product.ID, &cp.Product.Description, &cp.Product.ImageURL,
-		); err != nil {
-			return nil, err
-		}
-		result = append(result, cp)
-	}
-
-	return result, nil
-}
-
-func (h *Handler) applyMigration() error {
-	tx, err := h.db.Begin()
-	if err != nil {
-		return err
-	}
-
-	_, err = tx.Exec(migrations)
-	if err != nil {
-		defer tx.Rollback()
-		return err
-	}
-
-	return tx.Commit()
 }

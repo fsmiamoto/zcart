@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"os"
 
+	"github.com/fsmiamoto/zcart/cart_service/internal/migrations"
+	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
 	"github.com/fsmiamoto/zcart/cart_service/internal/uihandler"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -19,7 +21,8 @@ const (
 )
 
 var (
-	logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	logger  = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	devMode = false
 )
 
 func main() {
@@ -28,16 +31,24 @@ func main() {
 	app.Use(cors.New())
 
 	if os.Getenv("DEV_MODE") == "true" {
-		logger.Info().Msgf("Running in DEV_MODE")
+		logger.Info().Msgf("Running in Dev Mode")
+		devMode = true
 		os.Remove(DBFILE)
 	}
 
 	db, err := sql.Open("sqlite3", DBFILE)
 	fatalIfErr(err)
 
-	uihandler := uihandler.New(db, logger)
+	if devMode {
+		migrations.Apply(db)
+	}
 
-	fatalIfErr(uihandler.RegisterEndpoints(app))
+	cartRepo := repository.NewCartRepository(db)
+	productRepo := repository.NewProductRepository(db)
+
+	uihandler := uihandler.New(db, logger, cartRepo, productRepo)
+
+	uihandler.RegisterEndpoints(app)
 
 	fatalIfErr(app.Listen(PORT))
 }
