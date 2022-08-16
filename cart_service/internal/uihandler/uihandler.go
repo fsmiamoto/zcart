@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/fsmiamoto/zcart/cart_service/internal/models"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
 	_ "github.com/mattn/go-sqlite3"
@@ -30,8 +31,8 @@ const (
 type ActionType uint
 
 type Action struct {
-	CartProduct *CartProduct `json:"cart_product"`
-	Type        ActionType   `json:"type"`
+	CartProduct *models.CartProduct `json:"cart_product"`
+	Type        ActionType          `json:"type"`
 }
 
 type Handler struct {
@@ -149,7 +150,7 @@ func (h *Handler) AddProduct(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	cp := &CartProduct{
+	cp := &models.CartProduct{
 		CartID:    cartId,
 		ProductID: productId,
 		Quantity:  quantity,
@@ -160,7 +161,7 @@ func (h *Handler) AddProduct(ctx *fiber.Ctx) error {
 	return nil
 }
 
-func (h *Handler) notify(cartProduct *CartProduct) {
+func (h *Handler) notify(cartProduct *models.CartProduct) {
 	if cartProduct == nil {
 		return
 	}
@@ -183,9 +184,9 @@ func (h *Handler) addProduct(cartId string, productId string, quantity uint) err
 	return err
 }
 
-func (h *Handler) getProduct(productId string) (Product, error) {
+func (h *Handler) getProduct(productId string) (models.Product, error) {
 	const query = `SELECT id, name, price, description, image_url FROM products WHERE id = ?`
-	var product Product
+	var product models.Product
 
 	row := h.db.QueryRow(query, productId)
 
@@ -222,7 +223,7 @@ func (h *Handler) GetCart(ctx *fiber.Ctx) error {
 		return ErrCartNotFound
 	}
 
-	cart := &Cart{
+	cart := &models.Cart{
 		ID:       id,
 		Products: products,
 	}
@@ -230,27 +231,7 @@ func (h *Handler) GetCart(ctx *fiber.Ctx) error {
 	return ctx.JSON(cart)
 }
 
-type Cart struct {
-	ID       string         `json:"id"`
-	Products []*CartProduct `json:"products"`
-}
-
-type Product struct {
-	ID          string  `json:"id"`
-	Name        string  `json:"name"`
-	Description *string `json:"description"`
-	Price       float64 `json:"price"`
-	ImageURL    *string `json:"image_url"`
-}
-
-type CartProduct struct {
-	CartID    string  `json:"cart_id"`
-	ProductID string  `json:"product_id"`
-	Quantity  uint    `json:"quantity"`
-	Product   Product `json:"product"`
-}
-
-func (h *Handler) getCart(cartId string) ([]*CartProduct, error) {
+func (h *Handler) getCart(cartId string) ([]*models.CartProduct, error) {
 	const query = `
     SELECT 
         cp.cart_id, cp.product_id, cp.quantity, 
@@ -261,7 +242,7 @@ func (h *Handler) getCart(cartId string) ([]*CartProduct, error) {
         ORDER BY cp.updated_at;
     `
 
-	var result []*CartProduct
+	var result []*models.CartProduct
 
 	rows, err := h.db.Query(query, cartId)
 	if err != nil {
@@ -269,7 +250,7 @@ func (h *Handler) getCart(cartId string) ([]*CartProduct, error) {
 	}
 
 	for rows.Next() {
-		cp := &CartProduct{}
+		cp := &models.CartProduct{}
 		if err := rows.Scan(
 			&cp.CartID, &cp.ProductID, &cp.Quantity, &cp.Product.Name,
 			&cp.Product.Price, &cp.Product.ID, &cp.Product.Description, &cp.Product.ImageURL,
