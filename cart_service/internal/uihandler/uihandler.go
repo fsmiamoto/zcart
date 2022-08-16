@@ -6,11 +6,11 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/rs/zerolog"
 )
 
 var (
@@ -36,11 +36,11 @@ type Action struct {
 
 type Handler struct {
 	db       *sql.DB
-	logger   *log.Logger
+	logger   zerolog.Logger
 	channels map[string]chan Action
 }
 
-func New(db *sql.DB, logger *log.Logger) *Handler {
+func New(db *sql.DB, logger zerolog.Logger) *Handler {
 	return &Handler{
 		db:       db,
 		logger:   logger,
@@ -116,7 +116,7 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 		case msg := <-readerChannel:
 			h.logger.Printf("payload: %s", string(msg.payload))
 			if err = c.WriteMessage(messageType, payload); err != nil {
-				log.Println("write:", err)
+				h.logger.Err(err).Msgf("failed to write message")
 				return
 			}
 		case action := <-h.channels[cartId]:
@@ -124,11 +124,11 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 
 			payload, err := json.Marshal(action)
 			if err != nil {
-				log.Printf("failed to notify cart %s: %s", action.CartProduct.CartID, err)
+				h.logger.Err(err).Msgf("failed to notify cart %s", action.CartProduct.CartID)
 			}
 
 			if err = c.WriteMessage(websocket.TextMessage, payload); err != nil {
-				log.Println("write:", err)
+				h.logger.Err(err).Msgf("failed to write message")
 				return
 			}
 		}
