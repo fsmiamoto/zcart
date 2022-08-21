@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/fsmiamoto/zcart/cart_service/internal/migrations"
-	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
+	"github.com/fsmiamoto/zcart/cart_service/internal/repository/sqlite"
 	"github.com/fsmiamoto/zcart/cart_service/internal/uihandler"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -43,8 +43,8 @@ func main() {
 		fatalIfErr(migrations.Apply(db))
 	}
 
-	cartRepo := repository.NewCartRepository(db)
-	productRepo := repository.NewProductRepository(db)
+	cartRepo := sqlite.NewCartRepository(db)
+	productRepo := sqlite.NewProductRepository(db)
 
 	uihandler := uihandler.New(db, logger, cartRepo, productRepo)
 

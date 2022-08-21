@@ -1,4 +1,4 @@
-package repository_test
+package sqlite_test
 
 import (
 	"database/sql"
@@ -8,6 +8,7 @@ import (
 	"github.com/DATA-DOG/go-sqlmock"
 	"github.com/fsmiamoto/zcart/cart_service/internal/models"
 	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
+	"github.com/fsmiamoto/zcart/cart_service/internal/repository/sqlite"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -17,7 +18,7 @@ func optional(s string) *string {
 
 func createProductSetup() (repository.ProductRepository, *sql.DB, sqlmock.Sqlmock) {
 	db, mock := NewMock()
-	return repository.NewProductRepository(db), db, mock
+	return sqlite.NewProductRepository(db), db, mock
 }
 
 func TestProductRepo(t *testing.T) {
