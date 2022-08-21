@@ -1,17 +1,19 @@
-package uihandler
+package fiber_api
 
 import (
-	"database/sql"
 	"encoding/json"
 	"errors"
 
 	"github.com/fsmiamoto/zcart/cart_service/internal/models"
 	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/websocket/v2"
-	_ "github.com/mattn/go-sqlite3"
 	"github.com/rs/zerolog"
 )
+
+// TODO: This is a big ball of mud
+// Refactor into the appropriate Application/Domain services
 
 var (
 	ErrInvalidId    = errors.New("invalid cart id")
@@ -31,25 +33,36 @@ type Action struct {
 }
 
 type Handler struct {
+	app         *fiber.App
 	logger      zerolog.Logger
 	channels    map[string]chan Action
 	cartRepo    repository.CartRepository
 	productRepo repository.ProductRepository
 }
 
-func New(db *sql.DB, logger zerolog.Logger, cartRepo repository.CartRepository, productRepo repository.ProductRepository) *Handler {
-	return &Handler{
+func New(logger zerolog.Logger, cartRepo repository.CartRepository, productRepo repository.ProductRepository) *Handler {
+	handler := &Handler{
+		app:         fiber.New(),
 		logger:      logger,
 		channels:    make(map[string]chan Action),
 		cartRepo:    cartRepo,
 		productRepo: productRepo,
 	}
+	handler.RegisterEndpoints()
+	handler.app.Use(cors.New())
+
+	return handler
 }
 
-func (h *Handler) RegisterEndpoints(app *fiber.App) {
-	app.Get("/cart/:id/ws", h.WebsocketHandler, websocket.New(h.WebsocketManager))
-	app.Get("/cart/:id", h.GetCart)
-	app.Post("/cart/:id/products/:product_id", h.AddProduct)
+func (h *Handler) Listen(addr string) error {
+	return h.app.Listen(addr)
+}
+
+func (h *Handler) RegisterEndpoints() {
+	// TODO: Review these endpoints
+	h.app.Get("/cart/:id/ws", h.WebsocketHandler, websocket.New(h.WebsocketManager))
+	h.app.Get("/cart/:id", h.GetCart)
+	h.app.Post("/cart/:id/products/:product_id", h.AddProduct)
 }
 
 func (h *Handler) WebsocketHandler(ctx *fiber.Ctx) error {
@@ -126,6 +139,11 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 			}
 		}
 	}
+}
+
+type AddProductRequest struct {
+	ProductID string `json:"product_id"`
+	Quantity  uint   `json:"quantity"`
 }
 
 func (h *Handler) AddProduct(ctx *fiber.Ctx) error {

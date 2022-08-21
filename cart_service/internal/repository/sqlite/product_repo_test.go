@@ -48,7 +48,7 @@ func TestProductRepo(t *testing.T) {
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})
 
-		t.Run("Error", func(t *testing.T) {
+		t.Run("Error with random error", func(t *testing.T) {
 			repo, _, mock := createProductSetup()
 
 			productId := "2"
@@ -58,6 +58,18 @@ func TestProductRepo(t *testing.T) {
 
 			_, err := repo.GetProduct(productId)
 			assert.ErrorIs(t, err, expectedError)
+			assert.NoError(t, mock.ExpectationsWereMet())
+		})
+
+		t.Run("Error with no rows error", func(t *testing.T) {
+			repo, _, mock := createProductSetup()
+
+			productId := "2"
+
+			mock.ExpectQuery(`SELECT .* FROM products WHERE id = ?`).WithArgs(productId).WillReturnError(sql.ErrNoRows)
+
+			_, err := repo.GetProduct(productId)
+			assert.ErrorIs(t, err, sqlite.ErrProductNotFound)
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})
 

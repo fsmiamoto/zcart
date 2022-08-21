@@ -4,14 +4,14 @@ import (
 	"database/sql"
 	"os"
 
+	fiberApi "github.com/fsmiamoto/zcart/cart_service/internal/adapters/fiber_api"
 	"github.com/fsmiamoto/zcart/cart_service/internal/migrations"
 	"github.com/fsmiamoto/zcart/cart_service/internal/repository/sqlite"
-	"github.com/fsmiamoto/zcart/cart_service/internal/uihandler"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 // TODO: Make this configurable
@@ -26,10 +26,6 @@ var (
 )
 
 func main() {
-	app := fiber.New()
-
-	app.Use(cors.New())
-
 	if os.Getenv("DEV_MODE") == "true" {
 		logger.Info().Msgf("Running in Dev Mode")
 		devMode = true
@@ -46,11 +42,9 @@ func main() {
 	cartRepo := sqlite.NewCartRepository(db)
 	productRepo := sqlite.NewProductRepository(db)
 
-	uihandler := uihandler.New(db, logger, cartRepo, productRepo)
+	api := fiberApi.New(logger, cartRepo, productRepo)
 
-	uihandler.RegisterEndpoints(app)
-
-	fatalIfErr(app.Listen(PORT))
+	fatalIfErr(api.Listen(PORT))
 }
 
 func fatalIfErr(err error) {
