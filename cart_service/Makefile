@@ -5,6 +5,9 @@ all: build
 build:
 	$(GO) build -o ./bin/cart_service ./cmd/cart_service/
 
+test:
+	$(GO) test ./... -v
+
 dev:
 	DEV_MODE=true CompileDaemon -build "make build" -command "./bin/cart_service"
 

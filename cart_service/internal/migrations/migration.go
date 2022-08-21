@@ -16,7 +16,9 @@ func Apply(db *sql.DB) error {
 
 	_, err = tx.Exec(migrations)
 	if err != nil {
-		defer tx.Rollback()
+		defer func() {
+			_ = tx.Rollback()
+		}()
 		return err
 	}
 
