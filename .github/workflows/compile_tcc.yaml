@@ -1,5 +1,6 @@
 name: Compile TCC document
-on: [push]
+on: 
+  workflow_call:
 
 jobs:
   compile:
