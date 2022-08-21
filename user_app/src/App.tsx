@@ -9,16 +9,10 @@ import {
   Modal,
   Spin,
 } from "antd";
-import { ShoppingCartOutlined, LoadingOutlined } from "@ant-design/icons";
-
-import { CartProvider, CartItem } from "./CartProvider/CartProvider";
-
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { CartProvider, CartItem } from "src/service/cart_provider";
+import { LoadingSpinner } from "src/components/loading_spinner";
 import "./App.css";
-
-const Loading = () => {
-  const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-  return <Spin indicator={antIcon} />;
-};
 
 export interface Props {
   cartProvider: CartProvider;
@@ -79,7 +73,7 @@ function App(props: Props) {
       </Header>
       <Content className="content">
         {loading ? (
-          <Loading />
+          <LoadingSpinner />
         ) : (
           <>
             <List

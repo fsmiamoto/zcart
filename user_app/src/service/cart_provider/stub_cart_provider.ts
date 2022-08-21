@@ -1,4 +1,9 @@
-import { CartProvider, Item, CartItem, ItemHandler } from "./CartProvider";
+import {
+  CartProvider,
+  Item,
+  CartItem,
+  ItemHandler,
+} from "src/service/cart_provider";
 
 const IMAGE_BASE_URL = "https://zcart-test-images.s3.amazonaws.com";
 
@@ -61,9 +66,15 @@ export class StubCartProvider implements CartProvider {
   private removeHandler?: ItemHandler;
 
   private readonly interval: number;
+  private readonly delay: number;
 
-  constructor(interval: number = 10000, maxQuantity: number = 4) {
+  constructor(
+    delay: number = 2000,
+    interval: number = 10000,
+    maxQuantity: number = 4
+  ) {
     this.interval = interval;
+    this.delay = delay;
     this.cartItems = this.generateRandomCartItemList();
     setInterval(() => {
       const randomItem = this.ITEMS[this.randomIndex()];
@@ -85,6 +96,9 @@ export class StubCartProvider implements CartProvider {
   }
 
   async ListCartItems(): Promise<CartItem[]> {
+    await new Promise((resolve) => {
+      setTimeout(resolve, this.delay);
+    });
     return this.cartItems;
   }
 
