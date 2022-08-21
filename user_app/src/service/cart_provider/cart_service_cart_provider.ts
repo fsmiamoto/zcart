@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { CartProvider, CartItem, ItemHandler } from "./CartProvider";
+import { CartProvider, CartItem, ItemHandler } from "src/service/cart_provider";
 
 interface CartServiceResponse {
   id: string;
