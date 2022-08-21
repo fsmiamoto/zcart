@@ -1,4 +1,4 @@
-name: Check if should compile TCC
+name: Conditionally compile TCC document
 on: 
   push:
     branches:
