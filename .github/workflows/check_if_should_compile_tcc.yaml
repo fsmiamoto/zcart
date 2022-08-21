@@ -2,7 +2,7 @@ name: Check if should compile TCC
 on: 
   push:
     branches:
-      - main
+      - master
 
 jobs:
   compile:
