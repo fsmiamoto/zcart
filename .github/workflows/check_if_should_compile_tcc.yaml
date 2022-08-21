@@ -7,6 +7,8 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    outputs:
+      should_compile: contains(steps.changed-files.outputs.all_changed_files, 'docs/tcc')
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -18,5 +20,6 @@ jobs:
         uses: tj-actions/changed-files@v27
 
   compile:
-    if: contains(jobs.check.steps.changed-files.outputs.all_changed_files, 'docs/tcc')
+    needs: check
+    if: needs.check.outputs.should_compile
     uses: ./.github/workflows/compile_tcc.yaml
