@@ -21,5 +21,5 @@ jobs:
 
   compile:
     needs: check
-    if: needs.check.outputs.should_compile
+    if: ${{ needs.check.outputs.should_compile == 'true' }}
     uses: ./.github/workflows/compile_tcc.yaml
