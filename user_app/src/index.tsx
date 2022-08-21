@@ -7,17 +7,17 @@ import { CartServiceCartProvider } from "src/service/cart_provider/cart_service_
 import { StubCartProvider } from "src/service/cart_provider/stub_cart_provider";
 
 const root = ReactDOM.createRoot(
-    document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
 const provider = process.env.REACT_APP_CART_SERVICE_URL
-    ? new CartServiceCartProvider(process.env.REACT_APP_CART_SERVICE_URL)
-    : new StubCartProvider();
+  ? new CartServiceCartProvider(process.env.REACT_APP_CART_SERVICE_URL)
+  : new StubCartProvider();
 
 root.render(
-    <React.StrictMode>
-        <App cartProvider={provider} />
-    </React.StrictMode>
+  <React.StrictMode>
+    <App cartProvider={provider} />
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
