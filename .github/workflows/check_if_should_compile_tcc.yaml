@@ -19,12 +19,6 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v27
 
-  test:
-    needs: check
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo ${{ needs.check.outputs.should_compile }}
-
   compile:
     needs: check
     if: ${{ needs.check.outputs.should_compile == 'true' }}
