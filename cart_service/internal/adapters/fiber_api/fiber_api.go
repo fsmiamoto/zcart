@@ -62,7 +62,8 @@ func (h *Handler) RegisterEndpoints() {
 	// TODO: Review these endpoints
 	h.app.Get("/cart/:id/ws", h.WebsocketHandler, websocket.New(h.WebsocketManager))
 	h.app.Get("/cart/:id", h.GetCart)
-	h.app.Post("/cart/:id/products/:product_id", h.AddProduct)
+	h.app.Post("/cart/:cart_id/products/:product_id", h.AddProduct)
+	h.app.Post("/cart/:cart_id/products", h.UpdateProducts)
 }
 
 func (h *Handler) WebsocketHandler(ctx *fiber.Ctx) error {
@@ -141,13 +142,42 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 	}
 }
 
-type AddProductRequest struct {
+type UpdateProductsRequestAction string
+
+const (
+	add    UpdateProductsRequestAction = "add"
+	remove UpdateProductsRequestAction = "remove"
+)
+
+// TODO: Validation?
+type UpdateProductsRequest struct {
 	ProductID string `json:"product_id"`
-	Quantity  uint   `json:"quantity"`
+	Amount    uint   `json:"amount"`
+	Action    UpdateProductsRequestAction
+}
+
+func (h *Handler) UpdateProducts(ctx *fiber.Ctx) error {
+	var body UpdateProductsRequest
+
+	if err := ctx.BodyParser(&body); err != nil {
+		return err
+	}
+
+	cartId := ctx.Params("cart_id")
+
+	if body.Action == add {
+		return h.cartRepo.AddProduct(cartId, body.ProductID, body.Amount)
+	} else if body.Action == remove {
+		return h.cartRepo.RemoveProduct(cartId, body.ProductID, body.Amount)
+	} else {
+		return errors.New("invalid action")
+	}
+
+	// TODO: Notify
 }
 
 func (h *Handler) AddProduct(ctx *fiber.Ctx) error {
-	cartId := ctx.Params("id")
+	cartId := ctx.Params("cart_id")
 	productId := ctx.Params("product_id")
 	quantity := uint(1)
 
