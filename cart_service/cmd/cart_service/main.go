@@ -40,7 +40,7 @@ func main() {
 	fatalIfErr(err)
 
 	if devMode {
-		migrations.Apply(db)
+		fatalIfErr(migrations.Apply(db))
 	}
 
 	cartRepo := repository.NewCartRepository(db)

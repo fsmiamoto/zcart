@@ -1,0 +1,33 @@
+name: Cart Service CI
+on: 
+  workflow_call:
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.17
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Build
+        working-directory: ./cart_service
+        run: |
+          make build
+
+      - name: Test
+        working-directory: ./cart_service
+        run: |
+          make test
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          version: v1.29
+          working-directory: ./cart_service
