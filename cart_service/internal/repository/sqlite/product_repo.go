@@ -1,25 +1,22 @@
-package repository
+package sqlite
 
 import (
 	"database/sql"
 	"errors"
 
 	"github.com/fsmiamoto/zcart/cart_service/internal/models"
+	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
 )
 
 var (
 	ErrProductNotFound = errors.New("product not found")
 )
 
-type ProductRepository interface {
-	GetProduct(productId string) (models.Product, error)
-}
-
 type productRepository struct {
 	db *sql.DB
 }
 
-func NewProductRepository(db *sql.DB) ProductRepository {
+func NewProductRepository(db *sql.DB) repository.ProductRepository {
 	return &productRepository{db}
 }
 
