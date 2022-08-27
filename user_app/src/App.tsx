@@ -35,15 +35,15 @@ function App(props: Props) {
 
     useEffect(() => {
         props.cartProvider.OnAddProduct((item) => {
-            message.success(
-                `Produto ${item.quantity}x ${item.title} adicionado ao carrinho`
+            message.info(
+                <span>Produto {item.quantity}x {item.title} <b>adicionado</b> ao carrinho</span>
             );
             setLoading(true);
         });
 
         props.cartProvider.OnRemoveProduct((item) => {
-            message.success(
-                `Produto ${item.quantity}x ${item.title} removido do carrinho`
+            message.info(
+                <span>Produto {item.quantity}x {item.title} <b>removido</b> do carrinho</span>
             );
             setLoading(true);
         });

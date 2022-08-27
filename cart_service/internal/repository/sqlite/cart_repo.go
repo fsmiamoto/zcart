@@ -8,6 +8,10 @@ import (
 	"github.com/fsmiamoto/zcart/cart_service/internal/repository"
 )
 
+var (
+	ErrCartNotFound = errors.New("cart not found")
+)
+
 type sqlCartRepository struct {
 	db *sql.DB
 }
@@ -70,7 +74,7 @@ func (c *sqlCartRepository) GetCartProduct(cartId string, productId string) (*mo
 	return cartProduct, nil
 }
 
-func (c *sqlCartRepository) GetCart(cartId string) ([]*models.CartProduct, error) {
+func (c *sqlCartRepository) GetCart(cartId string) (*models.Cart, error) {
 	const query = `
         SELECT
           cp.cart_id,
@@ -90,7 +94,7 @@ func (c *sqlCartRepository) GetCart(cartId string) ([]*models.CartProduct, error
           cp.updated_at;
 `
 
-	var result []*models.CartProduct
+	var cartProducts []*models.CartProduct
 
 	rows, err := c.db.Query(query, cartId)
 	if err != nil {
@@ -105,10 +109,13 @@ func (c *sqlCartRepository) GetCart(cartId string) ([]*models.CartProduct, error
 		); err != nil {
 			return nil, err
 		}
-		result = append(result, cp)
+		cartProducts = append(cartProducts, cp)
 	}
 
-	return result, nil
+	return &models.Cart{
+		ID:       cartId,
+		Products: cartProducts,
+	}, nil
 }
 
 func (c *sqlCartRepository) removeProduct(cartId string, productId string) error {
