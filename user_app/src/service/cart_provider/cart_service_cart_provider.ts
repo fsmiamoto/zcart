@@ -19,13 +19,13 @@ interface CartServiceCartProduct {
   };
 }
 
-enum actionType {
-  ADD = 0,
-  REMOVE = 1,
+enum CartEvent {
+  ProductAdded = "product_added",
+  ProductRemoved = "product_removed",
 }
 
-interface cartServiceAction {
-  type: number;
+interface CartEventNotification {
+  event: CartEvent;
   cart_product: CartServiceCartProduct;
 }
 
@@ -51,9 +51,9 @@ export class CartServiceCartProvider implements CartProvider {
       console.log("closing websocket");
     };
     this.websocket.onmessage = (event) => {
-      const payload = JSON.parse(event.data) as cartServiceAction;
+      const payload = JSON.parse(event.data) as CartEventNotification;
       console.log(payload);
-      if (payload.type === actionType.ADD) {
+      if (payload.event === CartEvent.ProductAdded) {
         this.addProductHandler &&
           this.addProductHandler(this.adapter(payload.cart_product));
       } else {

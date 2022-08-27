@@ -5,7 +5,7 @@ import (
 )
 
 type CartRepository interface {
-	GetCart(cartId string) ([]*models.CartProduct, error)
+	GetCart(cartId string) (*models.Cart, error)
 	GetCartProduct(cartId string, productId string) (*models.CartProduct, error)
 	AddProduct(cartId string, productId string, amount uint) error
 	RemoveProduct(cartId string, productId string, amount uint) error

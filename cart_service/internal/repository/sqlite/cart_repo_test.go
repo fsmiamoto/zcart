@@ -66,11 +66,11 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId).
 				WillReturnRows(rows)
 
-			cartProducts, err := repo.GetCart(cartId)
+			cart, err := repo.GetCart(cartId)
 			assert.NoError(t, err)
 			assert.NoError(t, mock.ExpectationsWereMet())
 
-			assert.EqualValues(t, expectedCartProducts, cartProducts)
+			assert.EqualValues(t, expectedCartProducts, cart.Products)
 		})
 
 		t.Run("Error", func(t *testing.T) {
