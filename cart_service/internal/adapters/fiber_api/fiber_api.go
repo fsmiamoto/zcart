@@ -60,14 +60,14 @@ func (h *Handler) UpdateProducts(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	if err := h.processAction(cartId, request.ProductID, request.Amount, request.Action); err != nil {
+	if err := h.processAction(cartId, request.ProductID, request.Quantity, request.Action); err != nil {
 		return err
 	}
 
 	cp := &models.CartProduct{
 		CartID:    cartId,
 		ProductID: request.ProductID,
-		Quantity:  request.Amount,
+		Quantity:  request.Quantity,
 		Product:   product,
 	}
 

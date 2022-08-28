@@ -20,7 +20,7 @@ const (
 
 type UpdateProductsRequest struct {
 	ProductID string                      `json:"product_id"`
-	Amount    uint                        `json:"amount"`
+	Quantity  uint                        `json:"quantity"`
 	Action    UpdateProductsRequestAction `json:"action"`
 }
 
