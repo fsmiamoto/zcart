@@ -1,0 +1,9 @@
+.cart-items .cart-item {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.cart-items .cart-item .cart-item-meta * {
+  font-size: 1.25rem;
+}

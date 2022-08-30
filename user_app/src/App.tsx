@@ -12,6 +12,7 @@ import { ShoppingCartOutlined } from "@ant-design/icons";
 import { CartProvider, CartItem } from "src/service/cart_provider";
 import { LoadingSpinner } from "src/components/loading_spinner";
 import "./App.css";
+import { CartItemList } from "./components/cart_item_list";
 
 export interface Props {
     cartProvider: CartProvider;
@@ -20,7 +21,7 @@ export interface Props {
 const { Header, Content, Footer } = Layout;
 
 function App(props: Props) {
-    const [cartProducts, setCartProducts] = useState<CartItem[]>([]);
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [subtotal, setSubtotal] = useState(0.0);
     const [modalVisible, setModalVisible] = useState(false);
@@ -28,7 +29,7 @@ function App(props: Props) {
     useEffect(() => {
         if (!loading) return;
         props.cartProvider.ListCartItems().then((items) => {
-            setCartProducts(items);
+            setCartItems(items);
             setLoading(false);
         });
     }, [props.cartProvider, loading]);
@@ -51,16 +52,16 @@ function App(props: Props) {
 
     useEffect(() => {
         setSubtotal(
-            cartProducts.reduce(
+            cartItems.reduce(
                 (total, item) => total + item.price * item.quantity,
                 0.0
             )
         );
-    }, [cartProducts]);
+    }, [cartItems]);
 
     const handleFinalize = useCallback(() => {
         setModalVisible(false);
-        setCartProducts([]);
+        setCartItems([]);
         message.success("Obrigado!");
     }, []);
 
@@ -72,57 +73,35 @@ function App(props: Props) {
             </Header>
             <Content className="content">
                 {loading ? (
-                    <LoadingSpinner />
+                    <div className="loading-spinner">
+                        <LoadingSpinner fontSize={36} />
+                    </div>
                 ) : (
-                    <>
-                        <List
-                            className="products"
-                            itemLayout="horizontal"
-                            dataSource={cartProducts}
-                            locale={{ emptyText: "Carrinho vazio" }}
-                            renderItem={(item) => (
-                                <List.Item className="cart-item">
-                                    <List.Item.Meta
-                                        className="cart-item-meta"
-                                        avatar={<Avatar src={item.image_url} />}
-                                        title={`${item.quantity}x ${item.title}`}
-                                        description={`R$ ${item.price
-                                            .toFixed(2)
-                                            .replace(".", ",")}`}
-                                    />
-                                    <Statistic
-                                        className="cart-item-price"
-                                        value={item.price * item.quantity}
-                                        precision={2}
-                                        prefix="R$"
-                                        decimalSeparator=","
-                                    />
-                                </List.Item>
-                            )}
-                        />
-                        <div className="subtotal">
-                            <Button
-                                type="primary"
-                                size="large"
-                                onClick={() => setModalVisible(true)}
-                                disabled={cartProducts.length === 0}
-                            >
-                                Finalizar compra
-                            </Button>
-                            <span>
-                                Subtotal:{" "}
-                                <Statistic
-                                    value={subtotal}
-                                    prefix="R$"
-                                    precision={2}
-                                    decimalSeparator=","
-                                />
-                            </span>
-                        </div>
-                    </>
+                    <CartItemList cartItems={cartItems} />
                 )}
             </Content>
-            <Footer></Footer>
+            <Footer className="footer">
+                <div className="subtotal">
+                    <Button
+                        type="primary"
+                        size="large"
+                        onClick={() => setModalVisible(true)}
+                        disabled={cartItems.length === 0}
+                    >
+                        Finalizar compra
+                    </Button>
+                    <span>
+                        Subtotal:{" "}
+                        <Statistic
+                            value={subtotal}
+                            prefix="R$"
+                            precision={2}
+                            decimalSeparator=","
+                        />
+                    </span>
+                </div>
+
+            </Footer>
             <Modal
                 visible={modalVisible}
                 onOk={handleFinalize}

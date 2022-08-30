@@ -4,7 +4,7 @@
 }
 
 .app .header {
-  height: 8vh;
+  height: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,10 +14,14 @@
   font-weight: bold;
 }
 
+.app .loading-spinner {
+    display: flex;
+    justify-content: center;
+}
+
 .app .content {
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  overflow-y: scroll;
 }
 
 .app .subtotal {
@@ -26,15 +30,12 @@
   align-items: center;
 }
 
-.app .products .cart-item {
-  align-content: center;
-}
-
-.app .products .cart-item .cart-item-meta * {
-  font-size: 1.25rem;
-}
-
 .app .buttons {
   display: flex;
   justify-content: flex-start;
+  padding: 0rem 2rem;
+}
+
+.app .footer {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
