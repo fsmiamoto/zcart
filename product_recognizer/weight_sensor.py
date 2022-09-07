@@ -1,9 +1,10 @@
 from HX711.HX711 import HX711
 
-class WeightSensor():
+
+class WeightSensor:
     REFERENCE_UNIT = 224
 
-    def __init__(self, HX711: HX711 = HX711(5,6)):
+    def __init__(self, HX711: HX711 = HX711(5, 6)):
         self.HX711 = HX711
         self.HX711.set_reading_format("MSB", "MSB")
         self.HX711.set_reference_unit(self.REFERENCE_UNIT)
