@@ -4,11 +4,13 @@ import sys
 import time
 
 from frame_preprocessor import FramePreprocessor
-from object_detector import ObjectDetector
+from object import Object
+from frame_object_detector import FrameObjectDetector
+from object_filter import ObjectFilter
 from weight_sensor import WeightSensor
 from cart_service import CartServiceClient
 from video_window import VideoWindow
-from object_diff import ObjectDiff
+from product_recognizer import ProductRecognizer
 from queue import Queue
 from logger import Logger
 from video_stream import VideoStream
@@ -29,7 +31,7 @@ FRAME_HEIGHT = 480
 def main():
     log = Logger()
     weight_sensor = WeightSensor()
-    detector = ObjectDetector(model_path=MODEL_FILE, labelmap_path=LABELMAP_FILE)
+    detector = FrameObjectDetector(model_path=MODEL_FILE, labelmap_path=LABELMAP_FILE)
 
     height, width = detector.get_input_dimensions()
 
@@ -49,15 +51,16 @@ def main():
 
     objects_queue = Queue()
 
-    object_diff = ObjectDiff(
+    product_recognizer = ProductRecognizer(
         queue=objects_queue,
-        label_getter=detector.get_label,
         weight_sensor=weight_sensor,
         logger=log,
         cart_service_client=cart_service_client,
     )
 
-    object_diff.start()
+    object_filter = ObjectFilter(confidence_thresold=CONFIDENCE_THRESHOLD)
+
+    product_recognizer.start()
 
     video_window = VideoWindow()
 
@@ -66,23 +69,17 @@ def main():
             # Use for FPS calculation
             video_window.start_tick()
 
-            frame = stream.read_frame().copy()
+            frame = stream.read_frame()
 
             input = preprocessor.process(frame)
             detector.infer(input)
 
-            boxes, classes, scores = (
-                detector.get_boxes(),
-                detector.get_classes(),
-                detector.get_scores(),
-            )
+            objects = [
+                Object(label=label, score=score)
+                for (score, label) in zip(detector.get_scores(), detector.get_labels())
+            ]
 
-            filtered_objects = list(
-                filter(
-                    lambda tuple: tuple[0] >= CONFIDENCE_THRESHOLD,
-                    zip(scores, boxes, classes),
-                )
-            )
+            filtered_objects = object_filter.filter(objects)
 
             objects_queue.put(filtered_objects)
 
@@ -92,7 +89,7 @@ def main():
             log.info("received exit signal, cleaning up")
             weight_sensor.cleanup()
             video_window.stop()
-            object_diff.stop()
+            product_recognizer.stop()
             stream.stop()
             sys.exit()
 
