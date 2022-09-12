@@ -3,7 +3,7 @@ import numpy as np
 from tflite_runtime.interpreter import Interpreter
 
 
-class ObjectDetector:
+class FrameObjectDetector:
     def __init__(self, model_path: str, labelmap_path: str):
         self.__interpreter = Interpreter(model_path=model_path)
         self.__interpreter.allocate_tensors()
@@ -27,13 +27,23 @@ class ObjectDetector:
     def get_boxes(self):
         return self.__interpreter.get_tensor(self.__output_details[0]["index"])[0]
 
-    def get_classes(self):
+    def get_scores(self):
+        return [
+            float(score)
+            for score in self.__interpreter.get_tensor(
+                self.__output_details[2]["index"]
+            )[0]
+        ]
+
+    def get_labels(self):
+        return [
+            self.__get_label(int(class_index)) for class_index in self.__get_classes()
+        ]
+
+    def __get_classes(self):
         return self.__interpreter.get_tensor(self.__output_details[1]["index"])[0]
 
-    def get_scores(self):
-        return self.__interpreter.get_tensor(self.__output_details[2]["index"])[0]
-
-    def get_label(self, class_index: int) -> str:
+    def __get_label(self, class_index: int) -> str:
         return self.__labels[class_index]
 
     def __read_labels_from_file(self, path: str):
