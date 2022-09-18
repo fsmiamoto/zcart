@@ -1,5 +1,6 @@
-from typing import Tuple
+from typing import Tuple, List
 import numpy as np
+from frame_object import FrameObject
 from tflite_runtime.interpreter import Interpreter
 
 
@@ -23,6 +24,14 @@ class FrameObjectDetector:
     def infer(self, input):
         self.__interpreter.set_tensor(self.__input_details[0]["index"], input)
         self.__interpreter.invoke()
+
+    def get_objects(self) -> List[FrameObject]:
+        return [
+            FrameObject(label, score, box)
+            for (score, label, box) in zip(
+                self.get_scores(), self.get_labels(), self.get_boxes()
+            )
+        ]
 
     def get_boxes(self):
         return self.__interpreter.get_tensor(self.__output_details[0]["index"])[0]

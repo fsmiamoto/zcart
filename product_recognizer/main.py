@@ -2,11 +2,13 @@
 
 import sys
 import time
+from os import environ
+from typing import List
+from frame_object import FrameObject
 
 from frame_preprocessor import FramePreprocessor
-from object import Object
 from frame_object_detector import FrameObjectDetector
-from object_filter import ObjectFilter
+from frame_object_filter import FrameObjectFilter
 from weight_sensor import WeightSensor
 from cart_service import CartServiceClient
 from video_window import VideoWindow
@@ -27,6 +29,8 @@ INPUT_STD = 127.5
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
+WITH_VIDEO_WINDOW = environ.get("WITH_VIDEO_WINDOW")
+
 
 def main():
     log = Logger()
@@ -38,7 +42,7 @@ def main():
     preprocessor = FramePreprocessor(
         height, width, INPUT_MEAN, INPUT_STD, detector.is_floating_model()
     )
-    cart_service_client = CartServiceClient("http://tokyo:3333")
+    cart_service_client = CartServiceClient("http://localhost:3333")
 
     log.info("will start video stream")
     stream = VideoStream(resolution=(FRAME_WIDTH, FRAME_HEIGHT)).start()
@@ -49,46 +53,44 @@ def main():
     weight_sensor.tare()
     log.info("done taring")
 
-    objects_queue = Queue()
+    frame_objects_queue: "Queue[List[FrameObject]]" = Queue()
 
     product_recognizer = ProductRecognizer(
-        queue=objects_queue,
+        queue=frame_objects_queue,
         weight_sensor=weight_sensor,
         logger=log,
         cart_service_client=cart_service_client,
     )
 
-    object_filter = ObjectFilter(confidence_thresold=CONFIDENCE_THRESHOLD)
+    object_filter = FrameObjectFilter(confidence_thresold=CONFIDENCE_THRESHOLD)
 
     product_recognizer.start()
 
-    video_window = VideoWindow()
+    video_window = VideoWindow() if WITH_VIDEO_WINDOW else None
 
     while True:
         try:
-            # Use for FPS calculation
-            video_window.start_tick()
+            if video_window:
+                # Used for FPS calculation
+                video_window.start_tick()
 
             frame = stream.read_frame()
 
             input = preprocessor.process(frame)
             detector.infer(input)
 
-            objects = [
-                Object(label=label, score=score)
-                for (score, label) in zip(detector.get_scores(), detector.get_labels())
-            ]
+            filtered_objects = object_filter.filter(detector.get_objects())
 
-            filtered_objects = object_filter.filter(objects)
+            frame_objects_queue.put(filtered_objects)
 
-            objects_queue.put(filtered_objects)
-
-            video_window.display(frame)
+            if video_window:
+                video_window.display(frame)
 
         except (KeyboardInterrupt, SystemExit):
             log.info("received exit signal, cleaning up")
             weight_sensor.cleanup()
-            video_window.stop()
+            if video_window:
+                video_window.stop()
             product_recognizer.stop()
             stream.stop()
             sys.exit()
