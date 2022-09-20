@@ -1,1 +1,7 @@
 **/*.db
+product_recognizer/model/raw_image_data
+product_recognizer/model/yolov5
+product_recognizer/model/yolov5-transfer-learning
+product_recognizer/model/classes_specs.yaml
+product_recognizer/model/yolov5l.pt
+product_recognizer/model/metrics/exp/weights/best_saved_model
