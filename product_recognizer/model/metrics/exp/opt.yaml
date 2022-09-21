@@ -1,4 +1,4 @@
-weights: yolov5l.pt
+weights: yolov5s.pt
 cfg: ''
 data: classes_specs.yaml
 hyp:
