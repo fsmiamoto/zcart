@@ -1,5 +1,4 @@
 #! /usr/bin/python3
-
 import sys
 import time
 from os import environ
@@ -29,7 +28,9 @@ INPUT_STD = 127.5
 FRAME_WIDTH = 640
 FRAME_HEIGHT = 480
 
-WITH_VIDEO_WINDOW = environ.get("WITH_VIDEO_WINDOW")
+WITHOUT_VIDEO_WINDOW = environ.get("WITHOUT_VIDEO_WINDOW")
+
+CART_SERVICE_HOST = "http://tokyo:3333"
 
 
 def main():
@@ -42,7 +43,7 @@ def main():
     preprocessor = FramePreprocessor(
         height, width, INPUT_MEAN, INPUT_STD, detector.is_floating_model()
     )
-    cart_service_client = CartServiceClient("http://localhost:3333")
+    cart_service_client = CartServiceClient(CART_SERVICE_HOST)
 
     log.info("will start video stream")
     stream = VideoStream(resolution=(FRAME_WIDTH, FRAME_HEIGHT)).start()
@@ -66,7 +67,7 @@ def main():
 
     product_recognizer.start()
 
-    video_window = VideoWindow() if WITH_VIDEO_WINDOW else None
+    video_window = VideoWindow() if not WITHOUT_VIDEO_WINDOW else None
 
     while True:
         try:

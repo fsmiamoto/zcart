@@ -7,10 +7,11 @@ from logger import Logger
 from cart_service import CartServiceClient, UpdateCartRequest, UpdateCartRequestAction
 from frame_object import FrameObject
 from weight_sensor import WeightSensor
-from product import Product
+from product_catalog import ProductCatalog, StubProductCatalog
 
+# Should these be injected also?
 CART_ID = "2"
-LABEL_TO_PRODUCT = {"bottle": Product(product_id="1", weight_in_grams=18)}
+TOLERANCE = 0.15
 
 
 class ProductRecognizer:
@@ -20,11 +21,16 @@ class ProductRecognizer:
         weight_sensor: WeightSensor,
         logger: Logger,
         cart_service_client: CartServiceClient,
+        catalog: ProductCatalog = StubProductCatalog(),
     ):
         self.queue = queue
         self.weight_sensor = weight_sensor
         self.cart_service_client = cart_service_client
         self.log = logger
+        self.catalog = catalog
+
+        self.weight_tolerance = TOLERANCE
+        self.cart_id = CART_ID
 
         self.last_frame_objects = {}
         self.last_weight_reading = 0.0
@@ -86,7 +92,11 @@ class ProductRecognizer:
             )
             return False
 
-        product = LABEL_TO_PRODUCT[label]
+        product = self.catalog.get_product(label)
+        if not product:
+            # TODO: Review this
+            return False
+
         weight_difference = reading - self.last_weight_reading
         expected_difference = count * product.weight_in_grams
 
@@ -94,14 +104,18 @@ class ProductRecognizer:
             f"expected_difference: {expected_difference}, actual: {weight_difference}"
         )
 
-        return self.__in_range(expected_difference, weight_difference, 0.15)
+        return self.__is_weight_diff_withing_tolerance(
+            expected_difference, weight_difference
+        )
 
-    def __in_range(self, expected: float, actual: float, tolerance: float) -> bool:
+    def __is_weight_diff_withing_tolerance(
+        self, expected: float, actual: float
+    ) -> bool:
         # Use absolute value since with negative values the comparisons would invert
         expected = abs(expected)
         actual = abs(actual)
-        return (1 - tolerance) * expected <= actual and actual <= (
-            1 + tolerance
+        return (1 - self.weight_tolerance) * expected <= actual and actual <= (
+            1 + self.weight_tolerance
         ) * expected
 
     def __call_cart_service(self, label: str, count: int):
@@ -110,14 +124,18 @@ class ProductRecognizer:
         request = self.__build_cart_service_request(label, count)
 
         try:
-            response = self.cart_service_client.execute(CART_ID, request)
+            response = self.cart_service_client.execute(self.cart_id, request)
             self.log.info(f"got status {response.status_code}")
         except:
             self.log.error("exception while calling cart service")
 
     def __build_cart_service_request(self, label: str, count: int):
+        product = self.catalog.get_product(label)
+        if not product:
+            raise Exception(f"product not found for label {label}")
+
         return UpdateCartRequest(
-            LABEL_TO_PRODUCT[label].product_id,
+            product.product_id,
             abs(count),
             UpdateCartRequestAction.ADD
             if count > 0
@@ -136,12 +154,13 @@ class ProductRecognizer:
         result = {}
 
         for label in current_frame_objects:
-            if label not in LABEL_TO_PRODUCT:
+            self.log.debug(f"label: {label}")
+            if not self.catalog.get_product(label):
                 continue
             result[label] = current_frame_objects[label]
 
         for label in last_frame_objects:
-            if label not in LABEL_TO_PRODUCT:
+            if not self.catalog.get_product(label):
                 continue
             if label in result:
                 # Might be negative
