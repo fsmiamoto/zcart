@@ -333,7 +333,7 @@
             \lenauthor & \hspace{12px} \ABNTtitulodata / \ABNTautordata. -- \the\year. \\
             & \lencore \pageref{LastPage} f. : il. ; 30 cm \\
             & \\
-            & \lencore Orientador: \ABNTorientadordata. \\
+            & \lencore Advisor: \ABNTorientadordata. \\
             & \lencore \UTFPRdocumentodata $\;$(\UTFPRniveldata) -- \ABNTinstituicaodata. \UTFPRprogramadata.  \ABNTlocaldata, \the\year. \\
             & \lencore Bibliografia: f. \UTFPRfichacatpgbibdata. \\
             & \\
@@ -388,7 +388,7 @@
 {%
 	\if@openright\cleardoublepage\else\clearpage\fi%
 	\setchaptertype{}
-	\pretextualchapter{AGRADECIMENTOS}%
+	\pretextualchapter{ACKNOWLEDGMENTS}%
 }%
 {
 	\newpage
@@ -425,7 +425,7 @@
 {%
 	\if@openright\cleardoublepage\else\clearpage\fi%
 	\setchaptertype{resumo}
-	\pretextualchapter{\MakeUppercase{\resumoname}}%
+	\pretextualchapter{\MakeUppercase{ABSTRACT}}%
 	\begin{espacosimples}%
 		\setlength\parindent{0pt}
 		\setlength\parskip{12pt}
@@ -433,7 +433,7 @@
 		\ABNTinstituicaodata. \ABNTlocaldata, \ABNTdatadata.\par
 }%
 {
-		\par \textbf{Palavras-chave:} \UTFPRpalavraschavedata
+		\par \textbf{Keywords:} \UTFPRpalavraschavedata
 	\end{espacosimples}
 	\newpage
 }
@@ -478,7 +478,7 @@
 		{\setboolean{ABNTrestorecol}{true}\onecolumn}
 		{\setboolean{ABNTrestorecol}{false}}
 	\setchaptertype{listoffigures}
-	\pretextualchapter{LISTA DE FIGURAS}
+	\pretextualchapter{LIST OF FIGURES}
 	\begin{espacosimples}
 	\@starttoc{lof}
 	\end{espacosimples}
@@ -495,7 +495,7 @@
         \parindent -1.1em
 	\@tempdima 2.8em
 	--\advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-        {\MakeUppercase{Figura} \normalfont #1 \noindent }\nobreak \figfillnum{#2}
+        {\MakeUppercase{Figure} \normalfont #1 \noindent }\nobreak \figfillnum{#2}
 }
 
 
@@ -517,7 +517,7 @@
 		{\setboolean{ABNTrestorecol}{true}\onecolumn}
 		{\setboolean{ABNTrestorecol}{false}}
 	\setchaptertype{listoftables}
-	\pretextualchapter{LISTA DE TABELAS}
+	\pretextualchapter{LIST OF TABLES}
 	\begin{espacosimples}
 	\@starttoc{lot}
 	\end{espacosimples}
@@ -526,16 +526,17 @@
 		{}
 }%
 
+% FIXME
 \renewcommand*{\l@table}[2]
 {
-	\leftskip 3.4em % 3.4em
+	\leftskip 3.4em
 	\rightskip 1.8em
 	\parfillskip -\rightskip
-        \parindent -1.1em
-	\@tempdima 2.8em
+        \parindent -0.8em
+	\@tempdima 2.4em
 	--\advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
 	%{\MakeUppercase{Tabela \normalfont #1}}\nobreak \tabfillnum{#2}
-	{\MakeUppercase{Tabela} \normalfont #1}\nobreak \tabfillnum{#2} % 
+	{\MakeUppercase{Table} \normalfont #1}\nobreak \tabfillnum{#2} % 
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -572,7 +573,7 @@
 % Define os comandos que montam a lista de simbolos
 \newcommand{\listadesimbolos}
 {
-	\pretextualchapter{LISTA DE S\'IMBOLOS}
+	\pretextualchapter{LIST OF SYMBOLS}
 	\begin{espacosimples}  %cesar230511
 	\@starttoc{lsb}
 	\end{espacosimples}
@@ -600,7 +601,7 @@
 % Define o comando que monta a lista de siglas
 \newcommand{\listadesiglas}
 {
-	\pretextualchapter{LISTA DE SIGLAS}
+	\pretextualchapter{LIST OF ACRONYMS AND ABBREVIATIONS}
 	\begin{espacosimples}  %cesar230511
 	\@starttoc{lsg}
 	\end{espacosimples}
@@ -635,7 +636,7 @@
 		\setboolean{ABNTrestorecol}{false}
 	}%
 	\if@openright\cleardoublepage\else\clearpage\fi
-  	\pretextualchapter{SUM\'ARIO}%
+  	\pretextualchapter{SUMMARY}%
 	\thispagestyle{\chaptertitlepagestyle}
 	\global\@topnum\z@
 	\@afterindentfalse
@@ -897,7 +898,7 @@
 		\begin{spacing}{\taxaespacomeio}
 			\par
 		\end{spacing}
-		\centering\small{\textbf{Fonte: #1}}
+		\centering\small{\textbf{Source: #1}}
 	\end{flushleft}
 }
 
@@ -910,7 +911,7 @@
 % REFERENCIAS 
 
 % \providecommand{\ABNTbibliographyname}{}
-\renewcommand{\ABNTbibliographyname}{REFER\^ENCIAS}
+\renewcommand{\ABNTbibliographyname}{Bibliography}
 
 
 %%% Outros Ajustes:

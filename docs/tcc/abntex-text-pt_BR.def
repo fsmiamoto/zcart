@@ -15,12 +15,12 @@
 \providecommand{\ABNTabstractname}{Abstract}
 \providecommand{\ABNTbibliographyname}{\bibname}%alternativamente \refname
 \providecommand{\annexname}{Anexo}
-\providecommand{\supervisorname}{Orientador}
+\providecommand{\supervisorname}{Advisor}
 \providecommand{\cosupervisorname}{Co-orientador}
 \providecommand{\resumoname}{Resumo}
 %used by tabela-simbolos
 \providecommand{\listofabreviationsname}{Lista de abreviaturas e siglas}
-\providecommand{\listofsymbolsname}{Lista de s\'\i mbolos}
+\providecommand{\listofsymbolsname}{Symbol list}
 \providecommand{\romansymbolsname}{S\'\i mbolos romanos}
 \providecommand{\greeksymbolsname}{S\'\i mbolos gregos}
 \providecommand{\othersymbolsname}{Outros s\'\i mbolos}
