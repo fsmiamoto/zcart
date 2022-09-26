@@ -1183,8 +1183,8 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   \resetsubcounters{chapter}
   \gdef\thechapter{\Alph{chapter}}
   \setchaptertype{annex}
-  \gdef\@chapapp{Anexo}
-  \renewcommand{\anapchaptername}{\annexname}
+  \gdef\@chapapp{Annex}
+  \renewcommand{\anapchaptername}{Annex}
   \global\let\@chapter\@anapchapter}
 
 \let\anexo\annex
