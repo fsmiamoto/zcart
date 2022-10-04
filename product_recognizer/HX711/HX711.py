@@ -14,6 +14,7 @@ class HX711:
         # software try to access get values from the class at the same time.
         self.readLock = threading.Lock()
 
+        GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.PD_SCK, GPIO.OUT)
         GPIO.setup(self.DOUT, GPIO.IN)

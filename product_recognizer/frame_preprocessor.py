@@ -4,7 +4,12 @@ import cv2
 
 class FramePreprocessor:
     def __init__(
-        self, height: int, width: int, mean: float, std: float, is_floating_model: bool
+        self,
+        height: int,
+        width: int,
+        mean: float = 127.5,
+        std: float = 127.5,
+        is_floating_model: bool = True,
     ):
         self.__height = height
         self.__width = width

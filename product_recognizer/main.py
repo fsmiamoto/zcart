@@ -1,7 +1,7 @@
 #! /usr/bin/python3
 import sys
 import time
-from os import environ
+import argparse
 from typing import List
 from frame_object import FrameObject
 
@@ -16,37 +16,23 @@ from queue import Queue
 from logger import Logger
 from video_stream import VideoStream
 
-CONFIDENCE_THRESHOLD = 0.55
 
-MODEL_FILE = "./model/detect.tflite"
-LABELMAP_FILE = "./model/labelmap.txt"
-
-# Where do these come from??
-INPUT_MEAN = 127.5
-INPUT_STD = 127.5
-
-FRAME_WIDTH = 640
-FRAME_HEIGHT = 480
-
-WITHOUT_VIDEO_WINDOW = environ.get("WITHOUT_VIDEO_WINDOW")
-
-CART_SERVICE_HOST = "http://tokyo:3333"
-
-
-def main():
+def run(args):
     log = Logger()
     weight_sensor = WeightSensor()
-    detector = FrameObjectDetector(model_path=MODEL_FILE, labelmap_path=LABELMAP_FILE)
+    detector = FrameObjectDetector(
+        model_path=args.model_file, labelmap_path=args.label_file
+    )
 
     height, width = detector.get_input_dimensions()
 
     preprocessor = FramePreprocessor(
-        height, width, INPUT_MEAN, INPUT_STD, detector.is_floating_model()
+        height, width, is_floating_model=detector.is_floating_model()
     )
-    cart_service_client = CartServiceClient(CART_SERVICE_HOST)
+    cart_service_client = CartServiceClient(args.cart_service)
 
     log.info("will start video stream")
-    stream = VideoStream(resolution=(FRAME_WIDTH, FRAME_HEIGHT)).start()
+    stream = VideoStream(resolution=(args.width, args.height)).start()
     time.sleep(1)
     log.info("done starting video stream")
 
@@ -61,13 +47,13 @@ def main():
         weight_sensor=weight_sensor,
         logger=log,
         cart_service_client=cart_service_client,
+        cart_id=args.cart_id,
     )
 
-    object_filter = FrameObjectFilter(confidence_thresold=CONFIDENCE_THRESHOLD)
-
+    object_filter = FrameObjectFilter(confidence_thresold=args.confidence_threshold)
     product_recognizer.start()
 
-    video_window = VideoWindow() if not WITHOUT_VIDEO_WINDOW else None
+    video_window = VideoWindow() if args.with_window else None
 
     while True:
         try:
@@ -98,4 +84,39 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser("zCart Product Recognizer Application")
+    parser.add_argument("--cart_id", dest="cart_id", default="1", help="Cart ID")
+    parser.add_argument(
+        "--model_file",
+        dest="model_file",
+        default="./model/detect.tflite",
+        help="Path for the TFLite model file",
+    )
+    parser.add_argument(
+        "--label_file",
+        dest="label_file",
+        default="./model/labelmap.txt",
+        help="Path for the label file",
+    )
+    parser.add_argument(
+        "--confidence",
+        dest="confidence_threshold",
+        default=0.55,
+        help="Confidence threshold",
+    )
+    parser.add_argument("--width", dest="width", default=640, help="Frame width")
+    parser.add_argument("--height", dest="height", default=480, help="Frame height")
+    parser.add_argument(
+        "--with_window",
+        dest="with_window",
+        default=True,
+        help="Whether to show video window",
+    )
+    parser.add_argument(
+        "--cart_service",
+        dest="cart_service",
+        default=True,
+        help="Cart Service Endpoint",
+    )
+    args = parser.parse_args()
+    run(args)

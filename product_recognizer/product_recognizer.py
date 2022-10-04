@@ -9,10 +9,6 @@ from frame_object import FrameObject
 from weight_sensor import WeightSensor
 from product_catalog import ProductCatalog, StubProductCatalog
 
-# Should these be injected also?
-CART_ID = "2"
-TOLERANCE = 0.15
-
 
 class ProductRecognizer:
     def __init__(
@@ -21,7 +17,9 @@ class ProductRecognizer:
         weight_sensor: WeightSensor,
         logger: Logger,
         cart_service_client: CartServiceClient,
+        cart_id: str,
         catalog: ProductCatalog = StubProductCatalog(),
+        weight_tolerance: float = 0.15,
     ):
         self.queue = queue
         self.weight_sensor = weight_sensor
@@ -29,8 +27,8 @@ class ProductRecognizer:
         self.log = logger
         self.catalog = catalog
 
-        self.weight_tolerance = TOLERANCE
-        self.cart_id = CART_ID
+        self.weight_tolerance = weight_tolerance
+        self.cart_id = cart_id
 
         self.last_frame_objects = {}
         self.last_weight_reading = 0.0
