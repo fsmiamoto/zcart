@@ -1,14 +1,13 @@
 import { useState, useCallback, useEffect } from "react";
 import {
     Layout,
-    List,
     message,
-    Avatar,
     Button,
     Statistic,
     Modal,
+    Result,
 } from "antd";
-import { ShoppingCartOutlined } from "@ant-design/icons";
+import { DownCircleFilled, ShoppingCartOutlined, UpCircleFilled } from "@ant-design/icons";
 import { CartProvider, CartItem } from "src/service/cart_provider";
 import { LoadingSpinner } from "src/components/loading_spinner";
 import "./App.css";
@@ -25,6 +24,7 @@ function App(props: Props) {
     const [loading, setLoading] = useState(true);
     const [subtotal, setSubtotal] = useState(0.0);
     const [modalVisible, setModalVisible] = useState(false);
+    const [checkedout, setCheckedout] = useState(false);
 
     useEffect(() => {
         if (!loading) return;
@@ -36,16 +36,20 @@ function App(props: Props) {
 
     useEffect(() => {
         props.cartProvider.OnAddProduct((item) => {
-            message.info(
-                <span>Produto {item.quantity}x {item.title} <b>adicionado</b> ao carrinho</span>
-            );
+            message.info({
+                icon: <UpCircleFilled style={{ fontSize: "1.2rem" }} />,
+                content: <span>{item.quantity}x {item.title} <b>added</b> to the cart</span>,
+                style: { fontSize: "1.2rem", marginTop: "5vh" }
+            });
             setLoading(true);
         });
 
         props.cartProvider.OnRemoveProduct((item) => {
-            message.info(
-                <span>Produto {item.quantity}x {item.title} <b>removido</b> do carrinho</span>
-            );
+            message.info({
+                icon: <DownCircleFilled style={{ fontSize: "1.2rem" }} />,
+                content: <span>{item.quantity}x {item.title} <b>removed</b> from the cart</span>,
+                style: { fontSize: "1.2rem", marginTop: "5vh" }
+            });
             setLoading(true);
         });
     }, [props.cartProvider]);
@@ -59,11 +63,31 @@ function App(props: Props) {
         );
     }, [cartItems]);
 
+    useEffect(() => {
+        if (checkedout) {
+            props.cartProvider.Checkout()
+            return
+        };
+        setCartItems([])
+        setLoading(true)
+    }, [checkedout])
+
     const handleFinalize = useCallback(() => {
         setModalVisible(false);
-        setCartItems([]);
-        message.success("Obrigado!");
+        setCheckedout(true);
     }, []);
+
+    if (checkedout) {
+        return (
+            <Result
+                status="success"
+                title="Thank you for you purchase!"
+                extra={[
+                    <Button type="primary" key="buy" onClick={() => setCheckedout(false)}>Buy Again</Button>,
+                ]}
+            />
+        )
+    }
 
     return (
         <Layout className="app">
@@ -88,7 +112,7 @@ function App(props: Props) {
                         onClick={() => setModalVisible(true)}
                         disabled={cartItems.length === 0}
                     >
-                        Finalizar compra
+                        Checkout
                     </Button>
                     <span>
                         Subtotal:{" "}
@@ -97,6 +121,7 @@ function App(props: Props) {
                             prefix="R$"
                             precision={2}
                             decimalSeparator=","
+                            groupSeparator="."
                         />
                     </span>
                 </div>
@@ -106,10 +131,11 @@ function App(props: Props) {
                 visible={modalVisible}
                 onOk={handleFinalize}
                 onCancel={() => setModalVisible(false)}
-                okText={"Finalizar"}
-                cancelText={"Cancelar"}
+                okText={"Checkout"}
+                cancelText={"Cancel"}
+                title={"Checkout"}
             >
-                Deseja finalizar a compra?
+                Do you want to finish your purchase?
             </Modal>
         </Layout>
     );

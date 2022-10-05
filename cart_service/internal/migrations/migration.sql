@@ -25,7 +25,7 @@ INSERT INTO products (id,name,price,image_url) VALUES ('4','Café', 8.99, 'https
 INSERT INTO products (id,name,price,image_url) VALUES ('5','Chamyto', 10.99, 'https://zcart-test-images.s3.amazonaws.com/chamyto.png');
 INSERT INTO products (id,name,price,image_url) VALUES ('6','Macarrão Instântaneo Nissin', 3.99, 'https://zcart-test-images.s3.amazonaws.com/lamen.png');
 
-INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('2','1', 10);
-INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('2','2', 5);
-INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('2','3', 9);
-INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('2','4', 1);
+INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','1', 10);
+INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','2', 5);
+INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','3', 9);
+INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','4', 1);

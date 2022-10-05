@@ -1,7 +1,7 @@
 package fiber_api
 
 import (
-	"encoding/json"
+	// "encoding/json"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/websocket/v2"
@@ -20,7 +20,7 @@ func (h *Handler) WebsocketHandler(ctx *fiber.Ctx) error {
 
 func (h *Handler) setupUpdateChannel(cartId string) {
 	if _, found := h.channels[cartId]; !found {
-		h.channels[cartId] = make(chan CartEventWebsocketNotification, 10)
+		h.channels[cartId] = make(chan CartEventWebsocketNotification)
 	}
 }
 
@@ -70,15 +70,12 @@ func (h *Handler) WebsocketManager(c *websocket.Conn) {
 		case action := <-h.channels[cartId]:
 			h.logger.Printf("update for cart %s", action.CartProduct.CartID)
 
-			payload, err := json.Marshal(action)
-			if err != nil {
-				h.logger.Err(err).Msgf("failed to notify cart %s", action.CartProduct.CartID)
-			}
-
-			if err = c.WriteMessage(websocket.TextMessage, payload); err != nil {
+			if err := c.WriteJSON(action); err != nil {
 				h.logger.Err(err).Msgf("failed to write message")
 				return
 			}
+
+			h.logger.Info().Msgf("notified clients of cart %s", action.CartProduct.CartID)
 		}
 	}
 }

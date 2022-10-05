@@ -96,8 +96,8 @@ func TestCartRepo(t *testing.T) {
 
 			cartId := "1"
 			productId := "42"
-			quantity := uint(25)
-			quantityAlreadyAdded := uint(15)
+			quantity := int(25)
+			quantityAlreadyAdded := int(15)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
 				sqlmock.NewRows([]string{"cart_id", "product_id", "quantity"}).AddRow(cartId, productId, quantityAlreadyAdded),
@@ -107,7 +107,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId, quantity+quantityAlreadyAdded).
 				WillReturnResult(sqlmock.NewResult(1, 1))
 
-			err := repo.AddProduct(cartId, productId, quantity)
+			err := repo.UpdateProductQuantity(cartId, productId, quantity)
 
 			assert.NoError(t, err)
 			assert.NoError(t, mock.ExpectationsWereMet())
@@ -118,7 +118,7 @@ func TestCartRepo(t *testing.T) {
 
 			cartId := "1"
 			productId := "42"
-			quantity := uint(25)
+			quantity := int(25)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
 				sqlmock.NewRows([]string{"cart_id", "product_id", "quantity"}),
@@ -128,7 +128,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId, quantity).
 				WillReturnResult(sqlmock.NewResult(1, 1))
 
-			err := repo.AddProduct(cartId, productId, quantity)
+			err := repo.UpdateProductQuantity(cartId, productId, quantity)
 
 			assert.NoError(t, err)
 			assert.NoError(t, mock.ExpectationsWereMet())
@@ -139,8 +139,8 @@ func TestCartRepo(t *testing.T) {
 
 			cartId := "1"
 			productId := "42"
-			quantity := uint(25)
-			quantityAlreadyAdded := uint(15)
+			quantity := int(25)
+			quantityAlreadyAdded := int(15)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
 				sqlmock.NewRows([]string{"cart_id", "product_id", "quantity"}).AddRow(cartId, productId, quantityAlreadyAdded),
@@ -151,7 +151,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId, quantity+quantityAlreadyAdded).
 				WillReturnError(expectedError)
 
-			err := repo.AddProduct(cartId, productId, quantity)
+			err := repo.UpdateProductQuantity(cartId, productId, quantity)
 
 			assert.ErrorIs(t, err, expectedError)
 			assert.NoError(t, mock.ExpectationsWereMet())
@@ -164,8 +164,8 @@ func TestCartRepo(t *testing.T) {
 
 			cartId := "1"
 			productId := "42"
-			quantity := uint(5)
-			quantityAlreadyAdded := uint(15)
+			quantity := int(5)
+			quantityAlreadyAdded := int(15)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
 				sqlmock.NewRows([]string{"cart_id", "product_id", "quantity"}).AddRow(cartId, productId, quantityAlreadyAdded),
@@ -175,7 +175,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId, quantityAlreadyAdded-quantity).
 				WillReturnResult(sqlmock.NewResult(1, 1))
 
-			err := repo.RemoveProduct(cartId, productId, quantity)
+			err := repo.RemoveProduct(cartId, productId)
 			assert.NoError(t, err)
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})
@@ -185,7 +185,6 @@ func TestCartRepo(t *testing.T) {
 
 			cartId := "1"
 			productId := "42"
-			quantity := uint(25)
 			quantityAlreadyAdded := uint(15)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
@@ -196,7 +195,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId).
 				WillReturnResult(sqlmock.NewResult(1, 1))
 
-			err := repo.RemoveProduct(cartId, productId, quantity)
+			err := repo.RemoveProduct(cartId, productId)
 			assert.NoError(t, err)
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})
@@ -206,7 +205,6 @@ func TestCartRepo(t *testing.T) {
 
 			cartId := "1"
 			productId := "42"
-			quantity := uint(25)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
 				sqlmock.NewRows([]string{"cart_id", "product_id", "quantity"}),
@@ -216,7 +214,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId).
 				WillReturnResult(sqlmock.NewResult(1, 1))
 
-			err := repo.RemoveProduct(cartId, productId, quantity)
+			err := repo.RemoveProduct(cartId, productId)
 			assert.NoError(t, err)
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})
@@ -227,7 +225,6 @@ func TestCartRepo(t *testing.T) {
 			expectedError := errors.New("you have no power here")
 			cartId := "1"
 			productId := "42"
-			quantity := uint(25)
 
 			mock.ExpectQuery("SELECT cart_id,product_id,quantity FROM cart_products").WillReturnRows(
 				sqlmock.NewRows([]string{"cart_id", "product_id", "quantity"}),
@@ -237,7 +234,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId).
 				WillReturnError(expectedError)
 
-			err := repo.RemoveProduct(cartId, productId, quantity)
+			err := repo.RemoveProduct(cartId, productId)
 			assert.ErrorIs(t, err, expectedError)
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})
@@ -260,7 +257,7 @@ func TestCartRepo(t *testing.T) {
 				WithArgs(cartId, productId, quantityAlreadyAdded-quantity).
 				WillReturnError(expectedError)
 
-			err := repo.RemoveProduct(cartId, productId, quantity)
+			err := repo.RemoveProduct(cartId, productId)
 			assert.ErrorIs(t, err, expectedError)
 			assert.NoError(t, mock.ExpectationsWereMet())
 		})

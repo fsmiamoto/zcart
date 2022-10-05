@@ -69,6 +69,10 @@ export class CartServiceCartProvider implements CartProvider {
     return items.products.map(this.adapter);
   }
 
+  async Checkout() {
+    await this.axios.post(`/cart/${this.cartId}/checkout`)
+  }
+
   OnAddProduct(handler: ItemHandler) {
     this.addProductHandler = handler;
   }

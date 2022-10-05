@@ -102,6 +102,10 @@ export class StubCartProvider implements CartProvider {
     return this.cartItems;
   }
 
+  async Checkout() {
+    this.cartItems = []
+  }
+
   OnAddProduct(handler: ItemHandler) {
     this.addHandler = handler;
   }
