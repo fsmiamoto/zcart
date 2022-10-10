@@ -24,8 +24,8 @@
 \usepackage[utf8]{inputenc} % pacote para acentuacao direta
 \usepackage{amsmath,amsfonts,amssymb} % pacote matematico
 \usepackage{graphicx} % pacote grafico
-%\usepackage{times} % fonte times
 \usepackage[final]{pdfpages} % adicao da ata
+\usepackage{float}
 
 %Podem utilizar GEOMETRY{...} para realizar pequenos ajustes das margens. Onde, left=esquerda, right=direita, top=superior, bottom=inferior. P.ex.:
 %\geometry{left=3.0cm,right=1.5cm,top=4cm,bottom=1cm} 
@@ -71,18 +71,18 @@
 
 % dedicatoria
 \begin{dedicatoria}
-    To all our families and their inconditional support
+    To all our families and their unconditional support
 \end{dedicatoria}
 
 % agradecimentos (opcional)
 \begin{agradecimentos}
-    We thank you
+    We thank everyone that helped
 \end{agradecimentos}
 
 % epigrafe (opcional)
 \begin{epigrafe}
-If you can't explain it to a six year old, you don't understand it yourself. \\
-- Albert Einstein
+ If have seen further it is by standing on the shoulders of giants.  \\
+- Sir Isaac Newton
 \end{epigrafe}
 
 %abstract
@@ -113,20 +113,122 @@ Abstract text (maximum of 500 words).
 %---------- Primeiro Capitulo ----------
 \chapter{Introduction}
 
-With the advance of the high speed mobile networks and smartphone penetration,
-customers demands are on an ever increasing trajectory for more personalized
-and digital experiences.
+With the advancement of the high speed mobile networks and smartphone penetration,
+customer demands are on an ever increasing trajectory for more personalized
+and digital experiences. In that regard, companies worldwide are fighting for customer
+attention in the digital era by developing products and services that bring state-of-the-art technologies
+to the masses in the so called smart devices and systems \cite{Shafique2020}.
+
+As an example of such advancements, smart speakers such as the Amazon Echo \cite{GaoPanWangChen2018} include the latest and greatest
+in terms of Natural Language Processing and Deep Learning \cite{Young2018}, allowing customers to interact with the product in an conversational manner
+that was considered to be science fiction material until a couple of years ago.
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./images/echodot4.jpg} % <- formatos PNG, JPG e PDF
+	\caption[Amazon Echo 4th Generation smart speaker promotional material]{Amazon Echo 4th Gen Smart Speaker promotional material}
+	\fonte{Amazon}
+	\label{fig:dummy}
+\end{figure}
+
+\begin{quote}
+    \textit{This device is a gem! When I’m busy in the kitchen, for example, and can’t get
+    to a computer to find info or music to play, Alexa would be there to listen
+    and do what I ask.} \\
+    Customer review from \cite{GaoPanWangChen2018}
+\end{quote}
+
+Alongside the devices themselves, entirely new markets have emerged such as the third-party software extensions
+called \textit{Alexa Skills} \cite{Alexa2022}.
+
+These skills function much like mobile phone apps, extending and enhancing the functionality of the device, and
+can be sold to users.
+
+Developers are can then leverage the highly advanced machine learning models - which can be notoriously expensive to develop 
+and maintain \cite{Phdata2021} - through \sigla{APIs}{Application Programming Interfaces} and focus exclusively on their application logic.
+
+\begin{figure}[htb!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/skills.png} % <- formatos PNG, JPG e PDF
+	\caption[]{Diagram showing the steps of an interaction with an Alexa Skill}
+    \fonte{\cite{Alexa2022}}
+	\label{fig:dummy}
+\end{figure}
+
+More impressively, such technological advancements have been able to reach a considerable amount of households in
+a short period in developed countries like the United States, a display of the power of the economy of scale and how
+an extensible ecosystem can boost sales.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{./images/smartspeaker.png} % <- formatos PNG, JPG e PDF
+	\caption[US Smart Speaker Penetration from 2017 to 2022]{US Smart Speaker Penetration from 2017 to 2022}
+    \fonte{\cite{InsiderIntelligence2022}}
+	\label{fig:dummy}
+\end{figure}
+
+On developing countries, such as Brazil, these innovations tend to have delayed
+arrivals due to historical economic barriers but the potential customer base
+has attracted big tech companies and their economic power, shortening the
+delay.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./images/alexabr.jpg} % <- formatos PNG, JPG e PDF
+	\caption[]{Localized promotional material for the Echo Show 10 targeting Brazilian customers}
+    \fonte{Amazon}
+	\label{fig:dummy}
+\end{figure}
+
+According to the research company IDC Brasil, the home automation market - in
+which smart speakers are included - would have reached US\$ 298 million on
+2021.
+
+Although these advancements might seem entirely beneficial at first, countless
+challenges have been found regarding privacy and ethical handling of personal
+customer data \cite{Echoes2022} and overall negative experiences \cite{He2019}
+
+These discussions are of the utter most importance given our current scenario
+and have been brought up by recent literature but will be out of the scope of
+our work.
 
 \section{Motivation}
 
-\section{Objectives}
+Even with all of these innovations that are impacting customer behaviors, one aspect of the stands out as not having changed 
+significantly in the last couple of years: \textbf{Grocery Shopping}.
 
-\subsection{Objetivo Geral}
+No ano passado, o setor alcançou um faturamento de R\$ 611,2 bilhões, por meio
+da operação de todos os seus formatos e canais de distribuição (mercado de
+vizinhança, supermercado, hipermercado, atacarejo e e-commerce). Com isso, o
+resultado consolidado pelos supermercados representa 7,03\% do Produto Interno
+Bruto (PIB) nacional.
+https://www.abras.com.br/economia-e-pesquisa/ranking-abras/dados-gerais
+
+https://www.abras.com.br/clipping/tecnologia/110172/a-evolucao-do-e-commerce-na-nova-era-pos-covid
+
+Even after the COVID-19 pandemic, customer behavior has once again shifted back towards physical grocery shopping (add sources)
+
+\section{Current scenario}
+
+\subsection{Amazon Fresh}
+
+\subsection{Caper.ai}
+
+\subsection{Nextop}
+
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./images/nextop.jpeg}
+	\caption[]{Smart Cart® deployed to Brazilian supermarket}
+    \fonte{Nextop}
+	\label{fig:dummy}
+\end{figure}
+
+
+\section{Expected outcomes}
 
 Develop a prototype of a smart shopping cart, with object recognition and
 user interface.
-
-\subsection{Objetivos Específicos}
 
 \begin{itemize}
 	\item Develop
@@ -302,4 +404,3 @@ para gerar titulos de anexos.
 
 
 \end{document}
-
