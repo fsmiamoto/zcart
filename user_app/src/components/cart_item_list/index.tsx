@@ -8,18 +8,16 @@ function CartItemRow(props: { cartItem: CartItem }) {
         <List.Item className="cart-item">
             <List.Item.Meta
                 className="cart-item-meta"
-                avatar={<Avatar src={item.image_url} />}
-                title={`${item.quantity}x ${item.title}`}
-                description={`R$ ${item.price
-                    .toFixed(2)
-                    .replace(".", ",")}`}
-            />
+                avatar={<Avatar src={item.image_url} size="large" />}
+                title={`${item.title}`}
+                description={`${item.quantity} items`} />
             <Statistic
                 className="cart-item-price"
-                value={item.price * item.quantity}
+                value={item.price}
                 precision={2}
                 prefix="R$"
                 decimalSeparator=","
+                groupSeparator="."
             />
         </List.Item>
     )
@@ -33,7 +31,7 @@ export function CartItemList(props: { cartItems: CartItem[] }) {
             className="cart-items"
             itemLayout="horizontal"
             dataSource={cartItems}
-            locale={{ emptyText: "Carrinho vazio" }}
+            locale={{ emptyText: "Empty cart" }}
             renderItem={(item) => <CartItemRow cartItem={item} />} />
     )
 

@@ -24,6 +24,19 @@ type UpdateProductsRequest struct {
 	Action    UpdateProductsRequestAction `json:"action"`
 }
 
+func (u *UpdateProductsRequest) Validate() error {
+	if u.ProductID == "" {
+		return errors.New("missing product id")
+	}
+	if u.Quantity == 0 {
+		return errors.New("missing quantity")
+	}
+	if u.Action == "" {
+		return errors.New("missing action")
+	}
+	return nil
+}
+
 // WebSocket
 const (
 	ProductAddedEvent   = "product_added"

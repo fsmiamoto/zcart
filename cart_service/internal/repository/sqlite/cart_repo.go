@@ -20,45 +20,16 @@ func NewCartRepository(db *sql.DB) repository.CartRepository {
 	return &sqlCartRepository{db}
 }
 
-func (c *sqlCartRepository) AddProduct(cartId string, productId string, amount uint) error {
-	var quantity uint
-
-	quantity += amount
-
-	cartProduct, err := c.GetCartProduct(cartId, productId)
-	if err != nil {
-		if !errors.Is(err, sql.ErrNoRows) {
-			return err
-		}
-		// Product not added to cart, nothing to add
-	} else {
-		quantity += cartProduct.Quantity
-	}
-
-	return c.SetProductQuantity(cartId, productId, quantity)
+func (c *sqlCartRepository) EmptyCart(cartId string) error {
+	return c.emptyCart(cartId)
 }
 
-func (c *sqlCartRepository) RemoveProduct(cartId string, productId string, amount uint) error {
-	// Using signed int to detect underflow
-	var quantity int
+func (c *sqlCartRepository) RemoveProduct(cartId string, productId string) error {
+	return c.removeProduct(cartId, productId)
+}
 
-	quantity -= int(amount)
-
-	cartProduct, err := c.GetCartProduct(cartId, productId)
-	if err != nil {
-		if !errors.Is(err, sql.ErrNoRows) {
-			return err
-		}
-		// Product not added to cart, nothing to add
-	} else {
-		quantity += int(cartProduct.Quantity)
-	}
-
-	if quantity < 0 {
-		quantity = 0
-	}
-
-	return c.SetProductQuantity(cartId, productId, uint(quantity))
+func (c *sqlCartRepository) UpdateProductQuantity(cartId string, productId string, delta int) error {
+	return c.updateQuantity(cartId, productId, delta)
 }
 
 func (c *sqlCartRepository) GetCartProduct(cartId string, productId string) (*models.CartProduct, error) {
@@ -118,13 +89,19 @@ func (c *sqlCartRepository) GetCart(cartId string) (*models.Cart, error) {
 	}, nil
 }
 
+func (c *sqlCartRepository) emptyCart(cartId string) error {
+	const query = `DELETE FROM cart_products WHERE cart_id = ?`
+	_, err := c.db.Exec(query, cartId)
+	return err
+}
+
 func (c *sqlCartRepository) removeProduct(cartId string, productId string) error {
 	const query = `DELETE FROM cart_products WHERE cart_id = ? AND product_id = ?`
 	_, err := c.db.Exec(query, cartId, productId)
 	return err
 }
 
-func (c *sqlCartRepository) SetProductQuantity(cartId string, productId string, quantity uint) error {
+func (c *sqlCartRepository) updateQuantity(cartId string, productId string, delta int) error {
 	// Docs: https://sqlite.org/lang_upsert.html
 	const query = `
         INSERT INTO
@@ -133,14 +110,14 @@ func (c *sqlCartRepository) SetProductQuantity(cartId string, productId string, 
           (?, ?, ?) ON CONFLICT(cart_id, product_id) DO
         UPDATE
         SET
-          quantity = excluded.quantity;
+          quantity = quantity + excluded.quantity;
+
+        DELETE FROM
+            cart_products
+        WHERE
+            cart_id = ? AND product_id = ? AND quantity <= 0;
     `
-
-	if quantity == 0 {
-		return c.removeProduct(cartId, productId)
-	}
-
-	_, err := c.db.Exec(query, cartId, productId, quantity)
+	_, err := c.db.Exec(query, cartId, productId, delta, cartId, productId)
 
 	return err
 }

@@ -32,27 +32,35 @@ interface CartEventNotification {
 export class CartServiceCartProvider implements CartProvider {
   private readonly axios: AxiosInstance;
   private readonly cartId: string;
-  private readonly websocket: WebSocket;
+  private readonly baseUrl: string;
+  private websocket?: WebSocket;
   private addProductHandler?: ItemHandler;
   private removeProductHandler?: ItemHandler;
 
   constructor(url: string, cartId: string = "2") {
     this.cartId = cartId;
+    this.baseUrl = url;
     this.axios = axios.create({
       baseURL: url,
     });
-    const webSocketUrl = `${url}/cart/${cartId}/ws`.replace("http", "ws");
-    console.log(webSocketUrl);
+    this.setupWebsocket()
+  }
+
+  private setupWebsocket() {
+    if (this.websocket) {
+      this.websocket.close()
+    }
+    const webSocketUrl = `${this.baseUrl}/cart/${this.cartId}/ws`.replace("http", "ws");
     this.websocket = new WebSocket(webSocketUrl);
     this.websocket.onopen = (_event) => {
       console.log("opening websocket");
     };
     this.websocket.onclose = (_event) => {
       console.log("closing websocket");
+      setTimeout(() => this.setupWebsocket(), 1000)
     };
     this.websocket.onmessage = (event) => {
       const payload = JSON.parse(event.data) as CartEventNotification;
-      console.log(payload);
       if (payload.event === CartEvent.ProductAdded) {
         this.addProductHandler &&
           this.addProductHandler(this.adapter(payload.cart_product));
@@ -67,6 +75,10 @@ export class CartServiceCartProvider implements CartProvider {
     const items = (await this.axios.get(`/cart/${this.cartId}`))
       .data as CartServiceResponse;
     return items.products.map(this.adapter);
+  }
+
+  async Checkout() {
+    await this.axios.post(`/cart/${this.cartId}/checkout`)
   }
 
   OnAddProduct(handler: ItemHandler) {

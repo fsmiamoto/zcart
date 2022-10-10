@@ -44,13 +44,39 @@ func (h *Handler) RegisterEndpoints() {
 	h.app.Get("/cart/:id/ws", h.WebsocketHandler, websocket.New(h.WebsocketManager))
 	h.app.Get("/cart/:id", h.GetCart)
 	h.app.Post("/cart/:cart_id/products", h.UpdateProducts)
+	h.app.Post("/cart/:cart_id/checkout", h.Checkout)
+}
+
+func newError(status int, err error) error {
+	return fiber.NewError(status, err.Error())
+}
+
+func (h *Handler) Checkout(ctx *fiber.Ctx) error {
+	cartId := ctx.Params("cart_id")
+
+	if cartId == "" {
+		return newError(fiber.StatusBadRequest, errors.New("missing cart id"))
+	}
+
+	h.logger.Info().Msgf("Checkout: %s", cartId)
+
+	if err := h.cartRepo.EmptyCart(cartId); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func (h *Handler) UpdateProducts(ctx *fiber.Ctx) error {
+	// Add missing validation
 	var request UpdateProductsRequest
 
 	if err := ctx.BodyParser(&request); err != nil {
-		return err
+		return newError(fiber.StatusBadRequest, err)
+	}
+
+	if err := request.Validate(); err != nil {
+		return newError(fiber.StatusBadRequest, err)
 	}
 
 	cartId := ctx.Params("cart_id")
@@ -91,21 +117,23 @@ func (h *Handler) GetCart(ctx *fiber.Ctx) error {
 
 	h.logger.Printf("Cart length: %d", len(cart.Products))
 
-	if len(cart.Products) == 0 {
-		return ErrCartNotFound
+	if cart.Products == nil {
+		cart.Products = make([]*models.CartProduct, 0)
 	}
 
 	return ctx.JSON(cart)
 }
 
 func (h *Handler) processAction(cartId string, productId string, quantity uint, action UpdateProductsRequestAction) error {
+	var delta int
+
 	if action == AddProductAction {
-		return h.cartRepo.AddProduct(cartId, productId, quantity)
+		delta = int(quantity)
 	} else if action == RemoveProductAction {
-		return h.cartRepo.RemoveProduct(cartId, productId, quantity)
-	} else {
-		return errors.New("invalid action")
+		delta = -int(quantity)
 	}
+
+	return h.cartRepo.UpdateProductQuantity(cartId, productId, delta)
 }
 
 func (h *Handler) notify(cartProduct *models.CartProduct, action UpdateProductsRequestAction) {
