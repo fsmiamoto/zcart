@@ -110,7 +110,6 @@ Abstract text (maximum of 500 words).
 
 \setcounter{page}{12}
 
-%---------- Primeiro Capitulo ----------
 \chapter{Introduction}
 
 With the advancement of the high speed mobile networks and smartphone penetration,
@@ -127,8 +126,8 @@ that was considered to be science fiction material until a couple of years ago.
 	\centering
 	\includegraphics[width=0.4\textwidth]{./images/echodot4.jpg} % <- formatos PNG, JPG e PDF
 	\caption[Amazon Echo 4th Generation smart speaker promotional material]{Amazon Echo 4th Gen Smart Speaker promotional material}
-	\fonte{Amazon}
-	\label{fig:dummy}
+    \fonte{Amazon (2022)}
+	\label{fig:echodot4}
 \end{figure}
 
 \begin{quote}
@@ -150,9 +149,9 @@ and maintain \cite{Phdata2021} - through \sigla{APIs}{Application Programming In
 \begin{figure}[htb!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./images/skills.png} % <- formatos PNG, JPG e PDF
-	\caption[]{Diagram showing the steps of an interaction with an Alexa Skill}
+	\caption[Diagram showing the steps of an interaction with an Alexa Skill]{Diagram showing the steps of an interaction with an Alexa Skill}
     \fonte{\cite{Alexa2022}}
-	\label{fig:dummy}
+	\label{fig:alexaskill}
 \end{figure}
 
 More impressively, such technological advancements have been able to reach a considerable amount of households in
@@ -164,7 +163,7 @@ an extensible ecosystem can boost sales.
 	\includegraphics[width=0.6\textwidth]{./images/smartspeaker.png} % <- formatos PNG, JPG e PDF
 	\caption[US Smart Speaker Penetration from 2017 to 2022]{US Smart Speaker Penetration from 2017 to 2022}
     \fonte{\cite{InsiderIntelligence2022}}
-	\label{fig:dummy}
+	\label{fig:smartspeaker}
 \end{figure}
 
 On developing countries, such as Brazil, these innovations tend to have delayed
@@ -175,9 +174,9 @@ delay.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\textwidth]{./images/alexabr.jpg} % <- formatos PNG, JPG e PDF
-	\caption[]{Localized promotional material for the Echo Show 10 targeting Brazilian customers}
-    \fonte{Amazon}
-	\label{fig:dummy}
+	\caption[Localized promotional material for the Echo Show 10 targeting Brazilian customers]{Localized promotional material for the Echo Show 10 targeting Brazilian customers}
+    \fonte{Amazon (2022)}
+    \label{fig:alexabr}
 \end{figure}
 
 According to the research company IDC Brasil, the home automation market - in
@@ -185,63 +184,178 @@ which smart speakers are included - would have reached US\$ 298 million on
 2021.
 
 Although these advancements might seem entirely beneficial at first, countless
-challenges have been found regarding privacy and ethical handling of personal
-customer data \cite{Echoes2022} and overall negative experiences \cite{He2019}
+challenges have been found regarding privacy, ethical handling of personal
+customer data and overall negative experiences caused by increased
+dependencies, e.g what happens when you lose internet connection?
 
 These discussions are of the utter most importance given our current scenario
-and have been brought up by recent literature but will be out of the scope of
-our work.
+and have been brought up by recent literature \cite{Echoes2022,He2019}
+but will be out of the scope of our work.
 
 \section{Motivation}
 
-Even with all of these innovations that are impacting customer behaviors, one aspect of the stands out as not having changed 
-significantly in the last couple of years: \textbf{Grocery Shopping}.
+Even with all of these innovations impacting customer behaviors day by day, one
+important aspect of consumer life still hasn't had any significant changes in
+the last couple of years on the brazilian market: \textbf{grocery shopping on
+physical stores}.
 
-No ano passado, o setor alcançou um faturamento de R\$ 611,2 bilhões, por meio
-da operação de todos os seus formatos e canais de distribuição (mercado de
-vizinhança, supermercado, hipermercado, atacarejo e e-commerce). Com isso, o
-resultado consolidado pelos supermercados representa 7,03\% do Produto Interno
-Bruto (PIB) nacional.
-https://www.abras.com.br/economia-e-pesquisa/ranking-abras/dados-gerais
+According to \sigla{ABRAS}{Associação Brasileira de Supermercados} - the
+Brazilian Supermarket Association - the grocery retail sector has reached an
+impressive total revenue of \textbf{R\$ 611 billion} - roughly US\$ 117 billion on
+October 2022 - in 2021, making up 7.03\% of the national \sigla{GDP}{Gross
+Domestic Product}. About \textbf{28 million} customers visit of the more than
+\textbf{92,000} stores countrywide on a daily basis \cite{Abras2022}.
 
-https://www.abras.com.br/clipping/tecnologia/110172/a-evolucao-do-e-commerce-na-nova-era-pos-covid
+In the recent pandemic scenario, innovations such as the adoption of e-commerce platforms and
+self-checkout solutions had their adoption increased in 2020 but 2021 showed that consumers have
+mostly shifted back to their pre-pandemic behavior, favoring physical retail stores \cite{Kantar2022}.
 
-Even after the COVID-19 pandemic, customer behavior has once again shifted back towards physical grocery shopping (add sources)
+But in such an economic relevant market and with all the technological
+advancement we've been seing, most of the physical retail customers still
+report pain points related to visiting a store. In a survey conducted in 2019,
+Capgemini has found out five key problems \cite{Capgemini2020}:
+
+\begin{enumerate}
+        \item Long queues for payment checkout
+        \item Out of stock products
+        \item Difficulties in locating products in the store
+        \item Not being able to find a store associate to help me
+        \item Lack of product information when I select products
+\end{enumerate}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/painpoints.png}
+    \caption[Top five customer pain points in retail stores]{Top five customer pain points in retail stores}
+    \fonte{\cite{Capgemini2020}}
+    \label{fig:capgemini}
+\end{figure}
+
+More interestingly, Figure \ref{fig:capgemini} shows that at least half of the
+survey respondents believe that all of the five pain points can be solved through
+\textbf{automation}.
+
+It is in this scenario of customer pain and enormous market potential that this
+thesis will explore a technological solution to improve customer experience,
+namely the \textbf{smart shopping cart}.
 
 \section{Current scenario}
 
-\subsection{Amazon Fresh}
+In this next section, we'll explore some of the existing solutions and how they
+try to improve customer experience and increase the retailer's revenue.
 
-\subsection{Caper.ai}
+\subsection{Caper Cart}
+
+Developed by the Caper\footnote{https://caper.ai} company, the Caper Cart was the worlds's first AI-powered smart cart \cite{Caper2020}
+
+The first version was launched in 2017 and offered grocers the
+great advantage of not requiring any infrastructure overhaul for deployment.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/capercartui.png}
+	\caption[Caper Cart user interface]{Caper Cart user interface}
+    \fonte{Caper (2020)}
+	\label{fig:caperui}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/caper.png}
+	\caption[Caper Cart at a retail store]{Caper Cart at a retail store}
+    \fonte{Caper (2020)}
+	\label{fig:caperatretail}
+\end{figure}
+
+For customers, it offered visual product recognition and a payment terminal,
+allowing customers to avoid the dreaded queues by the end of their shopping.
+Additionally, customers were able to search products, get discounts and locate
+items more easily with the help of the user interface provided by the cart.
+
+Although Caper does not publicize the cost of each cart, it is estimate that each unit costs between
+\textbf{US\$ 5,000 and 10,000} \cite{TWP2021}.
+
+Acquired by Instacart\footnote{https://instacart.com} in 2021 for US\$ 350 million, Caper is developing in 2022 the 
+third version of its Smart Shopping Cart, advertising an increase in \textbf{65\% in the basket
+volume} and a \textbf{10 month} breakeven.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/capercart3.png}
+	\caption[Caper Cart 3 promotional material]{Caper Cart 3 promotional material}
+    \fonte{Caper (2022)}
+	\label{fig:nextop}
+\end{figure}
+
+
+\subsection{Amazon Dash Cart}
+
+Available at the Amazon Fresh\footnote{https://www.amazon.com/fmc/m/30003175?almBrandId=QW1hem9uIEZyZXNo} retail chain, the
+Amazon Dash Cart.
+
+According to Amazon, it uses computer vision and sensors to allow customers to
+simply add items to their cart which already accounts all the items and
+subtotal. By the end of their item selection, customers can check-out
+automatically without having to go through queues, solving the biggest customer
+pain point pointed out by Capgemini.
+
+\begin{quote}
+\textit{Looking to make grocery trips quicker? With the Amazon Dash Cart you can skip the checkout line and roll out to your car when you are done.}
+
+\textit{The Dash cart uses a combination of computer vision algorithms and sensor fusion to help identify items placed in the cart - simply grab an item, scan it on one of the Dash Cart cameras, and place it in the cart like you normally would.}
+\\
+Amazon (2022)
+\end{quote}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/dashcart.png}
+    \caption[Amazon Dash Cart]{Amazon Dash Cart}
+    \fonte{Amazon (2022)}
+    \label{fig:dashcart}
+\end{figure}
+
+Additionally, the user interface provided by the Cart allows customers to search for item location and see more information
+about them, improving the customer experience.
+
+One of its quircks is that it requires the download and usage of an mobile phone app for using the cart, in contrast
+to Caper's Cart.
+
+As of October 2022, the Amazon Dash Cart is exclusively available at the Amazon
+Fresh chain and therefore no commercial information regarding cost per unit is
+available.
 
 \subsection{Nextop}
 
-\begin{figure}[!htb]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\textwidth]{./images/nextop.jpeg}
-	\caption[]{Smart Cart® deployed to Brazilian supermarket}
-    \fonte{Nextop}
-	\label{fig:dummy}
+	\caption[Nextop Smart Cart® deployed to a Brazilian supermarket]{Smart Cart® deployed to a Brazilian supermarket}
+    \fonte{Nextop (2022)}
+	\label{fig:nextop}
 \end{figure}
 
 
 \section{Expected outcomes}
 
-Develop a prototype of a smart shopping cart, with object recognition and
-user interface.
+After presenting the problem domain and the current solutions, in this section we discuss the expected
+outcomes of this work.
+
+Develop a prototype of a smart shopping cart, including a mechanical assembly using with computer vision for object recognition with
+an user interface.
 
 \begin{itemize}
-	\item Develop
-	\item Desonerar autores da tediosa tarefa de formatar documentos academicos, permitindo sua concentracao no conteudo do mesmo.
-	\item Understand the practical challenges of developing a deep-learning based product
+    \item Train a Deep Learning model capable of detecting target products
+	\item Learn the practical challenges of developing a Deep Learning based product
+    \item Understand the economic viability of such a project in the Brazilian context
 \end{itemize}
 
 \chapter{Theoretical Background}
 
-In this section, we'll define in greater detail some of the relevant techniques
-that were used in developing our prototype.
+In this section, we'll define in greater detail some most relevant techniques
+used in the development of our prototype.
 
-This section can be skipped for readers with domain familiarity.
+This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Deep Learning}
 
@@ -263,76 +377,62 @@ This section can be skipped for readers with domain familiarity.
 
 \section{SQLite}
 
-%---------- Segundo Capitulo ----------
 \chapter{Development}
 \label{chap:desenv}
 
-A seguir ilustra-se a forma de incluir figuras, tabelas, equac\~oes, siglas e simbolos no documento, obtendo indexacao automatica em suas respectivas listas. A numeracao sequencial de figuras, tabelas e equac\~oes ocorre de modo automatico. Referencias cruzadas sao obtidas atraves dos comandos {\ttfamily \textbackslash label\{\}} e {\ttfamily \textbackslash ref\{\}}. Por exemplo, nao e necessario saber que o numero deste capitulo e~\ref{chap:desenv} para colocar o seu numero no texto. Isto facilita muito a insercao, remocao ou relocacao de elementos numerados no texto (fato corriqueiro na escrita e correcao de um documento academico) sem a necessidade de renumera-los todos.
-
-\section{Figuras}
-
-Na figura~\ref{fig:dummy} e apresentado um exemplo de grafico flutuante. Esta figura aparece automaticamente na lista de figuras. Para uso avancado de graficos no \LaTeX, recomenda-se a consulta de literatura especializada~\cite{Goossens2007}.
-
-
-\begin{figure}[!htb]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=0.2\textwidth]{./dummy.png} % <- formatos PNG, JPG e PDF
-	\caption[Figure example]{Exemplo de uma figura onde aparece uma imagem sem nenhum significado especial.}
-	\fonte{\cite{abnTeX2009}}
+	\includegraphics[width=0.5\textwidth]{./images/hx711.jpeg}
+	\caption[HX711 breakout board and load cell]{HX711 breakout board and load cell}
+	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
 
-
-\section{Tabelas}
-
-Tambem e apresentado o exemplo da tabela~\ref{tab:correlacao}, que aparece automaticamente na lista de tabelas. Informac\~oes sobre a construcao de tabelas no \LaTeX\ podem ser encontradas na literatura especializada~\cite{Lamport1986,Buerger1989,Kopka2003,Mittelbach2004}.
-
-\begin{table}[!htb]
+\begin{figure}[H]
 	\centering
-	\caption[Table example]{Exemplo de uma tabela mostrando a correlacao entre x e y.}
-	\label{tab:correlacao}
-	\begin{tabular}{cc}
-		\hline 
-		x & y \\
-		\hline
-		1 & 2 \\
-		3 & 4 \\
-		5 & 6 \\
-		7 & 8 \\
-		\hline 
-	\end{tabular}
-	\fonte{Autoria propria.}
-\end{table}
+	\includegraphics[width=0.8\textwidth]{./images/raspberrypiwithloadcell.jpeg}
+	\caption[Assembly used for development, including the Raspberry Pi and load cell]{Assembly used for development, including the Raspberry Pi and load cell}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
 
-\section{Equações}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/zCart.png}
+	\caption[High level architecture of zCart]{High level architecture of zCart}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
 
-A transformada de Laplace e dada na equacao~(\ref{eq:laplace}), enquanto a equacao~(\ref{eq:dft}) apresenta a formulacao da transformada discreta de Fourier bidimensional\footnote{Deve-se reparar na formatacao esteticamente perfeita destas equac\~oes!}.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/E2E.png}
+	\caption[End-to-end sequence of interactions]{End-to-end sequence of interactions}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
 
-\begin{equation}
-X(s) = \int\limits_{t = -\infty}^{\infty} x(t) \, \text{e}^{-st} \, dt
-\label{eq:laplace}
-\end{equation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/Product Recognizer Thread communication.png}
+	\caption[Thread communication for the Product Recognizer App]{Thread communication for the Product Recognizer App}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
 
-\begin{equation}
-F(u, v) = \sum_{m = 0}^{M - 1} \sum_{n = 0}^{N - 1} f(m, n) \exp \left[ -j 2 \pi \left( \frac{u m}{M} + \frac{v n}{N} \right) \right]
-\label{eq:dft}
-\end{equation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/Product Recognizer Activity.png}
+	\caption[Activity diagram for the Product Recognizer thread]{Activity diagram for the Product Recognizer thread}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
 
 \section{Siglas e símbolos}
 
-O pacote \textsc{abn}\TeX\ permite ainda a definicao de siglas e simbolos com indexacao automatica atraves dos comandos {\ttfamily \textbackslash sigla\{\}\{\}} e {\ttfamily \textbackslash simbolo\{\}\{\}}. Por exemplo, o significado das siglas\sigla{CPGEI}{Programa de Pos-graduacao em Engenharia Eletrica e Informatica Industrial},\sigla{DAELN}{Departamento Academico de Eletronica} e\sigla{UTFPR}{Universidade Tecnologica Federal do Parana} aparecem automaticamente na lista de siglas, bem como o significado dos simbolos\simbolo{$\lambda$}{comprimento de onda},\simbolo{$v$}{velocidade} e\simbolo{$f$}{frequencia} aparecem automaticamente na lista de simbolos. Mais detalhes sobre o uso destes e outros comandos do \textsc{abn}\TeX\ sao encontrados na sua documentacao especifica~\cite{abnTeX2009}.
+\simbolo{$\lambda$}{comprimento de onda}
 
-
-%---------- Terceiro Capitulo ----------
 \chapter{Conclusions}
-
-Espera-se que o uso do estilo de formatacao \LaTeX\ adequado as Normas para Elaboracao de Trabalhos Academicos da UTFPR ({\ttfamily normas-utf-tex.cls}) facilite a escrita de documentos no ambito desta instituicao e aumente a produtividade de seus autores. Para usuarios iniciantes em \LaTeX, alem da bibliografia especializada ja citada, existe ainda uma serie de recursos~\cite{CTAN2009} e fontes de informacao~\cite{TeX-Br2009,Wikibooks2009} disponiveis na Internet.
-
-Recomenda-se o editor de textos Kile como ferramenta de composicao de documentos em \LaTeX\ para usuarios Linux. Para usuarios Windows recomenda-se o editor \TeX nicCenter~\cite{TeXnicCenter2009}. O \LaTeX\ normalmente ja faz parte da maioria das distribuic\~oes Linux, mas no sistema operacional Windows e necessario instalar o software \textsc{MiK}\TeX~\cite{MiKTeX2009}.
-
-Alem disso, recomenda-se o uso de um gerenciador de referencias como o JabRef~\cite{JabRef2009} ou Mendeley~\cite{Mendeley2009} para a catalogacao bibliografica em um arquivo \textsc{Bib}\TeX, de forma a facilitar citac\~oes atraves do comando {\ttfamily \textbackslash cite\{\}} e outros comandos correlatos do pacote \textsc{abn}\TeX. A lista de referencias deste documento foi gerada automaticamente pelo software \LaTeX\ + \textsc{Bib}\TeX\ a partir do arquivo {\ttfamily reflatex.bib}, que por sua vez foi composto com o gerenciador de referencias JabRef.
-
-O estilo de formatacao \LaTeX\ da UTFPR e este exemplo de utilizacao foram elaborados por Diogo Rosa Kuiaski (diogo.kuiaski@gmail.com) e Hugo Vieira Neto (hvieir@utfpr.edu.br), com contribuic\~oes de Cesar Vargas Benitez. Sugest\~oes de melhorias sao bem-vindas.
 
 
 %---------- Referencias ----------
@@ -348,59 +448,9 @@ O estilo de formatacao \LaTeX\ da UTFPR e este exemplo de utilizacao foram elabo
 Use o comando {\ttfamily \textbackslash apendice} e depois comandos {\ttfamily \textbackslash chapter\{\}}
 para gerar titulos de apendices.
 
-
-% ---------- Anexos (opcionais) ----------
 \anexo
 \chapter{Nome do Anexo}
 
 Use o comando {\ttfamily \textbackslash anexo} e depois comandos {\ttfamily \textbackslash chapter\{\}}
 para gerar titulos de anexos.
-
-
-% --------- Ordenacao Afabetica da Lista de siglas --------
-%\textbf{* Observac\~oes:} a ordenacao alfabetica da lista de siglas ainda nao eh realizada de forma automatica, porem
-% eh possivel se de realizar isto manualmente. Duas formas:
-%
-% ** Primeira forma)
-%    A ordenacao eh feita com o auxilio do comando 'sort', disponivel em qualquer
-% sistema Linux e UNIX, e tambem em sistemas Windows se instalado o coreutils (http://gnuwin32.sourceforge.net/packages/coreutils.htm)
-% comandos para compilar e ordenar, supondo que seu arquivo se chame 'dissertacao.tex':
-%
-%      $ latex dissertacao
-%      $ bibtex dissertacao && latex dissertacao
-%      $ latex dissertacao
-%      $ sort dissertacao.lsg > dissertacao.lsg.tmp
-%      $ mv dissertacao.lsg.tmp dissertacao.lsg
-%      $ latex dissertacao
-%      $ dvipdf dissertacao.dvi
-%
-%
-% ** Segunda forma)
-%\textbf{Sugestao:} crie outro arquivo .tex para siglas e utilize o comando \sigla{sigla}{descricao}.
-%Para incluir este arquivo no final do arquivo, utilize o comando \input{arquivo.tex}.
-%Assim, Todas as siglas serao geradas na ultima pagina. Entao, devera excluir a ultima pagina da versao final do arquivo
-% PDF do seu documento.
-
-
-%-------- Citacoes ---------
-% - Utilize o comando \citeonline{...} para citacoes com o seguinte formato: Autor et al. (2011).
-% Este tipo de formato eh utilizado no comeco do paragrafo. P.ex.: \citeonline{autor2011}
-
-% - Utilize o comando \cite{...} para citacoeses no meio ou final do paragrafo. P.ex.: \cite{autor2011}
-
-
-
-%-------- Titulos com nomes cientificos (titulo, capitulos e secoes) ----------
-% Regra para escrita de nomes cientificos:
-% Os nomes devem ser escritos em italico, 
-%a primeira letra do primeiro nome deve ser em maiusculo e o restante em minusculo (inclusive a primeira letra do segundo nome).
-% VEJA os exemplos abaixo.
-% 
-% 1) voce nao quer que a secao fique com uppercase (caixa alta) automaticamente:
-%\section[nouppercase]{\MakeUppercase{Estudo dos efeitos da radiacao ultravioleta C e TFD em celulas de} {\textit{Saccharomyces boulardii}}
-%
-% 2) por padrao os cases (maiusculas/minuscula) sao ajustados automaticamente, voce nao precisa usar makeuppercase e afins.
-% \section{Introducao} % a introducao sera posta no texto como INTRODUCAO, automaticamente, como a norma indica.
-
-
 \end{document}

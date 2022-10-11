@@ -1,0 +1,24 @@
+@startuml E2E
+actor Customer as Customer
+control "Cart" as Cart
+participant "Product Recognizer" as ProductRecognizer
+participant "Cart Service" as CartService
+participant "User App" as CartService
+database "Database" as Database
+
+Customer -> Cart: Add product
+
+ProductRecognizer -> Cart: Detect product added
+activate ProductRecognizer
+ProductRecognizer -> CartService: Send product addition request
+activate CartService
+CartService -> Database: Store product on Cart
+CartService <- Database
+CartService -> UserApp: Notify of product addition
+CartService <-- UserApp
+ProductRecognizer <- CartService
+deactivate CartService
+deactivate ProductRecognizer
+
+Customer <-- UserApp: Show "Product added" message
+@enduml
