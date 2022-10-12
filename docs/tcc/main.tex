@@ -305,7 +305,7 @@ pain point pointed out by Capgemini.
 \textit{The Dash cart uses a combination of computer vision algorithms and sensor fusion to help identify items placed in the cart - simply grab an item, scan it on one of the Dash Cart cameras, and place it in the cart like you normally would.}
 \\
 Amazon (2022)
-\end{quote}
+\end{quote}R
 
 \begin{figure}[H]
 	\centering
@@ -327,14 +327,69 @@ available.
 
 \subsection{Nextop}
 
+Founded in 1997, Nextop\footnote{https://nextop.com.br} is a Brazilian company
+that develops products with a focus on the grocer market with an emphasis on
+loss prevention.
+
+According to the company, the Smart Cart Nextop is the first smart cart
+deployed in Brazil and Latin America and was initially rolled out to the Enxuto
+supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\textwidth]{./images/nextop.jpeg}
-	\caption[Nextop Smart Cart® deployed to a Brazilian supermarket]{Smart Cart® deployed to a Brazilian supermarket}
+	\caption[Smart Cart Nextop® deployed to a Brazilian supermarket]{Smart Cart Nextop® deployed to a Brazilian supermarket}
     \fonte{Nextop (2022)}
 	\label{fig:nextop}
 \end{figure}
 
+Differently than the carts developed by Amazon and Caper, Nextop's cart
+requires customers to first scan the product using the integrate bar code
+reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises
+\textit{triple validation} using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/nextop2.png}
+    \caption[Smart Cart Nextop® user interface with a payment terminal]{Smart Cart Nextop® user interface with a payment terminal}
+    \fonte{\cite{Paraiba2022}}
+	\label{fig:nextopui}
+\end{figure}
+
+Although it pleases grocers with the improved loss prevention, the usage of the barcode scanner creates in our opinion a worse
+end customer experience, becoming a sort of \textit{mobile checkout station}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/nextoppromo.png}
+    \caption[Smart Cart Nextop® promotinal material targetting supermarket owners]{Smart Cart Nextop® promotinal material targetting supermarket owners}
+    \fonte{\cite{Nextop2022}}
+	\label{fig:nextopui}
+\end{figure}
+
+Besides offering the improve shopping experience by not having to go through queues by the end of the trip, the product advertises increased sales
+as a result of the innovative approach and also allows a deeper understanding of the customer journey by collecting analytical data \cite{Paraiba2022}.
+
+\begin{quote}
+\textit{We are offering our customers an innovative and unique shopping experience within Enxuto}
+
+\textit{With the smart cart, we broke through this barrier and managed to monitor the
+entire customer's purchase circuit in the physical store. We have moved
+from the identified ticket era to the end-to-end identified journey}
+
+Bruno Bragancini Junior, CEO of the Enxuto Group \cite{Paraiba2022}
+\end{quote}
+
+
+This goes in line with the
+company's know how on loss prevention which appeared to be an important aspect
+of the product for the target Brazilian customer base.
+
+
+According to Nextop's CEO, Juliano Camargo, the company has already invested \textbf{R\$ 8.5 million} - about US\$ 1.63 million on October 2022 - and \textbf{4 and half years}
+of research and development.
+
+Each Smart Cart is estimated to cost around \textbf{R\$ 120,000  or around US\$ 23,020} on October 2022 \cite{Paraiba2022}.
 
 \section{Expected outcomes}
 
@@ -367,15 +422,11 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{HX711}
 
-\section{API}
-
-\section{HTTP}
-
-\section{JSON}
-
-\section{SQL}
+\section{RESTful APIs}
 
 \section{SQLite}
+
+\section{Websockets}
 
 \chapter{Development}
 \label{chap:desenv}
@@ -443,10 +494,38 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 %---------- Apendices (opcionais) ----------
 \apendice
-\chapter{Nome do Apendice}
+\chapter{User App screenshots}
+\label{ap:userapp}
 
-Use o comando {\ttfamily \textbackslash apendice} e depois comandos {\ttfamily \textbackslash chapter\{\}}
-para gerar titulos de apendices.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/userapp.png}
+	\caption[]{Thread communication for the Product Recognizer App}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/userapp2.png}
+	\caption[]{Thread communication for the Product Recognizer App}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/userapp3.png}
+	\caption[]{Thread communication for the Product Recognizer App}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/userapp4.png}
+	\caption[]{Thread communication for the Product Recognizer App}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/userapp5.png}
+	\caption[]{Thread communication for the Product Recognizer App}
+\end{figure}
 
 \anexo
 \chapter{Nome do Anexo}

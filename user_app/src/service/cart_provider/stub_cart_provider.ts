@@ -70,7 +70,7 @@ export class StubCartProvider implements CartProvider {
 
   constructor(
     delay: number = 2000,
-    interval: number = 60000,
+    interval: number = 5000,
     maxQuantity: number = 4
   ) {
     this.interval = interval;

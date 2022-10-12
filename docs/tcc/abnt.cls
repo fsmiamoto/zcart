@@ -1169,6 +1169,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \renewcommand{\appendix}{
   \setcounter{chapter}{0}
+  \setcounter{figure}{0}
   \resetsubcounters{chapter}
   \gdef\thechapter{\Alph{chapter}}
   \setchaptertype{appendix}
