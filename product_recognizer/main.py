@@ -1,12 +1,14 @@
 #! /usr/bin/python3
 import sys
 import time
+import pdb
 import argparse
+import logging
 from typing import List
 from frame_object import FrameObject
 
 from frame_preprocessor import FramePreprocessor
-from frame_object_detector import FrameObjectDetector
+from frame_object_detector import FrameObjectDetector, PytorchFrameObjectDetector, TfLiteFrameObjectDetector
 from frame_object_filter import FrameObjectFilter
 from weight_sensor import WeightSensor
 from cart_service import CartServiceClient
@@ -19,20 +21,22 @@ from video_stream import VideoStream
 
 def run(args):
     log = Logger()
+    log.setLevel(logging.DEBUG)
     weight_sensor = WeightSensor()
-    detector = FrameObjectDetector(
-        model_path=args.model_file, labelmap_path=args.label_file
-    )
+    # detector: FrameObjectDetector = TfLiteFrameObjectDetector(
+    #     model_path=args.model_file, labelmap_path=args.label_file
+    # )
+    detector: FrameObjectDetector = PytorchFrameObjectDetector('./model/mobilenet_classes.txt', logger=log)
 
     height, width = detector.get_input_dimensions()
 
-    preprocessor = FramePreprocessor(
-        height, width, is_floating_model=detector.is_floating_model()
-    )
+    # preprocessor = FramePreprocessor(
+    #     height, width, is_floating_model=detector.is_floating_model()
+    # )
     cart_service_client = CartServiceClient(args.cart_service)
 
     log.info("will start video stream")
-    stream = VideoStream(resolution=(args.width, args.height)).start()
+    stream = VideoStream(resolution=(width, height)).start()
     time.sleep(1)
     log.info("done starting video stream")
 
@@ -63,10 +67,16 @@ def run(args):
 
             frame = stream.read_frame()
 
-            input = preprocessor.process(frame)
+            # input = preprocessor.process(frame)
+            # log.info("will preprocess")
+            input = frame[:,:, [2,1,0]]
             detector.infer(input)
+            objects = detector.get_objects()
+            log.info("got objects")
+            # pdb.set_trace()
+            filtered_objects = object_filter.filter(objects)
 
-            filtered_objects = object_filter.filter(detector.get_objects())
+            log.info(f"Survivors: {len(filtered_objects)}")
 
             frame_objects_queue.put(filtered_objects)
 
@@ -102,6 +112,7 @@ if __name__ == "__main__":
         "--confidence",
         dest="confidence_threshold",
         default=0.55,
+        type=float,
         help="Confidence threshold",
     )
     parser.add_argument("--width", dest="width", default=640, help="Frame width")

@@ -52,10 +52,10 @@ class ProductRecognizer:
                 )
 
                 if len(frame_diff) == 0:
-                    self.log.info("empty diff")
+                    self.log.debug("empty diff")
                     continue
 
-                self.log.debug(f"object diff in frame: {frame_diff}")
+                self.log.info(f"object diff in frame: {frame_diff}")
 
                 weight_reading = self.weight_sensor.get_reading(samples=5)
                 self.log.debug(
@@ -79,15 +79,11 @@ class ProductRecognizer:
 
     def __valid_weight_difference(self, label: str, count: int, reading: float) -> bool:
         if reading > self.last_weight_reading and count < 0:
-            self.log.debug(
-                f"weight increased but count is negative ({count}), ignoring"
-            )
+            self.log.info(f"weight increased but count is negative ({count}), ignoring")
             return False
 
         if reading < self.last_weight_reading and count > 0:
-            self.log.debug(
-                f"weight decreased but count is positive ({count}), ignoring"
-            )
+            self.log.info(f"weight decreased but count is positive ({count}), ignoring")
             return False
 
         product = self.catalog.get_product(label)
@@ -98,7 +94,7 @@ class ProductRecognizer:
         weight_difference = reading - self.last_weight_reading
         expected_difference = count * product.weight_in_grams
 
-        self.log.debug(
+        self.log.info(
             f"expected_difference: {expected_difference}, actual: {weight_difference}"
         )
 
