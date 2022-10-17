@@ -144,7 +144,7 @@ These skills function much like mobile phone apps, extending and enhancing the f
 can be sold to users.
 
 Developers are can then leverage the highly advanced machine learning models - which can be notoriously expensive to develop 
-and maintain \cite{Phdata2021} - through \sigla{APIs}{Application Programming Interfaces} and focus exclusively on their application logic.
+and maintain \cite{Phdata2021} - through \sigla{API}{Application Programming Interface}s and focus exclusively on their application logic.
 
 \begin{figure}[htb!]
 	\centering
@@ -377,7 +377,7 @@ as a result of the innovative approach and also allows a deeper understanding of
 entire customer's purchase circuit in the physical store. We have moved
 from the identified ticket era to the end-to-end identified journey}
 
-Bruno Bragancini Junior, CEO of the Enxuto Group \cite{Paraiba2022}
+    Bruno Bragancini Junior, \sigla{CEO}{Chief Executive Officer} of the Enxuto Group \cite{Paraiba2022}
 \end{quote}
 
 
@@ -450,10 +450,11 @@ With those responsabilities in mind, the high level architecture of the prototyp
 was designed and is shown in Figure \ref{fig:architecture}.
 
 For each responsability, a separate software application will be used and those
-applications will communicate using network sockets with established protocols
-such as \sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
-RFC 1945} -- using the RESTful pattern --  and WebSocket\footnote{Defined in
-RFC 6455}.
+applications will communicate using \sigla{TCP}{Transmission Control Protocol}
+network sockets (ADD CITATION) with established application protocols such as
+\sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
+\sigla{RFC}{Request For Comments} 1945} -- using the RESTful pattern -- and
+WebSocket\footnote{Defined in RFC 6455}.
 
 For handling the first responsability, the \textit{User App} will request data
 from other applications and will display the information to end users and allow
@@ -467,11 +468,11 @@ side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
 massive adoption in mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
 SQLite -- the entire database is contained in a single file --  and the use of
-the familiar relational modeling, including SQL, were key factors in choosing
+the familiar relational modeling, including \sigla{SQL}{Structure Query Language}, were key factors in choosing
 it.
 
 All three applications will executed under a Linux-based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
-Computer.
+Computer (\sigla{SBC}{Single Board Computer}).
 
 \begin{figure}[H]
 	\centering
