@@ -437,6 +437,69 @@ This section can be skipped for readers with familiarity on the topics discussed
 \chapter{Development}
 \label{chap:desenv}
 
+As a first step in developing our prototype, a high level set of
+responsabilities was established:
+
+\begin{enumerate}
+    \item Handle user interactions and give visual feedback
+    \item Store the current set of products present in the cart and their respective information
+    \item Recognize the addition or removal of products through computer vision and sensorial data.
+\end{enumerate}
+
+With those responsabilities in mind, the high level architecture of the prototype
+was designed and is shown in Figure \ref{fig:architecture}.
+
+For each responsability, a separate software application will be used and those
+applications will communicate using network sockets with established protocols
+such as \sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
+RFC 1945} -- using the RESTful pattern --  and WebSocket\footnote{Defined in
+RFC 6455}.
+
+For handling the first responsability, the \textit{User App} will request data
+from other applications and will display the information to end users and allow
+them to interact with the cart using a touch enabled LCD display.
+
+The \textit{Cart Service} will be in charge of the second responsability,
+handling requests from the \textit{User App} that request data or incur in any
+side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
+\textbf{relational database} (ADD CITATION) as its datastore. Namely
+\textbf{SQLite}, considered to be the worlds most deployed database due to its
+massive adoption in mobile
+devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
+SQLite -- the entire database is contained in a single file --  and the use of
+the familiar relational modeling, including SQL, were key factors in choosing
+it.
+
+All three applications will executed under a Linux-based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
+Computer.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/zCart.png}
+	\caption[High level architecture of zCart]{High level architecture of zCart}
+	\fonte{Own work}
+	\label{fig:architecture}
+\end{figure}
+
+
+\subsection{Architectural Guidelines}
+In creating the zCart architecture, the following guidelines were followed:
+
+\begin{itemize}
+    \item Create a separate software application for each responsability
+    \item Use well defined standards for communication between applications.
+    \item All databases should be owned by a single application. 
+    \item Any interaction that requires an update to a given database that is
+        not owned by an application should be done through an API and not
+        directly.
+    \item Decouple the user interface from the how the data displayed is stored and transmitted
+\end{itemize}
+
+These guideline are based on known best practices from the software development industry including API-first design and segregation of
+responsabilities. \cite{Sam2021,Kong2022}
+
+In the sections that follow, each application will be further detailed.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/hx711.jpeg}
@@ -453,13 +516,6 @@ This section can be skipped for readers with familiarity on the topics discussed
 	\label{fig:dummy}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{./images/zCart.png}
-	\caption[High level architecture of zCart]{High level architecture of zCart}
-	\fonte{Own work}
-	\label{fig:dummy}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
