@@ -428,6 +428,24 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{HX711}
 
+The HX711 is a 24-bit analog-to-digital converter (\sigla{ADC}{Analog-to-Digital Converter})
+capable of outputting data in a Serial Interface (ADD CITATION).
+
+It has two channels for analog input with channel A having programable gains of 128 or 64.
+
+For power supply, it can be used with both 3.3\simbolo{V}{Volts} and 5 V standard digital voltages.
+
+One of its advantages is is that there's no need to program internal registers, all
+controls to the chip are through its pins.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/hx711-pinout.png}
+	\caption[HX711 Pinout for the SOP-16L package]{HX711 Pinout for the SOP-16L package}
+    \fonte{\cite{Avia2022}}
+	\label{fig:architecture}
+\end{figure}
+
 \section{RESTful APIs}
 
 \section{SQLite}
@@ -438,7 +456,7 @@ This section can be skipped for readers with familiarity on the topics discussed
 \label{chap:desenv}
 
 As a first step in developing our prototype, a high level set of
-responsabilities was established:
+responsibilities was established:
 
 \begin{enumerate}
     \item Handle user interactions and give visual feedback
@@ -482,6 +500,13 @@ Computer (\sigla{SBC}{Single Board Computer}).
 	\label{fig:architecture}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/E2E.png}
+	\caption[End-to-end sequence of interactions]{End-to-end sequence of interactions}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
 
 \subsection{Architectural Guidelines}
 In creating the zCart architecture, the following guidelines were followed:
@@ -501,6 +526,39 @@ responsabilities. \cite{Sam2021,Kong2022}
 
 In the sections that follow, each application will be further detailed.
 
+\section{User App}
+
+For developing the User App, we have used web technologies such as HTML, CSS and JavaScript (ADD CITATION) through the 
+React\footnote{htps://reactjs.org} framework. 
+
+Using web based technologies allows the User App to be display on any device capable of running a web browser and
+the mature ecosystem lends.
+
+Although developing Linux native graphical applications through toolkits such
+as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io} might have
+yield better performance, our familiarity with web based technologies was a
+key deciding factor in favor of using those.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/ui.png}
+	\caption[User App Interface display a single product]{User App Interface displaying a single product}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/lcddisplay.jpeg}
+	\caption[LCD Display showing the User App]{LCD Display showing the User App}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
+
+\section{Product Recognizer}
+
+\subsection{Weight Sensor}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/hx711.jpeg}
@@ -513,15 +571,6 @@ In the sections that follow, each application will be further detailed.
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/raspberrypiwithloadcell.jpeg}
 	\caption[Scheme used during development, including the Raspberry Pi and load cell assembly]{Scheme used during development, including the Raspberry Pi and load cell assembly}
-	\fonte{Own work}
-	\label{fig:dummy}
-\end{figure}
-
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{./images/E2E.png}
-	\caption[End-to-end sequence of interactions]{End-to-end sequence of interactions}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
@@ -541,6 +590,7 @@ In the sections that follow, each application will be further detailed.
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
+
 
 \section{Siglas e símbolos}
 
@@ -563,31 +613,31 @@ In the sections that follow, each application will be further detailed.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp.png}
-	\caption[]{Thread communication for the Product Recognizer App}
+	\caption[Product listing and subtotal]{Product listing and subtotal}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp2.png}
-	\caption[]{Thread communication for the Product Recognizer App}
+	\caption[Item addition notification]{Item addition notification}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp3.png}
-	\caption[]{Thread communication for the Product Recognizer App}
+	\caption[Item removal notification]{Item removal notification}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp4.png}
-	\caption[]{Thread communication for the Product Recognizer App}
+	\caption[Pre-checkout confirmation popup]{Pre-checkout confirmation popup}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp5.png}
-	\caption[]{Thread communication for the Product Recognizer App}
+	\caption[Post checkout screen]{Post checkout screen}
 \end{figure}
 
 \anexo
