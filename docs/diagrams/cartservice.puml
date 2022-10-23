@@ -1,0 +1,14 @@
+@startuml CartService
+
+component "Cart Service" {
+    portin HTTP
+    portin WebSocket
+    component Application
+    database Database
+}
+
+HTTP -left-> Application
+WebSocket -left-> Application
+Application -> Database
+
+@enduml

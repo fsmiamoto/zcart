@@ -1,0 +1,18 @@
+@startuml UserApp
+
+component "User App" as UserApp
+component "Cart Service" as CartService
+
+interface "Get Cart Products" as GetProducts
+interface "Subscribe to notifications" as Notifications
+interface "Checkout" as Checkout
+
+[UserApp] -down-( GetProducts : HTTP
+[UserApp] -down-( Notifications : WebSocket
+[UserApp] -down-( Checkout : HTTP
+
+GetProducts -- [CartService]
+Notifications -- [CartService]
+Checkout -- [CartService]
+
+@enduml

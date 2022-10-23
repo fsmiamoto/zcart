@@ -26,9 +26,24 @@
 \usepackage{graphicx} % pacote grafico
 \usepackage[final]{pdfpages} % adicao da ata
 \usepackage{float}
+\usepackage{listings}
 
-%Podem utilizar GEOMETRY{...} para realizar pequenos ajustes das margens. Onde, left=esquerda, right=direita, top=superior, bottom=inferior. P.ex.:
-%\geometry{left=3.0cm,right=1.5cm,top=4cm,bottom=1cm} 
+\lstdefinestyle{mystyle}{
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    frame=tb,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
 
 % ---------- Preambulo ----------
 \instituicao{Federal University of Technology - Paraná} % nome da instituicao
@@ -456,6 +471,7 @@ controls to the chip are through its pins.
 \label{chap:desenv}
 
 \section{Design}
+\label{sec:design}
 
 As a first step in developing our prototype, a set of
 responsibilities was established to guide the high level design and is listed below:
@@ -487,9 +503,10 @@ side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
 \textbf{SQLite}, considered to be the worlds most deployed database due to its
 massive adoption in mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
-SQLite -- the entire database is contained within a single file --  and the use of
-the familiar relational modeling, including \sigla{SQL}{Structured Query Language} \cite{Nield2016}, were key factors in choosing
-it.
+SQLite -- the entire database is contained within a single file -- great
+library support in common programming languages and the use of the familiar
+relational modeling, including \sigla{SQL}{Structured Query Language}
+\cite{Nield2016}, were key factors in choosing it.
 
 All three applications will executed under a Linux \cite{Tanenbaum2015} based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
 Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single circuit board with microprocessor, memory and input/output devices.
@@ -511,7 +528,7 @@ mention.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/E2E.png}
-	\caption[End-to-end sequence of interactions]{End-to-end sequence of interactions}
+	\caption[End-to-end sequence diagram for a product addition]{End-to-end sequence diagram for a product addition}
 	\fonte{Own work}
 	\label{fig:e2eseq}
 \end{figure}
@@ -552,18 +569,110 @@ key deciding factor in favor of using those.
 	\includegraphics[width=0.8\textwidth]{./images/ui.png}
 	\caption[User App Interface display a single product]{User App Interface displaying a single product}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:userapp}
 \end{figure}
+
+As shown on Figure \ref{fig:userapp}, the main objective of the User App is to
+provide a visual feedback mechanism for end users of the zCart.
+
+It displays the current products added to the cart, the quantity and also the
+price for each item. The subtotal for all products added to the cart is
+calculated and also displayed on the interface. Notifications are also
+displayed when the user adds or removes a product from the cart. Finally, the
+User App provides a \textit{Checkout} button to simulate the payment process
+and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}) but a functional implementaion is out of scope
+for the the zCart prototype.
 
 More screenshots are available in Appendix \ref{ap:userapp}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/lcddisplay.jpeg}
-	\caption[LCD Display showing the User App]{LCD Display showing the User App}
+	\caption[LCD Display showing the User App during development]{LCD Display showing the User App during development}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
+
+In terms of the data flow, the User App requests all data from the Cart Service, which exposes API endpoints for
+getting the list of products of a given cart, establishing a WebSocket connection for notifications and performing
+the PoC checkout.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/diagrams/UserApp.png}
+	\caption[User App and Cart Service interactions]{User App and Cart Service interactions}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
+
+\section{Cart Service}
+
+As described in Section \ref{sec:design}, the Cart Service will act as a
+centralized \textit{source of truth}, storing the overall \textbf{state} of the
+cart.
+
+For that it will responsible for managing the SQLite database and exposing API
+endpoints for the required state changes e.g. adding a product.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/diagrams/CartService.png}
+	\caption[Cart Service architecture]{Cart Service architecture. The database is contained withing the Cart Service boundary and it is not exposed in the public APIs}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
+
+For the HTTP endpoints, the Application uses the REST \cite{Roy2000} pattern
+with JavaScript Object Notation (\sigla{JSON}{JavaScript Object
+Notation})\footnote{https://json.org} as the data-interchange format, both
+being widely used in the current software industry.
+
+As example response is show at Listing \ref{lst:response}.
+
+\begin{table}[H]
+	\centering
+	\label{tab:correlacao}
+	\begin{tabular}{c|c|c}
+		\hline 
+        HTTP Method & URI & Description \\
+		\hline
+        \texttt{GET} & \texttt{/cart/:cartId} & Get the cart data with the product listing \\
+        \texttt{POST} & \texttt{/cart/:cartId/products} & Add or remove a product from the cart \\
+        \texttt{POST} & \texttt{/cart/:cartId/checkout} & Perform checkout, emptying the cart \\
+		\hline 
+	\end{tabular}
+	\caption[Cart Service API endpoints]{Cart Service API Endpoints}
+	\fonte{Own work}
+\end{table}
+
+\begin{lstlisting}[caption={Example response for the \texttt{GET /cart/:cartId} endpoint using JSON},label={lst:response}]
+{
+  "id": "1",
+  "products": [
+    {
+      "cart_id": "1",
+      "product_id": "1",
+      "quantity": 11,
+      "product": {
+        "id": "1",
+        "name": "Coca Cola",
+        "description": null,
+        "price": 5.99,
+        "image_url": "https://zcart-test-images.s3.amazonaws.com/coca2l.png"
+      }
+    },
+  ]
+}
+\end{lstlisting}
+
+For the implementation, the Go\footnote{https://go.dev} language was used
+alongside the Fiber\footnote{https://gofiber.io/} framework, which provides
+great support for the creation of the HTTP Server and also handling the
+WebSocket connections.
+
+One of the advantages of the Go language is the use of statically compiled
+native binaries, which allow running the application without the need to
+install any additional operating system libraries.
 
 \section{Product Recognizer}
 
@@ -580,7 +689,7 @@ More screenshots are available in Appendix \ref{ap:userapp}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/raspberrypiwithloadcell.jpeg}
-	\caption[Scheme used during development, including the Raspberry Pi and load cell assembly]{Scheme used during development, including the Raspberry Pi and load cell assembly}
+    \caption[Assembly used during development, including the Raspberry Pi, HX711 and load cell assembly]{Assembly used during development, including the Raspberry Pi, HX711 and load cell assembly}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
@@ -601,8 +710,24 @@ More screenshots are available in Appendix \ref{ap:userapp}.
 	\label{fig:dummy}
 \end{figure}
 
-\chapter{Conclusions}
+\chapter{Results}
 
+
+\section{Challenges}
+
+As one of the expected outcomes of our work, we been able to identify several
+practical challenges that would need to be worked on for a marketable product and will be discussed
+in the next sections.
+
+\subsection{Extending the model for new products}
+In a supermarket use case, we expect that products will need to be added or
+removed from detection on a regular basis. That becomes a challenge when we
+consider the amount of data necessary to train the model to the extend
+described in this work and becomes a topic for future work.
+
+\subsection{Deploying updates}
+
+\subsection{Detecting the addition or removal of many products at once}
 
 %---------- Referencias ----------
 \clearpage % this is need for add +1 to pageref of bibstart used in 'ficha catalografica'.
