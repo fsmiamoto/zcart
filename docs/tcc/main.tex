@@ -27,8 +27,19 @@
 \usepackage[final]{pdfpages} % adicao da ata
 \usepackage{float}
 \usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
     basicstyle=\ttfamily\footnotesize,
     breakatwhitespace=false,         
     breaklines=true,                 
@@ -676,11 +687,26 @@ install any additional operating system libraries.
 
 \section{Product Recognizer}
 
+At the core of the zCart prototype is the Product Recognizer application,
+responsible for the product detection based on computer vision and weight
+sensing.
+
+For achieving its goal, the Product Recognizer has three main sub-components as shown below:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/diagrams/ProductRecognizer.png}
+	\caption[]{}
+	\fonte{Own work}
+	\label{fig:dummy}
+\end{figure}
+
+Each of these sub-components will be described in more detail in the next subsections.
+
 \subsection{Weight Sensor}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/hx711.jpeg}
+	\includegraphics[width=0.4\textwidth]{./images/hx711.jpeg}
 	\caption[HX711 breakout board and load cell]{HX711 breakout board and load cell}
 	\fonte{Own work}
 	\label{fig:dummy}
@@ -688,30 +714,96 @@ install any additional operating system libraries.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/raspberrypiwithloadcell.jpeg}
+	\includegraphics[width=0.7\textwidth]{./images/raspberrypiwithloadcell.jpeg}
     \caption[Assembly used during development, including the Raspberry Pi, HX711 and load cell assembly]{Assembly used during development, including the Raspberry Pi, HX711 and load cell assembly}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{./images/Product Recognizer Thread communication.png}
-	\caption[Thread communication for the Product Recognizer App]{Thread communication for the Product Recognizer App}
-	\fonte{Own work}
-	\label{fig:dummy}
-\end{figure}
+\subsection{Camera}
+
+In order to obtain a video feed to run Object Detection on, a camera system was
+in required. For that, a standard consumer webcam was used for its reduced cost
+and good operating system driver support.
+
+The webcam used was a Microsoft LifeCam
+Cinema\footnote{https://www.microsoft.com/pt-BR/accessories/products/webcams/lifecam-cinema},
+capable of capturing video in 720p up to 30\sigla{FPS}{Frames per second}, more
+than enough for our prototyping requirements.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{./images/Product Recognizer Activity.png}
+	\includegraphics[width=0.3\textwidth]{./images/webcam.jpg}
+    \caption[Microsoft LifeCam Cinema Webcam used]{Microsoft LifeCam Cinema Webcam used}
+	\fonte{Microsoft}
+\end{figure}
+
+\subsection{Application}
+
+Developed in the Python\footnote{https://python.org} programming language, the
+Product Recognizer application will provide the compute capabilities to apply
+our business logic for processing the video feed provided by the camera and the
+readings from the weight sensor.
+
+The Python language was chosen for its vast tooling for working with computer
+vision, sensors and interacting with the Raspberry Pi's built-in devices. The
+language has also became a \textit{lingua franca} in the Machine Learning and
+Data Science community as shown by volume of publications using it in the last
+decade \cite{Wes2017,Joel2019,Andreas2016}.
+
+To take advantage of the multiple processing cores available on the Raspberry
+Pi 4 \sigla{SoC}{System on a chip}, the Product Recognizer application uses a
+multi-threaded design to allow parallel processing, improving the overall
+performance.
+
+The three threads created are described below:
+\begin{itemize}
+    \item Frame Reader Thread: Responsible for reading frames from the Camera and making them available to the Main Thread.
+    \item Main Thread: Responsible for bootstraping the application - including creating the other threads - and executed the main loop of
+        object detection.
+    \item Product Recognizer Thread: Responsible for applying the business logic using the objects detected and the weight sensor readings.
+\end{itemize}
+
+These threads communication in synchronous and asynchronous mechanisms to achieve the overall goal of processing video and sensor data, as
+shown on Figure \ref{fig:threads}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/Product Recognizer Thread communication.png}
+	\caption[Thread communication for the Product Recognizer Appplication]{Thread communication for the Product Recognizer Application}
+	\fonte{Own work}
+	\label{fig:threads}
+\end{figure}
+
+\begin{lstlisting}[language=Python,caption={Loop of the Main Thread. Some details were ommitted for the sake of brevity}]
+while True:
+  try:
+    # Get frame from camera
+    frame = stream.read_frame()
+
+    # Preprocess and run object detection
+    input = preprocessor.process(frame)
+    detector.infer(input)
+
+    # Filter objects by their class and confidence threshold
+    objects = detector.get_objects()
+    filtered_objects = object_filter.filter(objects)
+
+    # Add filtered objects to the queue
+    frame_objects_queue.put(filtered_objects)
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/Product Recognizer Activity.png}
 	\caption[Activity diagram for the Product Recognizer thread]{Activity diagram for the Product Recognizer thread}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
 
-\chapter{Results}
+\section{Mechanical Assembly}
 
+\chapter{Results}
 
 \section{Challenges}
 
