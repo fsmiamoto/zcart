@@ -455,8 +455,10 @@ controls to the chip are through its pins.
 \chapter{Development}
 \label{chap:desenv}
 
-As a first step in developing our prototype, a high level set of
-responsibilities was established:
+\section{Design}
+
+As a first step in developing our prototype, a set of
+responsibilities was established to guide the high level design and is listed below:
 
 \begin{enumerate}
     \item Handle user interactions and give visual feedback
@@ -469,7 +471,7 @@ was designed and is shown in Figure \ref{fig:architecture}.
 
 For each responsability, a separate software application will be used and those
 applications will communicate using \sigla{TCP}{Transmission Control Protocol}
-network sockets (ADD CITATION) with established application protocols such as
+network sockets \cite{Kurose2013} with established application protocols such as
 \sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
 \sigla{RFC}{Request For Comments} 1945} -- using the RESTful pattern -- and
 WebSocket\footnote{Defined in RFC 6455}.
@@ -481,16 +483,21 @@ them to interact with the cart using a touch enabled LCD display.
 The \textit{Cart Service} will be in charge of the second responsability,
 handling requests from the \textit{User App} that request data or incur in any
 side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
-\textbf{relational database} (ADD CITATION) as its datastore. Namely
+\textbf{relational database} \cite{Silberschatz2010} as its datastore. Namely
 \textbf{SQLite}, considered to be the worlds most deployed database due to its
 massive adoption in mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
-SQLite -- the entire database is contained in a single file --  and the use of
-the familiar relational modeling, including \sigla{SQL}{Structure Query Language}, were key factors in choosing
+SQLite -- the entire database is contained within a single file --  and the use of
+the familiar relational modeling, including \sigla{SQL}{Structured Query Language} \cite{Nield2016}, were key factors in choosing
 it.
 
-All three applications will executed under a Linux-based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
-Computer (\sigla{SBC}{Single Board Computer}).
+All three applications will executed under a Linux \cite{Tanenbaum2015} based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
+Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single circuit board with microprocessor, memory and input/output devices.
+
+The advantages of using a Linux environment for the development are many, but
+being able to leverage its concurrency capabilities, having built-in drivers
+for readily available hardware and leveraging open source projects are some to
+mention.
 
 \begin{figure}[H]
 	\centering
@@ -500,12 +507,13 @@ Computer (\sigla{SBC}{Single Board Computer}).
 	\label{fig:architecture}
 \end{figure}
 
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/E2E.png}
 	\caption[End-to-end sequence of interactions]{End-to-end sequence of interactions}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:e2eseq}
 \end{figure}
 
 \subsection{Architectural Guidelines}
@@ -528,11 +536,11 @@ In the sections that follow, each application will be further detailed.
 
 \section{User App}
 
-For developing the User App, we have used web technologies such as HTML, CSS and JavaScript (ADD CITATION) through the 
+For developing the User App, we have used web technologies such as HTML, CSS \cite{Duckett2011} and JavaScript \cite{Flanagan2020} through the 
 React\footnote{htps://reactjs.org} framework. 
 
 Using web based technologies allows the User App to be display on any device capable of running a web browser and
-the mature ecosystem lends.
+having mature tooling for development, testing and debugging influenced our decision.
 
 Although developing Linux native graphical applications through toolkits such
 as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io} might have
@@ -546,6 +554,8 @@ key deciding factor in favor of using those.
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
+
+More screenshots are available in Appendix \ref{ap:userapp}.
 
 \begin{figure}[H]
 	\centering
@@ -591,11 +601,6 @@ key deciding factor in favor of using those.
 	\label{fig:dummy}
 \end{figure}
 
-
-\section{Siglas e símbolos}
-
-\simbolo{$\lambda$}{comprimento de onda}
-
 \chapter{Conclusions}
 
 
@@ -613,31 +618,32 @@ key deciding factor in favor of using those.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp.png}
-	\caption[Product listing and subtotal]{Product listing and subtotal}
+	\caption[]{Product listing and subtotal}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp2.png}
-	\caption[Item addition notification]{Item addition notification}
+	\caption[]{Item addition notification}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp3.png}
-	\caption[Item removal notification]{Item removal notification}
+	\includegraphics[width=1\textwidth]{./images/userapp3.png}
+	\caption[]{Item removal notification}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp4.png}
-	\caption[Pre-checkout confirmation popup]{Pre-checkout confirmation popup}
+	\caption[]{Pre-checkout confirmation popup}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/userapp5.png}
-	\caption[Post checkout screen]{Post checkout screen}
+	\caption[]{Post checkout screen}
 \end{figure}
 
 \anexo
