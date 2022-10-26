@@ -97,12 +97,12 @@
 
 % dedicatoria
 \begin{dedicatoria}
-    To all our families and their unconditional support
+    Add dedicatoria
 \end{dedicatoria}
 
 % agradecimentos (opcional)
 \begin{agradecimentos}
-    We thank everyone that helped
+    Add agradecimentos
 \end{agradecimentos}
 
 % epigrafe (opcional)
@@ -800,10 +800,10 @@ shown on Figure \ref{fig:threads}.
 	\label{fig:threads}
 \end{figure}
 
-\begin{lstlisting}[language=Python,caption={Loop of the Main Thread. Some details were ommitted for the sake of brevity}]
+\begin{lstlisting}[language=Python,caption={Loop of the Main Thread. Some details were ommitted for the sake of brevity},label={lst:main}]
 while True:
   try:
-    # Get frame from camera
+    # Get frame from camera, provided by Frame Reader thread
     frame = stream.read_frame()
 
     # Preprocess and run object detection
@@ -818,12 +818,68 @@ while True:
     frame_objects_queue.put(filtered_objects)
 \end{lstlisting}
 
+As show on Listing \ref{lst:main} and on Figure \ref{fig:threads}, the Main
+thread will do the computational work to fetch the frames from the camera that
+were read by the Frame Reader thread, preprocess and run the object detection
+model in it. The objects are then filtered and then added to a message queue
+that will be used by the Product Recognizer thread to apply our business logic.
+
+\subsection{Product Recognizer Thread}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/diagrams/framediff.png}
+	\caption[Product Recognition diagram]{Product Recognition diagram}
+	\fonte{Own work}
+\end{figure}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/Product Recognizer Activity.png}
 	\caption[Activity diagram for the Product Recognizer thread]{Activity diagram for the Product Recognizer thread}
 	\fonte{Own work}
 \end{figure}
+
+\begin{lstlisting}[language=Python,caption={Product Recognizer thread logic}]
+objects = self.queue.get_nowait()
+
+# Preprocessing step just to format data
+current_frame_objects = self.__build_object_dict(objects)
+
+# Calculate the frame diff using the last and current frame objects
+frame_diff = self.__get_frame_diff(
+    current_frame_objects, self.last_frame_objects
+)
+
+if len(frame_diff) == 0:
+    self.log.info("empty diff")
+    continue
+
+# Get current weight reading
+weight_reading = self.weight_sensor.get_reading(samples=5)
+
+for label, count in frame_diff.items():
+    if not self.__valid_weight_difference(label, count, weight_reading):
+        self.log.info("ignoring, not valid weight difference")
+        continue
+
+    # Send request to cart service
+    self.__call_cart_service(label, count)
+
+    # Update stored state
+    self.last_weight_reading = weight_reading
+    self.last_frame_objects[label] = current_frame_objects[label]
+    if self.last_frame_objects[label] == 0:
+        del self.last_frame_objects[label]
+\end{lstlisting}
+
+Given the frame object diff, it is then possible to calculate an expected
+weight change based on the weight of each item - and their quantity - contained
+in the diff. The expected weight difference is then compared with the actual
+one obtained from the weight sensor
+
+In this scenario, the weight readings are used as a filter and act as a
+\textit{commit} step for differences detected in the frame objects.
 
 \section{Mechanical Assembly}
 
