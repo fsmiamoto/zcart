@@ -448,8 +448,6 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Neural Networks}
 
-\section{Strain Gauge}
-
 \section{Load Cell}
 
 \section{HX711}
@@ -471,12 +469,6 @@ controls to the chip are through its pins.
     \fonte{\cite{Avia2022}}
 	\label{fig:architecture}
 \end{figure}
-
-\section{RESTful APIs}
-
-\section{SQLite}
-
-\section{Websockets}
 
 \chapter{Development}
 \label{chap:desenv}
@@ -704,13 +696,46 @@ Each of these sub-components will be described in more detail in the next subsec
 
 \subsection{Weight Sensor}
 
+For the Weight Sensor, we've used two main hardware components, shown on Figure \ref{fig:weightcomponents}:
+\begin{itemize}
+    \item  A 10 Kg Load Cell
+    \item HX711 Integrated Circuit
+\end{itemize}
+
+Both components are readily available at relatively low costs and therefore were chosen for
+the project.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\textwidth]{./images/hx711.jpeg}
 	\caption[HX711 breakout board and load cell]{HX711 breakout board and load cell}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:weighttesting}
 \end{figure}
+
+The HX711 integrated circuited comes in a breakout board that contains the necessary passive components
+and includes the pin headers for connecting with other boards.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/hx711circuit.png}
+	\caption[Typical HX711 circuit]{Typical HX711 circuit}
+    \fonte{\cite{Ross2019}}
+\end{figure}
+
+The Raspberri Pi board was connected to the HX711 through its GPIO pins,
+allowing it to obtain the sensor readings through the a serial interface. The
+protocol used does not follow any known standard \cite{Avia2022} and can be
+described as a \textit{Non-i2c compliant two-wire
+protocol}\footnote{https://github.com/queuetue/Q2-HX711-Arduino-Library}.
+
+An open-source driver implementation was used\footnote{https://github.com/tatobari/hx711py} that
+included all the necessary features for the prototype.
+
+As shown on Figure \ref{fig:weighttesting}, the load cell requires a minimal
+mechanical assembly to be tested properly, and for that two small wood plates
+were used to secure the load cell and breakout board during development.
+
 
 \begin{figure}[H]
 	\centering
@@ -892,10 +917,4 @@ described in this work and becomes a topic for future work.
 	\includegraphics[width=1\textwidth]{./images/userapp5.png}
 	\caption[]{Post checkout screen}
 \end{figure}
-
-\anexo
-\chapter{Nome do Anexo}
-
-Use o comando {\ttfamily \textbackslash anexo} e depois comandos {\ttfamily \textbackslash chapter\{\}}
-para gerar titulos de anexos.
 \end{document}
