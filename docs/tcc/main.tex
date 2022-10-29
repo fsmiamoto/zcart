@@ -450,25 +450,6 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Load Cell}
 
-\section{HX711}
-
-The HX711 is a 24-bit analog-to-digital converter (\sigla{ADC}{Analog-to-Digital Converter})
-capable of outputting data in a Serial Interface (ADD CITATION).
-
-It has two channels for analog input with channel A having programable gains of 128 or 64.
-
-For power supply, it can be used with both 3.3\simbolo{V}{Volts} and 5 V standard digital voltages.
-
-One of its advantages is is that there's no need to program internal registers, all
-controls to the chip are through its pins.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{./images/hx711-pinout.png}
-	\caption[HX711 Pinout for the SOP-16L package]{HX711 Pinout for the SOP-16L package}
-    \fonte{\cite{Avia2022}}
-	\label{fig:architecture}
-\end{figure}
 
 \chapter{Development}
 \label{chap:desenv}
@@ -696,14 +677,30 @@ Each of these sub-components will be described in more detail in the next subsec
 
 \subsection{Weight Sensor}
 
-For the Weight Sensor, we've used two main hardware components, shown on Figure \ref{fig:weightcomponents}:
+For the Weight Sensor, we've used two main hardware components, shown on Figure \ref{fig:weighttesting}:
 \begin{itemize}
-    \item  A 10 Kg Load Cell
+    \item  A 10 Kilogram Load Cell
     \item HX711 Integrated Circuit
 \end{itemize}
 
-Both components are readily available at relatively low costs and therefore were chosen for
-the project.
+The HX711 is a 24-bit analog-to-digital converter (\sigla{ADC}{Analog-to-Digital Converter})
+capable of outputting data in a serial interface \cite{Avia2022}.
+
+It has two channels for analog input with channel A having programable gains of 128 or 64 and
+can funtion using both 3.3V and 5V standard digital voltage levels.
+
+One of its advantages is is that there's no need to program internal registers,
+all controls to the chip are through its pins. Additionally, it consumes only
+1.5mA under normal operation and has a on-chip power supply for the connected
+load cell, making it a great choice for our prototype.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/hx711-pinout.png}
+	\caption[HX711 Pinout for the SOP-16L package]{HX711 Pinout for the SOP-16L package}
+    \fonte{\cite{Avia2022}}
+	\label{fig:architecture}
+\end{figure}
 
 \begin{figure}[H]
 	\centering
@@ -725,8 +722,8 @@ and includes the pin headers for connecting with other boards.
 
 The Raspberri Pi board was connected to the HX711 through its GPIO pins,
 allowing it to obtain the sensor readings through the a serial interface. The
-protocol used does not follow any known standard \cite{Avia2022} and can be
-described as a \textit{Non-i2c compliant two-wire
+protocol used does not follow any known standard and can be
+described as a \textit{Non-I2C compliant two-wire
 protocol}\footnote{https://github.com/queuetue/Q2-HX711-Arduino-Library}.
 
 An open-source driver implementation was used\footnote{https://github.com/tatobari/hx711py} that
@@ -735,7 +732,6 @@ included all the necessary features for the prototype.
 As shown on Figure \ref{fig:weighttesting}, the load cell requires a minimal
 mechanical assembly to be tested properly, and for that two small wood plates
 were used to secure the load cell and breakout board during development.
-
 
 \begin{figure}[H]
 	\centering
@@ -826,18 +822,54 @@ that will be used by the Product Recognizer thread to apply our business logic.
 
 \subsection{Product Recognizer Thread}
 
+The Product Recognizer Thread is responsible for applying the main business
+logic of detecting the addition and removal of products by leveraging the
+objects detected in the frame and the readings provided by the weight sensor.
+
+The thread will execute an infinite loop to constantly observer the objects
+detected in the frame and the weight readings to detect the product addition
+or removals.
+
+It uses two main variables to keep track of the current state:
+\begin{itemize}
+    \item A dictionary of which products are present in the cart and their count.
+    \item The weight associated with the products present in the cart.
+\end{itemize}
+
+The first important step, is the \textit{frame diff}. This step calculates the
+a dictionary of the object difference, called \textit{diff}, by comparing the
+stored product dictionary and the received list of frame objects from the Main
+Thread.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/diagrams/framediff.png}
-	\caption[Product Recognition diagram]{Product Recognition diagram}
+	\caption[Illustration of the frame diff'ing scheme]{Illustration of the frame diff'ing scheme. A can was added on frame $n+1$ and therefore will generate a diff of one can. If the reading from the weight sensor matches the expected one, the product will be added to the cart.}
 	\fonte{Own work}
+    \label{fig:diff}
 \end{figure}
+
+Given the frame object diff, it is then possible to calculate an expected
+weight change based on the weight of each item - and their quantity - contained
+in the diff. The expected weight difference is then compared with the actual
+one obtained from the weight sensor, considering a 15\% tolerance.
+
+In this scenario, the weight readings are used as a filter and act as a
+\textit{commit} step for differences detected in the frame objects.
+
+For example, if the can illustraded in Figure \ref{fig:diff} weights an expected 400 grams, the weight
+difference expected should be of about 400 grams. If the weight difference does not match the expected
+one, the object will not be considered for addition or removal.
+
+A more detailed activity diagram of the logic executed in the Product Recognizer thread loop is
+shown in Figure \ref{fig:activity}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/Product Recognizer Activity.png}
 	\caption[Activity diagram for the Product Recognizer thread]{Activity diagram for the Product Recognizer thread}
 	\fonte{Own work}
+    \label{fig:activity}
 \end{figure}
 
 \begin{lstlisting}[language=Python,caption={Product Recognizer thread logic}]
@@ -873,13 +905,6 @@ for label, count in frame_diff.items():
         del self.last_frame_objects[label]
 \end{lstlisting}
 
-Given the frame object diff, it is then possible to calculate an expected
-weight change based on the weight of each item - and their quantity - contained
-in the diff. The expected weight difference is then compared with the actual
-one obtained from the weight sensor
-
-In this scenario, the weight readings are used as a filter and act as a
-\textit{commit} step for differences detected in the frame objects.
 
 \section{Mechanical Assembly}
 
@@ -931,6 +956,8 @@ described in this work and becomes a topic for future work.
 \subsection{Deploying updates}
 
 \subsection{Detecting the addition or removal of many products at once}
+
+\chapter{Challenges}
 
 %---------- Referencias ----------
 \clearpage % this is need for add +1 to pageref of bibstart used in 'ficha catalografica'.
