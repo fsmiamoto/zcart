@@ -616,7 +616,7 @@ As example response is show at Listing \ref{lst:response}.
 \begin{table}[H]
 	\centering
 	\label{tab:correlacao}
-	\begin{tabular}{c|c|c}
+	\begin{tabular}{c c|c}
 		\hline 
         HTTP Method & URI & Description \\
 		\hline
@@ -935,34 +935,114 @@ to keep a shape that would represent the overall idea of a smart cart.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{./images/cartbase2.jpeg}
-	\caption[False bottom structure with the load cell and Raspberri in between]{False bottom structure with the load cell and Raspberri in between}
+	\caption[False bottom structure with the load cell and Raspberry Pi board in between]{False bottom structure with the load cell and Raspberry Pi board in between}
 	\fonte{Own work}
 \end{figure}
 
 \chapter{Results}
 
-\section{Challenges}
+\section{Testing}
 
-As one of the expected outcomes of our work, we been able to identify several
-practical challenges that would need to be worked on for a marketable product and will be discussed
-in the next sections.
+\section{Cost}
+
+One of the import aspects when developing a marketable product is its \textbf{cost}.
+
+A more detailed overview of the items and their cost is shown on Table \ref{tbl:cost}.
+
+\begin{table}[H]
+	\centering
+	\label{tab:correlacao}
+	\begin{tabular}{c c c}
+		\hline 
+        Item & Quantity & Cost per item (BRL/USD) \\
+		\hline
+        Raspberry Pi 4 8GB Board &  1 & R\$ 1072,40 / US\$ 201,94 \\
+        HX711 with breakout board &  1  & R\$ 2,55 / US\$ 0.48 \\
+        10Kg Load Cell & 1 & R\$ 6,89 / US\$ 1,30 \\
+        MDF Board &  2  & R\$ 10,00 / US\$ 1,89 \\
+        Mounting hardware (screws, bolts and nuts) &  1  & R\$ 5,00 / US\$ 0,94 \\
+        Foldable utility cart &  1  & R\$ 125,00 / US\$ 23,60 \\
+        Webcam &  1  & R\$ 100,00 / US\$ 18.88 \\
+		\hline 
+        & Total cost & R\$ 1331.84 / US\$ 250.92 \\
+        \hline
+	\end{tabular}
+    \caption[Items used on the prototype and their approximate retail cost in October 2022]{Items used on the prototype and their retail cost in October 2022}
+	\fonte{Own work}
+    \label{tbl:cost}
+\end{table}
+
+Of course, the developed prototype does not include all the necessary hardware
+and software structure to deliver a successful product, but still it might show that at a
+fundamental level, the cost of such a solution might not reach the costs that
+current smart carts in the market sell for\footnote{The Nextop cart show on the
+introduction currently retails for R\$ 120.000}.
+
+Therefore, it might be possible to conclude that most of the retail cost of the
+existing smart carts is not composed of the production and infrastructure costs
+but from the required repayment of the research and development costs that such
+a product demand.
+
+\section{Challenges and future work}
+
+As one of the expected outcomes of our work, we have been able to identify
+several practical challenges that would need to be worked on for a marketable
+product and will be discussed in the next sections.
 
 \subsection{Extending the model for new products}
 In a supermarket use case, we expect that products will need to be added or
-removed from detection on a regular basis. That becomes a challenge when we
-consider the amount of data necessary to train the model to the extend
-described in this work and becomes a topic for future work.
+removed from detection model on a regular basis. That becomes a challenge when
+we consider the amount of data necessary to train the model used in the
+developed prototype.
+
+Considering that, an important next step on the development would be to work on
+a model that can be easily extend to support new products without requiring too
+much computational power for retraining.
 
 \subsection{Deploying updates}
 
-\subsection{Detecting the addition or removal of many products at once}
+Considering the compute locality of the detection model used in the prototype,
+which is the board embedded in the cart, deploying updates to the model to it
+might become a challenge.
 
-\chapter{Challenges}
+Changing the compute locality to  a Cloud infrastructure \cite{Aws2022} might
+allow for easier deployment for updates but that comes with a trade off in
+terms of latency, since networks calls would be required, and that can become
+detrimental in such a real-time based product.
+
+Investigating that trade off or even developing a solution for easy deployment
+of model updates is another import development to be worked in the future. 
+
+\subsection{Batteries and charging}
+
+Another challenge identified for creating a viable product is to develop and
+energy efficient solution that is capable of running on a reasonable battery
+for at least an entire day.
+
+Evidently, it is possible to include a battery with bigger capacity to the
+product to provide the expected battery life but that can come with a trade off
+of additional weight and cost, which might be considered undesired
+characteristics from the end user and grosser perspective, respectively.
+
+Additionally, it would be necessary to developed a practical mechanism to
+allow the carts to be charged such as a docking mechanism or even by wireless charging
+\cite{Treffers2015}.
+
+\subsection{Loss Prevention}
+
+As our research has shown, loss prevention is a key feature of a smart cart, specially in the brazilian context
+\cite{Nextop2022}.
+
+In such scenario, it would be important to work on possible extra features that
+would give the grosser the confidence to deploy the cart to his/her retail
+chain.
+
+\chapter{Conclusions}
 
 %---------- Referencias ----------
-\clearpage % this is need for add +1 to pageref of bibstart used in 'ficha catalografica'.
+\clearpage
 \label{bibstart}
-\bibliography{reflatex} % geracao automatica das referencias a partir do arquivo reflatex.bib
+\bibliography{reflatex}
 \label{bibend}
 
 %---------- Apendices (opcionais) ----------
