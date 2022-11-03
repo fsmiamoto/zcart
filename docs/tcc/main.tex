@@ -448,8 +448,53 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Neural Networks}
 
+\section{Strain Gauge}
+
+For measuring weight, one of the most common transducers utilized is the strain
+gauge. In general, a strain gauge is a device whose measured electrical
+resistance varies with changes in its applied force \cite{Stefanescu}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/straingauge.png}
+	\caption[Typical Strain Gauge construction]{Typical Strain Gauge construction}
+    \fonte{Michigan Scientific Corporation (2022)}
+	\label{fig:gauge1}
+\end{figure}
+
+The deformation of the material caused by the mechanical strain can then
+be measured through a variation in resistence.
+
+In practice, measuring the resistance variations are minute and can be
+difficult to mesure. Additionally, it is usually desirable to have as the
+output of the transducer a signal which can be converted to the digital domain
+through an Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital
+Converter}), and for that a Wheatstone Bridge can be used.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{./images/straingauge2.png}
+	\caption[Wheatstone Bridge circuit using four strain gauges]{Wheatstone Bridge circuit using four strain gauges}
+    \fonte{Michigan Scientific Corporation (2022)}
+	\label{fig:gauge2}
+\end{figure}
+
+\begin{quote}
+Now that the process of strain measurements has been established, the next step when using strain gauges is getting useful data.The strain gauge must be connected to an electrical circuit that is capable of accurately responding to the minute changes in resistance associated with strain. Multiple strain gauges can be used in a divided bridge circuit to measure small changes in electrical resistance. This is called a Wheatstone bridge. In a Wheatstone bridge configuration, an excitation voltage is applied across the circuit, and the output voltage is measured across two points in the middle of the bridge. When there is no load acting on the load cell, the Wheatstone bridge is balanced and there is zero output voltage. Any small change in the material under the strain gauge results in a change in the resistance of the strain gauge as it deforms with the material. This causes the bridge to be thrown out of balance, resulting in a change in the output voltage. As stated earlier, the resistance change is minute, which means that signal amplification is often needed to properly determine changes. The amplification process strengthens the strain signal changes; however, it also leads to more unwanted noise also being detected in the signal. Signal conditioning filters out the excess noise, ensuring accurate and understandable data. 
+\end{quote}
+
+It can be shown then that the relation between $V_{out}$ and $V_{in}$, shown on Figure \ref{fig:gauge2}, can be
+calculated as \cite{Stefanescu}:
+
+\begin{equation}
+    S = \frac{V_{out}}{V_{in}} = k\epsilon
+\end{equation}
+
+The output voltage $V_{out}$ will be then linearly proportional to the amount of strain applied.
+
 \section{Load Cell}
 
+Load cells are designed to focus stress through beam elements where strain gauges are located.
 
 \chapter{Development}
 \label{chap:desenv}
