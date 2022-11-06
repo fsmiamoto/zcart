@@ -463,7 +463,40 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Tensor Processing Unit}
 
-A Tensor Processing Unit (\sigla{TPU}{Tensor Processing Unit}) is a device...
+In the last decades, inferences using a Deep Neural Network (\sigla{DNN}{Deep
+Neural Network}) executed on general purpose hardware such as \sigla{CPU}{Central
+Processing Unit}s or specialized hardware but target for DNNs such as
+\sigla{GPU}{Graphics Processing Unit}.
+
+With the increased adoption of DNNs in various workloads and their specialized
+and heavy compute nature, Google started the development of a domain specific
+architecture (\sigla{DSA}{Domain Specific Architecture}) which resulted in a
+first generation custom chip, named Tensor Processing Unit (\sigla{TPU}{Tensor
+Processing Unit}), deployed to their data centers since 2015 \cite{Google2015}.
+The developed TPU had the target of improving the inference phase of DNNs and
+achieved a performance improvement of \textbf{15-30 times} when compared to
+contemporary hardware of paired with reduced power consumption.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{./images/tpublock.png}
+	\caption[TPU block diagram]{TPU block diagram. The main computation, matrix multiplication, is done by the yellow units.}
+    \fonte{\cite{Google2015}}
+	\label{fig:gauge1}
+\end{figure}
+
+Since the first generation TPU described in a 2018 paper \cite{Google2015},
+Google has released the TPU into commercials products made available to thirds
+parties. Most notably, the Google Coral\footnote{https://coral.ai} initiative
+offers ready-to-use development boards that embedded TPU chips, allowing
+developers to leverage the improved DNN performance in their applications.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/coralboard.png}
+	\caption[Coral Dev Board Micro]{Coral Dev Board Micro. It includes a microphone, camera and the Coral Edge TPU in a single board package.}
+    \fonte{Coral.ai}
+\end{figure}
 
 \section{Strain Gauge}
 
@@ -516,7 +549,6 @@ $\frac{\Delta l}{l}$ is the relative variation of length or strain.
 
 With that, Equation \ref{eq:strain} indicates that the output voltage $V_{out}$ will be linearly proportional to the
 amount of strain applied, providing the desired sensing capability.
-
 
 \section{Load Cell}
 
