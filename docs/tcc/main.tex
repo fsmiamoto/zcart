@@ -72,11 +72,11 @@
 \autordois{João Pedro Zanlorensi Cardoso} % autor do trabalho
 \cita{MIAMOTO, Flavio; ZANLORENSI, Joao Pedro} % sobrenome (maiusculas), nome do autor do trabalho
 
-\palavraschave{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things} 
+\keywords{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things, Sensors} 
 
 \comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining the Bachelor in Electronics Engineering degree}
 
-\orientador{André Eugênio Lazaretti, Ph.D}
+\orientador{André Eugênio Lazzaretti, Ph.D}
 
 \local{Curitiba} % cidade
 \data{\the\year} % ano automatico
@@ -113,7 +113,23 @@
 
 %abstract
 \begin{abstract}
-Abstract text (maximum of 500 words).
+The recent advancements in artificial intelligence have already impact many
+aspects of modern life but have yet to impact one important aspect of the
+consumer experience: shopping in physical stores. In that regard, tech
+Giants such as Amazon have recently deployed the so called \textit{smart
+carts} to physical stores, allowing customers to have an improved shopping
+experience including better product information and a seamless checkout
+process.
+
+Those products, however, are still a long way off towards reaching emerging
+markets such as Brazil, due to historical economical barriers. In that
+regard, this work analyses the current market and develops a prototype that
+achieves similar functionality to the ones available by using the same
+building blocks such as computer vision and sensor data.
+
+With that, we were able to identify the challenges and practical constraints
+of developing such a product and also lay the ground for future work to improve
+the developed solution into a commercial product.
 \end{abstract}
 
 % listas (opcionais, mas recomenda-se a partir de 5 elementos)
@@ -123,10 +139,7 @@ Abstract text (maximum of 500 words).
 \listadesiglas % geracao automatica da lista de siglas
 \listadesimbolos % geracao automatica da lista de simbolos
 
-% sumario
 \sumario % geracao automatica do sumario
-
-
 %---------- Inicio do Texto ----------
 % recomenda-se a escrita de cada capitulo em um arquivo texto separado (exemplo: intro.tex, fund.tex, exper.tex, concl.tex, etc.) e a posterior inclusao dos mesmos no mestre do documento utilizando o comando \input{}, da seguinte forma:
 %\input{intro.tex}
@@ -388,7 +401,7 @@ end customer experience, becoming a sort of \textit{mobile checkout station}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./images/nextoppromo.png}
-    \caption[Smart Cart Nextop® promotinal material targetting supermarket owners]{Smart Cart Nextop® promotinal material targetting supermarket owners}
+    \caption[Smart Cart Nextop® promotional material targetting supermarket owners]{Smart Cart Nextop® promotinal material targetting supermarket owners. It advertises for improved sales, loss prevention and reduced queues.}
     \fonte{\cite{Nextop2022}}
 	\label{fig:nextopui}
 \end{figure}
@@ -448,6 +461,10 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Neural Networks}
 
+\section{Tensor Processing Unit}
+
+A Tensor Processing Unit (\sigla{TPU}{Tensor Processing Unit}) is a device...
+
 \section{Strain Gauge}
 
 For measuring weight, one of the most common transducers utilized is the strain
@@ -458,7 +475,7 @@ resistance varies with changes in its applied force \cite{Stefanescu}.
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/straingauge.png}
 	\caption[Typical Strain Gauge construction]{Typical Strain Gauge construction}
-    \fonte{Michigan Scientific Corporation (2022)}
+    \fonte{\cite{Michigan2020}}
 	\label{fig:gauge1}
 \end{figure}
 
@@ -475,26 +492,51 @@ Converter}), and for that a Wheatstone Bridge can be used.
 	\centering
 	\includegraphics[width=0.9\textwidth]{./images/straingauge2.png}
 	\caption[Wheatstone Bridge circuit using four strain gauges]{Wheatstone Bridge circuit using four strain gauges}
-    \fonte{Michigan Scientific Corporation (2022)}
+    \fonte{\cite{Michigan2020}}
 	\label{fig:gauge2}
 \end{figure}
 
-\begin{quote}
-Now that the process of strain measurements has been established, the next step when using strain gauges is getting useful data.The strain gauge must be connected to an electrical circuit that is capable of accurately responding to the minute changes in resistance associated with strain. Multiple strain gauges can be used in a divided bridge circuit to measure small changes in electrical resistance. This is called a Wheatstone bridge. In a Wheatstone bridge configuration, an excitation voltage is applied across the circuit, and the output voltage is measured across two points in the middle of the bridge. When there is no load acting on the load cell, the Wheatstone bridge is balanced and there is zero output voltage. Any small change in the material under the strain gauge results in a change in the resistance of the strain gauge as it deforms with the material. This causes the bridge to be thrown out of balance, resulting in a change in the output voltage. As stated earlier, the resistance change is minute, which means that signal amplification is often needed to properly determine changes. The amplification process strengthens the strain signal changes; however, it also leads to more unwanted noise also being detected in the signal. Signal conditioning filters out the excess noise, ensuring accurate and understandable data. 
-\end{quote}
+The Wheatstone Bridge is a circuit capable of responding to the minute changes
+in resistance that when strain is applied to the sensor \cite{Michigan2020}.
+When no load is applied, the bridge is balanced and the output voltage
+$V_{out}$ should be zero. If any strain is applied to the gauges, the bridge
+will become unbalanced, and therefore will result in a non-zero output voltage.
+Since the voltage variation tends to be small, in the order of milivolts, signal amplification is usually
+required for pairing the bridge with commercially available ADCs \cite{HorowitzHill2015}.
 
-It can be shown then that the relation between $V_{out}$ and $V_{in}$, shown on Figure \ref{fig:gauge2}, can be
+It can be shown that the relation between $V_{out}$ and $V_{in}$, $S$, shown on Figure \ref{fig:gauge2}, can be
 calculated as \cite{Stefanescu}:
 
 \begin{equation}
-    S = \frac{V_{out}}{V_{in}} = k\epsilon
+    \label{eq:strain}
+    S = \frac{V_{out}}{V_{in}} = k\frac{\Delta l}{l}
 \end{equation}
+where $k$ is the is known as the \textit{gauge factor}, related to the physical construction and materials of the strain gauge, and 
+$\frac{\Delta l}{l}$ is the relative variation of length or strain.
 
-The output voltage $V_{out}$ will be then linearly proportional to the amount of strain applied.
+With that, Equation \ref{eq:strain} indicates that the output voltage $V_{out}$ will be linearly proportional to the
+amount of strain applied, providing the desired sensing capability.
+
 
 \section{Load Cell}
 
-Load cells are designed to focus stress through beam elements where strain gauges are located.
+In practice, using strain gauges directly can be difficult since a proper
+mechanical structure and arrangement is crucial for the sensors to function
+properly. For that, commercially available \textit{Load Cells} offer ready to
+use mechanical packages that embedded the strain gauges for weight sensing
+using electronic circuits.
+
+In general, they consist of a spring element onto which the gauges are placed.
+When load is applied to the cell, the strain gauges will be stressed and
+therefore provide the desired sensing \cite{HBM2022}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{./images/hbmz6.png}
+	\caption[HBM Z6 commercial load cell]{HBM Z6 commercial load cell}
+    \fonte{HBM}
+	\label{fig:gauge2}
+\end{figure}
 
 \chapter{Development}
 \label{chap:desenv}
@@ -950,6 +992,9 @@ for label, count in frame_diff.items():
         del self.last_frame_objects[label]
 \end{lstlisting}
 
+\subsection{Object Detection Model}
+
+TODO: Describe the development of the object detection model used.
 
 \section{Mechanical Assembly}
 
@@ -1083,6 +1128,7 @@ would give the grosser the confidence to deploy the cart to his/her retail
 chain.
 
 \chapter{Conclusions}
+
 
 %---------- Referencias ----------
 \clearpage
