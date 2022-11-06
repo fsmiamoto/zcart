@@ -1065,6 +1065,38 @@ to keep a shape that would represent the overall idea of a smart cart.
 
 \section{Testing}
 
+\subsection{Power Consumption}
+
+For estimating the overall power consumption, a commercial wattmeter was used
+to observer the total power required by the power adapter used to supply energy
+to the hardware components.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/powerconsumption.jpeg}
+	\caption[Power consumption measurement using a wattmeter]{Power consumption measurement using a wattmeter}
+	\fonte{Own work}
+\end{figure}
+
+During our tests, we have observed an average consumption of \textbf{10,4W}
+when running the all the software and hardware components of the protype
+through an external power adapter. 
+
+The tests were performed on a 220V power line using the following equipment:
+\begin{itemize}
+    \item Sinotimer DDS108 Digital Wattmeter
+    \item Baseus Quick Charger GaN 65W
+\end{itemize}
+
+Since both of these products do not have detailed accuracy and efficiency data
+available, we estimate an overall 10\% margin of error considering their
+construction \cite{Chen2017}. 
+
+With that, we can assume that the actual power draw is between 9,4W and 11,4W.
+Considering a desired  battery life of 24 hours, it would require a battery of
+about 240Wh, which can be found commercially and would not impose a
+insurmountable practical barrier.
+
 \section{Cost}
 
 One of the import aspects when developing a marketable product is its \textbf{cost}.
@@ -1141,14 +1173,19 @@ Another challenge identified for creating a viable product is to develop and
 energy efficient solution that is capable of running on a reasonable battery
 for at least an entire day.
 
-Evidently, it is possible to include a battery with bigger capacity to the
-product to provide the expected battery life but that can come with a trade off
-of additional weight and cost, which might be considered undesired
-characteristics from the end user and grosser perspective, respectively.
+As described in the testing section, the prototype is already capable of being
+deployed with a reasonable commercial battery but we believe that there are
+still margin for improvement.
 
-Additionally, it would be necessary to developed a practical mechanism to
-allow the carts to be charged such as a docking mechanism or even by wireless charging
-\cite{Treffers2015}.
+Evidently, it is possible to include a battery with bigger capacity to the
+product to provide better battery life but that comes with the trade off of
+additional weight and cost, undesired characteristics from the end user and
+grosser perspective respectively.
+
+Additionally, it would be important to developed a practical mechanism to allow
+the carts to be charged such as a docking mechanism or even by wireless
+charging \cite{Treffers2015}, reducing the maintenance effort from the grocer
+perspective. 
 
 \subsection{Loss Prevention}
 
