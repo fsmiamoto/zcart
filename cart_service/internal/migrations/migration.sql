@@ -25,6 +25,13 @@ INSERT INTO products (id,name,price,image_url) VALUES ('4','Café', 8.99, 'https
 INSERT INTO products (id,name,price,image_url) VALUES ('5','Chamyto', 10.99, 'https://zcart-test-images.s3.amazonaws.com/chamyto.png');
 INSERT INTO products (id,name,price,image_url) VALUES ('6','Macarrão Instântaneo Nissin', 3.99, 'https://zcart-test-images.s3.amazonaws.com/lamen.png');
 
+INSERT INTO products (id,name,price,image_url) VALUES ('7','Coca Cola Soda 350ml', 3.99, 'https://zcart-test-images.s3.amazonaws.com/coke_soda.png');
+INSERT INTO products (id,name,price,image_url) VALUES ('8','Fanta Guarana Soda 350ml', 2.99, 'https://zcart-test-images.s3.amazonaws.com/guarana_soda.png');
+INSERT INTO products (id,name,price,image_url) VALUES ('9','Bic Blue Pen 4-pack', 1.99, 'https://zcart-test-images.s3.amazonaws.com/blue_pens.png');
+INSERT INTO products (id,name,price,image_url) VALUES ('10','Postit', 7.99, 'https://zcart-test-images.s3.amazonaws.com/post_it.png');
+INSERT INTO products (id,name,price,image_url) VALUES ('11','Cart Deck', 5.99, 'https://zcart-test-images.s3.amazonaws.com/cart_deck.png');
+
+
 INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','1', 10);
 INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','2', 5);
 INSERT INTO cart_products (cart_id,product_id,quantity) VALUES ('1','3', 9);
