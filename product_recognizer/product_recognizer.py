@@ -19,7 +19,7 @@ class ProductRecognizer:
         cart_service_client: CartServiceClient,
         cart_id: str,
         catalog: ProductCatalog = StubProductCatalog(),
-        weight_tolerance: float = 0.15,
+        weight_tolerance: float = 0.5,
     ):
         self.queue = queue
         self.weight_sensor = weight_sensor
@@ -143,6 +143,7 @@ class ProductRecognizer:
     def __build_object_dict(self, objects: List[FrameObject]) -> Dict[str, int]:
         result = defaultdict(int)
         for object in objects:
+            self.log.debug(f"{object.label}: {object.score}")
             result[object.label] += 1
         return result
 

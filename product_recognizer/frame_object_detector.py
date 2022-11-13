@@ -4,7 +4,7 @@ from frame_object import FrameObject
 from tflite_runtime.interpreter import Interpreter
 
 
-class FrameObjectDetector:
+class MobileNetFrameObjectDetector:
     def __init__(self, model_path: str, labelmap_path: str):
         self.__interpreter = Interpreter(model_path=model_path)
         self.__interpreter.allocate_tensors()

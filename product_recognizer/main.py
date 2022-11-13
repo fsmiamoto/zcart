@@ -6,7 +6,8 @@ from typing import List
 from frame_object import FrameObject
 
 from frame_preprocessor import FramePreprocessor
-from frame_object_detector import FrameObjectDetector
+from frame_object_detector import MobileNetFrameObjectDetector
+from efficientdet import EfficientDetFrameObjectDetector, EfficientDetFramePreprocessor
 from frame_object_filter import FrameObjectFilter
 from weight_sensor import WeightSensor
 from cart_service import CartServiceClient
@@ -16,19 +17,25 @@ from queue import Queue
 from logger import Logger
 from video_stream import VideoStream
 
+import cv2
+
 
 def run(args):
     log = Logger()
     weight_sensor = WeightSensor()
-    detector = FrameObjectDetector(
-        model_path=args.model_file, labelmap_path=args.label_file
+    # detector = MobileNetFrameObjectDetector(
+    #     model_path=args.model_file, labelmap_path=args.label_file
+    # )
+    detector = EfficientDetFrameObjectDetector(
+        model_path="./model/custom_whole_efficientdet_lite0.tflite"
     )
 
     height, width = detector.get_input_dimensions()
 
-    preprocessor = FramePreprocessor(
-        height, width, is_floating_model=detector.is_floating_model()
-    )
+    # preprocessor = FramePreprocessor(
+    #     height, width, is_floating_model=detector.is_floating_model()
+    # )
+    preprocessor = EfficientDetFramePreprocessor(width, height)
     cart_service_client = CartServiceClient(args.cart_service)
 
     log.info("will start video stream")
@@ -63,14 +70,16 @@ def run(args):
 
             frame = stream.read_frame()
 
-            input = preprocessor.process(frame)
-            detector.infer(input)
+            input, resized = preprocessor.process(frame)
 
-            filtered_objects = object_filter.filter(detector.get_objects())
+            objects = detector.get_objects(input)
+
+            filtered_objects = object_filter.filter(objects)
 
             frame_objects_queue.put(filtered_objects)
 
             if video_window:
+                #video_window.display(resized.numpy())
                 video_window.display(frame)
 
         except (KeyboardInterrupt, SystemExit):
@@ -85,37 +94,45 @@ def run(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("zCart Product Recognizer Application")
-    parser.add_argument("--cart_id", dest="cart_id", default="1", help="Cart ID")
+    parser.add_argument("--cart_id", dest="cart_id", default="2", help="Cart ID")
     parser.add_argument(
         "--model_file",
         dest="model_file",
+        type=str,
         default="./model/detect.tflite",
         help="Path for the TFLite model file",
     )
     parser.add_argument(
         "--label_file",
         dest="label_file",
+        type=str,
         default="./model/labelmap.txt",
         help="Path for the label file",
     )
     parser.add_argument(
         "--confidence",
         dest="confidence_threshold",
-        default=0.55,
+        type=float,
+        default=0.65,
         help="Confidence threshold",
     )
-    parser.add_argument("--width", dest="width", default=640, help="Frame width")
-    parser.add_argument("--height", dest="height", default=480, help="Frame height")
+    parser.add_argument(
+        "--width", dest="width", type=int, default=640, help="Frame width"
+    )
+    parser.add_argument(
+        "--height", dest="height", type=int, default=480, help="Frame height"
+    )
     parser.add_argument(
         "--with_window",
         dest="with_window",
+        type=bool,
         default=True,
         help="Whether to show video window",
     )
     parser.add_argument(
         "--cart_service",
         dest="cart_service",
-        default=True,
+        default="http://localhost:3333",
         help="Cart Service Endpoint",
     )
     args = parser.parse_args()
