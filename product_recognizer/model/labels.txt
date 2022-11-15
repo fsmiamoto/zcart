@@ -1,5 +1,0 @@
-post_it
-guarana_soda
-coke_soda
-card_deck
-blue_pens
