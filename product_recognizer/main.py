@@ -5,9 +5,10 @@ import argparse
 from typing import List
 from frame_object import FrameObject
 
-from frame_preprocessor import FramePreprocessor
-from frame_object_detector import MobileNetFrameObjectDetector
-from efficientdet import EfficientDetFrameObjectDetector, EfficientDetFramePreprocessor
+from efficientdet_tpu import (
+    EfficientDetFrameObjectDetector,
+    EfficientDetFramePreprocessor,
+)
 from frame_object_filter import FrameObjectFilter
 from weight_sensor import WeightSensor
 from cart_service import CartServiceClient
@@ -17,24 +18,16 @@ from queue import Queue
 from logger import Logger
 from video_stream import VideoStream
 
-import cv2
-
 
 def run(args):
     log = Logger()
     weight_sensor = WeightSensor()
-    # detector = MobileNetFrameObjectDetector(
-    #     model_path=args.model_file, labelmap_path=args.label_file
-    # )
     detector = EfficientDetFrameObjectDetector(
-        model_path="./model/custom_whole_efficientdet_lite0.tflite"
+        model_path="./model/custom_whole_efficientdet_lite0_edgetpu.tflite"
     )
 
     height, width = detector.get_input_dimensions()
 
-    # preprocessor = FramePreprocessor(
-    #     height, width, is_floating_model=detector.is_floating_model()
-    # )
     preprocessor = EfficientDetFramePreprocessor(width, height)
     cart_service_client = CartServiceClient(args.cart_service)
 
@@ -70,7 +63,7 @@ def run(args):
 
             frame = stream.read_frame()
 
-            input, resized = preprocessor.process(frame)
+            input, _ = preprocessor.process(frame)
 
             objects = detector.get_objects(input)
 
@@ -79,7 +72,6 @@ def run(args):
             frame_objects_queue.put(filtered_objects)
 
             if video_window:
-                #video_window.display(resized.numpy())
                 video_window.display(frame)
 
         except (KeyboardInterrupt, SystemExit):
@@ -113,7 +105,7 @@ if __name__ == "__main__":
         "--confidence",
         dest="confidence_threshold",
         type=float,
-        default=0.65,
+        default=0.80,
         help="Confidence threshold",
     )
     parser.add_argument(
