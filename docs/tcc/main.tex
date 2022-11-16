@@ -74,7 +74,7 @@
 
 \keywords{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things, Sensors} 
 
-\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining the Bachelor in Electronics Engineering degree}
+\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining the Bachelor's degree in Electronics Engineering}
 
 \orientador{André Eugênio Lazzaretti, Ph.D}
 
@@ -97,12 +97,19 @@
 
 % dedicatoria
 \begin{dedicatoria}
-    Add dedicatoria
+    We would like to offer this thesis to our families and loved ones; 
+	to the supportive and knowledgeable Professors and mentors we had 
+	over the course of our studies; and to other students and enthusiasts
+	who pursue learning with great purpose, honesty and courage.
 \end{dedicatoria}
 
 % agradecimentos (opcional)
 \begin{agradecimentos}
-    Add agradecimentos
+	We would like to express our enormous gratitude to our families and loved ones 
+	for being by our sides and providing us with the conditions needed to develop our studies.
+    A huge thank you to the Federal University of Technology, for having 
+	provided us with the environment, the materials and the lessons	that allowed us,
+	students, to continue growing and developing ourselves to the highest standards.
 \end{agradecimentos}
 
 % epigrafe (opcional)
@@ -113,7 +120,7 @@
 
 %abstract
 \begin{abstract}
-The recent advancements in artificial intelligence have already impact many
+The recent advancements in artificial intelligence have already impacted many
 aspects of modern life but have yet to impact one important aspect of the
 consumer experience: shopping in physical stores. In that regard, tech
 Giants such as Amazon have recently deployed the so called \textit{smart
@@ -122,8 +129,8 @@ experience including better product information and a seamless checkout
 process.
 
 Those products, however, are still a long way off towards reaching emerging
-markets such as Brazil, due to historical economical barriers. In that
-regard, this work analyses the current market and develops a prototype that
+markets such as Brazil, due to historical economical barriers. Thus, 
+this work analyses the current market and develops a prototype that
 achieves similar functionality to the ones available by using the same
 building blocks such as computer vision and sensor data.
 
@@ -414,7 +421,7 @@ end customer experience, becoming a sort of \textit{mobile checkout station}.
 	\label{fig:nextopui}
 \end{figure}
 
-Besides offering the improve shopping experience by not having to go through queues by the end of the trip, the product advertises increased sales
+Besides offering the improved shopping experience by not having to go through queues by the end of the trip, the product advertises increased sales
 as a result of the innovative approach and also allows a deeper understanding of the customer journey by collecting analytical data \cite{Paraiba2022}.
 
 \begin{quote}
@@ -471,10 +478,10 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Tensor Processing Unit}
 
-In the last decades, inferences using a Deep Neural Network (\sigla{DNN}{Deep
-Neural Network}) executed on general purpose hardware such as \sigla{CPU}{Central
-Processing Unit}s or specialized hardware but target for DNNs such as
-\sigla{GPU}{Graphics Processing Unit}.
+Artificial Inteligence(\sigla{AI}{Artifical Intelligence}) models that use Deep Neural 
+Networks (\sigla{DNN}{Deep Neural Network})s can often be trained and deployed for inference
+on general purpose hardware such as \sigla{CPU}{Central Processing Unit}s, but target 
+for specialized hardware such as \sigla{GPU}{Graphics Processing Unit}s.
 
 With the increased adoption of DNNs in various workloads and their specialized
 and heavy compute nature, Google started the development of a domain specific
@@ -483,7 +490,7 @@ first generation custom chip, named Tensor Processing Unit (\sigla{TPU}{Tensor
 Processing Unit}), deployed to their data centers since 2015 \cite{Google2015}.
 The developed TPU had the target of improving the inference phase of DNNs and
 achieved a performance improvement of \textbf{15-30 times} when compared to
-contemporary hardware of paired with reduced power consumption.
+contemporary hardware of paired or reduced power consumption.
 
 \begin{figure}[H]
 	\centering
@@ -523,8 +530,8 @@ resistance varies with changes in its applied force \cite{Stefanescu}.
 The deformation of the material caused by the mechanical strain can then
 be measured through a variation in resistence.
 
-In practice, measuring the resistance variations are minute and can be
-difficult to mesure. Additionally, it is usually desirable to have as the
+In practice, the resistance variations are minute changes and can be
+difficult to measure. Additionally, it is usually desirable to have as the
 output of the transducer a signal which can be converted to the digital domain
 through an Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital
 Converter}), and for that a Wheatstone Bridge can be used.
@@ -538,7 +545,7 @@ Converter}), and for that a Wheatstone Bridge can be used.
 \end{figure}
 
 The Wheatstone Bridge is a circuit capable of responding to the minute changes
-in resistance that when strain is applied to the sensor \cite{Michigan2020}.
+in resistance that occur when strain is applied to the sensor \cite{Michigan2020}.
 When no load is applied, the bridge is balanced and the output voltage
 $V_{out}$ should be zero. If any strain is applied to the gauges, the bridge
 will become unbalanced, and therefore will result in a non-zero output voltage.
@@ -563,7 +570,7 @@ amount of strain applied, providing the desired sensing capability.
 In practice, using strain gauges directly can be difficult since a proper
 mechanical structure and arrangement is crucial for the sensors to function
 properly. For that, commercially available \textit{Load Cells} offer ready to
-use mechanical packages that embedded the strain gauges for weight sensing
+use mechanical packages that embed the strain gauges for weight sensing
 using electronic circuits.
 
 In general, they consist of a spring element onto which the gauges are placed.
@@ -585,7 +592,7 @@ therefore provide the desired sensing \cite{HBM2022}.
 \label{sec:design}
 
 As a first step in developing our prototype, a set of
-responsibilities was established to guide the high level design and is listed below:
+goals was defined to guide the high level design and is listed below:
 
 \begin{enumerate}
     \item Handle user interactions and give visual feedback
@@ -593,25 +600,25 @@ responsibilities was established to guide the high level design and is listed be
     \item Recognize the addition or removal of products through computer vision and sensorial data.
 \end{enumerate}
 
-With those responsabilities in mind, the high level architecture of the prototype
+With those goals in mind, the high level architecture of the prototype
 was designed and is shown in Figure \ref{fig:architecture}.
 
-For each responsability, a separate software application will be used and those
+For each goal, a dedicated software application will be used and those
 applications will communicate using \sigla{TCP}{Transmission Control Protocol}
 network sockets \cite{Kurose2013} with established application protocols such as
 \sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
 \sigla{RFC}{Request For Comments} 1945} -- using the RESTful pattern -- and
 WebSocket\footnote{Defined in RFC 6455}.
 
-For handling the first responsability, the \textit{User App} will request data
+For handling the first goal, the \textit{User App} will request data
 from other applications and will display the information to end users and allow
 them to interact with the cart using a touch enabled LCD display.
 
-The \textit{Cart Service} will be in charge of the second responsability,
+The \textit{Cart Service} will be in charge of the second goal,
 handling requests from the \textit{User App} that request data or incur in any
 side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
 \textbf{relational database} \cite{Silberschatz2010} as its datastore. Namely
-\textbf{SQLite}, considered to be the worlds most deployed database due to its
+\textbf{SQLite}, considered to be the world's most deployed database due to its
 massive adoption in mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
 SQLite -- the entire database is contained within a single file -- great
@@ -619,8 +626,10 @@ library support in common programming languages and the use of the familiar
 relational modeling, including \sigla{SQL}{Structured Query Language}
 \cite{Nield2016}, were key factors in choosing it.
 
-All three applications will executed under a Linux \cite{Tanenbaum2015} based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
-Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single circuit board with microprocessor, memory and input/output devices.
+All three applications will executed under a Linux \cite{Tanenbaum2015} 
+based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
+Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single 
+circuit board with a microprocessor, memory and input/output devices.
 
 The advantages of using a Linux environment for the development are many, but
 being able to leverage its concurrency capabilities, having built-in drivers
@@ -648,27 +657,31 @@ mention.
 In creating the zCart architecture, the following guidelines were followed:
 
 \begin{itemize}
-    \item Create a separate software application for each responsability
+    \item Create a separate software application for each goal domain
     \item Use well defined standards for communication between applications.
     \item All databases should be owned by a single application. 
     \item Any interaction that requires an update to a given database that is
         not owned by an application should be done through an API and not
         directly.
-    \item Decouple the user interface from the how the data displayed is stored and transmitted
+    \item Decouple the user interface from how the data displayed is stored and transmitted
 \end{itemize}
 
-These guideline are based on known best practices from the software development industry including API-first design and segregation of
-responsabilities. \cite{Sam2021,Kong2022}
+These guideline are based on known best practices from the software 
+development industry including API-first design and segregation of
+responsibilities. \cite{Sam2021,Kong2022}
 
 In the sections that follow, each application will be further detailed.
 
 \section{User App}
 
-For developing the User App, we have used web technologies such as HTML, CSS \cite{Duckett2011} and JavaScript \cite{Flanagan2020} through the 
+For developing the User App, we have used web technologies such 
+as HTML, CSS \cite{Duckett2011} and JavaScript \cite{Flanagan2020} through the 
 React\footnote{htps://reactjs.org} framework. 
 
-Using web based technologies allows the User App to be display on any device capable of running a web browser and
-having mature tooling for development, testing and debugging influenced our decision.
+Using web-based technologies allows the User App to be displayed on any 
+device capable of running a web browser; and having mature tooling for 
+development, testing and debugging are important factors that influenced 
+our decision.
 
 Although developing Linux native graphical applications through toolkits such
 as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io} might have
@@ -686,13 +699,13 @@ key deciding factor in favor of using those.
 As shown on Figure \ref{fig:userapp}, the main objective of the User App is to
 provide a visual feedback mechanism for end users of the zCart.
 
-It displays the current products added to the cart, the quantity and also the
-price for each item. The subtotal for all products added to the cart is
+It displays the current products added to the cart, their amounts and also the
+price for each item. The subtotal price for all products added to the cart is
 calculated and also displayed on the interface. Notifications are also
 displayed when the user adds or removes a product from the cart. Finally, the
 User App provides a \textit{Checkout} button to simulate the payment process
-and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}) but a functional implementaion is out of scope
-for the the zCart prototype.
+and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}), because a functional
+implementation of a payment mechanism is out of scope for the the zCart prototype.
 
 More screenshots are available in Appendix \ref{ap:userapp}.
 
@@ -736,9 +749,7 @@ endpoints for the required state changes e.g. adding a product.
 For the HTTP endpoints, the Application uses the REST \cite{Roy2000} pattern
 with JavaScript Object Notation (\sigla{JSON}{JavaScript Object
 Notation})\footnote{https://json.org} as the data-interchange format, both
-being widely used in the current software industry.
-
-As example response is show at Listing \ref{lst:response}.
+being widely employed in the current software industry.
 
 \begin{table}[H]
 	\centering
@@ -755,6 +766,8 @@ As example response is show at Listing \ref{lst:response}.
 	\caption[Cart Service API endpoints]{Cart Service API Endpoints}
 	\fonte{Own work}
 \end{table}
+
+As example response is shown at Listing \ref{lst:response}.
 
 \begin{lstlisting}[caption={Example response for the \texttt{GET /cart/:cartId} endpoint using JSON},label={lst:response}]
 {
@@ -791,7 +804,7 @@ At the core of the zCart prototype is the Product Recognizer application,
 responsible for the product detection based on computer vision and weight
 sensing.
 
-For achieving its goal, the Product Recognizer has three main sub-components as shown below:
+For achieving its goal, the Product Recognizer has three main sub-components, as shown below:
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/diagrams/ProductRecognizer.png}
@@ -848,13 +861,13 @@ and includes the pin headers for connecting with other boards.
 \end{figure}
 
 The Raspberri Pi board was connected to the HX711 through its GPIO pins,
-allowing it to obtain the sensor readings through the a serial interface. The
+allowing it to obtain the sensor readings through a serial interface. The
 protocol used does not follow any known standard and can be
 described as a \textit{Non-I2C compliant two-wire
 protocol}\footnote{https://github.com/queuetue/Q2-HX711-Arduino-Library}.
 
-An open-source driver implementation was used\footnote{https://github.com/tatobari/hx711py} that
-included all the necessary features for the prototype.
+An open-source driver implementation was used\footnote{https://github.com/tatobari/hx711py}, 
+which included all the necessary features for the prototype.
 
 As shown on Figure \ref{fig:weighttesting}, the load cell requires a minimal
 mechanical assembly to be tested properly, and for that two small wood plates
@@ -871,7 +884,7 @@ were used to secure the load cell and breakout board during development.
 \subsection{Camera}
 
 In order to obtain a video feed to run Object Detection on, a camera system was
-in required. For that, a standard consumer webcam was used for its reduced cost
+required. For that, a standard consumer webcam was used for its reduced cost
 and good operating system driver support.
 
 The webcam used was a Microsoft LifeCam
@@ -907,13 +920,13 @@ performance.
 The three threads created are described below:
 \begin{itemize}
     \item Frame Reader Thread: Responsible for reading frames from the Camera and making them available to the Main Thread.
-    \item Main Thread: Responsible for bootstraping the application - including creating the other threads - and executed the main loop of
+    \item Main Thread: Responsible for bootstraping the application - including creating the other threads - and executing the main loop of
         object detection.
     \item Product Recognizer Thread: Responsible for applying the business logic using the objects detected and the weight sensor readings.
 \end{itemize}
 
-These threads communication in synchronous and asynchronous mechanisms to achieve the overall goal of processing video and sensor data, as
-shown on Figure \ref{fig:threads}.
+These threads communicate in synchronous and asynchronous means to achieve 
+the overall goal of processing video and sensor data, as shown on Figure \ref{fig:threads}.
 
 \begin{figure}[H]
 	\centering
@@ -963,10 +976,12 @@ It uses two main variables to keep track of the current state:
     \item The weight associated with the products present in the cart.
 \end{itemize}
 
-The first important step, is the \textit{frame diff}. This step calculates the
-a dictionary of the object difference, called \textit{diff}, by comparing the
-stored product dictionary and the received list of frame objects from the Main
-Thread.
+The first important step, is the \textit{frame diff}. This step 
+calculates the difference in terms of the objects detected in the current 
+and previous frames (e.g. whether objects were added, removed, or remain the same) 
+and store it in a dictionary data structure\footnote{https://docs.python.org/3/tutorial/datastructures.html#dictionaries},
+by comparing the stored product dictionary and the received list of frame
+objects from the Main Thread.
 
 \begin{figure}[H]
 	\centering
@@ -978,15 +993,17 @@ Thread.
 
 Given the frame object diff, it is then possible to calculate an expected
 weight change based on the weight of each item - and their quantity - contained
-in the diff. The expected weight difference is then compared with the actual
+in the diff. The expected weight difference is then compared to the actual
 one obtained from the weight sensor, considering a 15\% tolerance.
 
 In this scenario, the weight readings are used as a filter and act as a
 \textit{commit} step for differences detected in the frame objects.
 
-For example, if the can illustraded in Figure \ref{fig:diff} weights an expected 400 grams, the weight
+For example, if the can illustrated in Figure \ref{fig:diff} weights an expected 400 grams, the weight
 difference expected should be of about 400 grams. If the weight difference does not match the expected
-one, the object will not be considered for addition or removal.
+one, the object will not be considered for addition or removal. For our PoC's purpose, setting up an 
+actionable visual warning on this type of exception is out of scope, but a full functional implementation
+may include it.
 
 A more detailed activity diagram of the logic executed in the Product Recognizer thread loop is
 shown in Figure \ref{fig:activity}.
@@ -1076,7 +1093,7 @@ to keep a shape that would represent the overall idea of a smart cart.
 \subsection{Power Consumption}
 
 For estimating the overall power consumption, a commercial wattmeter was used
-to observer the total power required by the power adapter used to supply energy
+to observe the total power required by the power adapter used to supply energy
 to the hardware components.
 
 \begin{figure}[H]
@@ -1107,9 +1124,9 @@ insurmountable practical barrier.
 
 \section{Cost}
 
-One of the import aspects when developing a marketable product is its \textbf{cost}.
+One of the important aspects when developing a marketable product is its \textbf{cost}.
 
-A more detailed overview of the items and their cost is shown on Table \ref{tbl:cost}.
+A more detailed overview of the items and their costs in Brazil is shown on Table \ref{tbl:cost}.
 
 \begin{table}[H]
 	\centering
@@ -1129,7 +1146,7 @@ A more detailed overview of the items and their cost is shown on Table \ref{tbl:
         & Total cost & R\$ 1331.84 / US\$ 250.92 \\
         \hline
 	\end{tabular}
-    \caption[Items used on the prototype and their approximate retail cost in October 2022]{Items used on the prototype and their retail cost in October 2022}
+    \caption[Items used on the prototype and their approximate retail cost in Brazil as of October 2022]{Items used on the prototype and their retail cost in October 2022}
 	\fonte{Own work}
     \label{tbl:cost}
 \end{table}
