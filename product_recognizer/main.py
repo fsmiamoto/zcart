@@ -23,7 +23,7 @@ def run(args):
     log = Logger()
     weight_sensor = WeightSensor()
     detector = EfficientDetFrameObjectDetector(
-        model_path="./model/custom_whole_efficientdet_lite0_edgetpu.tflite"
+        model_path="./model/custom_whole_efficientdet_lite1_resizing_edgetpu.tflite"
     )
 
     height, width = detector.get_input_dimensions()
@@ -105,7 +105,7 @@ if __name__ == "__main__":
         "--confidence",
         dest="confidence_threshold",
         type=float,
-        default=0.80,
+        default=0.70,
         help="Confidence threshold",
     )
     parser.add_argument(
