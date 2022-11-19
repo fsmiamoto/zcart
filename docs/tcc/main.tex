@@ -953,7 +953,7 @@ while True:
     frame_objects_queue.put(filtered_objects)
 \end{lstlisting}
 
-As show on Listing \ref{lst:main} and on Figure \ref{fig:threads}, the Main
+As shown on Listing \ref{lst:main} and on Figure \ref{fig:threads}, the Main
 thread will do the computational work to fetch the frames from the camera that
 were read by the Frame Reader thread, preprocess and run the object detection
 model in it. The objects are then filtered and then added to a message queue
@@ -978,7 +978,7 @@ It uses two main variables to keep track of the current state:
 The first important step, is the \textit{frame diff}. This step 
 calculates the difference in terms of the objects detected in the current 
 and previous frames (e.g. whether objects were added, removed, or remain the same) 
-and store it in a dictionary data structure\footnote{https://docs.python.org/3/tutorial/datastructures.html#dictionaries},
+and store it in a dictionary data structure\footnote{https://docs.python.org/3/tutorial/datastructures.html\#dictionaries},
 by comparing the stored product dictionary and the received list of frame
 objects from the Main Thread.
 
