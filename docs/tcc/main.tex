@@ -472,9 +472,93 @@ used in the development of our prototype.
 
 This section can be skipped for readers with familiarity on the topics discussed
 
+\section{Neural Networks}
+
+Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network})s,
+are networks built out of interconnected decisional Neurons that aim to replicate 
+the behaviour of the human brain, enabling computational systems to cluster data
+and to make predictions (cite IBM TBD https://www.ibm.com/cloud/learn/deep-learning). 
+
+A Neuron is similar to a Digital Logic Gate, which is capable of producing 
+different outputs depending on the input signals that are sent to it.
+A Neuron have weights, which are the coefficients that are used for calculating
+the outputs; and biases, which are the boundaries that represent how propense is an output
+to fit into a specific category of output. 
+The main difference between a digital logic gate and a Neuron is that, because neurons are
+parameterized with weights and biases, we can apply learning algorithms (make italic TDB) 
+to tune (or train) Networks of Neurons using real world or synthetic data (include reference TBD http://neuralnetworksanddeeplearning.com/chap1.html).
+
+\subsection{Neurons}
+
+One of the most popular types of Neurons is the Perceptron, introduced by 
+(include person name TBD) in (include year TDB). 
+A perceptron takes one or more binary inputs and produces a single binary output.
+
+(include perceptron picture TBD http://neuralnetworksanddeeplearning.com/chap1.html)
+
+A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
+contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron
+(include reference TBD), which take real numbers as inputs and also produce continuous outputs 
+within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
+This is particularly useful for learning, since in Perceptrons small differences in the 
+weights or biases could yield to different outputs without a full transparency 
+on how close the output would have been to a different one 
+(include reference TDB http://neuralnetworksanddeeplearning.com/chap1.html).
+
+(include sigmoid curve TBD)
+
+\subsection{Learning Algorithms}
+
+Learning algorithms can be Supervised or Unsupervised. (include reference TBD)
+Supervised learning is employed when you know what are your expected outputs and use this
+information to feed (train) your models as so as they can start doing that on their own; 
+and unsupervised learning is employed when you do not know what are the expected labels 
+in your data. Supervised learning is typically used for regression and classification tasks; 
+and Unsupervised Learning is typically used for clustering raw data into different buckets. 
+This work will focus primarily on Supervised Learning, since our proposed project uses
+Object Detection based in labelled data samples.
+
+As for the learning algorithms used for training Neural Networks, 
+the standard algorithm is the Stochastic Gradient Descent (\sigla{SGD}{Stochastic Gradient Descent}).
+Alike other gradient descent algorithms, the SGD aims to minimize the loss function of a given
+Neural Network itteratively. In simple terms, it consists of an itterative optimization algorithm defined by an
+objective function to minimize the error.
+The key feature of the SGD is that it does that very efficiently by initializing the weights
+and biases randomly and then fine tuning it during training by trying to find the higher descents 
+(or the higher derivatives of the error function), reducing the number of necessary iterations, 
+which is particularly important considering that the amount of data that is used to train AI
+models has increased considerably over the last years 
+(include reference TBD https://optimization.cbe.cornell.edu/index.php?title=Stochastic_gradient_descent).
+
+Finally, in terms of way how the SGD is computed in Neural Networks, a widely adopted approach 
+for Supervised Learning is Backpropagation. Backpropagation computes the gradients of the final 
+layers of a Neural Network first, and the gradients of the first layers at last, 
+and it reuses partial computations of the gradient from a layer to the other to compute each layer's 
+gradient, making it more efficient than calculating each layer's gradient separately
+(include refence TBD https://brilliant.org/wiki/backpropagation/). 
+
 \section{Deep Learning}
 
-\section{Neural Networks}
+Deep Learning defines a family of algorithms that take advantage of Neural Networks to train
+AI models that allow systems to forecast and clusterize data efficiently (include reference TBD 
+https://www.ibm.com/cloud/learn/deep-learning).
+Deep Learning algorithms use Neural Networks that have three types of layers:
+(include pretty list TBD)
+- Input Layer
+- Hidden Layer
+- Output Layer
+TBD include picture https://www.sciencedirect.com/topics/engineering/three-layered-neural-network
+
+The Input Layer takes the input data that will be fed into the model for training,
+xi (make italic TBD), and produces the weighting coefficients wji (make italic TBD).
+The wji (make italic TBD) coefficients are then used to feed the Hidden Layer of the the network, 
+which produces the weighting coefficients wki (make italic TBD).
+Finally, the wki (make italic TBD) coefficients are taken as an input to the Output Layer, 
+which produces the outputs Ok that are then compared to the actual labels dk (make italic TBD)
+to compute the error rates ek (make italic TBD).
+
+write a more detailed explanation on what is the purpose of each layer TBD.
+
 
 \section{Tensor Processing Unit}
 
