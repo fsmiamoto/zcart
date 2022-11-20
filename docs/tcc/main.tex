@@ -539,26 +539,43 @@ gradient, making it more efficient than calculating each layer's gradient separa
 
 \section{Deep Learning}
 
-Deep Learning defines a family of algorithms that take advantage of Neural Networks to train
-AI models that allow systems to forecast and clusterize data efficiently (include reference TBD 
-https://www.ibm.com/cloud/learn/deep-learning).
+Deep Learning defines a group of AI algorithms that use advanced learning techniques on the 
+top of ANNs to train models that allow systems to forecast and clusterize data 
+efficiently (include reference TBD https://www.ibm.com/cloud/learn/deep-learning).
 Deep Learning algorithms use Neural Networks that have three types of layers:
+
 (include pretty list TBD)
 - Input Layer
 - Hidden Layer
 - Output Layer
+
 TBD include picture https://www.sciencedirect.com/topics/engineering/three-layered-neural-network
 
 The Input Layer takes the input data that will be fed into the model for training,
-xi (make italic TBD), and produces the weighting coefficients wji (make italic TBD).
-The wji (make italic TBD) coefficients are then used to feed the Hidden Layer of the the network, 
-which produces the weighting coefficients wki (make italic TBD).
+xi (make italic TBD), and produces the weighting coefficients wji (make italic TBD). The Input Layers
+typically have the role of encoding the input data to a structure that can be processed by the 
+subsequent hidden layers (include reference TBD https://arxiv.org/ftp/arxiv/papers/2006/2006.01408.pdf).
+
+The wji (make italic TBD) coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients wki (make italic TBD). The Hidden Layers of a Deep Learning 
+Neural Network are used for the heavy processing of the encoded input data by applying a series of 
+mathematical operations that ultimately makes it possible to break down the most important features
+of the data and to produce comprehensive outputs to the decisional layers of the network (include reference 
+TBD https://deepai.org/machine-learning-glossary-and-terms/hidden-layer-machine-learning).
+
 Finally, the wki (make italic TBD) coefficients are taken as an input to the Output Layer, 
-which produces the outputs Ok that are then compared to the actual labels dk (make italic TBD)
-to compute the error rates ek (make italic TBD).
+which produces the outputs Ok (make italic TBD) that are compared to the actual labels dk 
+(make italic TBD) to compute the error rates ek (make italic TBD). The output layers of a network
+are responsible for producing its final results, and its Activation Functions (make italic TBD) 
+will determine the type of predictions that it can produce. 
 
-write a more detailed explanation on what is the purpose of each layer TBD.
-
+An important type of Activation Function that was presented previously in this thesis is the 
+Sigmoid Function. There are other types of Activation Functions that are usually targeted 
+to specific problem domains, such as Linear Activation for Regression problems. 
+In a Multi-Label Classification problem, which is the key problem in scope for this
+thesis, the Output Layers of a Neural Network typically have one node for each class that it is
+intended to forecast, using a Sigmoid Activation 
+(include reference TBD https://machinelearningmastery.com/choose-an-activation-function-for-deep-learning/).
 
 \section{Tensor Processing Unit}
 
@@ -1134,7 +1151,92 @@ for label, count in frame_diff.items():
 
 \subsection{Object Detection Model}
 
-TODO: Describe the development of the object detection model used.
+The data used for training our custom Object Detection model was collected and labelled
+using Edge Impulse (include reference TBD), a development platform for Machine Learning 
+on Edge devices.
+A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
+using the same webcam that is used for the inference in our final product.
+(include the edge-impulse-collect-data.png picture TBD)
+
+The pictures were then were labelled using the Labelling Queue 
+(add reference TBD https://docs.edgeimpulse.com/docs/edge-impulse-studio/data-acquisition/labeling-queue) 
+feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desired objects for detection.
+(include the edge-impulse-labelling-queue.png picture TBD).
+
+The raw pictures and bounding boxes were then exported from Edge Impulse as so as
+we could pre-process the data and model our custom object detection algorithm using the 
+Python programming language.
+The pictures were exported in their raw JPEG (include reference TBD) format, comprised in a ZIP folder.
+The bounding boxes were exported in the format of a JSON file containing the boundaries and the metrics
+for each picture, allowing us to easily reconstruct the bounding boxes for each object in each image
+using programming instructions. The files were then loaded to a Cloud Object Storage Bucket in AWS
+(include reference TBD), making it easier for us to access the data by importing it from the web using 
+a programming language.
+
+(include bounding box JSON file example TBD) 
+
+The development environment used for writing the code for training our custom model
+was Google Collab (include reference TBD), and the programming language that was employed is Python. 
+It consists on a web-based interface that allows developers
+to use Google's infrastructure (with GPUs and TPUs) for writing and executing code.
+(include Google Collab screenshot TBD)
+
+The Edge Impulse files were loaded from our cloud object storage bucket, and then manipulated in Python
+from Google Collab as so as we could utilize the images and bounding box coordinates for training
+our model.
+
+We decided to use Google's TensorFlow (include reference TB) framework to train our models, 
+as it is one of the most popular frameworks employed in the Industry for training AI models
+and also because it features a lightweight library called TensorFlow Lite, which is appropriate
+for creating efficient edge and mobile AI models considering the typical hardware constraints
+from these types of devices.
+
+To train our model, we used the TensorFlow Lite's ModelMaker API (include reference TBD) for 
+object detection, which simplifies the process of training our models by breaking down the most
+complex concepts of deep learning into parameterized objects and methods, allowing us to spend
+more time on the pre-processing steps and on experimenting with different network configurations
+to improve the model's accuracy. 
+
+TBD describe the EfficientDet architecture.
+
+In terms of the data pre-processing steps performed in our Python code, two approaches were
+tried out for preparing the images for training: resizing and cropping the images. 
+The bounding box coordinates and dimensions were also adjusted accordingly as so as the data 
+integrity for them was preserved. 
+
+Once the images and bounding boxes were pre-processed, the data was saved in the standardized
+format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
+which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
+structure:
+(TBD include a pretty formatted CSV file https://cloud.google.com/vision/automl/object-detection/docs/csv-format)
+
+Finally, we defined a programming loop to train different models using the EfficientDet-D0,
+EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
+applying Transfer Learning on the top of pre-trained weights from training with the COCO-2017 dataset 
+and by training the entire networks based in our custom data. We ran this entire loop using 
+the cropped images first; and then executed it using resized images with the EfficientDet-D0,
+EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
+performance balance considering our hardware constraints. With that, we came to have  16 distinct models.  
+
+The most lightweight models were the preferred ones considering our edge device capabilities,
+as they offer better inference time performance. 
+However, we were also looking for the most optimal accuracy and loss metrics, 
+therefore the models were evaluated with Test images to make sure that they were 
+efficient on the task that they need perform, which is to detect objects.
+(TBD include test images)
+
+The model accuracy metrics inferred by the TensorFlow Lite Model Maker are listed below for the
+different models that were trained:
+(TBD include formatted table with the model testing metrics)
+
+The loss (error) metrics during training were also computed for the 200 epochs that were used for
+training using a batch size of 16 images, for both the training and validation data sets, 
+in each of the models that were generated.
+(TBD include loss charts for the top 5 performing models)
+
+To improve inference time performance, we also compiled our TensorFlow Lite models for usage with an
+Edge TPU, which further improved our inference times. 
+(TBD maybe include a chart showing before and after for the inference times)
 
 \section{Mechanical Assembly}
 
@@ -1244,6 +1346,10 @@ Therefore, it might be possible to conclude that most of the retail cost of the
 existing smart carts is not composed of the production and infrastructure costs
 but from the required repayment of the research and development costs that such
 a product demand.
+
+\subsection{Model Accuracy}
+
+TBD describe the model evaluation metrics obtained when using the different training approaches.
 
 \section{Challenges and future work}
 
