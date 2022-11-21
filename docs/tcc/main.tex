@@ -1185,19 +1185,36 @@ The Edge Impulse files were loaded from our cloud object storage bucket, and the
 from Google Collab as so as we could utilize the images and bounding box coordinates for training
 our model.
 
-We decided to use Google's TensorFlow (include reference TB) framework to train our models, 
+We decided to use Google's TensorFlow (include reference TBD) framework to train our models, 
 as it is one of the most popular frameworks employed in the Industry for training AI models
-and also because it features a lightweight library called TensorFlow Lite, which is appropriate
-for creating efficient edge and mobile AI models considering the typical hardware constraints
-from these types of devices.
+and also because it features a lightweight library called TensorFlow Lite (include reference TBD), 
+which is appropriate for creating efficient edge and mobile AI models considering the 
+typical hardware constraints from these types of devices.
 
 To train our model, we used the TensorFlow Lite's ModelMaker API (include reference TBD) for 
-object detection, which simplifies the process of training our models by breaking down the most
+Object Detection, which simplifies the process of training our models by breaking down the most
 complex concepts of deep learning into parameterized objects and methods, allowing us to spend
 more time on the pre-processing steps and on experimenting with different network configurations
 to improve the model's accuracy. 
 
-TBD describe the EfficientDet architecture.
+As of the time of development of this work, the ModelMaker API only has compatibility with the 
+EfficientDet family of architectures (include reference TBD https://arxiv.org/pdf/1911.09070.pdf)
+for training Deep Learning models for Object Detection. 
+The EfficientDet family is efficient for object recognition in edge devices, altough contemporany 
+architectures, such as the YOLOv5 and its successors, can have better performance.
+
+(tbd include image from official YOLOv5 publication comparing it to EfficientDet https://github.com/ultralytics/yolov5/releases/tag/v4.0)
+
+Our initial plan was to use the YOLOv5 architecture, but since its implementation is not native
+to TensorFlow Lite, it would require us to create additional wrappers around the outputs of the YOLOv5
+network to get it working as expected. Even thought it is possible to convert the models from their
+original PyTorch (include reference TBD) format to a TensorFlow Lite format, the conversion does not
+cover some of the features from the original implementation, as discussed in this GitHub Issue (include reference TBD https://github.com/ultralytics/yolov5/issues/1981),
+which limits its functionality.
+Similar compatibility issues happen with latest YOLO implementations, such as the YOLOv7, 
+as shown in this white paper (include reference TBD https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4). 
+Thus, we decided to proceed with the TensorFlow Lite's Model Maker API compatible architectures, 
+which are in the EfficientDet family, as it fulfilled our project's requirements without major impacts.
 
 In terms of the data pre-processing steps performed in our Python code, two approaches were
 tried out for preparing the images for training: resizing and cropping the images. 
@@ -1208,7 +1225,7 @@ Once the images and bounding boxes were pre-processed, the data was saved in the
 format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
 which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
 structure:
-(TBD include a pretty formatted CSV file https://cloud.google.com/vision/automl/object-detection/docs/csv-format)
+(TBD include a pretty formatted CSV file just like https://cloud.google.com/vision/automl/object-detection/docs/csv-format)
 
 Finally, we defined a programming loop to train different models using the EfficientDet-D0,
 EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
