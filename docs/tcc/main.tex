@@ -74,7 +74,7 @@
 
 \keywords{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things, Sensors} 
 
-\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining the Bachelor's degree in Electronics Engineering}
+\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining a Bachelor's Degree in Electronics Engineering}
 
 \orientador{André Eugênio Lazzaretti, Ph.D}
 
@@ -477,7 +477,7 @@ This section can be skipped for readers with familiarity on the topics discussed
 Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network})s,
 are networks built out of interconnected decisional Neurons that aim to replicate 
 the behaviour of the human brain, enabling computational systems to cluster data
-and to make predictions (cite IBM TBD https://www.ibm.com/cloud/learn/deep-learning). 
+and to make predictions \cite{IBM_NeuralNetworks}. 
 
 A Neuron is similar to a Digital Logic Gate, which is capable of producing 
 different outputs depending on the input signals that are sent to it.
@@ -485,8 +485,8 @@ A Neuron have weights, which are the coefficients that are used for calculating
 the outputs; and biases, which are the boundaries that represent how propense is an output
 to fit into a specific category of output. 
 The main difference between a digital logic gate and a Neuron is that, because neurons are
-parameterized with weights and biases, we can apply learning algorithms (make italic TDB) 
-to tune (or train) Networks of Neurons using real world or synthetic data (include reference TBD http://neuralnetworksanddeeplearning.com/chap1.html).
+parameterized with weights and biases, we can apply \textit{learning algorithms}
+to tune (or train) Networks of Neurons using real world or synthetic data \cite{Nielsen2015}.
 
 \subsection{Neurons}
 
@@ -497,26 +497,30 @@ A perceptron takes one or more binary inputs and produces a single binary output
 (include perceptron picture TBD http://neuralnetworksanddeeplearning.com/chap1.html)
 
 A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
-contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron
-(include reference TBD), which take real numbers as inputs and also produce continuous outputs 
+contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
+which take real numbers as inputs and also produce continuous outputs 
 within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
 This is particularly useful for learning, since in Perceptrons small differences in the 
 weights or biases could yield to different outputs without a full transparency 
-on how close the output would have been to a different one 
-(include reference TDB http://neuralnetworksanddeeplearning.com/chap1.html).
+on how close the output would have been to a different one \cite{Nielsen2015}.
 
 (include sigmoid curve TBD)
 
 \subsection{Learning Algorithms}
 
-Learning algorithms can be Supervised or Unsupervised. (include reference TBD)
+There are three main types of learning algorithms: Supervised, Unsupervised and Reinforcement.
 Supervised learning is employed when you know what are your expected outputs and use this
 information to feed (train) your models as so as they can start doing that on their own; 
-and unsupervised learning is employed when you do not know what are the expected labels 
-in your data. Supervised learning is typically used for regression and classification tasks; 
-and Unsupervised Learning is typically used for clustering raw data into different buckets. 
-This work will focus primarily on Supervised Learning, since our proposed project uses
-Object Detection based in labelled data samples.
+unsupervised learning is applied when you do not know what are the expected labels 
+in your data or you do not have them available; and Reinforcement learning is used when
+algorithms need to replicate specific behaviors depending on the feedback that is
+provided to them \cite{CourseraML}. 
+Supervised learning is typically employed for regression and classification tasks; 
+Unsupervised Learning is typically used for clustering raw data into different buckets
+without necessarily knowing how to do it or having the labelled data available;
+and Reinforcement learning is often applied in control systems.
+This work will primarily focus on Supervised Learning, since our proposed project uses
+Object Detection and is trained based in labelled data samples.
 
 As for the learning algorithms used for training Neural Networks, 
 the standard algorithm is the Stochastic Gradient Descent (\sigla{SGD}{Stochastic Gradient Descent}).
@@ -527,21 +531,19 @@ The key feature of the SGD is that it does that very efficiently by initializing
 and biases randomly and then fine tuning it during training by trying to find the higher descents 
 (or the higher derivatives of the error function), reducing the number of necessary iterations, 
 which is particularly important considering that the amount of data that is used to train AI
-models has increased considerably over the last years 
-(include reference TBD https://optimization.cbe.cornell.edu/index.php?title=Stochastic_gradient_descent).
+models has increased considerably over the last years \cite{CornellSGD}.
 
 Finally, in terms of way how the SGD is computed in Neural Networks, a widely adopted approach 
 for Supervised Learning is Backpropagation. Backpropagation computes the gradients of the final 
 layers of a Neural Network first, and the gradients of the first layers at last, 
 and it reuses partial computations of the gradient from a layer to the other to compute each layer's 
-gradient, making it more efficient than calculating each layer's gradient separately
-(include refence TBD https://brilliant.org/wiki/backpropagation/). 
+gradient, making it more efficient than calculating each layer's gradient separately \cite{BrilliantBackpropagation}. 
 
 \section{Deep Learning}
 
 Deep Learning defines a group of AI algorithms that use advanced learning techniques on the 
 top of ANNs to train models that allow systems to forecast and clusterize data 
-efficiently (include reference TBD https://www.ibm.com/cloud/learn/deep-learning).
+efficiently\cite{IBM_DeepLearning}.
 Deep Learning algorithms use Neural Networks that have three types of layers:
 
 (include pretty list TBD)
@@ -552,21 +554,21 @@ Deep Learning algorithms use Neural Networks that have three types of layers:
 TBD include picture https://www.sciencedirect.com/topics/engineering/three-layered-neural-network
 
 The Input Layer takes the input data that will be fed into the model for training,
-xi (make italic TBD), and produces the weighting coefficients wji (make italic TBD). The Input Layers
+\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
 typically have the role of encoding the input data to a structure that can be processed by the 
-subsequent hidden layers (include reference TBD https://arxiv.org/ftp/arxiv/papers/2006/2006.01408.pdf).
+subsequent hidden layers\cite{Paranjape2020}.
 
-The wji (make italic TBD) coefficients are then used to feed the Hidden Layer of the the network,
-which produces the weighting coefficients wki (make italic TBD). The Hidden Layers of a Deep Learning 
+The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
 Neural Network are used for the heavy processing of the encoded input data by applying a series of 
 mathematical operations that ultimately makes it possible to break down the most important features
-of the data and to produce comprehensive outputs to the decisional layers of the network (include reference 
-TBD https://deepai.org/machine-learning-glossary-and-terms/hidden-layer-machine-learning).
+of the data and to produce comprehensive outputs to the decisional layers of the network
+\cite{DeepAI_HiddenLayer}.
 
-Finally, the wki (make italic TBD) coefficients are taken as an input to the Output Layer, 
-which produces the outputs Ok (make italic TBD) that are compared to the actual labels dk 
-(make italic TBD) to compute the error rates ek (make italic TBD). The output layers of a network
-are responsible for producing its final results, and its Activation Functions (make italic TBD) 
+Finally, the \textit{wki} coefficients are taken as an input to the Output Layer, 
+which produces the outputs \textit{Ok} that are compared to the actual labels \textit{dk} 
+to compute the error rates \textit{ek}. The output layers of a network
+are responsible for producing its final results, and its \textit{Activation Functions} 
 will determine the type of predictions that it can produce. 
 
 An important type of Activation Function that was presented previously in this thesis is the 
@@ -574,8 +576,7 @@ Sigmoid Function. There are other types of Activation Functions that are usually
 to specific problem domains, such as Linear Activation for Regression problems. 
 In a Multi-Label Classification problem, which is the key problem in scope for this
 thesis, the Output Layers of a Neural Network typically have one node for each class that it is
-intended to forecast, using a Sigmoid Activation 
-(include reference TBD https://machinelearningmastery.com/choose-an-activation-function-for-deep-learning/).
+intended to forecast, using a Sigmoid Activation\cite{Brownlee2021}.
 
 \section{Tensor Processing Unit}
 
