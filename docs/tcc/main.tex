@@ -1292,13 +1292,14 @@ which are in the EfficientDet family, as we would have taken considerable time o
 the conversion defects from the YOLO networks, which would deviate us from our project's main purpose,
 and as it fulfilled our project's requirements without major impacts. 
 
-In terms of the data pre-processing steps performed in our Python code, two approaches were
+Our original images were saved in 640x480 px, and the expected input of the EfficientDet network 
+was of 320x320 px, so in terms of the data pre-processing steps performed in our Python code, two approaches were
 tried out for preparing the images for training: resizing and cropping the images. 
 The bounding box coordinates and dimensions were also adjusted accordingly as so as the data 
 integrity for them was preserved. 
 
-Once the images and bounding boxes were pre-processed, the data was saved in the standardized
-format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
+Once the images and bounding boxes were pre-processed, the images were split into Train, Validation 
+and Test sets; and saved in the standardized format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
 which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
 structure:
 
@@ -1314,11 +1315,16 @@ TRAIN,./images_path/im5.png,label,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
 TRAIN,./images_path/im6.png,label,0.3,0.1,,,0.3,0.4,,
 \end{lstlisting}
 
+70 percent of the images were moved to the Train set; 21 percent were used for Validation;
+and the rest was used for testing the custom model. 
+(tbd explain the difference between the Train/Validation/Test sets)
+
 Finally, we defined a programming loop to train different models using the EfficientDet-D0,
 EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
 applying Transfer Learning on the top of pre-trained weights from training with the COCO-2017 dataset 
-and by training the entire networks based in our custom data. We ran this entire loop using 
-the cropped images first; and then executed it using resized images with the EfficientDet-D0,
+and by training the entire networks based in our custom data. 
+
+We ran this entire loop using the cropped images first; and then executed it using resized images with the EfficientDet-D0,
 EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
 performance balance considering our hardware constraints. 
 With that, we came to have 16 distinct custom models for testing.  
@@ -1439,14 +1445,41 @@ as they offer better inference time performance.
 However, we were also looking for the most optimal accuracy and loss metrics, 
 therefore the models were evaluated with Test images to make sure that they were 
 efficient on the task that they need perform, which is to detect objects.
-(TBD include test images)
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/singlelabel-classification-1.png}
+	\caption[Single-Label Classification Example 1]{Single-Label Classification Example 1}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/singlelabel-classification-2.png}
+	\caption[Single-Label Classification Example 2]{Single-Label Classification Example 2}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/multilabel-classification-1.png}
+	\caption[Multi-Label Classification Example 1]{Multi-Label Classification Example 1}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/multilabel-classification-2.png}
+	\caption[Multi-Label Classification Example 2]{Multi-Label Classification Example 2}
+	\fonte{Own work}
+\end{figure}
 
 The model accuracy metrics inferred by the TensorFlow Lite Model Maker are listed below for the
 different models that were trained:
 (TBD include formatted table with the model testing metrics)
 
 The loss (error) metrics during training were also computed for the 200 epochs that were used for
-training using a batch size of 16 images, for both the training and validation data sets, 
+training using batches of 16 images, for both the training and validation data sets, 
 in each of the models that were generated.
 (TBD include loss charts for the top 5 performing models)
 
