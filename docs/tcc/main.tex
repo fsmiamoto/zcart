@@ -491,10 +491,16 @@ to tune (or train) Networks of Neurons using real world or synthetic data \cite{
 \subsection{Neurons}
 
 One of the most popular types of Neurons is the Perceptron, introduced by 
-(include person name TBD) in (include year TDB). 
+Frank Rosenblatt in 1958\cite{Rosenblatt1958}. 
 A perceptron takes one or more binary inputs and produces a single binary output.
 
-(include perceptron picture TBD http://neuralnetworksanddeeplearning.com/chap1.html)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/perceptron.png}
+	\caption[Perceptron Neuron]{Perceptron Neuron}
+    \fonte{\cite{Nielsen2015}}
+	\label{fig:perceptron}
+\end{figure}
 
 A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
 contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
@@ -504,7 +510,13 @@ This is particularly useful for learning, since in Perceptrons small differences
 weights or biases could yield to different outputs without a full transparency 
 on how close the output would have been to a different one \cite{Nielsen2015}.
 
-(include sigmoid curve TBD)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/sigmoid-function.png}
+	\caption[Sigmoid Function]{Sigmoid Function}
+    \fonte{\cite{Nielsen2015}}
+	\label{fig:sigmoid}
+\end{figure}
 
 \subsection{Learning Algorithms}
 
@@ -546,12 +558,19 @@ top of ANNs to train models that allow systems to forecast and clusterize data
 efficiently\cite{IBM_DeepLearning}.
 Deep Learning algorithms use Neural Networks that have three types of layers:
 
-(include pretty list TBD)
-- Input Layer
-- Hidden Layer
-- Output Layer
+\begin{enumerate}
+    \item Input Layer
+    \item Hidden Layer
+    \item Output Layer
+\end{enumerate}
 
-TBD include picture https://www.sciencedirect.com/topics/engineering/three-layered-neural-network
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/three-layered-ann.jpg}
+	\caption[Three Layered Neural Network]{Three Layered Neural Network}
+    \fonte{\cite{ARAKI2015121}}
+	\label{fig:threeLayeredAnn}
+\end{figure}
 
 The Input Layer takes the input data that will be fed into the model for training,
 \textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
@@ -1153,69 +1172,125 @@ for label, count in frame_diff.items():
 \subsection{Object Detection Model}
 
 The data used for training our custom Object Detection model was collected and labelled
-using Edge Impulse (include reference TBD), a development platform for Machine Learning 
-on Edge devices.
+using Edge Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for Machine 
+Learning on Edge devices.
 A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
 using the same webcam that is used for the inference in our final product.
-(include the edge-impulse-collect-data.png picture TBD)
 
-The pictures were then were labelled using the Labelling Queue 
-(add reference TBD https://docs.edgeimpulse.com/docs/edge-impulse-studio/data-acquisition/labeling-queue) 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-collect-data.png}
+	\caption[Collecting Data in Edge Impulse]{Collecting Data in Edge Impulse}
+	\fonte{Edge Impulse}
+    \label{fig:diff}
+\end{figure}
+
+The pictures were then were labelled using the Labelling Queue\footnote{https://docs.edgeimpulse.com/docs/edge-impulse-studio/data-acquisition/labeling-queue}
 feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desired objects for detection.
-(include the edge-impulse-labelling-queue.png picture TBD).
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-labelling-queue.png}
+	\caption[Labelling Queue in Edge Impulse]{Labelling Queue in Edge Impulse}
+	\fonte{Edge Impulse}
+    \label{fig:diff}
+\end{figure}
 
 The raw pictures and bounding boxes were then exported from Edge Impulse as so as
 we could pre-process the data and model our custom object detection algorithm using the 
 Python programming language.
-The pictures were exported in their raw JPEG (include reference TBD) format, comprised in a ZIP folder.
-The bounding boxes were exported in the format of a JSON file containing the boundaries and the metrics
-for each picture, allowing us to easily reconstruct the bounding boxes for each object in each image
-using programming instructions. The files were then loaded to a Cloud Object Storage Bucket in AWS
-(include reference TBD), making it easier for us to access the data by importing it from the web using 
-a programming language.
+The pictures were exported in their raw JPEG\footnote{Defined in ISO/IEC 10918}  file format, 
+comprised in a ZIP folder.
+The bounding boxes were exported in the format of a JSON file containing the coordinates for the boundaries
+and the metrics for each picture, allowing us to easily reconstruct the bounding boxes for each object 
+in each image using programming instructions. The files were then loaded to a Cloud Object Storage Bucket in AWS
+\footnote{https://aws.amazon.com/}, making it easier for us to access the data by importing it from 
+the web using any programming language.
 
-(include bounding box JSON file example TBD) 
+\begin{lstlisting}[caption={Bounding boxes coordinates file exported from Edge Impulse},label={lst:boundingBoxCoordinates}]
+{
+	"version": 1,
+	"type": "bounding-box-labels",
+	"boundingBoxes": {
+	  "im1.jpg": [
+		{
+		  "label": "soda_can",
+		  "x": 120,
+		  "y": 265,
+		  "width": 172,
+		  "height": 207
+		},
+		{
+		  "label": "hands_sanitizer",
+		  "x": 285,
+		  "y": 120,
+		  "width": 136,
+		  "height": 247
+		}
+	  ],
+	  "im2.jpg": [
+		(...)
+	  ]
+	}
+}
+\end{lstlisting}
 
 The development environment used for writing the code for training our custom model
-was Google Collab (include reference TBD), and the programming language that was employed is Python. 
-It consists on a web-based interface that allows developers
+was Google Colab\footnote{https://colab.research.google.com/}, and the programming language 
+of choice was Python. 
+Google Colab consists on a web-based interface that allows developers
 to use Google's infrastructure (with GPUs and TPUs) for writing and executing code.
-(include Google Collab screenshot TBD)
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/google-colab.png}
+	\caption[Google Colab - Overview of Colaboratory Features]{Google Colab - Overview of Colaboratory Features}
+	\fonte{Google\footnote{https://colab.research.google.com/notebooks/basic_features_overview.ipynb}}
+    \label{fig:diff}
+\end{figure}
 
 The Edge Impulse files were loaded from our cloud object storage bucket, and then manipulated in Python
 from Google Collab as so as we could utilize the images and bounding box coordinates for training
 our model.
 
-We decided to use Google's TensorFlow (include reference TBD) framework to train our models, 
-as it is one of the most popular frameworks employed in the Industry for training AI models
-and also because it features a lightweight library called TensorFlow Lite (include reference TBD), 
+We decided to use Google's TensorFlow\footnote{https://www.tensorflow.org/} framework to train our 
+models, as it is one of the most popular frameworks employed in the Industry for training AI models
+and also because it features a lightweight library called TensorFlow Lite\footnote{https://www.tensorflow.org/lite}, 
 which is appropriate for creating efficient edge and mobile AI models considering the 
 typical hardware constraints from these types of devices.
 
-To train our model, we used the TensorFlow Lite's ModelMaker API (include reference TBD) for 
-Object Detection, which simplifies the process of training our models by breaking down the most
+To train our model, we used the TensorFlow Lite's ModelMaker API\footnote{https://www.tensorflow.org/lite/models/modify/model_maker} 
+for Object Detection, which simplifies the process of training our models by breaking down the most
 complex concepts of deep learning into parameterized objects and methods, allowing us to spend
 more time on the pre-processing steps and on experimenting with different network configurations
 to improve the model's accuracy. 
 
 As of the time of development of this work, the ModelMaker API only has compatibility with the 
-EfficientDet family of architectures (include reference TBD https://arxiv.org/pdf/1911.09070.pdf)
+EfficientDet family of architectures\cite{Mingxing2020}
 for training Deep Learning models for Object Detection. 
 The EfficientDet family is efficient for object recognition in edge devices, altough contemporany 
 architectures, such as the YOLOv5 and its successors, can have better performance.
 
-(tbd include image from official YOLOv5 publication comparing it to EfficientDet https://github.com/ultralytics/yolov5/releases/tag/v4.0)
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/yolo-efficientdet-comparison.png}
+	\caption[YOLOv5 vs EfficientDet - Performance Comparison]{YOLOv5 vs EfficientDet - Performance Comparison}
+	\fonte{YOLOv5 Release Notes\footnote{https://github.com/ultralytics/yolov5/releases/tag/v4.0}}
+    \label{fig:diff}
+\end{figure}
 
 Our initial plan was to use the YOLOv5 architecture, but since its implementation is not native
 to TensorFlow Lite, it would require us to create additional wrappers around the outputs of the YOLOv5
 network to get it working as expected. Even thought it is possible to convert the models from their
-original PyTorch (include reference TBD) format to a TensorFlow Lite format, the conversion does not
-cover some of the features from the original implementation, as discussed in this GitHub Issue (include reference TBD https://github.com/ultralytics/yolov5/issues/1981),
-which limits its functionality.
+original PyTorch\footnote{https://pytorch.org/} format to a TensorFlow Lite format, the conversion does
+not cover some of the features from the original implementation, as discussed in this GitHub Issue\footnote{https://github.com/ultralytics/yolov5/issues/1981},
+which limits its direct functionality.
 Similar compatibility issues happen with latest YOLO implementations, such as the YOLOv7, 
-as shown in this white paper (include reference TBD https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4). 
+as shown in this article\footnote{https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4}. 
 Thus, we decided to proceed with the TensorFlow Lite's Model Maker API compatible architectures, 
-which are in the EfficientDet family, as it fulfilled our project's requirements without major impacts.
+which are in the EfficientDet family, as we would have taken considerable time on troubleshooting 
+the conversion defects from the YOLO networks, which would deviate us from our project's main purpose,
+and as it fulfilled our project's requirements without major impacts. 
 
 In terms of the data pre-processing steps performed in our Python code, two approaches were
 tried out for preparing the images for training: resizing and cropping the images. 
@@ -1226,7 +1301,18 @@ Once the images and bounding boxes were pre-processed, the data was saved in the
 format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
 which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
 structure:
-(TBD include a pretty formatted CSV file just like https://cloud.google.com/vision/automl/object-detection/docs/csv-format)
+
+\begin{lstlisting}[caption={CSV format for specifying the Train, Test and Validation images for training models using the TensorFlow's Model Maker API for Object Detection},label={lst:csvFormatTrain}]
+Templates:
+set,path,label,x_min,y_min,,,x_max,y_max,,
+set,path,label,x_min,y_min,x_max,y_min,x_max,y_max,x_min,y_max
+
+Examples:
+TEST,./images_path/im3.png,0.5,0.6,,,0.2,0.9,,
+VALIDATION,./images_path/im4.png,label,0.3,0.4,,,0.4,0.8,,
+TRAIN,./images_path/im5.png,label,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
+TRAIN,./images_path/im6.png,label,0.3,0.1,,,0.3,0.4,,
+\end{lstlisting}
 
 Finally, we defined a programming loop to train different models using the EfficientDet-D0,
 EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
@@ -1234,27 +1320,8 @@ applying Transfer Learning on the top of pre-trained weights from training with 
 and by training the entire networks based in our custom data. We ran this entire loop using 
 the cropped images first; and then executed it using resized images with the EfficientDet-D0,
 EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
-performance balance considering our hardware constraints. With that, we came to have  16 distinct models.  
-
-The most lightweight models were the preferred ones considering our edge device capabilities,
-as they offer better inference time performance. 
-However, we were also looking for the most optimal accuracy and loss metrics, 
-therefore the models were evaluated with Test images to make sure that they were 
-efficient on the task that they need perform, which is to detect objects.
-(TBD include test images)
-
-The model accuracy metrics inferred by the TensorFlow Lite Model Maker are listed below for the
-different models that were trained:
-(TBD include formatted table with the model testing metrics)
-
-The loss (error) metrics during training were also computed for the 200 epochs that were used for
-training using a batch size of 16 images, for both the training and validation data sets, 
-in each of the models that were generated.
-(TBD include loss charts for the top 5 performing models)
-
-To improve inference time performance, we also compiled our TensorFlow Lite models for usage with an
-Edge TPU, which further improved our inference times. 
-(TBD maybe include a chart showing before and after for the inference times)
+performance balance considering our hardware constraints. 
+With that, we came to have 16 distinct custom models for testing.  
 
 \section{Mechanical Assembly}
 
@@ -1367,7 +1434,25 @@ a product demand.
 
 \subsection{Model Accuracy}
 
-TBD describe the model evaluation metrics obtained when using the different training approaches.
+The most lightweight models were the preferred ones considering our edge device capabilities,
+as they offer better inference time performance. 
+However, we were also looking for the most optimal accuracy and loss metrics, 
+therefore the models were evaluated with Test images to make sure that they were 
+efficient on the task that they need perform, which is to detect objects.
+(TBD include test images)
+
+The model accuracy metrics inferred by the TensorFlow Lite Model Maker are listed below for the
+different models that were trained:
+(TBD include formatted table with the model testing metrics)
+
+The loss (error) metrics during training were also computed for the 200 epochs that were used for
+training using a batch size of 16 images, for both the training and validation data sets, 
+in each of the models that were generated.
+(TBD include loss charts for the top 5 performing models)
+
+To improve inference time performance, we also compiled our TensorFlow Lite models for usage with an
+Edge TPU, which further improved our inference times. 
+(TBD maybe include a chart showing before and after for the inference times)
 
 \section{Challenges and future work}
 
