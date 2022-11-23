@@ -23,7 +23,7 @@ def run(args):
     log = Logger()
     weight_sensor = WeightSensor()
     detector = EfficientDetFrameObjectDetector(
-        model_path="./model/custom_whole_efficientdet_lite1_resizing_edgetpu.tflite"
+        model_path="./model/edgetpu/custom_whole_efficientdet_lite2_resizing_edgetpu.tflite"
     )
 
     height, width = detector.get_input_dimensions()
