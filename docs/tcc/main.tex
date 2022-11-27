@@ -73,7 +73,7 @@
 \autordois{João Pedro Zanlorensi Cardoso} % autor do trabalho
 \cita{MIAMOTO, Flavio; ZANLORENSI, Joao Pedro} % sobrenome (maiusculas), nome do autor do trabalho
 
-\keywords{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things, Sensors} 
+\keywords{Artificial Inteligence, Deep Learning, Smart Devices, Internet of Things, Sensors} 
 
 \comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining a Bachelor's Degree in Electronics Engineering}
 
@@ -125,19 +125,19 @@ The recent advancements in artificial intelligence have already impacted many
 aspects of modern life but have yet to impact one important aspect of the
 consumer experience: shopping in physical stores. In that regard, tech
 Giants such as Amazon have recently deployed the so called \textit{smart
-carts} to physical stores, allowing customers to have an improved shopping
-experience including better product information and a seamless checkout
-process.
+carts} to their physical retail stores, allowing customers to have an
+improved shopping experience including better product information and a
+seamless checkout process.
 
-Those products, however, are still a long way off towards reaching emerging
-markets such as Brazil, due to historical economical barriers. Thus, 
+These  smart carts, however, are still a long way off towards reaching emerging
+markets such as Brazil due to historical barriers. In that regard, 
 this work analyses the current market and develops a prototype that
-achieves similar functionality to the ones available by using the same
-building blocks such as computer vision and sensor data.
+achieves similar functionality to the ones available abroad by using the same
+building blocks such as computer vision and sensorial data.
 
-With that, we were able to identify the challenges and practical constraints
-of developing such a product and also lay the ground for future work to improve
-the developed solution into a commercial product.
+Additionally, we ahve identified the challenges and practical constraints of
+developing such a product and also lay the basis for future work to improve
+the developed prototype into a commercial product.
 \end{abstract}
 
 % listas (opcionais, mas recomenda-se a partir de 5 elementos)
@@ -145,7 +145,7 @@ the developed solution into a commercial product.
 \listadetabelas % geracao automatica da lista de tabelas
 % \listadequadros % adivinhe :)
 \listadesiglas % geracao automatica da lista de siglas
-\listadesimbolos % geracao automatica da lista de simbolos
+% \listadesimbolos % geracao automatica da lista de simbolos
 
 \sumario % geracao automatica do sumario
 %---------- Inicio do Texto ----------
@@ -360,7 +360,7 @@ pain point pointed out by Capgemini.
 \textit{The Dash cart uses a combination of computer vision algorithms and sensor fusion to help identify items placed in the cart - simply grab an item, scan it on one of the Dash Cart cameras, and place it in the cart like you normally would.}
 \\
 Amazon (2022)
-\end{quote}R
+\end{quote}
 
 \begin{figure}[H]
 	\centering
@@ -399,9 +399,9 @@ supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
 \end{figure}
 
 Differently than the carts developed by Amazon and Caper, Nextop's cart
-requires customers to first scan the product using the integrate bar code
-reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises
-\textit{triple validation} using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
+requires customers to first scan the product using the integrated bar code
+reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for
+\textit{triple validation} system, using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
 
 \begin{figure}[H]
 	\centering
@@ -422,8 +422,10 @@ end customer experience, becoming a sort of \textit{mobile checkout station}.
 	\label{fig:nextopui}
 \end{figure}
 
-Besides offering the improved shopping experience by not having to go through queues by the end of the trip, the product advertises increased sales
-as a result of the innovative approach and also allows a deeper understanding of the customer journey by collecting analytical data \cite{Paraiba2022}.
+Besides offering the improved shopping experience by not having to go through
+queues by the end of the trip, the product also advertises increased sales as a
+result of the innovative approach and also allows a deeper understanding of the
+customer journey by collecting analytical data \cite{Paraiba2022}.
 
 \begin{quote}
 \textit{We are offering our customers an innovative and unique shopping experience within Enxuto}
@@ -451,13 +453,14 @@ Each Smart Cart is estimated to cost around \textbf{R\$ 120,000  or around US\$ 
 After presenting the problem domain and the current solutions, in this section we discuss the expected
 outcomes of this work, mainly:
 
-\textit{Develop a prototype of a smart shopping cart, including a mechanical assembly using with computer vision for object recognition
-and an interactive user interface}
+\textit{Develop a prototype of a smart shopping cart, including a mechanical
+assembly that utlizes computer vision and sensorial data for product recognition, alongside  an interactive user
+interface}
 
 In a more granular level, these outcomes are also expected:
 
 \begin{itemize}
-    \item Collect a product dataset for traning a deep learning model
+    \item Collect a product dataset for training a deep learning model
     \item Train a Deep Learning model capable of detecting target products
 	\item Learn the practical challenges of developing a Deep Learning based product
     \item Understand the economic viability of such a project in the Brazilian context
@@ -493,7 +496,7 @@ to tune (or train) Networks of Neurons using real world or synthetic data \cite{
 \subsection{Neurons}
 
 One of the most popular types of Neurons is the Perceptron, introduced by 
-Frank Rosenblatt in 1958\cite{Rosenblatt1958}. 
+\cite{Rosenblatt1958}. 
 A perceptron takes one or more binary inputs and produces a single binary output.
 
 \begin{figure}[H]
@@ -561,40 +564,35 @@ Deep Learning defines a group of AI algorithms that use advanced learning techni
 top of ANNs to train models that allow systems to forecast and clusterize data 
 efficiently\cite{IBMDeepLearning}.
 Deep Learning algorithms use Neural Networks that have three types of layers:
-
-\begin{enumerate}
-    \item Input Layer
-    \item Hidden Layer
-    \item Output Layer
-\end{enumerate}
-
+Input Layer, Hidden Layer and Output Layer
+        
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/three-layered-ann.jpg}
+	\includegraphics[width=0.6\textwidth]{./images/three-layered-ann.jpg}
 	\caption[Three Layered Neural Network]{Three Layered Neural Network}
     \fonte{\cite{ARAKI2015121}}
 	\label{fig:threeLayeredAnn}
 \end{figure}
 
 The Input Layer takes the input data that will be fed into the model for training,
-\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
+$x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
 typically have the role of encoding the input data to a structure that can be processed by the 
 subsequent hidden layers\cite{Paranjape2020}.
 
-The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
-which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
+The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients $w_{ki}$. The Hidden Layers of a Deep Learning 
 Neural Network are used for the heavy processing of the encoded input data by applying a series of 
 mathematical operations that ultimately makes it possible to break down the most important features
 of the data and to produce comprehensive outputs to the decisional layers of the network
 \cite{DeepAI_HiddenLayer}.
 
 The Input Layer takes the input data that will be fed into the model for training,
-\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
+$x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
 typically have the role of encoding the input data to a structure that can be processed by the 
 subsequent hidden layers\cite{Paranjape2020}.
 
-The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
-which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
+The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients $w_{ki}$. The Hidden Layers of a Deep Learning 
 Neural Network are used for the heavy processing of the encoded input data by applying a series of 
 mathematical operations that ultimately makes it possible to break down the most important features
 of the data and to produce comprehensive outputs to the decisional layers of the network
@@ -603,7 +601,7 @@ of the data and to produce comprehensive outputs to the decisional layers of the
 \subsection{Transfer Learning}
 
 Another key technique applied by developers when training Deep Learning models is
-\textit(Transfer Learning). 
+\textit{Transfer Learning}. 
 It consists on reusing pre-trained networks, which were tuned in other datasets- usually big and
 somehow related to the one that you are going to run your inferences on- for training custom models.
 
@@ -1201,7 +1199,7 @@ using the same webcam that is used for the inference in our final product.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-collect-data.png}
+	\includegraphics[width=0.75\textwidth]{./images/edge-impulse-collect-data.png}
 	\caption[Collecting Data in Edge Impulse]{Collecting Data in Edge Impulse}
 	\fonte{Edge Impulse}
     \label{fig:diff}
@@ -1212,7 +1210,7 @@ feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-labelling-queue.png}
+	\includegraphics[width=0.75\textwidth]{./images/edge-impulse-labelling-queue.png}
 	\caption[Labelling Queue in Edge Impulse]{Labelling Queue in Edge Impulse}
 	\fonte{Edge Impulse}
     \label{fig:diff}
@@ -1236,14 +1234,14 @@ the web using any programming language.
 		"boundingBoxes": {
 		  "im1.jpg": [
 			{
-			  "label": "soda_can",
+			  "label": "blue_pens",
 			  "x": 120,
 			  "y": 265,
 			  "width": 172,
 			  "height": 207
 			},
 			{
-			  "label": "hands_sanitizer",
+			  "label": "card_deck",
 			  "x": 285,
 			  "y": 120,
 			  "width": 136,
@@ -1255,7 +1253,7 @@ the web using any programming language.
 		  ]
 		}
 	}
-	\end{lstlisting}
+\end{lstlisting}
 
 The development environment used for writing the code for training our custom model
 was Google Colab\footnote{https://colab.research.google.com/}, and the programming language 
@@ -1265,7 +1263,7 @@ to use Google's infrastructure (with GPUs and TPUs) for writing and executing co
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/google-colab.png}
+	\includegraphics[width=0.7\textwidth]{./images/google-colab.png}
 	\caption[Google Colab - Overview of Colaboratory Features]{Google Colab - Overview of Colaboratory Features}
 	\fonte{Google\footnote{https://colab.research.google.com/notebooks/basic\_features\_overview.ipynb}}
     \label{fig:diff}
@@ -1295,7 +1293,7 @@ architectures, such as the YOLOv5 and its successors, can have better performanc
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/yolo-efficientdet-comparison.png}
+	\includegraphics[width=0.6\textwidth]{./images/yolo-efficientdet-comparison.png}
 	\caption[YOLOv5 vs EfficientDet - Performance Comparison]{YOLOv5 vs EfficientDet - Performance Comparison}
 	\fonte{YOLOv5 Release Notes\footnote{https://github.com/ultralytics/yolov5/releases/tag/v4.0}}
     \label{fig:diff}
@@ -1322,7 +1320,7 @@ integrity for them was preserved.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/image_preprocessing.png}
+	\includegraphics[width=0.7\textwidth]{./images/image_preprocessing.png}
 	\caption[Image Preprocessing Strategies]{Image Preprocessing Strategies}
 	\fonte{Own work}
 \end{figure}
@@ -1396,6 +1394,8 @@ to keep a shape that would represent the overall idea of a smart cart.
 \end{figure}
 
 \chapter{Results}
+
+TODO: Add intro to section
 
 \section{Testing}
 
@@ -1574,28 +1574,12 @@ the EfficientDet-D0, D1 and D2, whole-trained and that used resizing as a prepro
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
-	\caption[Train and Validation Classification Loss for the EfficientDet-D0 Model that 
+	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
+	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
+	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
+	\caption[Train and Validation Classification Loss for the EfficientDet Models that 
 		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
-		for the EfficientDet-D0 Model that was whole-trained and took resized images as an input}
-	\fonte{Own work}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
-	\caption[Train and Validation Classification Loss for the EfficientDet-D1 Model that 
-		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
-		for the EfficientDet-D1 Model that was whole-trained and took resized images as an input}
-	\fonte{Own work}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
-	\caption[Train and Validation Classification Loss for the EfficientDet-D2 Model that 
-		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
-		for the EfficientDet-D2 Model that was whole-trained and took resized images as an input}
+		for the EfficientDet Models that was whole-trained and took resized images as an input}
 	\fonte{Own work}
 \end{figure}
 
@@ -1624,6 +1608,12 @@ usage with an Edge TPU, which further reduced our inference times.
 	\caption[Inference Performance Metrics with and without the TPU]{Inference Performance Metrics with and without the TPU}
 	\fonte{Own work}
 \end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/frameratemeasurement.png}
+	\caption[Frame rate measurement]{Frame rate measurement}
+\end{figure}
 
 The inference speed has thoroughly improved, resulting in a greater capability to process more 
 Frames Per Second. When we look at the number of CPU and TPU Operations, though, what we would
