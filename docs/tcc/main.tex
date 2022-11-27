@@ -28,6 +28,7 @@
 \usepackage{float}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{adjustbox}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -74,7 +75,7 @@
 
 \keywords{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things, Sensors} 
 
-\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining the Bachelor's degree in Electronics Engineering}
+\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining a Bachelor's Degree in Electronics Engineering}
 
 \orientador{André Eugênio Lazzaretti, Ph.D}
 
@@ -105,7 +106,7 @@ who pursue learning with great purpose, honesty and courage.
 
 % agradecimentos (opcional)
 \begin{agradecimentos}
-We would like to express our enormous gratitude to our families and loved ones 
+We want to express our enormous gratitude to our families and loved ones 
 for being by our sides and providing us with the conditions needed to develop our studies.
 A huge thank you to the Federal University of Technology, for having
 provided us with the environment, the materials and the lessons	that allowed us,
@@ -472,9 +473,151 @@ used in the development of our prototype.
 
 This section can be skipped for readers with familiarity on the topics discussed
 
+\section{Neural Networks}
+
+Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network})s,
+are networks built out of interconnected decisional Neurons that aim to replicate 
+the behaviour of the human brain, enabling computational systems to cluster data
+and to make predictions \cite{IBMNeuralNetworks}. 
+
+A Neuron is similar to a Digital Logic Gate, which is capable of producing 
+different outputs depending on the input signals that are sent to it.
+A Neuron have weights, which are the coefficients that are used for calculating
+the outputs; and biases, which are the boundaries that represent how propense is an output
+to fit into a specific category of output. 
+
+The main difference between a digital logic gate and a Neuron is that, because neurons are
+parameterized with weights and biases, we can apply \textit{learning algorithms}
+to tune (or train) Networks of Neurons using real world or synthetic data \cite{Nielsen2015}.
+
+\subsection{Neurons}
+
+One of the most popular types of Neurons is the Perceptron, introduced by 
+Frank Rosenblatt in 1958\cite{Rosenblatt1958}. 
+A perceptron takes one or more binary inputs and produces a single binary output.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/perceptron.png}
+	\caption[The Perceptron Neuron]{The Perceptron Neuron}
+    \fonte{\cite{Nielsen2015}}
+	\label{fig:perceptron}
+\end{figure}
+
+A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
+contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
+which take real numbers as  inputs and also produce continuous outputs 
+within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
+This is particularly useful for learning, since in Perceptrons small differences in the 
+weights or biases could yield to different outputs without a full transparency 
+on how close the output would have been to a different one \cite{Nielsen2015}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/sigmoid-function.png}
+	\caption[Sigmoid Function]{Sigmoid Function}
+    \fonte{\cite{Nielsen2015}}
+	\label{fig:sigmoid}
+\end{figure}
+
+\subsection{Learning Algorithms}
+
+There are three main types of learning algorithms: Supervised, Unsupervised and Reinforcement.
+Supervised learning is employed when you know what are your expected outputs and use this
+information to feed (train) your models as so as they can start doing that on their own; 
+unsupervised learning is applied when you do not know what are the expected labels 
+in your data or you do not have them available; and Reinforcement learning is used when
+algorithms need to replicate specific behaviors depending on the feedback that is
+provided to them \cite{CourseraML}. 
+
+Supervised learning is typically employed for regression and classification tasks; 
+Unsupervised Learning is typically used for clustering raw data into different buckets
+without necessarily knowing how to do it or having the labelled data available;
+and Reinforcement learning is often applied in control systems.
+This work will primarily focus on Supervised Learning, since our proposed project uses
+Object Detection and is trained based in labelled data samples.
+
+As for the learning algorithms used for training Neural Networks, 
+the standard algorithm is the Stochastic Gradient Descent (\sigla{SGD}{Stochastic Gradient Descent}).
+Alike other gradient descent algorithms, the SGD aims to minimize the loss function of a given
+Neural Network itteratively. In simple terms, it consists of an itterative optimization algorithm defined by an
+objective function to minimize the error.
+
+The key feature of the SGD is that it does that very efficiently by initializing the weights
+and biases randomly and then fine tuning it during training by trying to find the higher descents 
+(or the higher derivatives of the error function), reducing the number of necessary iterations, 
+which is particularly important considering that the amount of data that is used to train AI
+models has increased considerably over the last years \cite{CornellSGD}.
+
+Finally, in terms of way how the SGD is computed in Neural Networks, a widely adopted approach 
+for Supervised Learning is Backpropagation. Backpropagation computes the gradients of the final 
+layers of a Neural Network first, and the gradients of the first layers at last, 
+and it reuses partial computations of the gradient from a layer to the other to compute each layer's 
+gradient, making it more efficient than calculating each layer's gradient separately \cite{BrilliantBackpropagation}. 
+
 \section{Deep Learning}
 
-\section{Neural Networks}
+Deep Learning defines a group of AI algorithms that use advanced learning techniques on the 
+top of ANNs to train models that allow systems to forecast and clusterize data 
+efficiently\cite{IBMDeepLearning}.
+Deep Learning algorithms use Neural Networks that have three types of layers:
+
+\begin{enumerate}
+    \item Input Layer
+    \item Hidden Layer
+    \item Output Layer
+\end{enumerate}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/three-layered-ann.jpg}
+	\caption[Three Layered Neural Network]{Three Layered Neural Network}
+    \fonte{\cite{ARAKI2015121}}
+	\label{fig:threeLayeredAnn}
+\end{figure}
+
+The Input Layer takes the input data that will be fed into the model for training,
+\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
+typically have the role of encoding the input data to a structure that can be processed by the 
+subsequent hidden layers\cite{Paranjape2020}.
+
+The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
+Neural Network are used for the heavy processing of the encoded input data by applying a series of 
+mathematical operations that ultimately makes it possible to break down the most important features
+of the data and to produce comprehensive outputs to the decisional layers of the network
+\cite{DeepAI_HiddenLayer}.
+
+The Input Layer takes the input data that will be fed into the model for training,
+\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
+typically have the role of encoding the input data to a structure that can be processed by the 
+subsequent hidden layers\cite{Paranjape2020}.
+
+The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
+Neural Network are used for the heavy processing of the encoded input data by applying a series of 
+mathematical operations that ultimately makes it possible to break down the most important features
+of the data and to produce comprehensive outputs to the decisional layers of the network
+\cite{DeepAI_HiddenLayer}.
+
+\subsection{Transfer Learning}
+
+Another key technique applied by developers when training Deep Learning models is
+\textit(Transfer Learning). 
+It consists on reusing pre-trained networks, which were tuned in other datasets- usually big and
+somehow related to the one that you are going to run your inferences on- for training custom models.
+
+Transfer Learning works by freezing the weights and biases present in specific layers of a
+consolidated pre-trained Network- usually being the hidden layers, which are the feature extractors- 
+when training custom models, this way only some layers of the Network- usually the last layers, which 
+are the decisors- effectively have to be tuned.
+
+The biggest advantages of Transfer Learning are that, because it allows for training only specific 
+layers of an architecture to get a custom model for inference, the training process is much faster
+it would be for a whole network, because you do not need to compute all the weights and biases 
+of your custom model; and also that you typically do not need to have a lot of pictures for training
+good performing models, as you would be reusing pre-trained weights from a model that was already
+trained on larger datasets\cite{CS231N}.
 
 \section{Tensor Processing Unit}
 
@@ -889,7 +1032,7 @@ and good operating system driver support.
 
 The webcam used was a Microsoft LifeCam
 Cinema\footnote{https://www.microsoft.com/pt-BR/accessories/products/webcams/lifecam-cinema},
-capable of capturing video in 720p up to 30\sigla{FPS}{Frames per second}, more
+capable of capturing video in 720p up to 30\sigla{FPS}{Frames Per Second}, more
 than enough for our prototyping requirements.
 
 \begin{figure}[H]
@@ -1050,7 +1193,174 @@ for label, count in frame_diff.items():
 
 \subsection{Object Detection Model}
 
-TODO: Describe the development of the object detection model used.
+The data used for training our custom Object Detection model was collected and labelled
+using Edge Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for Machine 
+Learning on Edge devices.
+A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
+using the same webcam that is used for the inference in our final product.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-collect-data.png}
+	\caption[Collecting Data in Edge Impulse]{Collecting Data in Edge Impulse}
+	\fonte{Edge Impulse}
+    \label{fig:diff}
+\end{figure}
+
+The pictures were then were labelled using the Labelling Queue\footnote{https://docs.edgeimpulse.com/docs/edge-impulse-studio/data-acquisition/labeling-queue}
+feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desired objects for detection.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-labelling-queue.png}
+	\caption[Labelling Queue in Edge Impulse]{Labelling Queue in Edge Impulse}
+	\fonte{Edge Impulse}
+    \label{fig:diff}
+\end{figure}
+
+The raw pictures and bounding boxes were then exported from Edge Impulse as so as
+we could pre-process the data and model our custom object detection algorithm using the 
+Python programming language.
+The pictures were exported in their raw JPEG\footnote{Defined in ISO/IEC 10918}  file format, 
+comprised in a ZIP folder.
+The bounding boxes were exported in the format of a JSON file containing the coordinates for the boundaries
+and the metrics for each picture, allowing us to easily reconstruct the bounding boxes for each object 
+in each image using programming instructions. The files were then loaded to a Cloud Object Storage Bucket in AWS
+\footnote{https://aws.amazon.com/}, making it easier for us to access the data by importing it from 
+the web using any programming language.
+
+\begin{lstlisting}[caption={Bounding boxes coordinates file exported from Edge Impulse},label={lst:boundingBoxCoordinates}]
+	{
+		"version": 1,
+		"type": "bounding-box-labels",
+		"boundingBoxes": {
+		  "im1.jpg": [
+			{
+			  "label": "soda_can",
+			  "x": 120,
+			  "y": 265,
+			  "width": 172,
+			  "height": 207
+			},
+			{
+			  "label": "hands_sanitizer",
+			  "x": 285,
+			  "y": 120,
+			  "width": 136,
+			  "height": 247
+			}
+		  ],
+		  "im2.jpg": [
+			(...)
+		  ]
+		}
+	}
+	\end{lstlisting}
+
+The development environment used for writing the code for training our custom model
+was Google Colab\footnote{https://colab.research.google.com/}, and the programming language 
+of choice was Python. 
+Google Colab consists on a web-based interface that allows developers
+to use Google's infrastructure (with GPUs and TPUs) for writing and executing code.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/google-colab.png}
+	\caption[Google Colab - Overview of Colaboratory Features]{Google Colab - Overview of Colaboratory Features}
+	\fonte{Google\footnote{https://colab.research.google.com/notebooks/basic\_features\_overview.ipynb}}
+    \label{fig:diff}
+\end{figure}
+
+The Edge Impulse files were loaded from our cloud object storage bucket, and then manipulated in Python
+from Google Collab as so as we could utilize the images and bounding box coordinates for training
+our model.
+
+We decided to use Google's TensorFlow\footnote{https://www.tensorflow.org/} framework to train our 
+models, as it is one of the most popular frameworks employed in the Industry for training AI models
+and also because it features a lightweight library called TensorFlow Lite\footnote{https://www.tensorflow.org/lite}, 
+which is appropriate for creating efficient edge and mobile AI models considering the 
+typical hardware constraints from these types of devices.
+
+To train our model, we used the TensorFlow Lite's ModelMaker API\footnote{https://www.tensorflow.org/lite/models/modify/model\_maker} 
+for Object Detection, which simplifies the process of training our models by breaking down the most
+complex concepts of deep learning into parameterized objects and methods, allowing us to spend
+more time on the pre-processing steps and on experimenting with different network configurations
+to improve the model's accuracy. 
+
+As of the time of development of this work, the ModelMaker API only has compatibility with the 
+EfficientDet family of architectures\cite{Mingxing2020}
+for training Deep Learning models for Object Detection. 
+The EfficientDet family is efficient for object recognition in edge devices, altough contemporany 
+architectures, such as the YOLOv5 and its successors, can have better performance.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/yolo-efficientdet-comparison.png}
+	\caption[YOLOv5 vs EfficientDet - Performance Comparison]{YOLOv5 vs EfficientDet - Performance Comparison}
+	\fonte{YOLOv5 Release Notes\footnote{https://github.com/ultralytics/yolov5/releases/tag/v4.0}}
+    \label{fig:diff}
+\end{figure}
+
+Our initial plan was to use the YOLOv5 architecture, but since its implementation is not native
+to TensorFlow Lite, it would require us to create additional wrappers around the outputs of the YOLOv5
+network to get it working as expected. Even thought it is possible to convert the models from their
+original PyTorch\footnote{https://pytorch.org/} format to a TensorFlow Lite format, the conversion does
+not cover some of the features from the original implementation, as discussed in this GitHub Issue\footnote{https://github.com/ultralytics/yolov5/issues/1981},
+which limits its direct functionality.
+Similar compatibility issues happen with latest YOLO implementations, such as the YOLOv7, 
+as shown in this article\footnote{https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4}. 
+Thus, we decided to proceed with the TensorFlow Lite's Model Maker API compatible architectures, 
+which are in the EfficientDet family, as we would have taken considerable time on troubleshooting 
+the conversion defects from the YOLO networks, which would deviate us from our project's main purpose,
+and as it fulfilled our project's requirements without major impacts. 
+
+Our original images were saved in 640x480 px, and the expected input of the EfficientDet network 
+was of 320x320 px, so in terms of the data pre-processing steps performed in our Python code, two approaches were
+tried out for preparing the images for training: resizing and cropping the images. 
+The bounding box coordinates and dimensions were also adjusted accordingly as so as the data 
+integrity for them was preserved. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/image_preprocessing.png}
+	\caption[Image Preprocessing Strategies]{Image Preprocessing Strategies}
+	\fonte{Own work}
+\end{figure}
+
+Once the images and bounding boxes were pre-processed, the images were split into Train, Validation 
+and Test sets; and saved in the standardized format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
+which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
+structure:
+
+\begin{lstlisting}[caption={CSV format for specifying the Train, Test and Validation 
+	image sets for training models using the TensorFlow's Model Maker API for Object 
+	Detection},label={lst:csvFormatTrain}]
+Template:
+set,path,label,x_min,y_min,,,x_max,y_max,,
+set,path,label,x_min,y_min,x_max,y_min,x_max,y_max,x_min,y_max
+
+Examples:
+TEST,./images_path/im3.png,0.5,0.6,,,0.2,0.9,,
+VALIDATION,./images_path/im4.png,label,0.3,0.4,,,0.4,0.8,,
+TRAIN,./images_path/im5.png,label,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
+TRAIN,./images_path/im6.png,label,0.3,0.1,,,0.3,0.4,,
+\end{lstlisting}
+
+70\% of the photos shot were moved to the Train set, which is the set used for effectively 
+tuning the weights and biases of the custom models; 21\% were moved to the Validation set, 
+being used to understand our model's performance under different training scenarios and steps; 
+and the rest was used for testing the custom model after it was trained, which allowed us to 
+get unbiased metrics on how it would approximately perform in real life \cite{MluExplain}.
+
+Finally, we defined a programming loop to train different models using the EfficientDet-D0,
+EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
+applying Transfer Learning on the top of pre-trained weights from training with the COCO-2017 dataset 
+and by training the entire networks based in our custom data. 
+
+We ran this entire loop using the cropped images first; and then executed it using resized images with the EfficientDet-D0,
+EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
+performance balance considering our hardware constraints. 
+With that, we came to have 16 distinct custom models for testing. 
 
 \section{Mechanical Assembly}
 
@@ -1160,6 +1470,169 @@ Therefore, it might be possible to conclude that most of the retail cost of the
 existing smart carts is not composed of the production and infrastructure costs
 but from the required repayment of the research and development costs that such
 a product demand.
+
+\subsection{Model Accuracy}
+
+The most lightweight models were the preferred ones considering our edge device capabilities,
+as they offer better inference time performance. 
+However, we were also looking for the most optimal accuracy and loss metrics, 
+therefore the models were evaluated with test images, which were never introduced to the models
+during training, to make sure that they were efficient on the what they are ultimately supposed to do, 
+which is to detect products.
+
+Below you can find some examples of inferences executed in test images. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/singlelabel-classification-1.png}
+	\caption[Single-Label Classification Example 1]{Single-Label Classification Example 1}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/singlelabel-classification-2.png}
+	\caption[Single-Label Classification Example 2]{Single-Label Classification Example 2}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/multilabel-classification-1.png}
+	\caption[Multi-Label Classification Example 1]{Multi-Label Classification Example 1}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/multilabel-classification-2.png}
+	\caption[Multi-Label Classification Example 2]{Multi-Label Classification Example 2}
+	\fonte{Own work}
+\end{figure}
+
+The accuracy metrics were also inferred in our Test data set by using the TensorFlow Lite's 
+Object Detector \textit{"evaluate"} method\footnote{https://www.tensorflow.org/lite/api\_docs/python/tflite\_model\_maker/object\_detector/ObjectDetector\#evaluate}
+for all different model configurations that were applied. 
+The main evaluation metrics for the models considered for our product, which were the ones based 
+in the EfficientDet-D0, D1 and D2 architectures- as the D3 and D4 architectures were too 
+computationally expensive for our device- are listed below. 
+
+\begin{table}[H]
+	\centering
+	\begin{adjustbox}{width=1\textwidth}
+	\label{tab:modelPerformance}
+	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
+		\hline 
+		Model Architecture & Preprocessing Strategy & Training Strategy & AP & AP 50 IoU & AP 75 IoU & AP (label 1) & AP (label 2) & AP (label 3) & AP (label 4) & AP (label 5) \\
+		\hline
+        Efficientdet\-D0 & Resizing & Transfer Learning & \texttt{0.537} & \texttt{0.704} & \texttt{0.650} & \texttt{0.541} & \texttt{0.495} & \texttt{0.675} & \texttt{0.525} & \texttt{0.447} \\
+		Efficientdet\-D1 & Resizing & Transfer Learning & \texttt{0.633} & \texttt{0.794} & \texttt{ 0.776} & \texttt{0.439} & \texttt{0.671} & \texttt{0.807} & \texttt{0.631} & \texttt{0.619} \\
+		Efficientdet\-D2 & Resizing & Transfer Learning & \texttt{0.670} & \texttt{0.798} & \texttt{0.776} & \texttt{0.676} & \texttt{0.590} & \texttt{0.838} & \texttt{0.567} & \texttt{0.684} \\
+		Efficientdet\-D0 & Resizing & Whole & \texttt{0.777} & \texttt{0.912} & \texttt{0.867} & \texttt{0.577} & \texttt{0.724} & \texttt{0.891} & \texttt{0.913} & \texttt{0.779} \\
+		Efficientdet\-D1 & Resizing & Whole & \texttt{0.815} & \texttt{0.945} & \texttt{0.896} & \texttt{0.658} & \texttt{0.794} & \texttt{0.890} & \texttt{0.975} & \texttt{0.757} \\
+		Efficientdet\-D2 & Resizing & Whole & \texttt{0.820} & \texttt{0.928} & \texttt{0.878} & \texttt{0.630} & \texttt{0.784} & \texttt{0.905} & \texttt{1000} & \texttt{0.782} \\
+		Efficientdet\-D0 & Cropping & Transfer Learning & \texttt{0.463} & \texttt{0.632} & \texttt{0.577} & \texttt{0.371} & \texttt{0.413} & \texttt{0.626} & \texttt{0.465} & \texttt{0.440} \\
+		Efficientdet\-D1 & Cropping & Transfer Learning & \texttt{0.515} & \texttt{0.659} & \texttt{0.594} & \texttt{0.376} & \texttt{0.532} & \texttt{0.741} & \texttt{0.486} & \texttt{0.440} \\
+		Efficientdet\-D2 & Cropping & Transfer Learning & \texttt{0.505} & \texttt{0.684} & \texttt{0.617} & \texttt{0.442} & \texttt{0.604} & \texttt{0.554} & \texttt{0.345} & \texttt{0.580} \\
+		Efficientdet\-D0 & Cropping & Whole & \texttt{0.817} & \texttt{0.905} & \texttt{0.897} & \texttt{0.804} & \texttt{0.862} & \texttt{0.620} & \texttt{0.969} & \texttt{0.831} \\
+		Efficientdet\-D1 & Cropping & Whole & \texttt{0.805} & \texttt{0.926} & \texttt{0.903} & \texttt{0.800} & \texttt{0.761} & \texttt{0.687} & \texttt{0.950} & \texttt{0.829} \\
+		Efficientdet\-D2 & Cropping & Whole & \texttt{0.803} & \texttt{0.930} & \texttt{0.912} & \texttt{0.799} & \texttt{0.814} & \texttt{0.657} & \texttt{0.913} & \texttt{0.832} \\
+		\hline 
+	\end{tabular}
+	\end{adjustbox}
+	\caption[Test Evaluation Metrics for the Different Strategies and Models Applied for Inference]{Test Evaluation Metrics for the Different Strategies and Models Applied for Inference}
+	\fonte{Own work}
+\end{table}
+
+These numbers consist on the Average Precision (\sigla{AP}{Average Precision}), which provides us with 
+a percentage that is directly proportional to the number of correctly labeled predictions
+among the predictions made in the Test set; the AP considering an 
+Intersection over Union(\sigla{IoU}{Intersection over Union}) of 50\%, which means that there is 
+50\% of overlap between the predicted and the actual bounding boxes (this is measured by 
+taking the area of the intersection of the two bounding boxes divided by the area of their union, 
+hence the name); the AP considering an IoU of 75\%; and the individual APs for each label that 
+we wanted to forecast. 
+
+We could clearly see that, while the Transfer Learning models were much faster to train,
+in our particular case, the Whole-trained models outperformed them. This could be 
+due to the fact that our pictures and objects are different from the
+ones that are present in the COCO-2017 dataset; or because a custom feature extractor- 
+with custom hidden layer weights and biases- could have better performance with our pictures. 
+In terms of the architectures, as expected, the D2 architecture offered more robust results, at least in
+our models that applied resizing as a preprocessing strategy. We could not see much superior metrics for
+the models that used cropping for the images preprocessing, and that might be because most of the 
+bounding boxes ended up being cropped as well and, with that, we lost a portion of valuable label data. 
+
+The loss (error) metrics during training were also computed for our Train and Validation sets during the 
+200 epochs that were used for training our models using batches of 16 images, for all different 
+settings that were employed to train them. We can clearly state that the model showed significant
+improvement as the epochs progressed, and maybe more epochs would even have brought greater performance,
+as the weights would have been even more fine-tuned. The trade-off, though, is that it would have 
+taken more time and computer power to train the models.
+Below you can find the Classification Loss chart for our three top models of choice, which were
+the EfficientDet-D0, D1 and D2, whole-trained and that used resizing as a preprocessing strategy.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
+	\caption[Train and Validation Classification Loss for the EfficientDet-D0 Model that 
+		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
+		for the EfficientDet-D0 Model that was whole-trained and took resized images as an input}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
+	\caption[Train and Validation Classification Loss for the EfficientDet-D1 Model that 
+		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
+		for the EfficientDet-D1 Model that was whole-trained and took resized images as an input}
+	\fonte{Own work}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
+	\caption[Train and Validation Classification Loss for the EfficientDet-D2 Model that 
+		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
+		for the EfficientDet-D2 Model that was whole-trained and took resized images as an input}
+	\fonte{Own work}
+\end{figure}
+
+Note that those spikes in the loss values are probably due to the batch size, as it could be 
+that in specific batches of 16 images the model was not fully prepared to predict the labels
+in those images. Using a larger batch would likely solve it, however it would also take more RAM
+memory consumption. 
+
+Finally, to improve inference time performance, we also compiled our TensorFlow Lite models for 
+usage with an Edge TPU, which further reduced our inference times. 
+
+\begin{table}[H]
+	\centering
+	\begin{adjustbox}{width=1\textwidth}
+	\label{tab:modelPerformance}
+	\begin{tabular}{c|c|c|c|c}
+		\hline 
+		Model & FPS without the TPU & FPS using the TPU & CPU Ops using the TPU & TPU Ops using the TPU\\
+		\hline
+        Efficientdet-D0 Whole-Trained on Resized Images & \texttt{3.69} & \texttt{6.87} & \texttt{3} & \texttt{264}\\
+		Efficientdet-D1 Whole-Trained on Resized Images & \texttt{2.09} & \texttt{5.14} & \texttt{131} & \texttt{191}\\
+		Efficientdet-D2 Whole-Trained on Resized Images & \texttt{1.36} & \texttt{3.50} & \texttt{131} & \texttt{226}\\ 
+		\hline 
+	\end{tabular}
+	\end{adjustbox}
+	\caption[Inference Performance Metrics with and without the TPU]{Inference Performance Metrics with and without the TPU}
+	\fonte{Own work}
+\end{table}
+
+The inference speed has thoroughly improved, resulting in a greater capability to process more 
+Frames Per Second. When we look at the number of CPU and TPU Operations, though, what we would
+expect when using the TPU is that most Operations happen on the TPU side, however this behavior
+could only be seen in the EfficientDet-D0 model. Part of it is because the EfficientDet-D0 model
+has a simpler architecture, but it could also be due to the conversion of the model
+for usage with the TPU or to the limited capacity of the TPU device that was used. For instance, Google
+suggests using two TPU cores for the EfficientDet-D2 model\footnote{https://www.tensorflow.org/lite/models/modify/model\_maker/object\_detection}, 
+because the tensors are too large to fit in the chip's memory.
 
 \section{Challenges and future work}
 
