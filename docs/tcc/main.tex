@@ -454,10 +454,10 @@ After presenting the problem domain and the current solutions, in this section w
 outcomes of this work, mainly:
 
 \textit{Develop a prototype of a smart shopping cart, including a mechanical
-assembly that utlizes computer vision and sensorial data for product recognition, alongside  an interactive user
+assembly that utlizes computer vision and sensorial data for product recognition, presented through an interactive user
 interface}
 
-In a more granular level, these outcomes are also expected:
+At a more granular level, the following outcomes are also expected:
 
 \begin{itemize}
     \item Collect a product dataset for training a deep learning model
@@ -466,7 +466,7 @@ In a more granular level, these outcomes are also expected:
     \item Understand the economic viability of such a project in the Brazilian context
 \end{itemize}
 
-Given our time and financial constraints, it is expected that the final results will yield
+Considering time and financial constraints, it is expected that the final results will yield
 a solution with unsolved challenges, but a functional version is expected.
 
 \chapter{Theoretical Background}
@@ -478,14 +478,14 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Neural Networks}
 
-Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network})s,
+Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network}),
 are networks built out of interconnected decisional Neurons that aim to replicate 
 the behaviour of the human brain, enabling computational systems to cluster data
 and to make predictions \cite{IBMNeuralNetworks}. 
 
 A Neuron is similar to a Digital Logic Gate, which is capable of producing 
 different outputs depending on the input signals that are sent to it.
-A Neuron have weights, which are the coefficients that are used for calculating
+A Neuron has weights, which are the coefficients that are used for calculating
 the outputs; and biases, which are the boundaries that represent how propense is an output
 to fit into a specific category of output. 
 
@@ -508,8 +508,8 @@ A perceptron takes one or more binary inputs and produces a single binary output
 \end{figure}
 
 A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
-contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
-which take real numbers as  inputs and also produce continuous outputs 
+contemporary systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
+which take real numbers as inputs and also produces continuous outputs 
 within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
 This is particularly useful for learning, since in Perceptrons small differences in the 
 weights or biases could yield to different outputs without a full transparency 
@@ -527,8 +527,8 @@ on how close the output would have been to a different one \cite{Nielsen2015}.
 
 There are three main types of learning algorithms: Supervised, Unsupervised and Reinforcement.
 Supervised learning is employed when you know what are your expected outputs and use this
-information to feed (train) your models as so as they can start doing that on their own; 
-unsupervised learning is applied when you do not know what are the expected labels 
+information to feed (train) your models such that they can start doing that on their own; 
+Unsupervised learning is applied when you do not know what are the expected labels 
 in your data or you do not have them available; and Reinforcement learning is used when
 algorithms need to replicate specific behaviors depending on the feedback that is
 provided to them \cite{CourseraML}. 
@@ -538,21 +538,21 @@ Unsupervised Learning is typically used for clustering raw data into different b
 without necessarily knowing how to do it or having the labelled data available;
 and Reinforcement learning is often applied in control systems.
 This work will primarily focus on Supervised Learning, since our proposed project uses
-Object Detection and is trained based in labelled data samples.
+Object Detection and is trained based on labelled data samples.
 
 As for the learning algorithms used for training Neural Networks, 
 the standard algorithm is the Stochastic Gradient Descent (\sigla{SGD}{Stochastic Gradient Descent}).
 Alike other gradient descent algorithms, the SGD aims to minimize the loss function of a given
-Neural Network itteratively. In simple terms, it consists of an itterative optimization algorithm defined by an
+Neural Network iteratively. In simple terms, it consists of an iterative optimization algorithm defined by an
 objective function to minimize the error.
 
 The key feature of the SGD is that it does that very efficiently by initializing the weights
 and biases randomly and then fine tuning it during training by trying to find the higher descents 
 (or the higher derivatives of the error function), reducing the number of necessary iterations, 
 which is particularly important considering that the amount of data that is used to train AI
-models has increased considerably over the last years \cite{CornellSGD}.
+models has increased considerably over the last few years \cite{CornellSGD}.
 
-Finally, in terms of way how the SGD is computed in Neural Networks, a widely adopted approach 
+Finally, in terms of the way how the SGD is computed in Neural Networks, a widely adopted approach 
 for Supervised Learning is Backpropagation. Backpropagation computes the gradients of the final 
 layers of a Neural Network first, and the gradients of the first layers at last, 
 and it reuses partial computations of the gradient from a layer to the other to compute each layer's 
@@ -562,9 +562,9 @@ gradient, making it more efficient than calculating each layer's gradient separa
 
 Deep Learning defines a group of AI algorithms that use advanced learning techniques on the 
 top of ANNs to train models that allow systems to forecast and clusterize data 
-efficiently\cite{IBMDeepLearning}.
+efficiently \cite{IBMDeepLearning}.
 Deep Learning algorithms use Neural Networks that have three types of layers:
-Input Layer, Hidden Layer and Output Layer
+Input Layer, Hidden Layer and Output Layer.
         
 \begin{figure}[H]
 	\centering
@@ -576,8 +576,8 @@ Input Layer, Hidden Layer and Output Layer
 
 The Input Layer takes the input data that will be fed into the model for training,
 $x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
-typically have the role of encoding the input data to a structure that can be processed by the 
-subsequent hidden layers\cite{Paranjape2020}.
+typically have the role of encoding the input data into a structure that can be processed by the 
+subsequent hidden layers \cite{Paranjape2020}.
 
 The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
 which produces the weighting coefficients $w_{ki}$. The Hidden Layers of a Deep Learning 
@@ -588,8 +588,8 @@ of the data and to produce comprehensive outputs to the decisional layers of the
 
 The Input Layer takes the input data that will be fed into the model for training,
 $x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
-typically have the role of encoding the input data to a structure that can be processed by the 
-subsequent hidden layers\cite{Paranjape2020}.
+typically have the role of encoding the input data into a structure that can be processed by the 
+subsequent hidden layers \cite{Paranjape2020}.
 
 The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
 which produces the weighting coefficients $w_{ki}$. The Hidden Layers of a Deep Learning 
@@ -606,16 +606,18 @@ It consists on reusing pre-trained networks, which were tuned in other datasets-
 somehow related to the one that you are going to run your inferences on- for training custom models.
 
 Transfer Learning works by freezing the weights and biases present in specific layers of a
-consolidated pre-trained Network- usually being the hidden layers, which are the feature extractors- 
-when training custom models, this way only some layers of the Network- usually the last layers, which 
-are the decisors- effectively have to be tuned.
+pre-trained Network -- usually being the hidden layers, which are the feature extractors -- 
+when training customzized models. This way,  only some layers of the Network -- usually the last layers, which 
+are the decisors -- effectively have to be tuned.
 
-The biggest advantages of Transfer Learning are that, because it allows for training only specific 
-layers of an architecture to get a custom model for inference, the training process is much faster
-it would be for a whole network, because you do not need to compute all the weights and biases 
-of your custom model; and also that you typically do not need to have a lot of pictures for training
-good performing models, as you would be reusing pre-trained weights from a model that was already
-trained on larger datasets\cite{CS231N}.
+The biggest advantages of Transfer Learning are that, because it allows for
+training only specific layers of an architecture to get a custom model for
+inference, the training process is much faster than it would be for if the
+whole network had to be trained, because you do not need to compute all the
+weights and biases of your custom model; and also that you typically do not
+need to have a lot of data for training good performing models, as you
+would be reusing pre-trained weights from a model that was already trained on
+larger datasets \cite{CS231N}.
 
 \section{Tensor Processing Unit}
 
