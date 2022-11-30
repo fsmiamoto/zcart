@@ -73,7 +73,7 @@
 \autordois{João Pedro Zanlorensi Cardoso} % autor do trabalho
 \cita{MIAMOTO, Flavio; ZANLORENSI, Joao Pedro} % sobrenome (maiusculas), nome do autor do trabalho
 
-\keywords{Artificial Inteligenge, Deep Learning, Smart Devices, Internet of Things, Sensors} 
+\keywords{Artificial Inteligence, Deep Learning, Smart Devices, Internet of Things, Sensors} 
 
 \comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining a Bachelor's Degree in Electronics Engineering}
 
@@ -125,19 +125,19 @@ The recent advancements in artificial intelligence have already impacted many
 aspects of modern life but have yet to impact one important aspect of the
 consumer experience: shopping in physical stores. In that regard, tech
 Giants such as Amazon have recently deployed the so called \textit{smart
-carts} to physical stores, allowing customers to have an improved shopping
-experience including better product information and a seamless checkout
-process.
+carts} to their physical retail stores, allowing customers to have an
+improved shopping experience including better product information and a
+seamless checkout process.
 
-Those products, however, are still a long way off towards reaching emerging
-markets such as Brazil, due to historical economical barriers. Thus, 
+These  smart carts, however, are still a long way off towards reaching emerging
+markets such as Brazil due to historical barriers. In that regard, 
 this work analyses the current market and develops a prototype that
-achieves similar functionality to the ones available by using the same
-building blocks such as computer vision and sensor data.
+achieves similar functionality to the ones available abroad by using the same
+building blocks such as computer vision and sensorial data.
 
-With that, we were able to identify the challenges and practical constraints
-of developing such a product and also lay the ground for future work to improve
-the developed solution into a commercial product.
+Additionally, we ahve identified the challenges and practical constraints of
+developing such a product and also lay the basis for future work to improve
+the developed prototype into a commercial product.
 \end{abstract}
 
 % listas (opcionais, mas recomenda-se a partir de 5 elementos)
@@ -145,7 +145,7 @@ the developed solution into a commercial product.
 \listadetabelas % geracao automatica da lista de tabelas
 % \listadequadros % adivinhe :)
 \listadesiglas % geracao automatica da lista de siglas
-\listadesimbolos % geracao automatica da lista de simbolos
+% \listadesimbolos % geracao automatica da lista de simbolos
 
 \sumario % geracao automatica do sumario
 %---------- Inicio do Texto ----------
@@ -360,7 +360,7 @@ pain point pointed out by Capgemini.
 \textit{The Dash cart uses a combination of computer vision algorithms and sensor fusion to help identify items placed in the cart - simply grab an item, scan it on one of the Dash Cart cameras, and place it in the cart like you normally would.}
 \\
 Amazon (2022)
-\end{quote}R
+\end{quote}
 
 \begin{figure}[H]
 	\centering
@@ -399,9 +399,9 @@ supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
 \end{figure}
 
 Differently than the carts developed by Amazon and Caper, Nextop's cart
-requires customers to first scan the product using the integrate bar code
-reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises
-\textit{triple validation} using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
+requires customers to first scan the product using the integrated bar code
+reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for
+\textit{triple validation} system, using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
 
 \begin{figure}[H]
 	\centering
@@ -422,8 +422,10 @@ end customer experience, becoming a sort of \textit{mobile checkout station}.
 	\label{fig:nextopui}
 \end{figure}
 
-Besides offering the improved shopping experience by not having to go through queues by the end of the trip, the product advertises increased sales
-as a result of the innovative approach and also allows a deeper understanding of the customer journey by collecting analytical data \cite{Paraiba2022}.
+Besides offering the improved shopping experience by not having to go through
+queues by the end of the trip, the product also advertises increased sales as a
+result of the innovative approach and also allows a deeper understanding of the
+customer journey by collecting analytical data \cite{Paraiba2022}.
 
 \begin{quote}
 \textit{We are offering our customers an innovative and unique shopping experience within Enxuto}
@@ -451,19 +453,20 @@ Each Smart Cart is estimated to cost around \textbf{R\$ 120,000  or around US\$ 
 After presenting the problem domain and the current solutions, in this section we discuss the expected
 outcomes of this work, mainly:
 
-\textit{Develop a prototype of a smart shopping cart, including a mechanical assembly using with computer vision for object recognition
-and an interactive user interface}
+\textit{Develop a prototype of a smart shopping cart, including a mechanical
+assembly that utlizes computer vision and sensorial data for product recognition, presented through an interactive user
+interface}
 
-In a more granular level, these outcomes are also expected:
+At a more granular level, the following outcomes are also expected:
 
 \begin{itemize}
-    \item Collect a product dataset for traning a deep learning model
+    \item Collect a product dataset for training a deep learning model
     \item Train a Deep Learning model capable of detecting target products
 	\item Learn the practical challenges of developing a Deep Learning based product
     \item Understand the economic viability of such a project in the Brazilian context
 \end{itemize}
 
-Given our time and financial constraints, it is expected that the final results will yield
+Considering time and financial constraints, it is expected that the final results will yield
 a solution with unsolved challenges, but a functional version is expected.
 
 \chapter{Theoretical Background}
@@ -475,14 +478,14 @@ This section can be skipped for readers with familiarity on the topics discussed
 
 \section{Neural Networks}
 
-Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network})s,
+Neural Networks, or Artificial Neural Networks (\sigla{ANN}{Artificial Neural Network}),
 are networks built out of interconnected decisional Neurons that aim to replicate 
 the behaviour of the human brain, enabling computational systems to cluster data
 and to make predictions \cite{IBMNeuralNetworks}. 
 
 A Neuron is similar to a Digital Logic Gate, which is capable of producing 
 different outputs depending on the input signals that are sent to it.
-A Neuron have weights, which are the coefficients that are used for calculating
+A Neuron has weights, which are the coefficients that are used for calculating
 the outputs; and biases, which are the boundaries that represent how propense is an output
 to fit into a specific category of output. 
 
@@ -493,7 +496,7 @@ to tune (or train) Networks of Neurons using real world or synthetic data \cite{
 \subsection{Neurons}
 
 One of the most popular types of Neurons is the Perceptron, introduced by 
-Frank Rosenblatt in 1958\cite{Rosenblatt1958}. 
+\cite{Rosenblatt1958}. 
 A perceptron takes one or more binary inputs and produces a single binary output.
 
 \begin{figure}[H]
@@ -505,8 +508,8 @@ A perceptron takes one or more binary inputs and produces a single binary output
 \end{figure}
 
 A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
-contemporany systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
-which take real numbers as  inputs and also produce continuous outputs 
+contemporary systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
+which take real numbers as inputs and also produces continuous outputs 
 within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
 This is particularly useful for learning, since in Perceptrons small differences in the 
 weights or biases could yield to different outputs without a full transparency 
@@ -524,8 +527,8 @@ on how close the output would have been to a different one \cite{Nielsen2015}.
 
 There are three main types of learning algorithms: Supervised, Unsupervised and Reinforcement.
 Supervised learning is employed when you know what are your expected outputs and use this
-information to feed (train) your models as so as they can start doing that on their own; 
-unsupervised learning is applied when you do not know what are the expected labels 
+information to feed (train) your models such that they can start doing that on their own; 
+Unsupervised learning is applied when you do not know what are the expected labels 
 in your data or you do not have them available; and Reinforcement learning is used when
 algorithms need to replicate specific behaviors depending on the feedback that is
 provided to them \cite{CourseraML}. 
@@ -535,21 +538,21 @@ Unsupervised Learning is typically used for clustering raw data into different b
 without necessarily knowing how to do it or having the labelled data available;
 and Reinforcement learning is often applied in control systems.
 This work will primarily focus on Supervised Learning, since our proposed project uses
-Object Detection and is trained based in labelled data samples.
+Object Detection and is trained based on labelled data samples.
 
 As for the learning algorithms used for training Neural Networks, 
 the standard algorithm is the Stochastic Gradient Descent (\sigla{SGD}{Stochastic Gradient Descent}).
 Alike other gradient descent algorithms, the SGD aims to minimize the loss function of a given
-Neural Network itteratively. In simple terms, it consists of an itterative optimization algorithm defined by an
+Neural Network iteratively. In simple terms, it consists of an iterative optimization algorithm defined by an
 objective function to minimize the error.
 
 The key feature of the SGD is that it does that very efficiently by initializing the weights
 and biases randomly and then fine tuning it during training by trying to find the higher descents 
 (or the higher derivatives of the error function), reducing the number of necessary iterations, 
 which is particularly important considering that the amount of data that is used to train AI
-models has increased considerably over the last years \cite{CornellSGD}.
+models has increased considerably over the last few years \cite{CornellSGD}.
 
-Finally, in terms of way how the SGD is computed in Neural Networks, a widely adopted approach 
+Finally, in terms of the way how the SGD is computed in Neural Networks, a widely adopted approach 
 for Supervised Learning is Backpropagation. Backpropagation computes the gradients of the final 
 layers of a Neural Network first, and the gradients of the first layers at last, 
 and it reuses partial computations of the gradient from a layer to the other to compute each layer's 
@@ -559,42 +562,25 @@ gradient, making it more efficient than calculating each layer's gradient separa
 
 Deep Learning defines a group of AI algorithms that use advanced learning techniques on the 
 top of ANNs to train models that allow systems to forecast and clusterize data 
-efficiently\cite{IBMDeepLearning}.
+efficiently \cite{IBMDeepLearning}.
 Deep Learning algorithms use Neural Networks that have three types of layers:
-
-\begin{enumerate}
-    \item Input Layer
-    \item Hidden Layer
-    \item Output Layer
-\end{enumerate}
-
+Input Layer, Hidden Layer and Output Layer.
+        
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/three-layered-ann.jpg}
+	\includegraphics[width=0.6\textwidth]{./images/three-layered-ann.jpg}
 	\caption[Three Layered Neural Network]{Three Layered Neural Network}
     \fonte{\cite{ARAKI2015121}}
 	\label{fig:threeLayeredAnn}
 \end{figure}
 
 The Input Layer takes the input data that will be fed into the model for training,
-\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
-typically have the role of encoding the input data to a structure that can be processed by the 
-subsequent hidden layers\cite{Paranjape2020}.
+$x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
+typically have the role of encoding the input data into a structure that can be processed by the 
+subsequent hidden layers \cite{Paranjape2020}.
 
-The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
-which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
-Neural Network are used for the heavy processing of the encoded input data by applying a series of 
-mathematical operations that ultimately makes it possible to break down the most important features
-of the data and to produce comprehensive outputs to the decisional layers of the network
-\cite{DeepAI_HiddenLayer}.
-
-The Input Layer takes the input data that will be fed into the model for training,
-\textit{xi}, and produces the weighting coefficients \textit{wji}. The Input Layers
-typically have the role of encoding the input data to a structure that can be processed by the 
-subsequent hidden layers\cite{Paranjape2020}.
-
-The \textit{wji} coefficients are then used to feed the Hidden Layer of the the network,
-which produces the weighting coefficients \textit{wki}. The Hidden Layers of a Deep Learning 
+The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
+which produces the weighting coefficients $w_{kj}$. The Hidden Layers of a Deep Learning 
 Neural Network are used for the heavy processing of the encoded input data by applying a series of 
 mathematical operations that ultimately makes it possible to break down the most important features
 of the data and to produce comprehensive outputs to the decisional layers of the network
@@ -603,21 +589,23 @@ of the data and to produce comprehensive outputs to the decisional layers of the
 \subsection{Transfer Learning}
 
 Another key technique applied by developers when training Deep Learning models is
-\textit(Transfer Learning). 
+\textit{Transfer Learning}. 
 It consists on reusing pre-trained networks, which were tuned in other datasets- usually big and
 somehow related to the one that you are going to run your inferences on- for training custom models.
 
 Transfer Learning works by freezing the weights and biases present in specific layers of a
-consolidated pre-trained Network- usually being the hidden layers, which are the feature extractors- 
-when training custom models, this way only some layers of the Network- usually the last layers, which 
-are the decisors- effectively have to be tuned.
+pre-trained Network -- usually being the hidden layers, which are the feature extractors -- 
+when training customzized models. This way,  only some layers of the Network -- usually the last layers, which 
+are the decisors -- effectively have to be tuned.
 
-The biggest advantages of Transfer Learning are that, because it allows for training only specific 
-layers of an architecture to get a custom model for inference, the training process is much faster
-it would be for a whole network, because you do not need to compute all the weights and biases 
-of your custom model; and also that you typically do not need to have a lot of pictures for training
-good performing models, as you would be reusing pre-trained weights from a model that was already
-trained on larger datasets\cite{CS231N}.
+The biggest advantages of Transfer Learning are that, because it allows for
+training only specific layers of an architecture to get a custom model for
+inference, the training process is much faster than it would be for if the
+whole network had to be trained, because you do not need to compute all the
+weights and biases of your custom model; and also that you typically do not
+need to have a lot of data for training good performing models, as you
+would be reusing pre-trained weights from a model that was already trained on
+larger datasets \cite{CS231N}.
 
 \section{Tensor Processing Unit}
 
@@ -1201,7 +1189,7 @@ using the same webcam that is used for the inference in our final product.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-collect-data.png}
+	\includegraphics[width=0.75\textwidth]{./images/edge-impulse-collect-data.png}
 	\caption[Collecting Data in Edge Impulse]{Collecting Data in Edge Impulse}
 	\fonte{Edge Impulse}
     \label{fig:diff}
@@ -1212,7 +1200,7 @@ feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desi
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/edge-impulse-labelling-queue.png}
+	\includegraphics[width=0.75\textwidth]{./images/edge-impulse-labelling-queue.png}
 	\caption[Labelling Queue in Edge Impulse]{Labelling Queue in Edge Impulse}
 	\fonte{Edge Impulse}
     \label{fig:diff}
@@ -1236,14 +1224,14 @@ the web using any programming language.
 		"boundingBoxes": {
 		  "im1.jpg": [
 			{
-			  "label": "soda_can",
+			  "label": "blue_pens",
 			  "x": 120,
 			  "y": 265,
 			  "width": 172,
 			  "height": 207
 			},
 			{
-			  "label": "hands_sanitizer",
+			  "label": "card_deck",
 			  "x": 285,
 			  "y": 120,
 			  "width": 136,
@@ -1255,7 +1243,7 @@ the web using any programming language.
 		  ]
 		}
 	}
-	\end{lstlisting}
+\end{lstlisting}
 
 The development environment used for writing the code for training our custom model
 was Google Colab\footnote{https://colab.research.google.com/}, and the programming language 
@@ -1265,7 +1253,7 @@ to use Google's infrastructure (with GPUs and TPUs) for writing and executing co
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/google-colab.png}
+	\includegraphics[width=0.7\textwidth]{./images/google-colab.png}
 	\caption[Google Colab - Overview of Colaboratory Features]{Google Colab - Overview of Colaboratory Features}
 	\fonte{Google\footnote{https://colab.research.google.com/notebooks/basic\_features\_overview.ipynb}}
     \label{fig:diff}
@@ -1295,7 +1283,7 @@ architectures, such as the YOLOv5 and its successors, can have better performanc
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/yolo-efficientdet-comparison.png}
+	\includegraphics[width=0.6\textwidth]{./images/yolo-efficientdet-comparison.png}
 	\caption[YOLOv5 vs EfficientDet - Performance Comparison]{YOLOv5 vs EfficientDet - Performance Comparison}
 	\fonte{YOLOv5 Release Notes\footnote{https://github.com/ultralytics/yolov5/releases/tag/v4.0}}
     \label{fig:diff}
@@ -1322,7 +1310,7 @@ integrity for them was preserved.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/image_preprocessing.png}
+	\includegraphics[width=0.7\textwidth]{./images/image_preprocessing.png}
 	\caption[Image Preprocessing Strategies]{Image Preprocessing Strategies}
 	\fonte{Own work}
 \end{figure}
@@ -1396,6 +1384,8 @@ to keep a shape that would represent the overall idea of a smart cart.
 \end{figure}
 
 \chapter{Results}
+
+TODO: Add intro to section
 
 \section{Testing}
 
@@ -1530,7 +1520,7 @@ computationally expensive for our device- are listed below.
 		Efficientdet\-D2 & Resizing & Transfer Learning & \texttt{0.670} & \texttt{0.798} & \texttt{0.776} & \texttt{0.676} & \texttt{0.590} & \texttt{0.838} & \texttt{0.567} & \texttt{0.684} \\
 		Efficientdet\-D0 & Resizing & Whole & \texttt{0.777} & \texttt{0.912} & \texttt{0.867} & \texttt{0.577} & \texttt{0.724} & \texttt{0.891} & \texttt{0.913} & \texttt{0.779} \\
 		Efficientdet\-D1 & Resizing & Whole & \texttt{0.815} & \texttt{0.945} & \texttt{0.896} & \texttt{0.658} & \texttt{0.794} & \texttt{0.890} & \texttt{0.975} & \texttt{0.757} \\
-		Efficientdet\-D2 & Resizing & Whole & \texttt{0.820} & \texttt{0.928} & \texttt{0.878} & \texttt{0.630} & \texttt{0.784} & \texttt{0.905} & \texttt{1000} & \texttt{0.782} \\
+		Efficientdet\-D2 & Resizing & Whole & \texttt{0.820} & \texttt{0.928} & \texttt{0.878} & \texttt{0.630} & \texttt{0.784} & \texttt{0.905} & \texttt{1.000} & \texttt{0.782} \\
 		Efficientdet\-D0 & Cropping & Transfer Learning & \texttt{0.463} & \texttt{0.632} & \texttt{0.577} & \texttt{0.371} & \texttt{0.413} & \texttt{0.626} & \texttt{0.465} & \texttt{0.440} \\
 		Efficientdet\-D1 & Cropping & Transfer Learning & \texttt{0.515} & \texttt{0.659} & \texttt{0.594} & \texttt{0.376} & \texttt{0.532} & \texttt{0.741} & \texttt{0.486} & \texttt{0.440} \\
 		Efficientdet\-D2 & Cropping & Transfer Learning & \texttt{0.505} & \texttt{0.684} & \texttt{0.617} & \texttt{0.442} & \texttt{0.604} & \texttt{0.554} & \texttt{0.345} & \texttt{0.580} \\
@@ -1574,28 +1564,12 @@ the EfficientDet-D0, D1 and D2, whole-trained and that used resizing as a prepro
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
-	\caption[Train and Validation Classification Loss for the EfficientDet-D0 Model that 
+	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
+	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
+	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
+	\caption[Train and Validation Classification Loss for the EfficientDet Models that 
 		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
-		for the EfficientDet-D0 Model that was whole-trained and took resized images as an input}
-	\fonte{Own work}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
-	\caption[Train and Validation Classification Loss for the EfficientDet-D1 Model that 
-		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
-		for the EfficientDet-D1 Model that was whole-trained and took resized images as an input}
-	\fonte{Own work}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
-	\caption[Train and Validation Classification Loss for the EfficientDet-D2 Model that 
-		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
-		for the EfficientDet-D2 Model that was whole-trained and took resized images as an input}
+		for the EfficientDet Models that was whole-trained and took resized images as an input}
 	\fonte{Own work}
 \end{figure}
 
@@ -1624,6 +1598,12 @@ usage with an Edge TPU, which further reduced our inference times.
 	\caption[Inference Performance Metrics with and without the TPU]{Inference Performance Metrics with and without the TPU}
 	\fonte{Own work}
 \end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/frameratemeasurement.png}
+	\caption[Frame rate measurement]{Frame rate measurement}
+\end{figure}
 
 The inference speed has thoroughly improved, resulting in a greater capability to process more 
 Frames Per Second. When we look at the number of CPU and TPU Operations, though, what we would
