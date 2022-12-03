@@ -1377,10 +1377,33 @@ have 16 distinct custom models for testing.
 
 The performance and precision of these models will be discussed in the Results section.
 
+\subsection{Coral Accelerator}
+
+As discussed in Section \ref{sec:TPU}, running DNN inferences on general purpose hardware can be expensive
+both in computational and power efficiency terms. 
+
+To alleviate that, we have used the Coral USB Accelerator, a TPU that can be
+connected to the Raspberry Pi board through \sigla{USB}{Universal Serial Bus}
+and provide significant performance improvements.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./images/coralusb.png}
+	\caption[Coral USB Accelerator]{Coral USB Accelerator}
+	\fonte{Coral.ai}
+\end{figure}
+
+To actually utilize the TPU, two important steps needed to be done. The first, is to install
+a Linux native library that acts as a driver for the device. The seconds, is that the Tensor Flow Lite 
+models need to go through a compilation process\footnote{https://coral.ai/docs/edgetpu/compiler/\#compiler-and-runtime-versions} to actually take advantage of the TPU.
+
+Both of these steps were performed and the results, including performance comparisons 
+with and without the TPU are discussed in the Results section.
+
 \section{Mechanical Assembly}
 
-For the mechanical assembly, a foldable utility cart was selected as a core
-component with two additional wooden plates used for creating a \textit{false
+A foldable utility cart was selected as a core
+component with two additional wood plates, used for creating a \textit{false
 bottom}. Between the plates, the load cell and Raspberry Pi board were secured
 in place using bolts, screws and velcro.
 
@@ -1400,7 +1423,7 @@ in place using bolts, screws and velcro.
 
 Considering the objectives of the prototype, the shape of the mechanical
 housing was not considered to be of great relevance and using a real
-supermarket cart would be impractical for its size and cost. Still, we wanted
+supermarket cart would have been impractical considering its size and cost. Still, we wanted
 to keep a shape that would represent the overall idea of a smart cart.
 
 \begin{figure}[H]
@@ -1410,89 +1433,9 @@ to keep a shape that would represent the overall idea of a smart cart.
 	\fonte{Own work}
 \end{figure}
 
-\subsection{Coral Accelerator}
-
-As discussed in Section \ref{sec:TPU},
-
 \chapter{Results}
 
-In this section, we discuss the results of the developed prototype.
-
-\section{Testing}
-
-\subsection{Power Consumption}
-
-For estimating the overall power consumption, a commercial wattmeter was used
-to observe the total power required by the power adapter used to supply energy
-to the hardware components.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/powerconsumption.jpeg}
-	\caption[Power consumption measurement using a wattmeter]{Power consumption measurement using a wattmeter}
-	\fonte{Own work}
-\end{figure}
-
-During our tests, we have observed an average consumption of \textbf{10,4W}
-when running the all the software and hardware components of the protype
-through an external power adapter. 
-
-The tests were performed on a 220V power line using the following equipment:
-\begin{itemize}
-    \item Sinotimer DDS108 Digital Wattmeter
-    \item Baseus Quick Charger GaN 65W
-\end{itemize}
-
-Since both of these products do not have detailed accuracy and efficiency data
-available, we estimate an overall 10\% margin of error considering their
-construction \cite{Chen2017}. 
-
-With that, we can assume that the actual power draw is between 9,4W and 11,4W.
-Considering a desired  battery life of 24 hours, it would require a battery of
-about 240Wh, which can be found commercially and would not impose a
-insurmountable practical barrier.
-
-\section{Cost}
-
-One of the important aspects when developing a marketable product is its \textbf{cost}.
-
-A more detailed overview of the items and their costs in Brazil is shown on Table \ref{tbl:cost}.
-
-\begin{table}[H]
-	\centering
-	\label{tab:correlacao}
-	\begin{tabular}{c c c}
-		\hline 
-        Item & Quantity & Cost per item (BRL/USD) \\
-		\hline
-        Raspberry Pi 4 8GB Board &  1 & R\$ 1072,40 / US\$ 201,94 \\
-        HX711 with breakout board &  1  & R\$ 2,55 / US\$ 0.48 \\
-        10Kg Load Cell & 1 & R\$ 6,89 / US\$ 1,30 \\
-        MDF Board &  2  & R\$ 10,00 / US\$ 1,89 \\
-        Mounting hardware (screws, bolts and nuts) &  1  & R\$ 5,00 / US\$ 0,94 \\
-        Foldable utility cart &  1  & R\$ 125,00 / US\$ 23,60 \\
-        Webcam &  1  & R\$ 100,00 / US\$ 18.88 \\
-		\hline 
-        & Total cost & R\$ 1331.84 / US\$ 250.92 \\
-        \hline
-	\end{tabular}
-    \caption[Items used on the prototype and their approximate retail cost in Brazil as of October 2022]{Items used on the prototype and their retail cost in October 2022}
-	\fonte{Own work}
-    \label{tbl:cost}
-\end{table}
-
-Of course, the developed prototype does not include all the necessary hardware
-and software structure to deliver a successful product, but still it might show that at a
-fundamental level, the cost of such a solution might not reach the costs that
-current smart carts in the market sell for\footnote{The Nextop cart show on the
-introduction currently retails for R\$ 120.000}.
-
-Therefore, it might be possible to conclude that most of the retail cost of the
-existing smart carts is not composed of the production and infrastructure costs
-but from the required repayment of the research and development costs that such
-a product demand.
-
-\subsection{Model Accuracy}
+\section{Model Accuracy}
 
 The most lightweight models were the preferred ones considering our edge device capabilities,
 as they offer better inference time performance. 
@@ -1645,6 +1588,78 @@ for usage with the TPU or to the limited capacity of the TPU device that was use
 suggests using two TPU cores for the EfficientDet-D2 model\footnote{https://www.tensorflow.org/lite/models/modify/model\_maker/object\_detection}, 
 because the tensors are too large to fit in the chip's memory.
 
+\section{Power Consumption}
+
+For estimating the overall power consumption, a commercial wattmeter was used
+to observe the total power required by the power adapter used to supply energy
+to the hardware components.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/powerconsumption.jpeg}
+	\caption[Power consumption measurement using a wattmeter]{Power consumption measurement using a wattmeter}
+	\fonte{Own work}
+\end{figure}
+
+During our tests, we have observed an average consumption of \textbf{10,4W}
+when running the all the software and hardware components of the protype
+through an external power adapter. 
+
+The tests were performed on a 220V power line using the following equipment:
+\begin{itemize}
+    \item Sinotimer DDS108 Digital Wattmeter
+    \item Baseus Quick Charger GaN 65W
+\end{itemize}
+
+Since both of these products do not have detailed accuracy and efficiency data
+available, we estimate an overall 10\% margin of error considering their
+construction \cite{Chen2017}. 
+
+With that, we can assume that the actual power draw is between 9,4W and 11,4W.
+Considering a desired  battery life of 24 hours, it would require a battery of
+about 240 Wh, which can be found commercially and would not impose a
+insurmountable practical barrier.
+
+\section{Cost}
+
+One of the important aspects when developing a marketable product is its \textbf{cost}.
+
+A more detailed overview of the items and their costs in Brazil is shown on Table \ref{tbl:cost}.
+
+\begin{table}[H]
+	\centering
+	\label{tab:correlacao}
+	\begin{tabular}{c c c}
+		\hline 
+        Item & Quantity & Cost per item (BRL/USD) \\
+		\hline
+        Raspberry Pi 4 8GB Board &  1 & R\$ 1072,40 / US\$ 201,94 \\
+        HX711 with breakout board &  1  & R\$ 2,55 / US\$ 0.48 \\
+        10Kg Load Cell & 1 & R\$ 6,89 / US\$ 1,30 \\
+        MDF Board &  2  & R\$ 10,00 / US\$ 1,89 \\
+        Mounting hardware (screws, bolts and nuts) &  1  & R\$ 5,00 / US\$ 0,94 \\
+        Foldable utility cart &  1  & R\$ 125,00 / US\$ 23,60 \\
+        Webcam &  1  & R\$ 100,00 / US\$ 18.88 \\
+		\hline 
+        & Total cost & R\$ 1331.84 / US\$ 250.92 \\
+        \hline
+	\end{tabular}
+    \caption[Items used on the prototype and their approximate retail cost in Brazil as of October 2022]{Items used on the prototype and their retail cost in October 2022}
+	\fonte{Own work}
+    \label{tbl:cost}
+\end{table}
+
+Of course, the developed prototype does not include all the necessary hardware
+and software structure to deliver a successful product, but still it might show that at a
+fundamental level, the cost of such a solution might not reach the costs that
+current smart carts in the market sell for\footnote{The Nextop cart show on the
+introduction currently retails for R\$ 120.000}.
+
+Therefore, it might be possible to conclude that most of the retail cost of the
+existing smart carts is not composed of the production and infrastructure costs
+but from the required repayment of the research and development costs that such
+a product demand.
+
 \section{Challenges and future work}
 
 As one of the expected outcomes of our work, we have been able to identify
@@ -1697,18 +1712,18 @@ perspective.
 
 \subsection{Loss Prevention}
 
-As our research has shown, loss prevention is a key feature of a smart cart, specially in the brazilian context
+As our research has shown, loss prevention is a key feature of a smart cart, specially in the Brazilian context
 \cite{Nextop2022}.
 
 In such scenario, it would be important to work on possible extra features that
-would give the grosser the confidence to deploy the cart to his/her retail
+would give the grosser the extra confidence to deploy the cart to his/her retail
 chain.
 
 \subsection{Improving accuracy and reliability}
 
 Related to the subsection above, improving the accuracy and reliability of the
 overall system is key not just for loss prevention but to provide a great user
-experience. We believe that a subpar experience will eventually lead to disuse
+experience. We believe that a sub par experience will eventually lead to disuse
 and therefore our objective would be to achieve a \textit{transparent}
 experience, where the user might even forget about all the technological feat
 that allows the cart to function.
@@ -1716,10 +1731,19 @@ that allows the cart to function.
 \chapter{Conclusions}
 
 This work has shown the development of \textit{zCart}, a functional smart cart
-prototype using computer vision and sensorial data, the same technological
-framework used on similar commercial products. Additionally, we were able to present
-some of the challenges and future work discussions related to the current state
-of the prototype.
+prototype using computer vision and sensor data, the same technological
+framework used on similar commercial products. The prototype development has
+successfully reached all of the desired objectives including the training of a
+object detection model and developing an interactive user interface.
+
+The real time performance achieved using the selected hardware was sufficient
+for our purposes, at around 4 FPS with the EffiecientDet-D2 model, that showed an
+average precision of about 80\% during validation.
+
+Additionally, we were able to present some of the challenges and future work
+discussions related to the current state of the prototype and also its cost
+structure.
+
 
 %---------- Referencias ----------
 \clearpage
