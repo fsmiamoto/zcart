@@ -457,33 +457,31 @@ of research and development.
 
 Each Smart Cart is estimated to cost around \textbf{R\$ 120,000  or around US\$ 23,020} on October 2022 \cite{Paraiba2022}.
 
-\section{Expected outcomes}
+\section{Objectives}
 
-After presenting the problem domain and the current solutions, in this section we discuss the expected
-outcomes of this work, mainly:
+After presenting the problem domain and the current market scenario, in this section we discuss the 
+objectives of this work.
 
-\textit{Develop a prototype of a smart shopping cart, including a mechanical
-assembly that utlizes computer vision and sensorial data for product recognition, presented through an interactive user
-interface}
+\subsection{Main objective}
+Develop a prototype of a smart shopping cart that utilizes computer
+vision and sensor data for product recognition.
 
-At a more granular level, the following outcomes are also expected:
-
+\subsection{Granular objectives}
 \begin{itemize}
+    \item Build a mechanical assembly for the prototype
+    \item Develop an interactive user interface for the prototype
     \item Collect a product dataset for training a deep learning model
     \item Train a Deep Learning model capable of detecting target products
 	\item Learn the practical challenges of developing a Deep Learning based product
     \item Understand the economic viability of such a project in the Brazilian context
 \end{itemize}
 
-Considering time and financial constraints, it is expected that the final results will yield
-a solution with unsolved challenges, but a functional version is expected.
-
 \chapter{Theoretical Background}
 
-In this section, we'll define in greater detail some most relevant techniques
-used in the development of our prototype.
+In this section, we'll define in greater detail the theory behind some most
+relevant techniques used in the development of the prototype.
 
-This section can be skipped for readers with familiarity on the topics discussed
+This section can be skipped for readers with familiarity on the topics discussed.
 
 \section{Neural Networks}
 
@@ -495,7 +493,7 @@ and to make predictions \cite{IBMNeuralNetworks}.
 A Neuron is similar to a Digital Logic Gate, which is capable of producing 
 different outputs depending on the input signals that are sent to it.
 A Neuron has weights, which are the coefficients that are used for calculating
-the outputs; and biases, which are the boundaries that represent how propense is an output
+the outputs; and biases, which are the boundaries that represent how prone is an output
 to fit into a specific category of output. 
 
 The main difference between a digital logic gate and a Neuron is that, because neurons are
@@ -516,7 +514,7 @@ A perceptron takes one or more binary inputs and produces a single binary output
 	\label{fig:perceptron}
 \end{figure}
 
-A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
+A Neuron does not necessarily have binary inputs and outputs. In fact, 
 contemporary systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
 which take real numbers as inputs and also produces continuous outputs 
 within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
@@ -584,11 +582,11 @@ Input Layer, Hidden Layer and Output Layer.
 \end{figure}
 
 The Input Layer takes the input data that will be fed into the model for training,
-$x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
+$x_i$, and produces the weighting coefficients $w_{ji}$. Input Layers
 typically have the role of encoding the input data into a structure that can be processed by the 
 subsequent hidden layers \cite{Paranjape2020}.
 
-The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
+The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the network,
 which produces the weighting coefficients $w_{kj}$. The Hidden Layers of a Deep Learning 
 Neural Network are used for the heavy processing of the encoded input data by applying a series of 
 mathematical operations that ultimately makes it possible to break down the most important features
@@ -599,29 +597,23 @@ of the data and to produce comprehensive outputs to the decisional layers of the
 
 Another key technique applied by developers when training Deep Learning models is
 \textit{Transfer Learning}. 
-It consists on reusing pre-trained networks, which were tuned in other datasets- usually big and
-somehow related to the one that you are going to run your inferences on- for training custom models.
+It consists of reusing pre-trained networks, which were tuned in other datasets -- usually big and
+somehow related to the one that you are going to run your inferences on -- for training custom models.
 
 Transfer Learning works by freezing the weights and biases present in specific layers of a
 pre-trained Network -- usually being the hidden layers, which are the feature extractors -- 
-when training customzized models. This way,  only some layers of the Network -- usually the last layers, which 
-are the decisors -- effectively have to be tuned.
+when training customized models. This way,  only some layers of the Network -- usually the last layers, which 
+are the deciders -- effectively have to be tuned.
 
 The biggest advantages of Transfer Learning are that, because it allows for
-training only specific layers of an architecture to get a custom model for
-inference, the training process is much faster than it would be for if the
-whole network had to be trained, because you do not need to compute all the
-weights and biases of your custom model; and also that you typically do not
-need to have a lot of data for training good performing models, as you
-would be reusing pre-trained weights from a model that was already trained on
-larger datasets \cite{CS231N}.
+training only specific layers of an architecture to get a custom model, the
+training process is much faster than it would be if the whole network had to be
+retrained; and additionally less training data is required for achieving a good
+performing model, since you reuse the work done on the previous training
+\cite{CS231N}.
 
 \section{Tensor Processing Unit}
-
-Artificial Inteligence(\sigla{AI}{Artifical Intelligence}) models that use Deep Neural 
-Networks (\sigla{DNN}{Deep Neural Network})s can often be trained and deployed for inference
-on general purpose hardware such as \sigla{CPU}{Central Processing Unit}s, but target 
-for specialized hardware such as \sigla{GPU}{Graphics Processing Unit}s.
+\label{sec:TPU}
 
 With the increased adoption of DNNs in various workloads and their specialized
 and heavy compute nature, Google started the development of a domain specific
@@ -641,7 +633,7 @@ contemporary hardware of paired or reduced power consumption.
 \end{figure}
 
 Since the first generation TPU described in a 2018 paper \cite{Google2015},
-Google has released the TPU into commercials products made available to thirds
+Google has released the TPU into commercials products made available to third
 parties. Most notably, the Google Coral\footnote{https://coral.ai} initiative
 offers ready-to-use development boards that embedded TPU chips, allowing
 developers to leverage the improved DNN performance in their applications.
@@ -655,9 +647,10 @@ developers to leverage the improved DNN performance in their applications.
 
 \section{Strain Gauge}
 
-For measuring weight, one of the most common transducers utilized is the strain
-gauge. In general, a strain gauge is a device whose measured electrical
-resistance varies with changes in its applied force \cite{Stefanescu}.
+For measuring weight, one of the most common transducers used is the strain
+gauge. A strain gauge is a device whose measured electrical
+resistance varies with changes in its applied force, as a consequence of the
+mechanical deformation \cite{Stefanescu}.
 
 \begin{figure}[H]
 	\centering
@@ -667,14 +660,11 @@ resistance varies with changes in its applied force \cite{Stefanescu}.
 	\label{fig:gauge1}
 \end{figure}
 
-The deformation of the material caused by the mechanical strain can then
-be measured through a variation in resistence.
-
-In practice, the resistance variations are minute changes and can be
-difficult to measure. Additionally, it is usually desirable to have as the
-output of the transducer a signal which can be converted to the digital domain
-through an Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital
-Converter}), and for that a Wheatstone Bridge can be used.
+In practice, however, the resistance variations observed after applying a
+mechanical strain are minute and can be difficult to measure. To solve that issue,
+and to also provide a signal which can be later used as the input of an
+Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital Converter}), the Wheatstone
+Bridge circuit can be used \cite{Michigan2020}.
 
 \begin{figure}[H]
 	\centering
@@ -684,12 +674,10 @@ Converter}), and for that a Wheatstone Bridge can be used.
 	\label{fig:gauge2}
 \end{figure}
 
-The Wheatstone Bridge is a circuit capable of responding to the minute changes
-in resistance that occur when strain is applied to the sensor \cite{Michigan2020}.
 When no load is applied, the bridge is balanced and the output voltage
 $V_{out}$ should be zero. If any strain is applied to the gauges, the bridge
 will become unbalanced, and therefore will result in a non-zero output voltage.
-Since the voltage variation tends to be small, in the order of milivolts, signal amplification is usually
+Since the voltage variation tends to be small, in the order of millivolts, signal amplification is usually
 required for pairing the bridge with commercially available ADCs \cite{HorowitzHill2015}.
 
 It can be shown that the relation between $V_{out}$ and $V_{in}$, $S$, shown on Figure \ref{fig:gauge2}, can be
@@ -699,15 +687,17 @@ calculated as \cite{Stefanescu}:
     \label{eq:strain}
     S = \frac{V_{out}}{V_{in}} = k\frac{\Delta l}{l}
 \end{equation}
-where $k$ is the is known as the \textit{gauge factor}, related to the physical construction and materials of the strain gauge, and 
-$\frac{\Delta l}{l}$ is the relative variation of length or strain.
+where $k$ is known as the \textit{gauge factor}, related to the physical
+construction and materials of the strain gauge, and $\frac{\Delta l}{l}$ is the
+relative variation of length or strain.
 
-With that, Equation \ref{eq:strain} indicates that the output voltage $V_{out}$ will be linearly proportional to the
-amount of strain applied, providing the desired sensing capability.
+With that, Equation \ref{eq:strain} indicates that the output voltage $V_{out}$
+will be linearly proportional to the amount of strain applied, providing the
+desired sensing capability.
 
 \section{Load Cell}
 
-In practice, using strain gauges directly can be difficult since a proper
+Using strain gauges directly can be difficult since a proper
 mechanical structure and arrangement is crucial for the sensors to function
 properly. For that, commercially available \textit{Load Cells} offer ready to
 use mechanical packages that embed the strain gauges for weight sensing
@@ -728,16 +718,20 @@ therefore provide the desired sensing \cite{HBM2022}.
 \chapter{Development}
 \label{chap:desenv}
 
+In this section, we describe the development of the \textit{zCart} smart cart
+prototype. All the source code related to the prototype is available at a
+GitHub repository\footnote{https://github.com/fsmiamoto/zcart}
+
 \section{Design}
 \label{sec:design}
 
 As a first step in developing our prototype, a set of
-goals was defined to guide the high level design and is listed below:
+high level goals was defined to guide the initial design:
 
 \begin{enumerate}
     \item Handle user interactions and give visual feedback
     \item Store the current set of products present in the cart and their respective information
-    \item Recognize the addition or removal of products through computer vision and sensorial data.
+    \item Recognize the addition or removal of products, including quantities.
 \end{enumerate}
 
 With those goals in mind, the high level architecture of the prototype
@@ -745,19 +739,19 @@ was designed and is shown in Figure \ref{fig:architecture}.
 
 For each goal, a dedicated software application will be used and those
 applications will communicate using \sigla{TCP}{Transmission Control Protocol}
-network sockets \cite{Kurose2013} with established application protocols such as
+network sockets \cite{Kurose2013} with industry standard application protocols such as
 \sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
-\sigla{RFC}{Request For Comments} 1945} -- using the RESTful pattern -- and
-WebSocket\footnote{Defined in RFC 6455}.
+\sigla{RFC}{Request For Comments} 1945} and WebSocket\footnote{Defined in RFC 6455}.
+Most of the HTTP communication will follow the widespread REST pattern \cite{Roy2000}.
 
 For handling the first goal, the \textit{User App} will request data
 from other applications and will display the information to end users and allow
-them to interact with the cart using a touch enabled LCD display.
+them to interact with the cart using a touch enabled LCD display. 
 
 The \textit{Cart Service} will be in charge of the second goal,
 handling requests from the \textit{User App} that request data or incur in any
-side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
-\textbf{relational database} \cite{Silberschatz2010} as its datastore. Namely
+side effects, such as completing a purchase. The \textit{Cart Service} uses a
+\textbf{relational database} \cite{Silberschatz2010} as its primary database. Namely
 \textbf{SQLite}, considered to be the world's most deployed database due to its
 massive adoption in mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
@@ -766,6 +760,15 @@ library support in common programming languages and the use of the familiar
 relational modeling, including \sigla{SQL}{Structured Query Language}
 \cite{Nield2016}, were key factors in choosing it.
 
+In order to provide real time updates to the \textit{User App}, the Cart Service has a
+WebSocket API endpoint that allows the User App to listen to updates such as a product addition
+and then display a notification to the end user.
+
+For the third goal, the \textit{Product Recognizer} application will be responsible
+for processing a camera feed and weight sensor data to be able to tell if any products
+were added of removed from the cart. Any detected changes will be communicated to the
+Cart Service, which will be responsible for persisting those changes on the database. 
+
 All three applications will executed under a Linux \cite{Tanenbaum2015} 
 based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
 Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single 
@@ -773,8 +776,8 @@ circuit board with a microprocessor, memory and input/output devices.
 
 The advantages of using a Linux environment for the development are many, but
 being able to leverage its concurrency capabilities, having built-in drivers
-for readily available hardware and leveraging open source projects are some to
-mention.
+for readily available hardware and leveraging open source projects are some 
+worth mentioning.
 
 \begin{figure}[H]
 	\centering
@@ -783,7 +786,6 @@ mention.
 	\fonte{Own work}
 	\label{fig:architecture}
 \end{figure}
-
 
 \begin{figure}[H]
 	\centering
@@ -802,15 +804,16 @@ In creating the zCart architecture, the following guidelines were followed:
     \item All databases should be owned by a single application. 
     \item Any interaction that requires an update to a given database that is
         not owned by an application should be done through an API and not
-        directly.
+        directly on the database.
     \item Decouple the user interface from how the data displayed is stored and transmitted
 \end{itemize}
 
 These guideline are based on known best practices from the software 
 development industry including API-first design and segregation of
-responsibilities. \cite{Sam2021,Kong2022}
+responsibilities \cite{Sam2021,Kong2022}, which are key for future architectural
+evolution.
 
-In the sections that follow, each application will be further detailed.
+In the next sections, each application will be  detailed.
 
 \section{User App}
 
@@ -823,10 +826,10 @@ device capable of running a web browser; and having mature tooling for
 development, testing and debugging are important factors that influenced 
 our decision.
 
-Although developing Linux native graphical applications through toolkits such
-as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io} might have
-yield better performance, our familiarity with web based technologies was a
-key deciding factor in favor of using those.
+As an alternative, developing Linux native graphical applications through
+toolkits such as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io}
+might have yielded better performance but our unfamiliarity with those would be
+a challenge.
 
 \begin{figure}[H]
 	\centering
@@ -845,9 +848,9 @@ calculated and also displayed on the interface. Notifications are also
 displayed when the user adds or removes a product from the cart. Finally, the
 User App provides a \textit{Checkout} button to simulate the payment process
 and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}), because a functional
-implementation of a payment mechanism is out of scope for the the zCart prototype.
+implementation of a payment mechanism is out of scope for our prototype.
 
-More screenshots are available in Appendix \ref{ap:userapp}.
+More screenshots showing the user experience are available in Appendix \ref{ap:userapp}.
 
 \begin{figure}[H]
 	\centering
@@ -863,7 +866,7 @@ the PoC checkout.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/diagrams/UserApp.png}
+	\includegraphics[width=0.6\textwidth]{./images/diagrams/UserApp.png}
 	\caption[User App and Cart Service interactions]{User App and Cart Service interactions}
 	\fonte{Own work}
 	\label{fig:dummy}
@@ -875,26 +878,28 @@ As described in Section \ref{sec:design}, the Cart Service will act as a
 centralized \textit{source of truth}, storing the overall \textbf{state} of the
 cart.
 
-For that it will responsible for managing the SQLite database and exposing API
+For that, it will responsible for managing the SQLite database and exposing API
 endpoints for the required state changes e.g. adding a product.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/diagrams/CartService.png}
-	\caption[Cart Service architecture]{Cart Service architecture. The database is contained withing the Cart Service boundary and it is not exposed in the public APIs}
+	\includegraphics[width=0.6\textwidth]{./images/diagrams/CartService.png}
+    \caption[Cart Service architecture]{Cart Service architecture. The database
+    is contained withing the Cart Service boundary and it is not exposed in the
+    public APIs}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
 
-For the HTTP endpoints, the Application uses the REST \cite{Roy2000} pattern
+For the HTTP endpoints, the application uses the REST \cite{Roy2000} pattern
 with JavaScript Object Notation (\sigla{JSON}{JavaScript Object
 Notation})\footnote{https://json.org} as the data-interchange format, both
-being widely employed in the current software industry.
+being widely employed in the software industry.
 
 \begin{table}[H]
 	\centering
 	\label{tab:correlacao}
-	\begin{tabular}{c c|c}
+	\begin{tabular}{c | c|c}
 		\hline 
         HTTP Method & URI & Description \\
 		\hline
@@ -903,11 +908,9 @@ being widely employed in the current software industry.
         \texttt{POST} & \texttt{/cart/:cartId/checkout} & Perform checkout, emptying the cart \\
 		\hline 
 	\end{tabular}
-	\caption[Cart Service API endpoints]{Cart Service API Endpoints}
+    \caption[Cart Service API endpoints]{Cart Service API Endpoints.}
 	\fonte{Own work}
 \end{table}
-
-As example response is shown at Listing \ref{lst:response}.
 
 \begin{lstlisting}[caption={Example response for the \texttt{GET /cart/:cartId} endpoint using JSON},label={lst:response}]
 {
@@ -929,14 +932,14 @@ As example response is shown at Listing \ref{lst:response}.
 }
 \end{lstlisting}
 
-For the implementation, the Go\footnote{https://go.dev} language was used
-alongside the Fiber\footnote{https://gofiber.io/} framework, which provides
-great support for the creation of the HTTP Server and also handling the
-WebSocket connections.
+For implementing the Cart Service, the Go\footnote{https://go.dev} programming
+language was used alongside the Fiber\footnote{https://gofiber.io/} framework,
+which provides great support for the creation of a HTTP Server and also
+handling the WebSocket connections.
 
 One of the advantages of the Go language is the use of statically compiled
 native binaries, which allow running the application without the need to
-install any additional operating system libraries.
+install any additional operating system libraries. 
 
 \section{Product Recognizer}
 
@@ -966,17 +969,17 @@ For the Weight Sensor, we've used two main hardware components, shown on Figure 
 The HX711 is a 24-bit analog-to-digital converter (\sigla{ADC}{Analog-to-Digital Converter})
 capable of outputting data in a serial interface \cite{Avia2022}.
 
-It has two channels for analog input with channel A having programable gains of 128 or 64 and
-can funtion using both 3.3V and 5V standard digital voltage levels.
+It has two channels for analog input with channel A having programmable gains of 128 or 64 and
+can function using both 3.3V and 5V standard digital voltage levels.
 
 One of its advantages is is that there's no need to program internal registers,
 all controls to the chip are through its pins. Additionally, it consumes only
-1.5mA under normal operation and has a on-chip power supply for the connected
+1,5 mA under normal operation and has an on-chip power supply for the connected
 load cell, making it a great choice for our prototype.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{./images/hx711-pinout.png}
+	\includegraphics[width=0.9\textwidth]{./images/hx711-pinout.png}
 	\caption[HX711 Pinout for the SOP-16L package]{HX711 Pinout for the SOP-16L package}
     \fonte{\cite{Avia2022}}
 	\label{fig:architecture}
@@ -1000,8 +1003,8 @@ and includes the pin headers for connecting with other boards.
     \fonte{\cite{Ross2019}}
 \end{figure}
 
-The Raspberri Pi board was connected to the HX711 through its GPIO pins,
-allowing it to obtain the sensor readings through a serial interface. The
+The Raspberry Pi board was connected to the HX711 through its GPIO pins,
+allowing it to obtain the sensor readings through the serial interface. The
 protocol used does not follow any known standard and can be
 described as a \textit{Non-I2C compliant two-wire
 protocol}\footnote{https://github.com/queuetue/Q2-HX711-Arduino-Library}.
@@ -1023,7 +1026,7 @@ were used to secure the load cell and breakout board during development.
 
 \subsection{Camera}
 
-In order to obtain a video feed to run Object Detection on, a camera system was
+In order to obtain a video feed to run object detection on, a camera system was
 required. For that, a standard consumer webcam was used for its reduced cost
 and good operating system driver support.
 
@@ -1052,10 +1055,14 @@ language has also became a \textit{lingua franca} in the Machine Learning and
 Data Science community as shown by volume of publications using it in the last
 decade \cite{Wes2017,Joel2019,Andreas2016}.
 
-To take advantage of the multiple processing cores available on the Raspberry
-Pi 4 \sigla{SoC}{System on a chip}, the Product Recognizer application uses a
-multi-threaded design to allow parallel processing, improving the overall
-performance.
+The Product Recognizer application also uses a multi-threaded design to allow
+concurrent processing, an important factor when considering the amount
+\sigla{I/O}{Input/Output} operations performed.
+
+Since Python's threading implementation does not allow for multiple threads to
+execute in parallel -- i.e. at the same time -- a multi-process design could take
+better advantage of the four available processing cores in the Raspberry Pi CPU
+but that path was not explored and will be left for future iterations.
 
 The three threads created are described below:
 \begin{itemize}
@@ -1095,7 +1102,7 @@ while True:
 
 As shown on Listing \ref{lst:main} and on Figure \ref{fig:threads}, the Main
 thread will do the computational work to fetch the frames from the camera that
-were read by the Frame Reader thread, preprocess and run the object detection
+were read by the Frame Reader thread, pre-process and run the object detection
 model in it. The objects are then filtered and then added to a message queue
 that will be used by the Product Recognizer thread to apply our business logic.
 
@@ -1105,9 +1112,9 @@ The Product Recognizer Thread is responsible for applying the main business
 logic of detecting the addition and removal of products by leveraging the
 objects detected in the frame and the readings provided by the weight sensor.
 
-The thread will execute an infinite loop to constantly observer the objects
-detected in the frame and the weight readings to detect the product addition
-or removals.
+The thread will execute an infinite loop to constantly observe the objects
+detected in the frame and the weight readings to detect product additions
+and removals.
 
 It uses two main variables to keep track of the current state:
 \begin{itemize}
@@ -1115,7 +1122,7 @@ It uses two main variables to keep track of the current state:
     \item The weight associated with the products present in the cart.
 \end{itemize}
 
-The first important step, is the \textit{frame diff}. This step 
+The first important step in the thread's logic is the \textit{Frame Diff}. This step 
 calculates the difference in terms of the objects detected in the current 
 and previous frames (e.g. whether objects were added, removed, or remain the same) 
 and store it in a dictionary data structure\footnote{https://docs.python.org/3/tutorial/datastructures.html\#dictionaries},
@@ -1133,16 +1140,15 @@ objects from the Main Thread.
 Given the frame object diff, it is then possible to calculate an expected
 weight change based on the weight of each item - and their quantity - contained
 in the diff. The expected weight difference is then compared to the actual
-one obtained from the weight sensor, considering a 15\% tolerance.
+one obtained from the weight sensor, considering a configurable tolerance.
 
 In this scenario, the weight readings are used as a filter and act as a
-\textit{commit} step for differences detected in the frame objects.
+\textit{commit} step for differences detected in the frame objects. This way, objects are not
+added or removed from the cart simply by appearing or disappearing from the frame.
 
-For example, if the can illustrated in Figure \ref{fig:diff} weights an expected 400 grams, the weight
-difference expected should be of about 400 grams. If the weight difference does not match the expected
-one, the object will not be considered for addition or removal. For our PoC's purpose, setting up an 
-actionable visual warning on this type of exception is out of scope, but a full functional implementation
-may include it.
+In the example show in Figure \ref{fig:diff}, if the illustrated can weights an expected 400 grams, the weight
+difference expected should be close to 400 grams. If the weight difference does not match the expected
+one, the object will not be considered for addition or removal. 
 
 A more detailed activity diagram of the logic executed in the Product Recognizer thread loop is
 shown in Figure \ref{fig:activity}.
@@ -1190,11 +1196,14 @@ for label, count in frame_diff.items():
 
 \subsection{Object Detection Model}
 
-The data used for training our custom Object Detection model was collected and labelled
-using Edge Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for Machine 
-Learning on Edge devices.
-A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
-using the same webcam that is used for the inference in our final product.
+To actually execute the Product Recognizer logic, a object detection model was
+in order and for that the first step was to actually collect the training data.
+
+It was collected and labelled using Edge
+Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for
+Machine Learning on Edge devices. A total of 1000 photos were taken using the
+Data Collection feature of the Edge Impulse Studio, using the same webcam that
+is used for the inference in our final product.
 
 \begin{figure}[H]
 	\centering
@@ -1215,16 +1224,17 @@ feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desi
     \label{fig:diff}
 \end{figure}
 
-The raw pictures and bounding boxes were then exported from Edge Impulse as so as
-we could pre-process the data and model our custom object detection algorithm using the 
-Python programming language.
-The pictures were exported in their raw JPEG\footnote{Defined in ISO/IEC 10918}  file format, 
-comprised in a ZIP folder.
-The bounding boxes were exported in the format of a JSON file containing the coordinates for the boundaries
-and the metrics for each picture, allowing us to easily reconstruct the bounding boxes for each object 
-in each image using programming instructions. The files were then loaded to a Cloud Object Storage Bucket in AWS
-\footnote{https://aws.amazon.com/}, making it easier for us to access the data by importing it from 
-the web using any programming language.
+The raw pictures and bounding boxes were then exported from Edge Impulse such
+that we could pre-process the data and model our custom object detection
+algorithm using the Python programming language. The pictures were exported in
+their raw JPEG\footnote{Defined in ISO/IEC 10918}  file format, comprised in a
+ZIP folder. The bounding boxes were exported in the format of a JSON file
+containing the coordinates for the boundaries and the metrics for each picture,
+allowing us to easily reconstruct the bounding boxes for each object in each
+image using programming instructions. The files were then loaded to a Cloud
+Object Storage Bucket in AWS \footnote{https://aws.amazon.com/}, making it
+easier for us to access the data by importing it from the web using any
+programming language.
 
 \begin{lstlisting}[caption={Bounding boxes coordinates file exported from Edge Impulse},label={lst:boundingBoxCoordinates}]
 	{
@@ -1269,7 +1279,7 @@ to use Google's infrastructure (with GPUs and TPUs) for writing and executing co
 \end{figure}
 
 The Edge Impulse files were loaded from our cloud object storage bucket, and then manipulated in Python
-from Google Collab as so as we could utilize the images and bounding box coordinates for training
+from Google Collab such that we could utilize the images and bounding box coordinates for training
 our model.
 
 We decided to use Google's TensorFlow\footnote{https://www.tensorflow.org/} framework to train our 
@@ -1284,11 +1294,11 @@ complex concepts of deep learning into parameterized objects and methods, allowi
 more time on the pre-processing steps and on experimenting with different network configurations
 to improve the model's accuracy. 
 
-As of the time of development of this work, the ModelMaker API only has compatibility with the 
-EfficientDet family of architectures\cite{Mingxing2020}
-for training Deep Learning models for Object Detection. 
-The EfficientDet family is efficient for object recognition in edge devices, altough contemporany 
-architectures, such as the YOLOv5 and its successors, can have better performance.
+As of writing this work, the ModelMaker API only has compatibility
+with the EfficientDet family of architectures \cite{Mingxing2020} for training
+Deep Learning models for Object Detection. The EfficientDet family is efficient
+for object recognition in edge devices, altough contemporany architectures,
+such as the YOLOv5 and its successors, can have better performance.
 
 \begin{figure}[H]
 	\centering
@@ -1298,24 +1308,27 @@ architectures, such as the YOLOv5 and its successors, can have better performanc
     \label{fig:diff}
 \end{figure}
 
-Our initial plan was to use the YOLOv5 architecture, but since its implementation is not native
-to TensorFlow Lite, it would require us to create additional wrappers around the outputs of the YOLOv5
-network to get it working as expected. Even thought it is possible to convert the models from their
-original PyTorch\footnote{https://pytorch.org/} format to a TensorFlow Lite format, the conversion does
-not cover some of the features from the original implementation, as discussed in this GitHub Issue\footnote{https://github.com/ultralytics/yolov5/issues/1981},
-which limits its direct functionality.
-Similar compatibility issues happen with latest YOLO implementations, such as the YOLOv7, 
-as shown in this article\footnote{https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4}. 
-Thus, we decided to proceed with the TensorFlow Lite's Model Maker API compatible architectures, 
-which are in the EfficientDet family, as we would have taken considerable time on troubleshooting 
-the conversion defects from the YOLO networks, which would deviate us from our project's main purpose,
-and as it fulfilled our project's requirements without major impacts. 
+Our initial plan was to use the YOLOv5 architecture, but since its
+implementation is not native to TensorFlow Lite, it would require us to create
+additional wrappers around the outputs of the YOLOv5 network to get it working
+as expected. Even thought it is possible to convert the models from their
+original PyTorch\footnote{https://pytorch.org/} format to a TensorFlow Lite
+format, the conversion does not cover some of the features from the original
+implementation\footnote{https://github.com/ultralytics/yolov5/issues/1981},
+which limits its direct functionality. Similar compatibility issues happen with
+the latest YOLO implementations, such as the
+YOLOv7\footnote{https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4}.
+Thus, we have decided to proceed with the TensorFlow Lite's Model Maker API
+compatible architectures -- namely the EfficientDet family --  since it would
+have taken a considerable time to troubleshoot conversion defects from the YOLO
+architecture and all that work wouldn't bring any additional value to our
+prototype.
 
-Our original images were saved in 640x480 px, and the expected input of the EfficientDet network 
-was of 320x320 px, so in terms of the data pre-processing steps performed in our Python code, two approaches were
-tried out for preparing the images for training: resizing and cropping the images. 
-The bounding box coordinates and dimensions were also adjusted accordingly as so as the data 
-integrity for them was preserved. 
+Since our original images were saved in the 640x480 resolution and the expected
+input of the EfficientDet network is of 320x320 px, two pre-processing
+approaches were tried out for the training dataset: resizing and cropping the
+images. The bounding box coordinates and dimensions were also adjusted
+accordingly such that the data integrity was preserved. 
 
 \begin{figure}[H]
 	\centering
@@ -1324,10 +1337,11 @@ integrity for them was preserved.
 	\fonte{Own work}
 \end{figure}
 
-Once the images and bounding boxes were pre-processed, the images were split into Train, Validation 
-and Test sets; and saved in the standardized format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
-which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
-structure:
+Once the images and bounding boxes were pre-processed, the images were split
+into Train, Validation and Test sets; and saved in the standardized format
+required by the TensorFlow Lite's Model Maker for Object Detection API for
+training, which consists on a Comma Separated Values (\sigla{CSV}{Comma
+Separated Values}) in the following structure:
 
 \begin{lstlisting}[caption={CSV format for specifying the Train, Test and Validation 
 	image sets for training models using the TensorFlow's Model Maker API for Object 
@@ -1343,25 +1357,29 @@ TRAIN,./images_path/im5.png,label,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
 TRAIN,./images_path/im6.png,label,0.3,0.1,,,0.3,0.4,,
 \end{lstlisting}
 
-70\% of the photos shot were moved to the Train set, which is the set used for effectively 
-tuning the weights and biases of the custom models; 21\% were moved to the Validation set, 
+Approximately 70\% of the photos shot were moved to the Train set, which is the set used for effectively 
+tuning the weights and biases of the custom models; About 21\% were moved to the Validation set, 
 being used to understand our model's performance under different training scenarios and steps; 
 and the rest was used for testing the custom model after it was trained, which allowed us to 
 get unbiased metrics on how it would approximately perform in real life \cite{MluExplain}.
 
-Finally, we defined a programming loop to train different models using the EfficientDet-D0,
-EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
-applying Transfer Learning on the top of pre-trained weights from training with the COCO-2017 dataset 
-and by training the entire networks based in our custom data. 
+Finally, we defined a programming loop to train different models using the
+EfficientDet-D0, EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and
+EfficientDet-D4 architectures; both by applying Transfer Learning on the top of
+pre-trained weights from training with the COCO-2017 dataset and by training
+the entire networks based in our custom data. 
 
-We ran this entire loop using the cropped images first; and then executed it using resized images with the EfficientDet-D0,
-EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
-performance balance considering our hardware constraints. 
-With that, we came to have 16 distinct custom models for testing. 
+We ran this entire loop using the cropped images first; and then executed it
+using resized images with the EfficientDet-D0, EfficientDet-D1 and
+EfficientDet-D2 architectures too, as they were the ones who offered better
+performance balance considering our hardware constraints. With that, we came to
+have 16 distinct custom models for testing. 
+
+The performance and precision of these models will be discussed in the Results section.
 
 \section{Mechanical Assembly}
 
-For the mechinal assembly, a foldable utility cart was selected as a core
+For the mechanical assembly, a foldable utility cart was selected as a core
 component with two additional wooden plates used for creating a \textit{false
 bottom}. Between the plates, the load cell and Raspberry Pi board were secured
 in place using bolts, screws and velcro.
@@ -1392,9 +1410,13 @@ to keep a shape that would represent the overall idea of a smart cart.
 	\fonte{Own work}
 \end{figure}
 
+\subsection{Coral Accelerator}
+
+As discussed in Section \ref{sec:TPU},
+
 \chapter{Results}
 
-TODO: Add intro to section
+In this section, we discuss the results of the developed prototype.
 
 \section{Testing}
 
