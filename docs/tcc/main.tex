@@ -127,22 +127,26 @@ students, to continue growing and developing ourselves to the highest standards.
 \begin{abstract}
 The recent advancements in artificial intelligence have already impacted many
 aspects of modern life but have yet to impact one important aspect of the
-consumer experience: shopping in physical stores. In that regard, tech
-Giants such as Amazon have recently deployed the so called \textit{smart
+consumer experience in a meaningful way: shopping in physical stores. Tech
+giants such as Amazon have recently deployed the so called \textit{smart
 carts} to their physical retail stores, allowing customers to have an
-improved shopping experience including better product information and a
+improved shopping experience, including better product information and a
 seamless checkout process. These  smart carts, however, are still a long
-way off towards reaching emerging markets such as Brazil due to historical
-barriers. In that regard, this work analyses the current market and
-develops a prototype that achieves similar functionality to the ones
-available abroad by using the same building blocks such as computer vision
-and sensorial data. Additionally, we have identified the challenges and
-practical constraints of developing such a product and also lay the basis
-for future work to improve the developed prototype into a commercial
-product.
+way off towards reaching emerging markets such as Brazil. In that regard,
+this work analyses the current market and describes the development of a
+prototype that achieves similar functionality to the ones available abroad
+by using the same building blocks such as computer vision and sensor data.
+A \textit{Deep Learning} model was developed for product detection and deployed
+to a single board computer capable of running inferences at around 4
+FPS with an average precision of 80\%.
+Finally, this work discusses the challenges and practical constraints
+of developing such a prototype and also lay the basis for future work to
+improve the solution into a commercial product.
 \end{abstract}
 
 \begin{resumo}
+
+TODO: Traduzir abstract
 
 \end{resumo}
 
@@ -226,10 +230,10 @@ countries like the United States.
 	\label{fig:smartspeaker}
 \end{figure}
 
-On developing countries, such as Brazil, these innovations tend to
-have delayed arrivals due to historical barriers, but the potential
+On developing countries such as Brazil, these innovations tend to
+have delayed arrivals due to historical economic barriers but the potential
 customer base has attracted big tech companies like Amazon, that are able
-to shorten the delay with their economic power.
+to shorten the arrival delay with their economic power.
 
 \begin{figure}[h!]
 	\centering
@@ -239,42 +243,38 @@ to shorten the delay with their economic power.
     \label{fig:alexabr}
 \end{figure}
 
-According to the research company IDC Brasil, the brazilian home automation
+According to the research company IDC Brasil, the Brazilian home automation
 market -- in which smart speakers are included -- would have reached US\$ 298
 million on 2021, an impressive figure that might explain the attractiveness of
 our market.
 
-Although these advancements might seem entirely beneficial at first, countless
-challenges have been found regarding privacy, ethical handling of personal
-customer data and overall negative experiences caused by increased
-dependencies, e.g what happens when you lose internet connection?
+% Although these advancements might seem entirely beneficial at first, countless
+% challenges have been found regarding privacy, ethical handling of personal
+% customer data and overall negative experiences caused by increased
+% dependencies, e.g what happens when you lose internet connection?
+%
+% These discussions are of the utter most importance given our current scenario
+% and have been brought up by recent literature \cite{Echoes2022,He2019}
+% but will be out of the scope of this work.
 
-These discussions are of the utter most importance given our current scenario
-and have been brought up by recent literature \cite{Echoes2022,He2019}
-but will be out of the scope of this work.
 
-
-Even with all of these innovations impacting customer behaviors day by day, one
+But even with all of these innovations impacting customer behaviors day by day, one
 important aspect of consumer life still hasn't had any significant changes in
-the last couple of years: \textbf{grocery shopping on
+the last couple of years: \textbf{shopping on
 physical stores}.
 
 According to \sigla{ABRAS}{Associação Brasileira de Supermercados} - the
 Brazilian Supermarket Association - the grocery retail sector has reached an
 impressive total revenue of \textbf{R\$ 611 billion} in 2021 - roughly US\$ 117 billion on
-October 2022 rates - making up 7,03\% of the national \sigla{GDP}{Gross
+October 2022 conversion rates - making up 7,03\% of the national \sigla{GDP}{Gross
 Domestic Product}. About \textbf{28 million} customers visit one of the more than
 \textbf{92.000} stores countrywide on a daily basis \cite{Abras2022}.
 
-In light of the recent pandemic scenario, innovations such as the adoption of
-e-commerce platforms and self-checkout solutions had their adoption increased
-in 2020 but 2021 showed a trend that consumers have mostly shifted back to
-their pre-pandemic behavior, favoring physical retail stores \cite{Kantar2022}.
-
-But in such an economic relevant market and with all the technological
-advancement we've been seing, most of the physical retail customers still
-report pain points related to visiting a store. In a survey conducted in 2019,
-Capgemini has found out five key problems \cite{Capgemini2020}:
+Despite all the technological advancement seen over the last few year and the
+economic relevance of such sector, retail grocery shopping still exhibits the
+same pain points found a decade ago. In a survey conducted in 2019, Capgemini
+has found out five key pain problems related to physical stores in general
+\cite{Capgemini2020}:
 
 \begin{enumerate}
         \item Long queues for payment checkout
@@ -292,18 +292,22 @@ Capgemini has found out five key problems \cite{Capgemini2020}:
     \label{fig:capgemini}
 \end{figure}
 
-More interestingly, Figure \ref{fig:capgemini} shows that at least half of the
-survey respondents believe that all of the five pain points can be solved through
-\textbf{automation}.
+More interestingly, the survey points out that at least half of the survey
+respondents believe that all of the five pain points can be solved through
+\textbf{automation}. Even in light of the recent pandemic scenario, innovations
+that increase automation such as e-commerce platforms had their adoption
+increased in 2020 but 2021 showed a trend of consumers shifting
+back to their pre-pandemic behavior, favoring physical retail stores
+\cite{Kantar2022}.
 
 It is in this scenario of customer pain and enormous market potential that this
-thesis will explore a technological solution to improve customer experience,
+thesis will explore a technological solution to improve customer experience and increase sales,
 namely the \textbf{smart shopping cart}.
 
 \section{Current scenario}
 
-In this next section, we'll explore some of the existing solutions and how they
-try to improve customer experience and increase the retailer's revenue.
+In this next section, we'll explore some of the existing solutions and the user experience
+provided by them.
 
 \subsection{Caper Cart}
 
@@ -328,17 +332,17 @@ great advantage of not requiring any infrastructure overhaul for deployment.
 	\label{fig:caperatretail}
 \end{figure}
 
-For customers, it offered visual product recognition and a payment terminal,
-allowing customers to avoid the dreaded queues by the end of their shopping.
+For end users, it offered visual product recognition and a payment terminal,
+allowing them to avoid the dreaded queues by the end of their shopping session.
 Additionally, customers were able to search products, get discounts and locate
-items more easily with the help of the user interface provided by the cart.
+items more easily with the help of the interactive user interface provided by the cart.
 
-Although Caper does not publicize the cost of each cart, it is estimate that each unit costs between
+Although Caper does not publicize the cost of each cart, it is estimated that each unit costs between
 \textbf{US\$ 5,000 and 10,000} \cite{TWP2021}.
 
 Acquired by Instacart\footnote{https://instacart.com} in 2021 for US\$ 350 million, Caper is developing in 2022 the 
-third version of its Smart Shopping Cart, advertising an increase in \textbf{65\% in the basket
-volume} and a \textbf{10 month} breakeven.
+third version of its Smart Shopping Cart, advertising an increase of \textbf{65\% in the basket
+volume} and a \textbf{10 month} break even period.
 
 \begin{figure}[H]
 	\centering
@@ -352,13 +356,14 @@ volume} and a \textbf{10 month} breakeven.
 \subsection{Amazon Dash Cart}
 
 Available at the Amazon Fresh\footnote{https://www.amazon.com/fmc/m/30003175?almBrandId=QW1hem9uIEZyZXNo} retail chain, the
-Amazon Dash Cart.
+Amazon Dash Cart is the company's first smart cart available to end users.
 
 According to Amazon, it uses computer vision and sensors to allow customers to
-simply add items to their cart which already accounts all the items and
-subtotal. By the end of their item selection, customers can check-out
+simply add items to their cart like they usually would. The cart accounts all
+the items present in the cart, displaying a list which includes their prices
+and subtotal. By the end of their item selection, customers can check-out
 automatically without having to go through queues, solving the biggest customer
-pain point pointed out by Capgemini.
+pain point pointed out by \cite{Capgemini2020}.
 
 \begin{quote}
 \textit{Looking to make grocery trips quicker? With the Amazon Dash Cart you can skip the checkout line and roll out to your car when you are done.}
@@ -376,11 +381,12 @@ Amazon (2022)
     \label{fig:dashcart}
 \end{figure}
 
-Additionally, the user interface provided by the Cart allows customers to search for item location and see more information
-about them, improving the customer experience.
+In addition to the item accounting capabilities, the user interface provided by
+the Cart also allows customers to search for the location of items  in the
+store and see more information about them, improving the customer experience.
 
-One of its quircks is that it requires the download and usage of an mobile phone app for using the cart, in contrast
-to Caper's Cart.
+One of its quirks is that it requires the download and usage of an mobile phone
+app for using the cart, something not required by Caper's Cart.
 
 As of October 2022, the Amazon Dash Cart is exclusively available at the Amazon
 Fresh chain and therefore no commercial information regarding cost per unit is
@@ -394,7 +400,7 @@ loss prevention.
 
 According to the company, the Smart Cart Nextop is the first smart cart
 deployed in Brazil and Latin America and was initially rolled out to the Enxuto
-supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
+supermarket chain in 2022 \cite{Paraiba2022}.
 
 \begin{figure}[H]
 	\centering
@@ -404,10 +410,11 @@ supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
 	\label{fig:nextop}
 \end{figure}
 
-Differently than the carts developed by Amazon and Caper, Nextop's cart
+In contrast to the carts developed by Amazon and Caper, Nextop's cart
 requires customers to first scan the product using the integrated bar code
-reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for
-\textit{triple validation} system, using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
+reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for a
+\textit{triple validation} system, using the cameras, sensors and the barcode scanner 
+to prevent losses \cite{Nextop2022}.
 
 \begin{figure}[H]
 	\centering
@@ -417,8 +424,10 @@ reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises 
 	\label{fig:nextopui}
 \end{figure}
 
-Although it pleases grocers with the improved loss prevention, the usage of the barcode scanner creates in our opinion a worse
-end customer experience, becoming a sort of \textit{mobile checkout station}.
+Although loss prevention is an important selling point in the Brazilian market,
+the usage of the barcode scanner creates, in our opinion, a worse end customer
+experience, becoming a \textit{mobile checkout station}. Also, the product does not
+include additional features such as product location search and item details. 
 
 \begin{figure}[H]
 	\centering
@@ -428,10 +437,10 @@ end customer experience, becoming a sort of \textit{mobile checkout station}.
 	\label{fig:nextopui}
 \end{figure}
 
-Besides offering the improved shopping experience by not having to go through
-queues by the end of the trip, the product also advertises increased sales as a
-result of the innovative approach and also allows a deeper understanding of the
-customer journey by collecting analytical data \cite{Paraiba2022}.
+Offering a solution to the main end user pain point of having to go through
+long queues, the product also advertises increased sales as a result of the
+innovative approach and also allows a deeper understanding of the customer
+journey by collecting analytical data \cite{Paraiba2022}.
 
 \begin{quote}
 \textit{We are offering our customers an innovative and unique shopping experience within Enxuto}
@@ -442,12 +451,6 @@ from the identified ticket era to the end-to-end identified journey}
 
     Bruno Bragancini Junior, \sigla{CEO}{Chief Executive Officer} of the Enxuto Group \cite{Paraiba2022}
 \end{quote}
-
-
-This goes in line with the
-company's know how on loss prevention which appeared to be an important aspect
-of the product for the target Brazilian customer base.
-
 
 According to Nextop's CEO, Juliano Camargo, the company has already invested \textbf{R\$ 8.5 million} - about US\$ 1.63 million on October 2022 - and \textbf{4 and half years}
 of research and development.
