@@ -607,6 +607,13 @@ need to have a lot of data for training good performing models, as you
 would be reusing pre-trained weights from a model that was already trained on
 larger datasets \cite{CS231N}.
 
+\section{Object Detection}
+TBD: write theoretical background on Object Detection
+images can be processed as number matrixes of two or three dimensions by computers, 
+therefore we can use collections of images as an input to train deep learning algorithms and
+perform classification and object detection tasks. 
+Bounding boxes, classification algorithms, etc. 
+
 \section{Tensor Processing Unit}
 
 Artificial Inteligence(\sigla{AI}{Artifical Intelligence}) models that use Deep Neural 
@@ -1181,11 +1188,16 @@ for label, count in frame_diff.items():
 
 \subsection{Object Detection Model}
 
-The data used for training our custom Object Detection model was collected and labelled
+5 products were chosen for the purpose of setting up demonstrating the Object Recognition 
+capability of our product: a Blue Pens Packet; a Card Deck; a Coke Can; a Guarana Soda Can; 
+and a Post It Pack. 
+The data used for training our custom Object Detection model was collected and labelled by us
 using Edge Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for Machine 
 Learning on Edge devices.
 A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
 using the same webcam that is used for the inference in our final product.
+Our photos included images showing each one of the products in different scenarios and positions, 
+and also images where more than one product was present.
 
 \begin{figure}[H]
 	\centering
@@ -1329,9 +1341,9 @@ set,path,label,x_min,y_min,x_max,y_min,x_max,y_max,x_min,y_max
 
 Examples:
 TEST,./images_path/im3.png,0.5,0.6,,,0.2,0.9,,
-VALIDATION,./images_path/im4.png,label,0.3,0.4,,,0.4,0.8,,
-TRAIN,./images_path/im5.png,label,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
-TRAIN,./images_path/im6.png,label,0.3,0.1,,,0.3,0.4,,
+VALIDATION,./images_path/im4.png,coke_soda,0.3,0.4,,,0.4,0.8,,
+TRAIN,./images_path/im5.png,guarana_soda,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
+TRAIN,./images_path/im5.png,post_it,0.3,0.1,,,0.3,0.4,,
 \end{lstlisting}
 
 70\% of the photos shot were moved to the Train set, which is the set used for effectively 
@@ -1339,6 +1351,29 @@ tuning the weights and biases of the custom models; 21\% were moved to the Valid
 being used to understand our model's performance under different training scenarios and steps; 
 and the rest was used for testing the custom model after it was trained, which allowed us to 
 get unbiased metrics on how it would approximately perform in real life \cite{MluExplain}.
+
+The Table \ref{tbl:imageSetsTab} describes the data sets created for training and evaluation in greater detail.
+
+\begin{table}[H]
+	\centering
+	\begin{adjustbox}{width=1\textwidth}
+	\label{tab:imageSets}
+	\begin{tabular}{c|c|c|c|c}
+		\hline 
+		Class & Total Number of Pictures & Number of Pictures in the Train Set & Number of Pictures in the Validation Set & Number of Pictures in the Test Set \\
+		\hline
+        Blue Pens Packet & 293 & 206 & 61 & 26\\
+		Card Deck & 306 & 215 & 64 & 27\\
+		Coke Can & 276 & 194 & 58 & 24\\
+		Guarana Soda Can & 283 & 199 & 59 & 25\\
+		Post It Pack & 273 & 192 & 57 & 24\\
+		\hline 
+	\end{tabular}
+	\end{adjustbox}
+	\caption[Image Sets Created for Training, Validation and Testing]{Image Sets Created for Training, Validation and Testing}
+	\label{tbl:imageSetsTab}
+	\fonte{Own work}
+\end{table}
 
 Finally, we defined a programming loop to train different models using the EfficientDet-D0,
 EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
@@ -1348,7 +1383,39 @@ and by training the entire networks based in our custom data.
 We ran this entire loop using the cropped images first; and then executed it using resized images with the EfficientDet-D0,
 EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
 performance balance considering our hardware constraints. 
-With that, we came to have 16 distinct custom models for testing. 
+With that, we came to have 16 distinct custom models for experimenting, as shown in Table \ref{tbl:modelsTrainedTab}.
+
+\begin{table}[H]
+	\centering
+	\begin{adjustbox}{width=1\textwidth}
+	\label{tab:modelsTrained}
+	\begin{tabular}{c|c|c|c}
+		\hline 
+		Model & Image Pre-Processing Strategy & Architecture & Whole Trained/Transfer Learning \\
+		\hline
+        1 & Cropping & EfficientDet-D0 & Whole Trained \\
+		2 & Cropping & EfficientDet-D1 & Whole Trained \\
+		3 & Cropping & EfficientDet-D2 & Whole Trained \\
+		4 & Cropping & EfficientDet-D3 & Whole Trained \\
+		5 & Cropping & EfficientDet-D4 & Whole Trained \\
+		6 & Cropping & EfficientDet-D0 & Transfer Learning on COCO-2017 \\
+		7 & Cropping & EfficientDet-D1 & Transfer Learning on COCO-2017 \\
+		8 & Cropping & EfficientDet-D2 & Transfer Learning on COCO-2017 \\
+		9 & Cropping & EfficientDet-D3 & Transfer Learning on COCO-2017 \\
+		10 & Cropping & EfficientDet-D4 & Transfer Learning on COCO-2017 \\
+		11 & Cropping & EfficientDet-D0 & Whole Trained \\
+		12 & Cropping & EfficientDet-D1 & Whole Trained \\
+		13 & Resizing & EfficientDet-D2 & Whole Trained \\
+		14 & Resizing & EfficientDet-D0 & Transfer Learning on COCO-2017 \\
+		15 & Resizing & EfficientDet-D1 & Transfer Learning on COCO-2017 \\
+		16 & Resizing & EfficientDet-D2 & Transfer Learning on COCO-2017 \\
+		\hline 
+	\end{tabular}
+	\end{adjustbox}
+	\caption[Different Models Trained for Experimenting]{Different Models Trained for Experimenting}
+	\label{tbl:modelsTrainedTab}
+	\fonte{Own work}
+\end{table}
 
 \section{Mechanical Assembly}
 
@@ -1513,12 +1580,12 @@ computationally expensive for our device- are listed below.
 	\label{tab:modelPerformance}
 	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
 		\hline 
-		Model Architecture & Preprocessing Strategy & Training Strategy & AP & AP 50 IoU & AP 75 IoU & AP (label 1) & AP (label 2) & AP (label 3) & AP (label 4) & AP (label 5) \\
+		Architecture & Preprocessing Strategy & Training Strategy & AP & AP 50 IoU & AP 75 IoU & AP (label 1) & AP (label 2) & AP (label 3) & AP (label 4) & AP (label 5) \\
 		\hline
         Efficientdet\-D0 & Resizing & Transfer Learning & \texttt{0.537} & \texttt{0.704} & \texttt{0.650} & \texttt{0.541} & \texttt{0.495} & \texttt{0.675} & \texttt{0.525} & \texttt{0.447} \\
 		Efficientdet\-D1 & Resizing & Transfer Learning & \texttt{0.633} & \texttt{0.794} & \texttt{ 0.776} & \texttt{0.439} & \texttt{0.671} & \texttt{0.807} & \texttt{0.631} & \texttt{0.619} \\
 		Efficientdet\-D2 & Resizing & Transfer Learning & \texttt{0.670} & \texttt{0.798} & \texttt{0.776} & \texttt{0.676} & \texttt{0.590} & \texttt{0.838} & \texttt{0.567} & \texttt{0.684} \\
-		Efficientdet\-D0 & Resizing & Whole & \texttt{0.777} & \texttt{0.912} & \texttt{0.867} & \texttt{0.577} & \texttt{0.724} & \texttt{0.891} & \texttt{0.913} & \texttt{0.779} \\
+		Efficientdet\-D0 & Resizing & Whole Trained & \texttt{0.777} & \texttt{0.912} & \texttt{0.867} & \texttt{0.577} & \texttt{0.724} & \texttt{0.891} & \texttt{0.913} & \texttt{0.779} \\
 		Efficientdet\-D1 & Resizing & Whole & \texttt{0.815} & \texttt{0.945} & \texttt{0.896} & \texttt{0.658} & \texttt{0.794} & \texttt{0.890} & \texttt{0.975} & \texttt{0.757} \\
 		Efficientdet\-D2 & Resizing & Whole & \texttt{0.820} & \texttt{0.928} & \texttt{0.878} & \texttt{0.630} & \texttt{0.784} & \texttt{0.905} & \texttt{1.000} & \texttt{0.782} \\
 		Efficientdet\-D0 & Cropping & Transfer Learning & \texttt{0.463} & \texttt{0.632} & \texttt{0.577} & \texttt{0.371} & \texttt{0.413} & \texttt{0.626} & \texttt{0.465} & \texttt{0.440} \\
