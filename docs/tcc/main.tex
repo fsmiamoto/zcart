@@ -73,7 +73,8 @@
 \autordois{João Pedro Zanlorensi Cardoso} % autor do trabalho
 \cita{MIAMOTO, Flavio; ZANLORENSI, Joao Pedro} % sobrenome (maiusculas), nome do autor do trabalho
 
-\keywords{Artificial Inteligence, Deep Learning, Smart Devices, Internet of Things, Sensors} 
+\keywords{Artificial Inteligence, Deep Learning, Smart Devices, Internet of Things, Sensors, Object Detection, Smart Cart, Supermarket} 
+\palavraschave{Inteligência Artificial, Aprendizado Profundo, Smart Devices, Internet das Coisas, Sensores, Carrinho Inteligente, Detecção de Objetos, Supermercado}
 
 \comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining a Bachelor's Degree in Electronics Engineering}
 
@@ -117,28 +118,51 @@ students, to continue growing and developing ourselves to the highest standards.
 \begin{epigrafe}
  If have seen further it is by standing on the shoulders of giants.  \\
 - Sir Isaac Newton
+
+ The only thing we're allowed to believe is that we won't regret the choice we made.  \\
+- Hajime Isayama
 \end{epigrafe}
 
 %abstract
 \begin{abstract}
 The recent advancements in artificial intelligence have already impacted many
 aspects of modern life but have yet to impact one important aspect of the
-consumer experience: shopping in physical stores. In that regard, tech
-Giants such as Amazon have recently deployed the so called \textit{smart
+consumer experience in a meaningful way: shopping in physical stores. Tech
+giants such as Amazon have recently deployed the so called \textit{smart
 carts} to their physical retail stores, allowing customers to have an
-improved shopping experience including better product information and a
-seamless checkout process.
-
-These  smart carts, however, are still a long way off towards reaching emerging
-markets such as Brazil due to historical barriers. In that regard, 
-this work analyses the current market and develops a prototype that
-achieves similar functionality to the ones available abroad by using the same
-building blocks such as computer vision and sensorial data.
-
-Additionally, we ahve identified the challenges and practical constraints of
-developing such a product and also lay the basis for future work to improve
-the developed prototype into a commercial product.
+improved shopping experience, including better product information and a
+seamless checkout process. In that regard, this work analyses the current
+market and describes the development of a prototype that achieves similar
+functionality to the ones currently available by using the same building
+blocks such as computer vision and sensor data. A \textit{Deep Learning}
+model was developed for product detection and deployed to a single board
+computer capable of running inferences at around 4 FPS with an average
+precision higher than  80\%. Finally, this work discusses the challenges and
+practical constraints of developing such a prototype and also lay the basis
+for future work to improve the solution into a commercial product.
 \end{abstract}
+
+\begin{resumo}
+
+Os recentes avanços em inteligência artificial já impactaram diversos aspectos
+da vida moderna mas ainda não atingiram um aspecto importante das
+experiência dos consumidores: compras em lojas físicas. Gigantes da
+tecnologia como a Amazon lançaram recentemente os chamados
+\textit{carrinhos inteligentes} (smart carts) em suas lojas físicas,
+proporcionando aos consumidores uma melhor experiência de compra, com mais
+informações sobre os produtos e um processo de pagamento rápido e prático.
+Neste sentido, o presente trabalho analisa o contexto atual do mercado e
+descreve o desenvolvimento de um protótipo que entrega funcionalidades
+similares aos produtos disponíveis no mercado utilizando as mesmas bases
+tecnológicas de visão computacional e sensores. Um modelo de
+aprendizado profundo (Deep Learning) foi desenvolvido para a detecção de
+produtos e implantado em um single board computer capaz de executar
+inferências em aproximadamente 4 \sigla{QPS}{Quadros Por Segundo} com uma
+precisão média acima dos 80\%. Finalmente, o trabalho discute os desafios e
+restrições práticas do desenvolvimento do protótipo e prepara o caminho
+para trabalhos futuros que podem levar o desenvolvimento até um produto
+comercial.
+\end{resumo}
 
 % listas (opcionais, mas recomenda-se a partir de 5 elementos)
 \listadefiguras % geracao automatica da lista de figuras
@@ -220,10 +244,10 @@ countries like the United States.
 	\label{fig:smartspeaker}
 \end{figure}
 
-On developing countries, such as Brazil, these innovations tend to
-have delayed arrivals due to historical barriers, but the potential
+On developing countries such as Brazil, these innovations tend to
+have delayed arrivals due to historical economic barriers but the potential
 customer base has attracted big tech companies like Amazon, that are able
-to shorten the delay with their economic power.
+to shorten the arrival delay with their economic power.
 
 \begin{figure}[h!]
 	\centering
@@ -233,42 +257,38 @@ to shorten the delay with their economic power.
     \label{fig:alexabr}
 \end{figure}
 
-According to the research company IDC Brasil, the brazilian home automation
+According to the research company IDC Brasil, the Brazilian home automation
 market -- in which smart speakers are included -- would have reached US\$ 298
 million on 2021, an impressive figure that might explain the attractiveness of
 our market.
 
-Although these advancements might seem entirely beneficial at first, countless
-challenges have been found regarding privacy, ethical handling of personal
-customer data and overall negative experiences caused by increased
-dependencies, e.g what happens when you lose internet connection?
+% Although these advancements might seem entirely beneficial at first, countless
+% challenges have been found regarding privacy, ethical handling of personal
+% customer data and overall negative experiences caused by increased
+% dependencies, e.g what happens when you lose internet connection?
+%
+% These discussions are of the utter most importance given our current scenario
+% and have been brought up by recent literature \cite{Echoes2022,He2019}
+% but will be out of the scope of this work.
 
-These discussions are of the utter most importance given our current scenario
-and have been brought up by recent literature \cite{Echoes2022,He2019}
-but will be out of the scope of this work.
 
-
-Even with all of these innovations impacting customer behaviors day by day, one
+But even with all of these innovations impacting customer behaviors day by day, one
 important aspect of consumer life still hasn't had any significant changes in
-the last couple of years: \textbf{grocery shopping on
+the last couple of years: \textbf{shopping on
 physical stores}.
 
 According to \sigla{ABRAS}{Associação Brasileira de Supermercados} - the
 Brazilian Supermarket Association - the grocery retail sector has reached an
 impressive total revenue of \textbf{R\$ 611 billion} in 2021 - roughly US\$ 117 billion on
-October 2022 rates - making up 7,03\% of the national \sigla{GDP}{Gross
+October 2022 conversion rates - making up 7,03\% of the national \sigla{GDP}{Gross
 Domestic Product}. About \textbf{28 million} customers visit one of the more than
 \textbf{92.000} stores countrywide on a daily basis \cite{Abras2022}.
 
-In light of the recent pandemic scenario, innovations such as the adoption of
-e-commerce platforms and self-checkout solutions had their adoption increased
-in 2020 but 2021 showed a trend that consumers have mostly shifted back to
-their pre-pandemic behavior, favoring physical retail stores \cite{Kantar2022}.
-
-But in such an economic relevant market and with all the technological
-advancement we've been seing, most of the physical retail customers still
-report pain points related to visiting a store. In a survey conducted in 2019,
-Capgemini has found out five key problems \cite{Capgemini2020}:
+Despite all the technological advancement seen over the last few year and the
+economic relevance of such sector, retail grocery shopping still exhibits the
+same pain points found a decade ago. In a survey conducted in 2019, Capgemini
+has found out five key pain problems related to physical stores in general
+\cite{Capgemini2020}:
 
 \begin{enumerate}
         \item Long queues for payment checkout
@@ -286,18 +306,22 @@ Capgemini has found out five key problems \cite{Capgemini2020}:
     \label{fig:capgemini}
 \end{figure}
 
-More interestingly, Figure \ref{fig:capgemini} shows that at least half of the
-survey respondents believe that all of the five pain points can be solved through
-\textbf{automation}.
+More interestingly, the survey points out that at least half of the survey
+respondents believe that all of the five pain points can be solved through
+\textbf{automation}. Even in light of the recent pandemic scenario, innovations
+that increase automation such as e-commerce platforms had their adoption
+increased in 2020 but 2021 showed a trend of consumers shifting
+back to their pre-pandemic behavior, favoring physical retail stores
+\cite{Kantar2022}.
 
 It is in this scenario of customer pain and enormous market potential that this
-thesis will explore a technological solution to improve customer experience,
+thesis will explore a technological solution to improve customer experience and increase sales,
 namely the \textbf{smart shopping cart}.
 
 \section{Current scenario}
 
-In this next section, we'll explore some of the existing solutions and how they
-try to improve customer experience and increase the retailer's revenue.
+In this next section, we'll explore some of the existing solutions and the user experience
+provided by them.
 
 \subsection{Caper Cart}
 
@@ -322,17 +346,17 @@ great advantage of not requiring any infrastructure overhaul for deployment.
 	\label{fig:caperatretail}
 \end{figure}
 
-For customers, it offered visual product recognition and a payment terminal,
-allowing customers to avoid the dreaded queues by the end of their shopping.
+For end users, it offered visual product recognition and a payment terminal,
+allowing them to avoid the dreaded queues by the end of their shopping session.
 Additionally, customers were able to search products, get discounts and locate
-items more easily with the help of the user interface provided by the cart.
+items more easily with the help of the interactive user interface provided by the cart.
 
-Although Caper does not publicize the cost of each cart, it is estimate that each unit costs between
+Although Caper does not publicize the cost of each cart, it is estimated that each unit costs between
 \textbf{US\$ 5,000 and 10,000} \cite{TWP2021}.
 
 Acquired by Instacart\footnote{https://instacart.com} in 2021 for US\$ 350 million, Caper is developing in 2022 the 
-third version of its Smart Shopping Cart, advertising an increase in \textbf{65\% in the basket
-volume} and a \textbf{10 month} breakeven.
+third version of its Smart Shopping Cart, advertising an increase of \textbf{65\% in the basket
+volume} and a \textbf{10 month} break even period.
 
 \begin{figure}[H]
 	\centering
@@ -346,13 +370,14 @@ volume} and a \textbf{10 month} breakeven.
 \subsection{Amazon Dash Cart}
 
 Available at the Amazon Fresh\footnote{https://www.amazon.com/fmc/m/30003175?almBrandId=QW1hem9uIEZyZXNo} retail chain, the
-Amazon Dash Cart.
+Amazon Dash Cart is the company's first smart cart available to end users.
 
 According to Amazon, it uses computer vision and sensors to allow customers to
-simply add items to their cart which already accounts all the items and
-subtotal. By the end of their item selection, customers can check-out
+simply add items to their cart like they usually would. The cart accounts all
+the items present in the cart, displaying a list which includes their prices
+and subtotal. By the end of their item selection, customers can check-out
 automatically without having to go through queues, solving the biggest customer
-pain point pointed out by Capgemini.
+pain point pointed out by \cite{Capgemini2020}.
 
 \begin{quote}
 \textit{Looking to make grocery trips quicker? With the Amazon Dash Cart you can skip the checkout line and roll out to your car when you are done.}
@@ -370,11 +395,12 @@ Amazon (2022)
     \label{fig:dashcart}
 \end{figure}
 
-Additionally, the user interface provided by the Cart allows customers to search for item location and see more information
-about them, improving the customer experience.
+In addition to the item accounting capabilities, the user interface provided by
+the Cart also allows customers to search for the location of items  in the
+store and see more information about them, improving the customer experience.
 
-One of its quircks is that it requires the download and usage of an mobile phone app for using the cart, in contrast
-to Caper's Cart.
+One of its quirks is that it requires the download and usage of an mobile phone
+app for using the cart, something not required by Caper's Cart.
 
 As of October 2022, the Amazon Dash Cart is exclusively available at the Amazon
 Fresh chain and therefore no commercial information regarding cost per unit is
@@ -388,7 +414,7 @@ loss prevention.
 
 According to the company, the Smart Cart Nextop is the first smart cart
 deployed in Brazil and Latin America and was initially rolled out to the Enxuto
-supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
+supermarket chain in 2022 \cite{Paraiba2022}.
 
 \begin{figure}[H]
 	\centering
@@ -398,10 +424,11 @@ supermarket chain, present in the São Paulo state, on 2022 \cite{Paraiba2022}.
 	\label{fig:nextop}
 \end{figure}
 
-Differently than the carts developed by Amazon and Caper, Nextop's cart
+In contrast to the carts developed by Amazon and Caper, Nextop's cart
 requires customers to first scan the product using the integrated bar code
-reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for
-\textit{triple validation} system, using the cameras, sensors and the barcode scanner \cite{Nextop2022}.
+reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for a
+\textit{triple validation} system, using the cameras, sensors and the barcode scanner 
+to prevent losses \cite{Nextop2022}.
 
 \begin{figure}[H]
 	\centering
@@ -411,8 +438,10 @@ reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises 
 	\label{fig:nextopui}
 \end{figure}
 
-Although it pleases grocers with the improved loss prevention, the usage of the barcode scanner creates in our opinion a worse
-end customer experience, becoming a sort of \textit{mobile checkout station}.
+Although loss prevention is an important selling point in the Brazilian market,
+the usage of the barcode scanner creates, in our opinion, a worse end customer
+experience, becoming a \textit{mobile checkout station}. Also, the product does not
+include additional features such as product location search and item details. 
 
 \begin{figure}[H]
 	\centering
@@ -422,10 +451,10 @@ end customer experience, becoming a sort of \textit{mobile checkout station}.
 	\label{fig:nextopui}
 \end{figure}
 
-Besides offering the improved shopping experience by not having to go through
-queues by the end of the trip, the product also advertises increased sales as a
-result of the innovative approach and also allows a deeper understanding of the
-customer journey by collecting analytical data \cite{Paraiba2022}.
+Offering a solution to the main end user pain point of having to go through
+long queues, the product also advertises increased sales as a result of the
+innovative approach and also allows a deeper understanding of the customer
+journey by collecting analytical data \cite{Paraiba2022}.
 
 \begin{quote}
 \textit{We are offering our customers an innovative and unique shopping experience within Enxuto}
@@ -437,44 +466,36 @@ from the identified ticket era to the end-to-end identified journey}
     Bruno Bragancini Junior, \sigla{CEO}{Chief Executive Officer} of the Enxuto Group \cite{Paraiba2022}
 \end{quote}
 
-
-This goes in line with the
-company's know how on loss prevention which appeared to be an important aspect
-of the product for the target Brazilian customer base.
-
-
 According to Nextop's CEO, Juliano Camargo, the company has already invested \textbf{R\$ 8.5 million} - about US\$ 1.63 million on October 2022 - and \textbf{4 and half years}
 of research and development.
 
 Each Smart Cart is estimated to cost around \textbf{R\$ 120,000  or around US\$ 23,020} on October 2022 \cite{Paraiba2022}.
 
-\section{Expected outcomes}
+\section{Objectives}
 
-After presenting the problem domain and the current solutions, in this section we discuss the expected
-outcomes of this work, mainly:
+After presenting the problem domain and the current market scenario, in this section we discuss the 
+objectives of this work.
 
-\textit{Develop a prototype of a smart shopping cart, including a mechanical
-assembly that utlizes computer vision and sensorial data for product recognition, presented through an interactive user
-interface}
+\subsection{Main objective}
+Develop a prototype of a smart shopping cart that utilizes computer
+vision and sensor data for product recognition.
 
-At a more granular level, the following outcomes are also expected:
-
+\subsection{Granular objectives}
 \begin{itemize}
+    \item Build a mechanical assembly for the prototype
+    \item Develop an interactive user interface for the prototype
     \item Collect a product dataset for training a deep learning model
     \item Train a Deep Learning model capable of detecting target products
 	\item Learn the practical challenges of developing a Deep Learning based product
     \item Understand the economic viability of such a project in the Brazilian context
 \end{itemize}
 
-Considering time and financial constraints, it is expected that the final results will yield
-a solution with unsolved challenges, but a functional version is expected.
-
 \chapter{Theoretical Background}
 
-In this section, we'll define in greater detail some most relevant techniques
-used in the development of our prototype.
+In this section, we'll define in greater detail the theory behind some most
+relevant techniques used in the development of the prototype.
 
-This section can be skipped for readers with familiarity on the topics discussed
+This section can be skipped for readers with familiarity on the topics discussed.
 
 \section{Neural Networks}
 
@@ -486,7 +507,7 @@ and to make predictions \cite{IBMNeuralNetworks}.
 A Neuron is similar to a Digital Logic Gate, which is capable of producing 
 different outputs depending on the input signals that are sent to it.
 A Neuron has weights, which are the coefficients that are used for calculating
-the outputs; and biases, which are the boundaries that represent how propense is an output
+the outputs; and biases, which are the boundaries that represent how prone is an output
 to fit into a specific category of output. 
 
 The main difference between a digital logic gate and a Neuron is that, because neurons are
@@ -507,7 +528,7 @@ A perceptron takes one or more binary inputs and produces a single binary output
 	\label{fig:perceptron}
 \end{figure}
 
-A Neuron does not necessarily need to have binary inputs and outputs. In fact, 
+A Neuron does not necessarily have binary inputs and outputs. In fact, 
 contemporary systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
 which take real numbers as inputs and also produces continuous outputs 
 within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
@@ -575,11 +596,11 @@ Input Layer, Hidden Layer and Output Layer.
 \end{figure}
 
 The Input Layer takes the input data that will be fed into the model for training,
-$x_i$, and produces the weighting coefficients $w_{ji}$. The Input Layers
+$x_i$, and produces the weighting coefficients $w_{ji}$. Input Layers
 typically have the role of encoding the input data into a structure that can be processed by the 
 subsequent hidden layers \cite{Paranjape2020}.
 
-The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the the network,
+The $w_{ji}$ coefficients are then used to feed the Hidden Layer of the network,
 which produces the weighting coefficients $w_{kj}$. The Hidden Layers of a Deep Learning 
 Neural Network are used for the heavy processing of the encoded input data by applying a series of 
 mathematical operations that ultimately makes it possible to break down the most important features
@@ -590,22 +611,20 @@ of the data and to produce comprehensive outputs to the decisional layers of the
 
 Another key technique applied by developers when training Deep Learning models is
 \textit{Transfer Learning}. 
-It consists on reusing pre-trained networks, which were tuned in other datasets- usually big and
-somehow related to the one that you are going to run your inferences on- for training custom models.
+It consists of reusing pre-trained networks, which were tuned in other datasets -- usually big and
+somehow related to the one that you are going to run your inferences on -- for training custom models.
 
 Transfer Learning works by freezing the weights and biases present in specific layers of a
 pre-trained Network -- usually being the hidden layers, which are the feature extractors -- 
-when training customzized models. This way,  only some layers of the Network -- usually the last layers, which 
-are the decisors -- effectively have to be tuned.
+when training customized models. This way,  only some layers of the Network -- usually the last layers, which 
+are the deciders -- effectively have to be tuned.
 
 The biggest advantages of Transfer Learning are that, because it allows for
-training only specific layers of an architecture to get a custom model for
-inference, the training process is much faster than it would be for if the
-whole network had to be trained, because you do not need to compute all the
-weights and biases of your custom model; and also that you typically do not
-need to have a lot of data for training good performing models, as you
-would be reusing pre-trained weights from a model that was already trained on
-larger datasets \cite{CS231N}.
+training only specific layers of an architecture to get a custom model, the
+training process is much faster than it would be if the whole network had to be
+retrained; and additionally less training data is required for achieving a good
+performing model, since you reuse the work done on the previous training
+\cite{CS231N}.
 
 \section{Object Detection}
 
@@ -665,11 +684,7 @@ regions of interest with the highest probability scores and ultimately get to a 
 \end{figure}
 
 \section{Tensor Processing Unit}
-
-Artificial Inteligence(\sigla{AI}{Artifical Intelligence}) models that use Deep Neural 
-Networks (\sigla{DNN}{Deep Neural Network})s can often be trained and deployed for inference
-on general purpose hardware such as \sigla{CPU}{Central Processing Unit}s, but target 
-for specialized hardware such as \sigla{GPU}{Graphics Processing Unit}s.
+\label{sec:TPU}
 
 With the increased adoption of DNNs in various workloads and their specialized
 and heavy compute nature, Google started the development of a domain specific
@@ -689,7 +704,7 @@ contemporary hardware of paired or reduced power consumption.
 \end{figure}
 
 Since the first generation TPU described in a 2018 paper \cite{Google2015},
-Google has released the TPU into commercials products made available to thirds
+Google has released the TPU into commercials products made available to third
 parties. Most notably, the Google Coral\footnote{https://coral.ai} initiative
 offers ready-to-use development boards that embedded TPU chips, allowing
 developers to leverage the improved DNN performance in their applications.
@@ -703,9 +718,10 @@ developers to leverage the improved DNN performance in their applications.
 
 \section{Strain Gauge}
 
-For measuring weight, one of the most common transducers utilized is the strain
-gauge. In general, a strain gauge is a device whose measured electrical
-resistance varies with changes in its applied force \cite{Stefanescu}.
+For measuring weight, one of the most common transducers used is the strain
+gauge. A strain gauge is a device whose measured electrical
+resistance varies with changes in its applied force, as a consequence of the
+mechanical deformation \cite{Stefanescu}.
 
 \begin{figure}[H]
 	\centering
@@ -715,14 +731,11 @@ resistance varies with changes in its applied force \cite{Stefanescu}.
 	\label{fig:gauge1}
 \end{figure}
 
-The deformation of the material caused by the mechanical strain can then
-be measured through a variation in resistence.
-
-In practice, the resistance variations are minute changes and can be
-difficult to measure. Additionally, it is usually desirable to have as the
-output of the transducer a signal which can be converted to the digital domain
-through an Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital
-Converter}), and for that a Wheatstone Bridge can be used.
+In practice, however, the resistance variations observed after applying a
+mechanical strain are minute and can be difficult to measure. To solve that issue,
+and to also provide a signal which can be later used as the input of an
+Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital Converter}), the Wheatstone
+Bridge circuit can be used \cite{Michigan2020}.
 
 \begin{figure}[H]
 	\centering
@@ -732,12 +745,10 @@ Converter}), and for that a Wheatstone Bridge can be used.
 	\label{fig:gauge2}
 \end{figure}
 
-The Wheatstone Bridge is a circuit capable of responding to the minute changes
-in resistance that occur when strain is applied to the sensor \cite{Michigan2020}.
 When no load is applied, the bridge is balanced and the output voltage
 $V_{out}$ should be zero. If any strain is applied to the gauges, the bridge
 will become unbalanced, and therefore will result in a non-zero output voltage.
-Since the voltage variation tends to be small, in the order of milivolts, signal amplification is usually
+Since the voltage variation tends to be small, in the order of millivolts, signal amplification is usually
 required for pairing the bridge with commercially available ADCs \cite{HorowitzHill2015}.
 
 It can be shown that the relation between $V_{out}$ and $V_{in}$, $S$, shown on Figure \ref{fig:gauge2}, can be
@@ -747,15 +758,17 @@ calculated as \cite{Stefanescu}:
     \label{eq:strain}
     S = \frac{V_{out}}{V_{in}} = k\frac{\Delta l}{l}
 \end{equation}
-where $k$ is the is known as the \textit{gauge factor}, related to the physical construction and materials of the strain gauge, and 
-$\frac{\Delta l}{l}$ is the relative variation of length or strain.
+where $k$ is known as the \textit{gauge factor}, related to the physical
+construction and materials of the strain gauge, and $\frac{\Delta l}{l}$ is the
+relative variation of length or strain.
 
-With that, Equation \ref{eq:strain} indicates that the output voltage $V_{out}$ will be linearly proportional to the
-amount of strain applied, providing the desired sensing capability.
+With that, Equation \ref{eq:strain} indicates that the output voltage $V_{out}$
+will be linearly proportional to the amount of strain applied, providing the
+desired sensing capability.
 
 \section{Load Cell}
 
-In practice, using strain gauges directly can be difficult since a proper
+Using strain gauges directly can be difficult since a proper
 mechanical structure and arrangement is crucial for the sensors to function
 properly. For that, commercially available \textit{Load Cells} offer ready to
 use mechanical packages that embed the strain gauges for weight sensing
@@ -776,16 +789,20 @@ therefore provide the desired sensing \cite{HBM2022}.
 \chapter{Development}
 \label{chap:desenv}
 
+In this section, we describe the development of the \textit{zCart} smart cart
+prototype. All the source code related to the prototype is available at a
+GitHub repository\footnote{https://github.com/fsmiamoto/zcart}
+
 \section{Design}
 \label{sec:design}
 
 As a first step in developing our prototype, a set of
-goals was defined to guide the high level design and is listed below:
+high level goals was defined to guide the initial design:
 
 \begin{enumerate}
     \item Handle user interactions and give visual feedback
     \item Store the current set of products present in the cart and their respective information
-    \item Recognize the addition or removal of products through computer vision and sensorial data.
+    \item Recognize the addition or removal of products, including quantities.
 \end{enumerate}
 
 With those goals in mind, the high level architecture of the prototype
@@ -793,19 +810,19 @@ was designed and is shown in Figure \ref{fig:architecture}.
 
 For each goal, a dedicated software application will be used and those
 applications will communicate using \sigla{TCP}{Transmission Control Protocol}
-network sockets \cite{Kurose2013} with established application protocols such as
+network sockets \cite{Kurose2013} with industry standard application protocols such as
 \sigla{HTTP}{Hypertext Transfer Protocol}\footnote{First defined in
-\sigla{RFC}{Request For Comments} 1945} -- using the RESTful pattern -- and
-WebSocket\footnote{Defined in RFC 6455}.
+\sigla{RFC}{Request For Comments} 1945} and WebSocket\footnote{Defined in RFC 6455}.
+Most of the HTTP communication will follow the widespread REST pattern \cite{Roy2000}.
 
 For handling the first goal, the \textit{User App} will request data
 from other applications and will display the information to end users and allow
-them to interact with the cart using a touch enabled LCD display.
+them to interact with the cart using a touch enabled LCD display. 
 
 The \textit{Cart Service} will be in charge of the second goal,
 handling requests from the \textit{User App} that request data or incur in any
-side effects, such as finalizing a purchase. The \textit{Cart Service} uses a
-\textbf{relational database} \cite{Silberschatz2010} as its datastore. Namely
+side effects, such as completing a purchase. The \textit{Cart Service} uses a
+\textbf{relational database} \cite{Silberschatz2010} as its primary database. Namely
 \textbf{SQLite}, considered to be the world's most deployed database due to its
 massive adoption in mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
@@ -814,6 +831,15 @@ library support in common programming languages and the use of the familiar
 relational modeling, including \sigla{SQL}{Structured Query Language}
 \cite{Nield2016}, were key factors in choosing it.
 
+In order to provide real time updates to the \textit{User App}, the Cart Service has a
+WebSocket API endpoint that allows the User App to listen to updates such as a product addition
+and then display a notification to the end user.
+
+For the third goal, the \textit{Product Recognizer} application will be responsible
+for processing a camera feed and weight sensor data to be able to tell if any products
+were added of removed from the cart. Any detected changes will be communicated to the
+Cart Service, which will be responsible for persisting those changes on the database. 
+
 All three applications will executed under a Linux \cite{Tanenbaum2015} 
 based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
 Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single 
@@ -821,8 +847,8 @@ circuit board with a microprocessor, memory and input/output devices.
 
 The advantages of using a Linux environment for the development are many, but
 being able to leverage its concurrency capabilities, having built-in drivers
-for readily available hardware and leveraging open source projects are some to
-mention.
+for readily available hardware and leveraging open source projects are some 
+worth mentioning.
 
 \begin{figure}[H]
 	\centering
@@ -831,7 +857,6 @@ mention.
 	\fonte{Own work}
 	\label{fig:architecture}
 \end{figure}
-
 
 \begin{figure}[H]
 	\centering
@@ -850,15 +875,16 @@ In creating the zCart architecture, the following guidelines were followed:
     \item All databases should be owned by a single application. 
     \item Any interaction that requires an update to a given database that is
         not owned by an application should be done through an API and not
-        directly.
+        directly on the database.
     \item Decouple the user interface from how the data displayed is stored and transmitted
 \end{itemize}
 
 These guideline are based on known best practices from the software 
 development industry including API-first design and segregation of
-responsibilities. \cite{Sam2021,Kong2022}
+responsibilities \cite{Sam2021,Kong2022}, which are key for future architectural
+evolution.
 
-In the sections that follow, each application will be further detailed.
+In the next sections, each application will be  detailed.
 
 \section{User App}
 
@@ -871,10 +897,10 @@ device capable of running a web browser; and having mature tooling for
 development, testing and debugging are important factors that influenced 
 our decision.
 
-Although developing Linux native graphical applications through toolkits such
-as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io} might have
-yield better performance, our familiarity with web based technologies was a
-key deciding factor in favor of using those.
+As an alternative, developing Linux native graphical applications through
+toolkits such as GTK\footnote{https://gtk.org} and Qt\footnote{https://qt.io}
+might have yielded better performance but our unfamiliarity with those would be
+a challenge.
 
 \begin{figure}[H]
 	\centering
@@ -893,13 +919,13 @@ calculated and also displayed on the interface. Notifications are also
 displayed when the user adds or removes a product from the cart. Finally, the
 User App provides a \textit{Checkout} button to simulate the payment process
 and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}), because a functional
-implementation of a payment mechanism is out of scope for the the zCart prototype.
+implementation of a payment mechanism is out of scope for our prototype.
 
-More screenshots are available in Appendix \ref{ap:userapp}.
+More screenshots showing the user experience are available in Appendix \ref{ap:userapp}.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/lcddisplay.jpeg}
+	\includegraphics[width=0.6\textwidth]{./images/lcddisplay.jpeg}
 	\caption[LCD Display showing the User App during development]{LCD Display showing the User App during development}
 	\fonte{Own work}
 	\label{fig:dummy}
@@ -911,7 +937,7 @@ the PoC checkout.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/diagrams/UserApp.png}
+	\includegraphics[width=0.6\textwidth]{./images/diagrams/UserApp.png}
 	\caption[User App and Cart Service interactions]{User App and Cart Service interactions}
 	\fonte{Own work}
 	\label{fig:dummy}
@@ -923,26 +949,28 @@ As described in Section \ref{sec:design}, the Cart Service will act as a
 centralized \textit{source of truth}, storing the overall \textbf{state} of the
 cart.
 
-For that it will responsible for managing the SQLite database and exposing API
+For that, it will responsible for managing the SQLite database and exposing API
 endpoints for the required state changes e.g. adding a product.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{./images/diagrams/CartService.png}
-	\caption[Cart Service architecture]{Cart Service architecture. The database is contained withing the Cart Service boundary and it is not exposed in the public APIs}
+	\includegraphics[width=0.6\textwidth]{./images/diagrams/CartService.png}
+    \caption[Cart Service architecture]{Cart Service architecture. The database
+    is contained withing the Cart Service boundary and it is not exposed in the
+    public APIs}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
 
-For the HTTP endpoints, the Application uses the REST \cite{Roy2000} pattern
+For the HTTP endpoints, the application uses the REST \cite{Roy2000} pattern
 with JavaScript Object Notation (\sigla{JSON}{JavaScript Object
 Notation})\footnote{https://json.org} as the data-interchange format, both
-being widely employed in the current software industry.
+being widely employed in the software industry.
 
 \begin{table}[H]
 	\centering
 	\label{tab:correlacao}
-	\begin{tabular}{c c|c}
+	\begin{tabular}{c | c|c}
 		\hline 
         HTTP Method & URI & Description \\
 		\hline
@@ -951,11 +979,9 @@ being widely employed in the current software industry.
         \texttt{POST} & \texttt{/cart/:cartId/checkout} & Perform checkout, emptying the cart \\
 		\hline 
 	\end{tabular}
-	\caption[Cart Service API endpoints]{Cart Service API Endpoints}
+    \caption[Cart Service API endpoints]{Cart Service API Endpoints.}
 	\fonte{Own work}
 \end{table}
-
-As example response is shown at Listing \ref{lst:response}.
 
 \begin{lstlisting}[caption={Example response for the \texttt{GET /cart/:cartId} endpoint using JSON},label={lst:response}]
 {
@@ -977,14 +1003,14 @@ As example response is shown at Listing \ref{lst:response}.
 }
 \end{lstlisting}
 
-For the implementation, the Go\footnote{https://go.dev} language was used
-alongside the Fiber\footnote{https://gofiber.io/} framework, which provides
-great support for the creation of the HTTP Server and also handling the
-WebSocket connections.
+For implementing the Cart Service, the Go\footnote{https://go.dev} programming
+language was used alongside the Fiber\footnote{https://gofiber.io/} framework,
+which provides great support for the creation of a HTTP Server and also
+handling the WebSocket connections.
 
 One of the advantages of the Go language is the use of statically compiled
 native binaries, which allow running the application without the need to
-install any additional operating system libraries.
+install any additional operating system libraries. 
 
 \section{Product Recognizer}
 
@@ -1014,17 +1040,17 @@ For the Weight Sensor, we've used two main hardware components, shown on Figure 
 The HX711 is a 24-bit analog-to-digital converter (\sigla{ADC}{Analog-to-Digital Converter})
 capable of outputting data in a serial interface \cite{Avia2022}.
 
-It has two channels for analog input with channel A having programable gains of 128 or 64 and
-can funtion using both 3.3V and 5V standard digital voltage levels.
+It has two channels for analog input with channel A having programmable gains of 128 or 64 and
+can function using both 3.3V and 5V standard digital voltage levels.
 
 One of its advantages is is that there's no need to program internal registers,
 all controls to the chip are through its pins. Additionally, it consumes only
-1.5mA under normal operation and has a on-chip power supply for the connected
+1,5 mA under normal operation and has an on-chip power supply for the connected
 load cell, making it a great choice for our prototype.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{./images/hx711-pinout.png}
+	\includegraphics[width=0.9\textwidth]{./images/hx711-pinout.png}
 	\caption[HX711 Pinout for the SOP-16L package]{HX711 Pinout for the SOP-16L package}
     \fonte{\cite{Avia2022}}
 	\label{fig:architecture}
@@ -1048,8 +1074,8 @@ and includes the pin headers for connecting with other boards.
     \fonte{\cite{Ross2019}}
 \end{figure}
 
-The Raspberri Pi board was connected to the HX711 through its GPIO pins,
-allowing it to obtain the sensor readings through a serial interface. The
+The Raspberry Pi board was connected to the HX711 through its GPIO pins,
+allowing it to obtain the sensor readings through the serial interface. The
 protocol used does not follow any known standard and can be
 described as a \textit{Non-I2C compliant two-wire
 protocol}\footnote{https://github.com/queuetue/Q2-HX711-Arduino-Library}.
@@ -1071,7 +1097,7 @@ were used to secure the load cell and breakout board during development.
 
 \subsection{Camera}
 
-In order to obtain a video feed to run Object Detection on, a camera system was
+In order to obtain a video feed to run object detection on, a camera system was
 required. For that, a standard consumer webcam was used for its reduced cost
 and good operating system driver support.
 
@@ -1100,10 +1126,14 @@ language has also became a \textit{lingua franca} in the Machine Learning and
 Data Science community as shown by volume of publications using it in the last
 decade \cite{Wes2017,Joel2019,Andreas2016}.
 
-To take advantage of the multiple processing cores available on the Raspberry
-Pi 4 \sigla{SoC}{System on a chip}, the Product Recognizer application uses a
-multi-threaded design to allow parallel processing, improving the overall
-performance.
+The Product Recognizer application also uses a multi-threaded design to allow
+concurrent processing, an important factor when considering the amount
+\sigla{I/O}{Input/Output} operations performed.
+
+Since Python's threading implementation does not allow for multiple threads to
+execute in parallel -- i.e. at the same time -- a multi-process design could take
+better advantage of the four available processing cores in the Raspberry Pi CPU
+but that path was not explored and will be left for future iterations.
 
 The three threads created are described below:
 \begin{itemize}
@@ -1143,7 +1173,7 @@ while True:
 
 As shown on Listing \ref{lst:main} and on Figure \ref{fig:threads}, the Main
 thread will do the computational work to fetch the frames from the camera that
-were read by the Frame Reader thread, preprocess and run the object detection
+were read by the Frame Reader thread, pre-process and run the object detection
 model in it. The objects are then filtered and then added to a message queue
 that will be used by the Product Recognizer thread to apply our business logic.
 
@@ -1153,9 +1183,9 @@ The Product Recognizer Thread is responsible for applying the main business
 logic of detecting the addition and removal of products by leveraging the
 objects detected in the frame and the readings provided by the weight sensor.
 
-The thread will execute an infinite loop to constantly observer the objects
-detected in the frame and the weight readings to detect the product addition
-or removals.
+The thread will execute an infinite loop to constantly observe the objects
+detected in the frame and the weight readings to detect product additions
+and removals.
 
 It uses two main variables to keep track of the current state:
 \begin{itemize}
@@ -1163,7 +1193,7 @@ It uses two main variables to keep track of the current state:
     \item The weight associated with the products present in the cart.
 \end{itemize}
 
-The first important step, is the \textit{frame diff}. This step 
+The first important step in the thread's logic is the \textit{Frame Diff}. This step 
 calculates the difference in terms of the objects detected in the current 
 and previous frames (e.g. whether objects were added, removed, or remain the same) 
 and store it in a dictionary data structure\footnote{https://docs.python.org/3/tutorial/datastructures.html\#dictionaries},
@@ -1181,16 +1211,15 @@ objects from the Main Thread.
 Given the frame object diff, it is then possible to calculate an expected
 weight change based on the weight of each item - and their quantity - contained
 in the diff. The expected weight difference is then compared to the actual
-one obtained from the weight sensor, considering a 15\% tolerance.
+one obtained from the weight sensor, considering a configurable tolerance.
 
 In this scenario, the weight readings are used as a filter and act as a
-\textit{commit} step for differences detected in the frame objects.
+\textit{commit} step for differences detected in the frame objects. This way, objects are not
+added or removed from the cart simply by appearing or disappearing from the frame.
 
-For example, if the can illustrated in Figure \ref{fig:diff} weights an expected 400 grams, the weight
-difference expected should be of about 400 grams. If the weight difference does not match the expected
-one, the object will not be considered for addition or removal. For our PoC's purpose, setting up an 
-actionable visual warning on this type of exception is out of scope, but a full functional implementation
-may include it.
+In the example show in Figure \ref{fig:diff}, if the illustrated can weights an expected 400 grams, the weight
+difference expected should be close to 400 grams. If the weight difference does not match the expected
+one, the object will not be considered for addition or removal. 
 
 A more detailed activity diagram of the logic executed in the Product Recognizer thread loop is
 shown in Figure \ref{fig:activity}.
@@ -1273,16 +1302,17 @@ feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desi
     \label{fig:diff}
 \end{figure}
 
-The raw pictures and bounding boxes were then exported from Edge Impulse as so as
-we could pre-process the data and model our custom object detection algorithm using the 
-Python programming language.
-The pictures were exported in their raw JPEG\footnote{Defined in ISO/IEC 10918}  file format, 
-comprised in a ZIP folder.
-The bounding boxes were exported in the format of a JSON file containing the coordinates for the boundaries
-and the metrics for each picture, allowing us to easily reconstruct the bounding boxes for each object 
-in each image using programming instructions. The files were then loaded to a Cloud Object Storage Bucket in AWS
-\footnote{https://aws.amazon.com/}, making it easier for us to access the data by importing it from 
-the web using any programming language.
+The raw pictures and bounding boxes were then exported from Edge Impulse such
+that we could pre-process the data and model our custom object detection
+algorithm using the Python programming language. The pictures were exported in
+their raw JPEG\footnote{Defined in ISO/IEC 10918}  file format, comprised in a
+ZIP folder. The bounding boxes were exported in the format of a JSON file
+containing the coordinates for the boundaries and the metrics for each picture,
+allowing us to easily reconstruct the bounding boxes for each object in each
+image using programming instructions. The files were then loaded to a Cloud
+Object Storage Bucket in AWS \footnote{https://aws.amazon.com/}, making it
+easier for us to access the data by importing it from the web using any
+programming language.
 
 \begin{lstlisting}[caption={Bounding boxes coordinates file exported from Edge Impulse},label={lst:boundingBoxCoordinates}]
 	{
@@ -1327,7 +1357,7 @@ to use Google's infrastructure (with GPUs and TPUs) for writing and executing co
 \end{figure}
 
 The Edge Impulse files were loaded from our cloud object storage bucket, and then manipulated in Python
-from Google Collab as so as we could utilize the images and bounding box coordinates for training
+from Google Collab such that we could utilize the images and bounding box coordinates for training
 our model.
 
 We decided to use Google's TensorFlow\footnote{https://www.tensorflow.org/} framework to train our 
@@ -1342,11 +1372,11 @@ complex concepts of deep learning into parameterized objects and methods, allowi
 more time on the pre-processing steps and on experimenting with different network configurations
 to improve the model's accuracy. 
 
-As of the time of development of this work, the ModelMaker API only has compatibility with the 
-EfficientDet family of architectures\cite{Mingxing2020}
-for training Deep Learning models for Object Detection. 
-The EfficientDet family is efficient for object recognition in edge devices, altough contemporany 
-architectures, such as the YOLOv5 and its successors, can have better performance.
+As of writing this work, the ModelMaker API only has compatibility
+with the EfficientDet family of architectures \cite{Mingxing2020} for training
+Deep Learning models for Object Detection. The EfficientDet family is efficient
+for object recognition in edge devices, altough contemporany architectures,
+such as the YOLOv5 and its successors, can have better performance.
 
 \begin{figure}[H]
 	\centering
@@ -1356,24 +1386,27 @@ architectures, such as the YOLOv5 and its successors, can have better performanc
     \label{fig:diff}
 \end{figure}
 
-Our initial plan was to use the YOLOv5 architecture, but since its implementation is not native
-to TensorFlow Lite, it would require us to create additional wrappers around the outputs of the YOLOv5
-network to get it working as expected. Even thought it is possible to convert the models from their
-original PyTorch\footnote{https://pytorch.org/} format to a TensorFlow Lite format, the conversion does
-not cover some of the features from the original implementation, as discussed in this GitHub Issue\footnote{https://github.com/ultralytics/yolov5/issues/1981},
-which limits its direct functionality.
-Similar compatibility issues happen with latest YOLO implementations, such as the YOLOv7, 
-as shown in this article\footnote{https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4}. 
-Thus, we decided to proceed with the TensorFlow Lite's Model Maker API compatible architectures, 
-which are in the EfficientDet family, as we would have taken considerable time on troubleshooting 
-the conversion defects from the YOLO networks, which would deviate us from our project's main purpose,
-and as it fulfilled our project's requirements without major impacts. 
+Our initial plan was to use the YOLOv5 architecture, but since its
+implementation is not native to TensorFlow Lite, it would require us to create
+additional wrappers around the outputs of the YOLOv5 network to get it working
+as expected. Even thought it is possible to convert the models from their
+original PyTorch\footnote{https://pytorch.org/} format to a TensorFlow Lite
+format, the conversion does not cover some of the features from the original
+implementation\footnote{https://github.com/ultralytics/yolov5/issues/1981},
+which limits its direct functionality. Similar compatibility issues happen with
+the latest YOLO implementations, such as the
+YOLOv7\footnote{https://medium.com/geekculture/journey-putting-yolo-v7-model-into-tensorflow-lite-object-detection-api-model-running-on-android-e3f746a02fc4}.
+Thus, we have decided to proceed with the TensorFlow Lite's Model Maker API
+compatible architectures -- namely the EfficientDet family --  since it would
+have taken a considerable time to troubleshoot conversion defects from the YOLO
+architecture and all that work wouldn't bring any additional value to our
+prototype.
 
-Our original images were saved in 640x480 px, and the expected input of the EfficientDet network 
-was of 320x320 px, so in terms of the data pre-processing steps performed in our Python code, two approaches were
-tried out for preparing the images for training: resizing and cropping the images. 
-The bounding box coordinates and dimensions were also adjusted accordingly as so as the data 
-integrity for them was preserved. 
+Since our original images were saved in the 640x480 resolution and the expected
+input of the EfficientDet network is of 320x320 px, two pre-processing
+approaches were tried out for the training dataset: resizing and cropping the
+images. The bounding box coordinates and dimensions were also adjusted
+accordingly such that the data integrity was preserved. 
 
 \begin{figure}[H]
 	\centering
@@ -1382,10 +1415,11 @@ integrity for them was preserved.
 	\fonte{Own work}
 \end{figure}
 
-Once the images and bounding boxes were pre-processed, the images were split into Train, Validation 
-and Test sets; and saved in the standardized format required by the TensorFlow Lite's Model Maker for Object Detection API for training,
-which consists on a Comma Separated Values (\sigla{CSV}{Comma Separated Values}) in the following
-structure:
+Once the images and bounding boxes were pre-processed, the images were split
+into Train, Validation and Test sets; and saved in the standardized format
+required by the TensorFlow Lite's Model Maker for Object Detection API for
+training, which consists on a Comma Separated Values (\sigla{CSV}{Comma
+Separated Values}) in the following structure:
 
 \begin{lstlisting}[caption={CSV format for specifying the Train, Test and Validation 
 	image sets for training models using the TensorFlow's Model Maker API for Object 
@@ -1401,8 +1435,8 @@ TRAIN,./images_path/im5.png,guarana_soda,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
 TRAIN,./images_path/im5.png,post_it,0.3,0.1,,,0.3,0.4,,
 \end{lstlisting}
 
-70\% of the photos shot were moved to the Train set, which is the set used for effectively 
-tuning the weights and biases of the custom models; 21\% were moved to the Validation set, 
+Approximately 70\% of the photos shot were moved to the Train set, which is the set used for effectively 
+tuning the weights and biases of the custom models; About 21\% were moved to the Validation set, 
 being used to understand our model's performance under different training scenarios and steps; 
 and the rest was used for testing the custom model after it was trained, which allowed us to 
 get unbiased metrics on how it would approximately perform in real life \cite{MluExplain}.
@@ -1474,8 +1508,8 @@ With that, we came to have 16 distinct custom models for experimenting, as shown
 
 \section{Mechanical Assembly}
 
-For the mechinal assembly, a foldable utility cart was selected as a core
-component with two additional wooden plates used for creating a \textit{false
+A foldable utility cart was selected as a core
+component with two additional wood plates, used for creating a \textit{false
 bottom}. Between the plates, the load cell and Raspberry Pi board were secured
 in place using bolts, screws and velcro.
 
@@ -1495,7 +1529,7 @@ in place using bolts, screws and velcro.
 
 Considering the objectives of the prototype, the shape of the mechanical
 housing was not considered to be of great relevance and using a real
-supermarket cart would be impractical for its size and cost. Still, we wanted
+supermarket cart would have been impractical considering its size and cost. Still, we wanted
 to keep a shape that would represent the overall idea of a smart cart.
 
 \begin{figure}[H]
@@ -1505,85 +1539,11 @@ to keep a shape that would represent the overall idea of a smart cart.
 	\fonte{Own work}
 \end{figure}
 
+Additional photos of the prototype can be seen on Appendix \ref{app:photos}.
+
 \chapter{Results}
 
-TODO: Add intro to section
-
-\section{Testing}
-
-\subsection{Power Consumption}
-
-For estimating the overall power consumption, a commercial wattmeter was used
-to observe the total power required by the power adapter used to supply energy
-to the hardware components.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/powerconsumption.jpeg}
-	\caption[Power consumption measurement using a wattmeter]{Power consumption measurement using a wattmeter}
-	\fonte{Own work}
-\end{figure}
-
-During our tests, we have observed an average consumption of \textbf{10,4W}
-when running the all the software and hardware components of the protype
-through an external power adapter. 
-
-The tests were performed on a 220V power line using the following equipment:
-\begin{itemize}
-    \item Sinotimer DDS108 Digital Wattmeter
-    \item Baseus Quick Charger GaN 65W
-\end{itemize}
-
-Since both of these products do not have detailed accuracy and efficiency data
-available, we estimate an overall 10\% margin of error considering their
-construction \cite{Chen2017}. 
-
-With that, we can assume that the actual power draw is between 9,4W and 11,4W.
-Considering a desired  battery life of 24 hours, it would require a battery of
-about 240Wh, which can be found commercially and would not impose a
-insurmountable practical barrier.
-
-\section{Cost}
-
-One of the important aspects when developing a marketable product is its \textbf{cost}.
-
-A more detailed overview of the items and their costs in Brazil is shown on Table \ref{tbl:cost}.
-
-\begin{table}[H]
-	\centering
-	\label{tab:correlacao}
-	\begin{tabular}{c c c}
-		\hline 
-        Item & Quantity & Cost per item (BRL/USD) \\
-		\hline
-        Raspberry Pi 4 8GB Board &  1 & R\$ 1072,40 / US\$ 201,94 \\
-        HX711 with breakout board &  1  & R\$ 2,55 / US\$ 0.48 \\
-        10Kg Load Cell & 1 & R\$ 6,89 / US\$ 1,30 \\
-        MDF Board &  2  & R\$ 10,00 / US\$ 1,89 \\
-        Mounting hardware (screws, bolts and nuts) &  1  & R\$ 5,00 / US\$ 0,94 \\
-        Foldable utility cart &  1  & R\$ 125,00 / US\$ 23,60 \\
-        Webcam &  1  & R\$ 100,00 / US\$ 18.88 \\
-		\hline 
-        & Total cost & R\$ 1331.84 / US\$ 250.92 \\
-        \hline
-	\end{tabular}
-    \caption[Items used on the prototype and their approximate retail cost in Brazil as of October 2022]{Items used on the prototype and their retail cost in October 2022}
-	\fonte{Own work}
-    \label{tbl:cost}
-\end{table}
-
-Of course, the developed prototype does not include all the necessary hardware
-and software structure to deliver a successful product, but still it might show that at a
-fundamental level, the cost of such a solution might not reach the costs that
-current smart carts in the market sell for\footnote{The Nextop cart show on the
-introduction currently retails for R\$ 120.000}.
-
-Therefore, it might be possible to conclude that most of the retail cost of the
-existing smart carts is not composed of the production and infrastructure costs
-but from the required repayment of the research and development costs that such
-a product demand.
-
-\subsection{Model Accuracy}
+\section{Model Accuracy}
 
 The most lightweight models were the preferred ones considering our edge device capabilities,
 as they offer better inference time performance. 
@@ -1736,6 +1696,83 @@ for usage with the TPU or to the limited capacity of the TPU device that was use
 suggests using two TPU cores for the EfficientDet-D2 model\footnote{https://www.tensorflow.org/lite/models/modify/model\_maker/object\_detection}, 
 because the tensors are too large to fit in the chip's memory.
 
+Overall, after considering the tradeoff between precision and performance, we
+have decided to use the EfficientDet-D2 model since its performance when paired
+with the Coral TPU was more than enough for our purposes (around 4 FPS) and had
+the best precision, improving the overall experience of the prototype.
+
+\section{Power Consumption}
+
+For estimating the overall power consumption, a commercial wattmeter was used
+to observe the total power required by the power adapter used to supply energy
+to the hardware components.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{./images/powerconsumption.jpeg}
+	\caption[Power consumption measurement using a wattmeter]{Power consumption measurement using a wattmeter}
+	\fonte{Own work}
+\end{figure}
+
+During our tests, we have observed an average consumption of \textbf{10,4W}
+when running the all the software and hardware components of the protype
+through an external power adapter. 
+
+The tests were performed on a 220V power line using the following equipment:
+\begin{itemize}
+    \item Sinotimer DDS108 Digital Wattmeter
+    \item Baseus Quick Charger GaN 65W
+\end{itemize}
+
+Since both of these products do not have detailed accuracy and efficiency data
+available, we estimate an overall 10\% margin of error considering their
+construction \cite{Chen2017}. 
+
+With that, we can assume that the actual power draw is between 9,4W and 11,4W.
+Considering a desired  battery life of 24 hours, it would require a battery of
+about 240 Wh, which can be found commercially and would not impose a
+insurmountable practical barrier.
+
+\section{Cost}
+
+One of the important aspects when developing a marketable product is its \textbf{cost}.
+
+A more detailed overview of the items and their costs in Brazil is shown on Table \ref{tbl:cost}.
+
+\begin{table}[H]
+	\centering
+	\label{tab:correlacao}
+	\begin{tabular}{c c c}
+		\hline 
+        Item & Quantity & Cost per item (BRL/USD) \\
+		\hline
+        Raspberry Pi 4 8GB Board &  1 & R\$ 1072,40 / US\$ 201,94 \\
+        HX711 with breakout board &  1  & R\$ 2,55 / US\$ 0.48 \\
+        10Kg Load Cell & 1 & R\$ 6,89 / US\$ 1,30 \\
+        MDF Board &  2  & R\$ 10,00 / US\$ 1,89 \\
+        Mounting hardware (screws, bolts and nuts) &  1  & R\$ 5,00 / US\$ 0,94 \\
+        Foldable utility cart &  1  & R\$ 125,00 / US\$ 23,60 \\
+        Webcam &  1  & R\$ 100,00 / US\$ 18.88 \\
+		\hline 
+        & Total cost & R\$ 1331.84 / US\$ 250.92 \\
+        \hline
+	\end{tabular}
+    \caption[Items used on the prototype and their approximate retail cost in Brazil as of October 2022]{Items used on the prototype and their retail cost in October 2022}
+	\fonte{Own work}
+    \label{tbl:cost}
+\end{table}
+
+Of course, the developed prototype does not include all the necessary hardware
+and software structure to deliver a successful product, but still it might show that at a
+fundamental level, the cost of such a solution might not reach the costs that
+current smart carts in the market sell for\footnote{The Nextop cart show on the
+introduction currently retails for R\$ 120.000}.
+
+Therefore, it might be possible to conclude that most of the retail cost of the
+existing smart carts is not composed of the production and infrastructure costs
+but from the required repayment of the research and development costs that such
+a product demand.
+
 \section{Challenges and future work}
 
 As one of the expected outcomes of our work, we have been able to identify
@@ -1788,18 +1825,18 @@ perspective.
 
 \subsection{Loss Prevention}
 
-As our research has shown, loss prevention is a key feature of a smart cart, specially in the brazilian context
+As our research has shown, loss prevention is a key feature of a smart cart, specially in the Brazilian context
 \cite{Nextop2022}.
 
 In such scenario, it would be important to work on possible extra features that
-would give the grosser the confidence to deploy the cart to his/her retail
+would give the grosser the extra confidence to deploy the cart to his/her retail
 chain.
 
 \subsection{Improving accuracy and reliability}
 
 Related to the subsection above, improving the accuracy and reliability of the
 overall system is key not just for loss prevention but to provide a great user
-experience. We believe that a subpar experience will eventually lead to disuse
+experience. We believe that a sub par experience will eventually lead to disuse
 and therefore our objective would be to achieve a \textit{transparent}
 experience, where the user might even forget about all the technological feat
 that allows the cart to function.
@@ -1807,10 +1844,19 @@ that allows the cart to function.
 \chapter{Conclusions}
 
 This work has shown the development of \textit{zCart}, a functional smart cart
-prototype using computer vision and sensorial data, the same technological
-framework used on similar commercial products. Additionally, we were able to present
-some of the challenges and future work discussions related to the current state
-of the prototype.
+prototype using computer vision and sensor data, the same technological
+framework used on similar commercial products. The prototype development has
+successfully reached all of the desired objectives including the training of a
+object detection model and developing an interactive user interface.
+
+The real time performance achieved using the selected hardware was sufficient
+for our purposes, at around 4 FPS with the EffiecientDet-D2 model, that showed an
+average precision of about 80\% during validation.
+
+Additionally, we were able to present some of the challenges and future work
+discussions related to the current state of the prototype and also its cost
+structure.
+
 
 %---------- Referencias ----------
 \clearpage
@@ -1819,6 +1865,7 @@ of the prototype.
 \label{bibend}
 
 %---------- Apendices (opcionais) ----------
+\setcounter{chapter}{0}
 \apendice
 \chapter{User App screenshots}
 \label{ap:userapp}
@@ -1853,4 +1900,54 @@ of the prototype.
 	\includegraphics[width=1\textwidth]{./images/userapp5.png}
 	\caption[]{Post checkout screen}
 \end{figure}
+
+\apendice
+\chapter{Prototype Photos}
+\label{app:photos}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{./images/20221204_164252.jpg}
+	\caption[]{Frontal view of the prototype}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.8\textwidth]{./images/20221204_164147.jpg}
+	\caption[]{Top view displaying the products in the cart}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.8\textwidth]{./images/20221204_163825.jpg}
+	\caption[]{Frontal view of the prototype displaying the video camera feed}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.8\textwidth]{./images/20221204_164136.jpg}
+	\caption[]{Frontal view of the prototype displaying the product listing}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.8\textwidth]{./images/20221204_161311.jpg}
+    \caption[]{Popup confirmation before finishing the purchase}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.8\textwidth]{./images/20221204_161314.jpg}
+	\caption[]{Checkout confirmation screen}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.7\textwidth]{./images/20221204_164249.jpg}
+    \includegraphics[width=0.7\textwidth]{./images/20221204_164237.jpg}
+	\caption[]{Product addition and removal notifications}
+\end{figure}
+
+
 \end{document}

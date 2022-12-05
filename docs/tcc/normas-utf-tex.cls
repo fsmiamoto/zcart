@@ -425,7 +425,7 @@
 {%
 	\if@openright\cleardoublepage\else\clearpage\fi%
 	\setchaptertype{resumo}
-	\pretextualchapter{\MakeUppercase{ABSTRACT}}%
+	\pretextualchapter{\MakeUppercase{RESUMO}}%
 	\begin{espacosimples}%
 		\setlength\parindent{0pt}
 		\setlength\parskip{12pt}
@@ -433,7 +433,7 @@
 		\ABNTinstituicaodata. \ABNTlocaldata, \ABNTdatadata.\par
 }%
 {
-		\par \textbf{Keywords:} \UTFPRpalavraschavedata
+		\par \textbf{Palavras-chave:} \UTFPRpalavraschavedata
 	\end{espacosimples}
 	\newpage
 }
