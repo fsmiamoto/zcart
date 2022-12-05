@@ -626,6 +626,63 @@ retrained; and additionally less training data is required for achieving a good
 performing model, since you reuse the work done on the previous training
 \cite{CS231N}.
 
+\section{Object Detection}
+
+Images can be processed as number matrixes by computers, where each number represents a 
+pixel's color level and each index points to a position in the image;
+therefore, we can use collections of images as an input to train Deep Learning algorithms 
+and perform classification and object detection tasks on them. 
+
+Image Classification is a field of studies that is focused in labelling images as a whole; 
+Object Detection, on the other hand, focuses not only in classifying them, but also in identifying the individual
+label's coordinates within each image. For the purpose of our project and considering our proposed product's specifications,
+we will focus on Object Detection, as it needs to be able to recognize multiple objects within an image. 
+
+To feed supervised Deep Learning algorithms to detect multiple objects within an image, we need to provide our AI Models with 
+images that have one or more labels within them, the specification on what labels are there, and their coordinates.
+To specify the coordinates of an object within an image, we use Bounding Boxes.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{./images/bounding-box.png}
+	\caption[Bounding Boxes]{Bounding Boxes}
+    \fonte{\cite{AmazonRekognition}}
+	\label{fig:boundingBoxes}
+\end{figure}
+
+For our models to perform feature extraction and ultimately be able to classify each label in an image and tell their positions,
+an important mathematical operation comes to play: the Convolution. 
+Deep Learning algorithms that use Convolutions in their backbones are typically called Convolutional Neural Networks
+(\sigla{CNN}{Convolutional Neural Networks}). 
+These algorithms typically start by creating grid cells, which are delimiters for groups of pixels, around the raw images for 
+determining regions of interest and breaking down concise representations of what are the elements within the image.
+Convolutions are then applied from the original image against those grids to filter and reduce the dimensionality of
+the original image and create feature maps \cite{ObjectDetectionDeepLearning}. 
+
+These feature maps then typically go through final convolutional stages to calculate Kernels that allows for creating 
+activation functions around the grid cells that contain each of the objects within the pictures \cite{JeremyJordan};
+and those activation functions allow us to determine the Bounding Box coordinates, the confidence score of the inference 
+and the labels of the image themselves. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/convolution-activation.png}
+	\caption[Activation Functions in Object Detection]{Activation Functions in Object Detection}
+    \fonte{\cite{JeremyJordan}}
+	\label{fig:convolutionActivation}
+\end{figure}
+
+Finally, a technique known as the Non-Maximum Supression (\sigla{NMS}{Non-Maximum Supression}) is commonly used to filter the
+regions of interest with the highest probability scores and ultimately get to a single bounding box for each prediction.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/nms-object-detection.png }
+	\caption[NMS Applied to Object Detection]{NMS Applied to Object Detection}
+    \fonte{\cite{JeremyJordan}}
+	\label{fig:nmsObjectDetection}
+\end{figure}
+
 \section{Tensor Processing Unit}
 \label{sec:TPU}
 
@@ -1210,14 +1267,21 @@ for label, count in frame_diff.items():
 
 \subsection{Object Detection Model}
 
-To actually execute the Product Recognizer logic, a object detection model was
-in order and for that the first step was to actually collect the training data.
+The code used to train our Object Detection models was made available in GitHub,
+in our Project's Repository
+\footnote{https://github.com/fsmiamoto/zcart/blob/master/product\_recognizer/model/notebooks/model\_object\_detection\_tf\_api.ipynb}.
+It can be used for reference and for performing a further deep dive into this section.
 
-It was collected and labelled using Edge
-Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for
-Machine Learning on Edge devices. A total of 1000 photos were taken using the
-Data Collection feature of the Edge Impulse Studio, using the same webcam that
-is used for the inference in our final product.
+5 products were chosen for the purpose of setting up demonstrating the Object Recognition 
+capability of our product: a Blue Pens Packet; a Card Deck; a Coke Can; a Guarana Soda Can; 
+and a Post It Pack. 
+The data used for training our custom Object Detection model was collected and labelled by us
+using Edge Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for Machine 
+Learning on Edge devices.
+A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
+using the same webcam that is used for the inference in our final product.
+Our photos included images showing each one of the products in different scenarios and positions, 
+and also images where more than one product was present.
 
 \begin{figure}[H]
 	\centering
@@ -1366,9 +1430,9 @@ set,path,label,x_min,y_min,x_max,y_min,x_max,y_max,x_min,y_max
 
 Examples:
 TEST,./images_path/im3.png,0.5,0.6,,,0.2,0.9,,
-VALIDATION,./images_path/im4.png,label,0.3,0.4,,,0.4,0.8,,
-TRAIN,./images_path/im5.png,label,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
-TRAIN,./images_path/im6.png,label,0.3,0.1,,,0.3,0.4,,
+VALIDATION,./images_path/im4.png,coke_soda,0.3,0.4,,,0.4,0.8,,
+TRAIN,./images_path/im5.png,guarana_soda,0.3,0.3,0.8,0.8,1.0,0.9,0.1,1.0
+TRAIN,./images_path/im5.png,post_it,0.3,0.1,,,0.3,0.4,,
 \end{lstlisting}
 
 Approximately 70\% of the photos shot were moved to the Train set, which is the set used for effectively 
@@ -1377,42 +1441,70 @@ being used to understand our model's performance under different training scenar
 and the rest was used for testing the custom model after it was trained, which allowed us to 
 get unbiased metrics on how it would approximately perform in real life \cite{MluExplain}.
 
-Finally, we defined a programming loop to train different models using the
-EfficientDet-D0, EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and
-EfficientDet-D4 architectures; both by applying Transfer Learning on the top of
-pre-trained weights from training with the COCO-2017 dataset and by training
-the entire networks based in our custom data. 
+The Table \ref{tbl:imageSetsTab} describes the data sets created for training and evaluation in greater detail.
 
-We ran this entire loop using the cropped images first; and then executed it
-using resized images with the EfficientDet-D0, EfficientDet-D1 and
-EfficientDet-D2 architectures too, as they were the ones who offered better
-performance balance considering our hardware constraints. With that, we came to
-have 16 distinct custom models for testing. 
-
-The performance and precision of these models will be discussed in the Results section.
-
-\subsection{Coral Accelerator}
-
-As discussed in Section \ref{sec:TPU}, running DNN inferences on general purpose hardware can be expensive
-both in computational and power efficiency terms. 
-
-To alleviate that, we have used the Coral USB Accelerator, a TPU that can be
-connected to the Raspberry Pi board through \sigla{USB}{Universal Serial Bus}
-and provide significant performance improvements.
-
-\begin{figure}[H]
+\begin{table}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth]{./images/coralusb.png}
-	\caption[Coral USB Accelerator]{Coral USB Accelerator}
-	\fonte{Coral.ai}
-\end{figure}
+	\begin{adjustbox}{width=1\textwidth}
+	\label{tab:imageSets}
+	\begin{tabular}{c|c|c|c|c}
+		\hline 
+		Class & Number of Pictures & Pictures in the Train Set & Pictures in the Validation Set & Pictures in the Test Set \\
+		\hline
+        Blue Pens Packet & 293 & 206 & 61 & 26\\
+		Card Deck & 306 & 215 & 64 & 27\\
+		Coke Can & 276 & 194 & 58 & 24\\
+		Guarana Soda Can & 283 & 199 & 59 & 25\\
+		Post It Pack & 273 & 192 & 57 & 24\\
+		\hline 
+	\end{tabular}
+	\end{adjustbox}
+	\caption[Image Sets Created for Training, Validation and Testing]{Image Sets Created for Training, Validation and Testing}
+	\label{tbl:imageSetsTab}
+	\fonte{Own work}
+\end{table}
 
-To actually utilize the TPU, two important steps needed to be done. The first, is to install
-a Linux native library that acts as a driver for the device. The seconds, is that the Tensor Flow Lite 
-models need to go through a compilation process\footnote{https://coral.ai/docs/edgetpu/compiler/\#compiler-and-runtime-versions} to actually take advantage of the TPU.
+Finally, we defined a programming loop to train different models using the EfficientDet-D0,
+EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
+applying Transfer Learning on the top of pre-trained weights from training with the COCO-2017 dataset 
+and by training the entire networks based in our custom data. 
 
-Both of these steps were performed and the results, including performance comparisons 
-with and without the TPU are discussed in the Results section.
+We ran this entire loop using the cropped images first; and then executed it using resized images with the EfficientDet-D0,
+EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
+performance balance considering our hardware constraints. 
+With that, we came to have 16 distinct custom models for experimenting, as shown in Table \ref{tbl:modelsTrainedTab}.
+
+\begin{table}[H]
+	\centering
+	\begin{adjustbox}{width=1\textwidth}
+	\label{tab:modelsTrained}
+	\begin{tabular}{c|c|c|c}
+		\hline 
+		Model & Image Pre-Processing Strategy & Architecture & Whole Trained/Transfer Learning \\
+		\hline
+        1 & Cropping & EfficientDet-D0 & Whole Trained \\
+		2 & Cropping & EfficientDet-D1 & Whole Trained \\
+		3 & Cropping & EfficientDet-D2 & Whole Trained \\
+		4 & Cropping & EfficientDet-D3 & Whole Trained \\
+		5 & Cropping & EfficientDet-D4 & Whole Trained \\
+		6 & Cropping & EfficientDet-D0 & Transfer Learning on COCO-2017 \\
+		7 & Cropping & EfficientDet-D1 & Transfer Learning on COCO-2017 \\
+		8 & Cropping & EfficientDet-D2 & Transfer Learning on COCO-2017 \\
+		9 & Cropping & EfficientDet-D3 & Transfer Learning on COCO-2017 \\
+		10 & Cropping & EfficientDet-D4 & Transfer Learning on COCO-2017 \\
+		11 & Cropping & EfficientDet-D0 & Whole Trained \\
+		12 & Cropping & EfficientDet-D1 & Whole Trained \\
+		13 & Resizing & EfficientDet-D2 & Whole Trained \\
+		14 & Resizing & EfficientDet-D0 & Transfer Learning on COCO-2017 \\
+		15 & Resizing & EfficientDet-D1 & Transfer Learning on COCO-2017 \\
+		16 & Resizing & EfficientDet-D2 & Transfer Learning on COCO-2017 \\
+		\hline 
+	\end{tabular}
+	\end{adjustbox}
+	\caption[Models Trained]{Models Trained}
+	\label{tbl:modelsTrainedTab}
+	\fonte{Own work}
+\end{table}
 
 \section{Mechanical Assembly}
 
@@ -1503,20 +1595,20 @@ computationally expensive for our device- are listed below.
 	\label{tab:modelPerformance}
 	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
 		\hline 
-		Model Architecture & Preprocessing Strategy & Training Strategy & AP & AP 50 IoU & AP 75 IoU & AP (label 1) & AP (label 2) & AP (label 3) & AP (label 4) & AP (label 5) \\
+		Architecture & Preprocessing Strategy & Training Strategy & AP & AP 50 IoU & AP 75 IoU & AP (post\_it) & AP (guarana) & AP (coke) & AP (card\_deck) & AP (blue\_pens) \\
 		\hline
-        Efficientdet\-D0 & Resizing & Transfer Learning & \texttt{0.537} & \texttt{0.704} & \texttt{0.650} & \texttt{0.541} & \texttt{0.495} & \texttt{0.675} & \texttt{0.525} & \texttt{0.447} \\
-		Efficientdet\-D1 & Resizing & Transfer Learning & \texttt{0.633} & \texttt{0.794} & \texttt{ 0.776} & \texttt{0.439} & \texttt{0.671} & \texttt{0.807} & \texttt{0.631} & \texttt{0.619} \\
-		Efficientdet\-D2 & Resizing & Transfer Learning & \texttt{0.670} & \texttt{0.798} & \texttt{0.776} & \texttt{0.676} & \texttt{0.590} & \texttt{0.838} & \texttt{0.567} & \texttt{0.684} \\
-		Efficientdet\-D0 & Resizing & Whole & \texttt{0.777} & \texttt{0.912} & \texttt{0.867} & \texttt{0.577} & \texttt{0.724} & \texttt{0.891} & \texttt{0.913} & \texttt{0.779} \\
-		Efficientdet\-D1 & Resizing & Whole & \texttt{0.815} & \texttt{0.945} & \texttt{0.896} & \texttt{0.658} & \texttt{0.794} & \texttt{0.890} & \texttt{0.975} & \texttt{0.757} \\
-		Efficientdet\-D2 & Resizing & Whole & \texttt{0.820} & \texttt{0.928} & \texttt{0.878} & \texttt{0.630} & \texttt{0.784} & \texttt{0.905} & \texttt{1.000} & \texttt{0.782} \\
-		Efficientdet\-D0 & Cropping & Transfer Learning & \texttt{0.463} & \texttt{0.632} & \texttt{0.577} & \texttt{0.371} & \texttt{0.413} & \texttt{0.626} & \texttt{0.465} & \texttt{0.440} \\
-		Efficientdet\-D1 & Cropping & Transfer Learning & \texttt{0.515} & \texttt{0.659} & \texttt{0.594} & \texttt{0.376} & \texttt{0.532} & \texttt{0.741} & \texttt{0.486} & \texttt{0.440} \\
-		Efficientdet\-D2 & Cropping & Transfer Learning & \texttt{0.505} & \texttt{0.684} & \texttt{0.617} & \texttt{0.442} & \texttt{0.604} & \texttt{0.554} & \texttt{0.345} & \texttt{0.580} \\
-		Efficientdet\-D0 & Cropping & Whole & \texttt{0.817} & \texttt{0.905} & \texttt{0.897} & \texttt{0.804} & \texttt{0.862} & \texttt{0.620} & \texttt{0.969} & \texttt{0.831} \\
-		Efficientdet\-D1 & Cropping & Whole & \texttt{0.805} & \texttt{0.926} & \texttt{0.903} & \texttt{0.800} & \texttt{0.761} & \texttt{0.687} & \texttt{0.950} & \texttt{0.829} \\
-		Efficientdet\-D2 & Cropping & Whole & \texttt{0.803} & \texttt{0.930} & \texttt{0.912} & \texttt{0.799} & \texttt{0.814} & \texttt{0.657} & \texttt{0.913} & \texttt{0.832} \\
+        Efficientdet\-D0 & Resizing & Transfer Learning & \texttt{0.527} & \texttt{0.700} & \texttt{0.644} & \texttt{0.521} & \texttt{0.443} & \texttt{0.685} & \texttt{0.490} & \texttt{0.497} \\
+		Efficientdet\-D1 & Resizing & Transfer Learning & \texttt{0.623} & \texttt{0.786} & \texttt{0.740} & \texttt{0.409} & \texttt{0.639} & \texttt{0.812} & \texttt{0.670} & \texttt{0.588} \\
+		Efficientdet\-D2 & Resizing & Transfer Learning & \texttt{0.653} & \texttt{0.799} & \texttt{0.774} & \texttt{0.587} & \texttt{0.659} & \texttt{0.825} & \texttt{0.669} & \texttt{0.524} \\
+		Efficientdet\-D0 & Resizing & Whole & \texttt{0.813} & \texttt{0.978} & \texttt{0.906} & \texttt{0.752} & \texttt{0.765} & \texttt{0.891} & \texttt{0.921} & \texttt{0.736} \\
+		Efficientdet\-D1 & Resizing & Whole & \texttt{0.802} & \texttt{0.939} & \texttt{0.875} & \texttt{0.719} & \texttt{0.675} & \texttt{0.903} & \texttt{0.928} & \texttt{0.785} \\
+		Efficientdet\-D2 & Resizing & Whole & \texttt{0.826} & \texttt{0.967} & \texttt{0.922} & \texttt{0.763} & \texttt{0.776} & \texttt{0.910} & \texttt{0.895} & \texttt{0.784} \\
+		Efficientdet\-D0 & Cropping & Transfer Learning & \texttt{0.490} & \texttt{0.668} & \texttt{0.592} & \texttt{0.357} & \texttt{0.422} & \texttt{0.595} & \texttt{0.633} & \texttt{0.443} \\
+		Efficientdet\-D1 & Cropping & Transfer Learning & \texttt{0.580} & \texttt{0.730} & \texttt{0.686} & \texttt{0.312} & \texttt{0.605} & \texttt{0.716} & \texttt{0.736} & \texttt{0.531} \\
+		Efficientdet\-D2 & Cropping & Transfer Learning & \texttt{0.562} & \texttt{0.722} & \texttt{0.699} & \texttt{0.463} & \texttt{0.569} & \texttt{0.576} & \texttt{0.661} & \texttt{0.539} \\
+		Efficientdet\-D0 & Cropping & Whole & \texttt{0.832} & \texttt{0.954} & \texttt{0.934} & \texttt{0.869} & \texttt{0.854} & \texttt{0.717} & \texttt{0.922} & \texttt{0.800} \\
+		Efficientdet\-D1 & Cropping & Whole & \texttt{0.792} & \texttt{0.897} & \texttt{0.880} & \texttt{0.823} & \texttt{0.763} & \texttt{0.586} & \texttt{0.933} & \texttt{0.852} \\
+		Efficientdet\-D2 & Cropping & Whole & \texttt{0.803} & \texttt{0.923} & \texttt{0.893} & \texttt{0.795} & \texttt{0.808} & \texttt{0.631} & \texttt{0.941} & \texttt{0.840} \\
 		\hline 
 	\end{tabular}
 	\end{adjustbox}
