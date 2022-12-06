@@ -76,7 +76,7 @@
 \keywords{Artificial Inteligence, Deep Learning, Smart Devices, Internet of Things, Sensors, Object Detection, Smart Cart, Supermarket} 
 \palavraschave{Inteligência Artificial, Aprendizado Profundo, Smart Devices, Internet das Coisas, Sensores, Carrinho Inteligente, Detecção de Objetos, Supermercado}
 
-\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requisite for obtaining a Bachelor's Degree in Electronics Engineering}
+\comentario{\UTFPRdocumentodata\ presented to the \UTFPRprogramadata\ of the \ABNTinstituicaodata\ as a partial requirement for obtaining a Bachelor's Degree in Electronics Engineering}
 
 \orientador{André Eugênio Lazzaretti, Ph.D}
 
@@ -156,7 +156,7 @@ descreve o desenvolvimento de um protótipo que entrega funcionalidades
 similares aos produtos disponíveis no mercado utilizando as mesmas bases
 tecnológicas de visão computacional e sensores. Um modelo de
 aprendizado profundo (Deep Learning) foi desenvolvido para a detecção de
-produtos e implantado em um single board computer capaz de executar
+produtos e implantado em um Single Board Computer capaz de executar
 inferências em aproximadamente 4 \sigla{QPS}{Quadros Por Segundo} com uma
 precisão média acima dos 80\%. Finalmente, o trabalho discute os desafios e
 restrições práticas do desenvolvimento do protótipo e prepara o caminho
@@ -278,13 +278,13 @@ the last couple of years: \textbf{shopping on
 physical stores}.
 
 According to \sigla{ABRAS}{Associação Brasileira de Supermercados} - the
-Brazilian Supermarket Association - the grocery retail sector has reached an
+Brazilian Supermarket Association - the Brazilian grocery retail sector has reached an
 impressive total revenue of \textbf{R\$ 611 billion} in 2021 - roughly US\$ 117 billion on
 October 2022 conversion rates - making up 7,03\% of the national \sigla{GDP}{Gross
 Domestic Product}. About \textbf{28 million} customers visit one of the more than
 \textbf{92.000} stores countrywide on a daily basis \cite{Abras2022}.
 
-Despite all the technological advancement seen over the last few year and the
+Despite all the technological advancement seen over the last few years and the
 economic relevance of such sector, retail grocery shopping still exhibits the
 same pain points found a decade ago. In a survey conducted in 2019, Capgemini
 has found out five key pain problems related to physical stores in general
@@ -439,7 +439,7 @@ to prevent losses \cite{Nextop2022}.
 \end{figure}
 
 Although loss prevention is an important selling point in the Brazilian market,
-the usage of the barcode scanner creates, in our opinion, a worse end customer
+the usage of the barcode scanner creates, in our opinion, a worse customer
 experience, becoming a \textit{mobile checkout station}. Also, the product does not
 include additional features such as product location search and item details. 
 
@@ -466,10 +466,10 @@ from the identified ticket era to the end-to-end identified journey}
     Bruno Bragancini Junior, \sigla{CEO}{Chief Executive Officer} of the Enxuto Group \cite{Paraiba2022}
 \end{quote}
 
-According to Nextop's CEO, Juliano Camargo, the company has already invested \textbf{R\$ 8.5 million} - about US\$ 1.63 million on October 2022 - and \textbf{4 and half years}
+According to Nextop's CEO, Juliano Camargo, the company has already invested \textbf{R\$ 8,5 millions} - about US\$ 1,63 million on October 2022 - and \textbf{4 and half years}
 of research and development.
 
-Each Smart Cart is estimated to cost around \textbf{R\$ 120,000  or around US\$ 23,020} on October 2022 \cite{Paraiba2022}.
+Each Smart Cart is estimated to cost around \textbf{R\$ 120,000} or around US\$ 23,020 on October 2022 \cite{Paraiba2022}.
 
 \section{Objectives}
 
@@ -559,7 +559,7 @@ Unsupervised Learning is typically used for clustering raw data into different b
 without necessarily knowing how to do it or having the labelled data available;
 and Reinforcement learning is often applied in control systems.
 This work will primarily focus on Supervised Learning, since our proposed project uses
-Object Detection and is trained based on labelled data samples.
+Object Detection and is trained based on labeled data samples.
 
 As for the learning algorithms used for training Neural Networks, 
 the standard algorithm is the Stochastic Gradient Descent (\sigla{SGD}{Stochastic Gradient Descent}).
@@ -628,15 +628,17 @@ performing model, since you reuse the work done on the previous training
 
 \section{Object Detection}
 
-Images can be processed as number matrixes by computers, where each number represents a 
+Images can be processed as number matrices by computers, where each number represents a 
 pixel's color level and each index points to a position in the image;
 therefore, we can use collections of images as an input to train Deep Learning algorithms 
 and perform classification and object detection tasks on them. 
 
-Image Classification is a field of studies that is focused in labelling images as a whole; 
-Object Detection, on the other hand, focuses not only in classifying them, but also in identifying the individual
-label's coordinates within each image. For the purpose of our project and considering our proposed product's specifications,
-we will focus on Object Detection, as it needs to be able to recognize multiple objects within an image. 
+Image Classification is a field of studies that is focused on labeling images
+as a whole; Object Detection, on the other hand, focuses not only in
+classifying them, but also in identifying the individual label's coordinates
+within each image. For the purpose of our project and considering our proposed
+product's specifications, we will focus on Object Detection, as it needs to be
+able to recognize multiple objects within an image. 
 
 To feed supervised Deep Learning algorithms to detect multiple objects in an image, we need to provide our AI Models with 
 images that have one or more labels, the specification on what labels are there, and their coordinates.
@@ -650,19 +652,24 @@ To specify the coordinates of an object within an image, we use Bounding Boxes.
 	\label{fig:boundingBoxes}
 \end{figure}
 
-For our models to perform feature extraction and ultimately be able to classify each label in an image and tell their positions,
-an important mathematical operation comes to play: the Convolution. 
-Deep Learning algorithms that use Convolutions in their backbones are typically called Convolutional Neural Networks
-(\sigla{CNN}{Convolutional Neural Networks}). 
-These algorithms typically start by creating grid cells, which are delimiters for groups of pixels, around the raw images for 
-determining regions of interest and breaking down concise representations of what are the elements within the image.
-Convolutions are then applied from the original image against those grids to filter and reduce the dimensionality of
-the original image and create feature maps \cite{ObjectDetectionDeepLearning}. 
+For our models to perform feature extraction and ultimately be able to classify
+each label in an image and tell their positions, an important mathematical
+operation comes to play: the Convolution. Deep Learning algorithms that use
+Convolutions in their backbones are typically called Convolutional Neural
+Networks (\sigla{CNN}{Convolutional Neural Networks}). These algorithms
+typically start by creating grid cells, which are delimiters for groups of
+pixels, around the raw images for determining regions of interest and breaking
+down concise representations of what are the elements within the image.
+Convolutions are then applied from the original image against those grids to
+filter and reduce the dimensionality of the original image and create feature
+maps \cite{ObjectDetectionDeepLearning}. 
 
-These feature maps then typically go through final convolutional stages to calculate Kernels that allows for creating 
-activation functions around the grid cells that contain each of the objects within the pictures \cite{JeremyJordan};
-and those activation functions allow us to determine the Bounding Box coordinates, the confidence score of the inference 
-and the labels of the image themselves. 
+These feature maps then typically go through the final convolutional stages to
+calculate Kernels that allows for creating activation functions around the grid
+cells that contain each of the objects within the pictures \cite{JeremyJordan};
+and those activation functions allow us to determine the Bounding Box
+coordinates, the confidence score of the inference and the labels of the image
+themselves. 
 
 \begin{figure}[H]
 	\centering
@@ -672,8 +679,10 @@ and the labels of the image themselves.
 	\label{fig:convolutionActivation}
 \end{figure}
 
-Finally, a technique known as the Non-Maximum Supression (\sigla{NMS}{Non-Maximum Supression}) is commonly used to filter the
-regions of interest with the highest probability scores and ultimately get to a single bounding box for each prediction.
+Finally, a technique known as the Non-Maximum Suppression
+(\sigla{NMS}{Non-Maximum Suppression}) is commonly used to filter the regions
+of interest with the highest probability scores and ultimately get to a single
+bounding box for each prediction.
 
 \begin{figure}[H]
 	\centering
@@ -797,7 +806,7 @@ GitHub repository\footnote{https://github.com/fsmiamoto/zcart}
 \label{sec:design}
 
 As a first step in developing our prototype, a set of
-high level goals was defined to guide the initial design:
+high level goals was defined to guide the initial technical design:
 
 \begin{enumerate}
     \item Handle user interactions and give visual feedback
@@ -815,6 +824,14 @@ network sockets \cite{Kurose2013} with industry standard application protocols s
 \sigla{RFC}{Request For Comments} 1945} and WebSocket\footnote{Defined in RFC 6455}.
 Most of the HTTP communication will follow the widespread REST pattern \cite{Roy2000}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{./images/zCart.png}
+	\caption[High level architecture of zCart]{High level architecture of zCart}
+	\fonte{Own work}
+	\label{fig:architecture}
+\end{figure}
+
 For handling the first goal, the \textit{User App} will request data
 from other applications and will display the information to end users and allow
 them to interact with the cart using a touch enabled LCD display. 
@@ -824,10 +841,10 @@ handling requests from the \textit{User App} that request data or incur in any
 side effects, such as completing a purchase. The \textit{Cart Service} uses a
 \textbf{relational database} \cite{Silberschatz2010} as its primary database. Namely
 \textbf{SQLite}, considered to be the world's most deployed database due to its
-massive adoption in mobile
+massive adoption on mobile
 devices\footnote{https://www.sqlite.org/mostdeployed.html}. The simplicity of
-SQLite -- the entire database is contained within a single file -- great
-library support in common programming languages and the use of the familiar
+SQLite, the entire database is contained within a single file, great
+library support on common programming languages and the use of the familiar
 relational modeling, including \sigla{SQL}{Structured Query Language}
 \cite{Nield2016}, were key factors in choosing it.
 
@@ -840,7 +857,7 @@ for processing a camera feed and weight sensor data to be able to tell if any pr
 were added of removed from the cart. Any detected changes will be communicated to the
 Cart Service, which will be responsible for persisting those changes on the database. 
 
-All three applications will executed under a Linux \cite{Tanenbaum2015} 
+All three applications will execute under a Linux \cite{Tanenbaum2015} 
 based environment on a Raspberry Pi\footnote{https://www.raspberrypi.com} 4 Single Board
 Computer (\sigla{SBC}{Single Board Computer}) - a complete computer built on a single 
 circuit board with a microprocessor, memory and input/output devices.
@@ -849,14 +866,6 @@ The advantages of using a Linux environment for the development are many, but
 being able to leverage its concurrency capabilities, having built-in drivers
 for readily available hardware and leveraging open source projects are some 
 worth mentioning.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{./images/zCart.png}
-	\caption[High level architecture of zCart]{High level architecture of zCart}
-	\fonte{Own work}
-	\label{fig:architecture}
-\end{figure}
 
 \begin{figure}[H]
 	\centering
@@ -884,12 +893,12 @@ development industry including API-first design and segregation of
 responsibilities \cite{Sam2021,Kong2022}, which are key for future architectural
 evolution.
 
-In the next sections, each application will be  detailed.
+In the next sections, each application will be discussed in further detail.
 
 \section{User App}
 
 For developing the User App, we have used web technologies such 
-as HTML, CSS \cite{Duckett2011} and JavaScript \cite{Flanagan2020} through the 
+as HTML, CSS \cite{Duckett2011} and JavaScript \cite{Flanagan2020} using the 
 React\footnote{htps://reactjs.org} framework. 
 
 Using web-based technologies allows the User App to be displayed on any 
@@ -916,9 +925,10 @@ provide a visual feedback mechanism for end users of the zCart.
 It displays the current products added to the cart, their amounts and also the
 price for each item. The subtotal price for all products added to the cart is
 calculated and also displayed on the interface. Notifications are also
-displayed when the user adds or removes a product from the cart. Finally, the
-User App provides a \textit{Checkout} button to simulate the payment process
-and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}), because a functional
+displayed when the user adds or removes a product from the cart. 
+
+Finally, the User App provides a \textit{Checkout} button to simulate the payment process
+and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}), since a functional
 implementation of a payment mechanism is out of scope for our prototype.
 
 More screenshots showing the user experience are available in Appendix \ref{ap:userapp}.
@@ -1009,8 +1019,8 @@ which provides great support for the creation of a HTTP Server and also
 handling the WebSocket connections.
 
 One of the advantages of the Go language is the use of statically compiled
-native binaries, which allow running the application without the need to
-install any additional operating system libraries. 
+native binaries, which allows running the application without the need to
+install any additional operating system libraries on the Linux environment. 
 
 \section{Product Recognizer}
 
@@ -1018,16 +1028,16 @@ At the core of the zCart prototype is the Product Recognizer application,
 responsible for the product detection based on computer vision and weight
 sensing.
 
-For achieving its goal, the Product Recognizer has three main sub-components, as shown below:
+For achieving its goal, the Product Recognizer has three main components, as shown below:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{./images/diagrams/ProductRecognizer.png}
-	\caption[]{}
+	\includegraphics[width=0.6\textwidth]{./images/diagrams/ProductRecognizer.png}
+	\caption[Product Recognizer Components]{Product Recognizer Components. Detected events will be communicated to the Cart Service for persistence}
 	\fonte{Own work}
 	\label{fig:dummy}
 \end{figure}
 
-Each of these sub-components will be described in more detail in the next subsections.
+Each of these components will be described in more detail in the next subsections.
 
 \subsection{Weight Sensor}
 
@@ -1684,16 +1694,19 @@ usage with an Edge TPU, which further reduced our inference times.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/frameratemeasurement.png}
-	\caption[Frame rate measurement]{Frame rate measurement}
+    \caption[Frame from camera feed with FPS count]{Frame from camera feed with FPS count}
 \end{figure}
 
-The inference speed has thoroughly improved, resulting in a greater capability to process more 
-Frames Per Second. When we look at the number of CPU and TPU Operations, though, what we would
-expect when using the TPU is that most Operations happen on the TPU side, however this behavior
-could only be seen in the EfficientDet-D0 model. Part of it is because the EfficientDet-D0 model
-has a simpler architecture, but it could also be due to the conversion of the model
-for usage with the TPU or to the limited capacity of the TPU device that was used. For instance, Google
-suggests using two TPU cores for the EfficientDet-D2 model\footnote{https://www.tensorflow.org/lite/models/modify/model\_maker/object\_detection}, 
+The inference speed has thoroughly improved - about 50\% on average - resulting
+in a greater capability to process more Frames Per Second. When we look at the
+number of CPU and TPU Operations, though, what we would expect when using the
+TPU is that most Operations happen on the TPU side, however this behavior could
+only be seen in the EfficientDet-D0 model. Part of it is because the
+EfficientDet-D0 model has a simpler architecture, but it could also be due to
+the conversion of the model for usage with the TPU or to the limited capacity
+of the TPU device that was used. For instance, Google suggests using two TPU
+cores for the EfficientDet-D2
+model\footnote{https://www.tensorflow.org/lite/models/modify/model\_maker/object\_detection},
 because the tensors are too large to fit in the chip's memory.
 
 Overall, after considering the tradeoff between precision and performance, we
@@ -1737,7 +1750,7 @@ insurmountable practical barrier.
 
 One of the important aspects when developing a marketable product is its \textbf{cost}.
 
-A more detailed overview of the items and their costs in Brazil is shown on Table \ref{tbl:cost}.
+A more detailed overview of the items and their costs is shown on Table \ref{tbl:cost}.
 
 \begin{table}[H]
 	\centering
@@ -1851,7 +1864,7 @@ object detection model and developing an interactive user interface.
 
 The real time performance achieved using the selected hardware was sufficient
 for our purposes, at around 4 FPS with the EffiecientDet-D2 model, that showed an
-average precision of about 80\% during validation.
+average precision above 80\% during validation.
 
 Additionally, we were able to present some of the challenges and future work
 discussions related to the current state of the prototype and also its cost
