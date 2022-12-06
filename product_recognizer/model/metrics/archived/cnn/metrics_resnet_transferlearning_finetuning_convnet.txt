@@ -1,0 +1,1001 @@
+Epoch 0/199
+----------
+train Loss: 0.9023 Acc: 0.5935
+val Loss: 0.1195 Acc: 0.9547
+
+Epoch 1/199
+----------
+train Loss: 0.8842 Acc: 0.5935
+val Loss: 0.1189 Acc: 0.9597
+
+Epoch 2/199
+----------
+train Loss: 0.8902 Acc: 0.5846
+val Loss: 0.1193 Acc: 0.9572
+
+Epoch 3/199
+----------
+train Loss: 0.8746 Acc: 0.6113
+val Loss: 0.1060 Acc: 0.9597
+
+Epoch 4/199
+----------
+train Loss: 0.8611 Acc: 0.6162
+val Loss: 0.1046 Acc: 0.9673
+
+Epoch 5/199
+----------
+train Loss: 0.9178 Acc: 0.5836
+val Loss: 0.1100 Acc: 0.9647
+
+Epoch 6/199
+----------
+train Loss: 0.8810 Acc: 0.5994
+val Loss: 0.1196 Acc: 0.9622
+
+Epoch 7/199
+----------
+train Loss: 0.8698 Acc: 0.6182
+val Loss: 0.1159 Acc: 0.9572
+
+Epoch 8/199
+----------
+train Loss: 0.8764 Acc: 0.5865
+val Loss: 0.1142 Acc: 0.9622
+
+Epoch 9/199
+----------
+train Loss: 0.8651 Acc: 0.6014
+val Loss: 0.1093 Acc: 0.9597
+
+Epoch 10/199
+----------
+train Loss: 0.8840 Acc: 0.6073
+val Loss: 0.1294 Acc: 0.9647
+
+Epoch 11/199
+----------
+train Loss: 0.8906 Acc: 0.5826
+val Loss: 0.1201 Acc: 0.9597
+
+Epoch 12/199
+----------
+train Loss: 0.8735 Acc: 0.5945
+val Loss: 0.1074 Acc: 0.9647
+
+Epoch 13/199
+----------
+train Loss: 0.8949 Acc: 0.6142
+val Loss: 0.1128 Acc: 0.9647
+
+Epoch 14/199
+----------
+train Loss: 0.8827 Acc: 0.5974
+val Loss: 0.1207 Acc: 0.9622
+
+Epoch 15/199
+----------
+train Loss: 0.8790 Acc: 0.6004
+val Loss: 0.1134 Acc: 0.9597
+
+Epoch 16/199
+----------
+train Loss: 0.8492 Acc: 0.6133
+val Loss: 0.1072 Acc: 0.9673
+
+Epoch 17/199
+----------
+train Loss: 0.8941 Acc: 0.6034
+val Loss: 0.1128 Acc: 0.9622
+
+Epoch 18/199
+----------
+train Loss: 0.9011 Acc: 0.5628
+val Loss: 0.1199 Acc: 0.9622
+
+Epoch 19/199
+----------
+train Loss: 0.9010 Acc: 0.5935
+val Loss: 0.1093 Acc: 0.9647
+
+Epoch 20/199
+----------
+train Loss: 0.8812 Acc: 0.6004
+val Loss: 0.1184 Acc: 0.9597
+
+Epoch 21/199
+----------
+train Loss: 0.8768 Acc: 0.6044
+val Loss: 0.1205 Acc: 0.9496
+
+Epoch 22/199
+----------
+train Loss: 0.8791 Acc: 0.6044
+val Loss: 0.1213 Acc: 0.9597
+
+Epoch 23/199
+----------
+train Loss: 0.8721 Acc: 0.6073
+val Loss: 0.1160 Acc: 0.9572
+
+Epoch 24/199
+----------
+train Loss: 0.8750 Acc: 0.6063
+val Loss: 0.1128 Acc: 0.9572
+
+Epoch 25/199
+----------
+train Loss: 0.8795 Acc: 0.5856
+val Loss: 0.1168 Acc: 0.9597
+
+Epoch 26/199
+----------
+train Loss: 0.9220 Acc: 0.5727
+val Loss: 0.1213 Acc: 0.9622
+
+Epoch 27/199
+----------
+train Loss: 0.8800 Acc: 0.5945
+val Loss: 0.1070 Acc: 0.9597
+
+Epoch 28/199
+----------
+train Loss: 0.8669 Acc: 0.6083
+val Loss: 0.1238 Acc: 0.9622
+
+Epoch 29/199
+----------
+train Loss: 0.8908 Acc: 0.5945
+val Loss: 0.1125 Acc: 0.9622
+
+Epoch 30/199
+----------
+train Loss: 0.8899 Acc: 0.5865
+val Loss: 0.1036 Acc: 0.9647
+
+Epoch 31/199
+----------
+train Loss: 0.8733 Acc: 0.6004
+val Loss: 0.1036 Acc: 0.9673
+
+Epoch 32/199
+----------
+train Loss: 0.8762 Acc: 0.5955
+val Loss: 0.1172 Acc: 0.9597
+
+Epoch 33/199
+----------
+train Loss: 0.9174 Acc: 0.5628
+val Loss: 0.1172 Acc: 0.9622
+
+Epoch 34/199
+----------
+train Loss: 0.8792 Acc: 0.5945
+val Loss: 0.1376 Acc: 0.9547
+
+Epoch 35/199
+----------
+train Loss: 0.8604 Acc: 0.6093
+val Loss: 0.1253 Acc: 0.9572
+
+Epoch 36/199
+----------
+train Loss: 0.8820 Acc: 0.5974
+val Loss: 0.1138 Acc: 0.9673
+
+Epoch 37/199
+----------
+train Loss: 0.9002 Acc: 0.5767
+val Loss: 0.1125 Acc: 0.9673
+
+Epoch 38/199
+----------
+train Loss: 0.8799 Acc: 0.5856
+val Loss: 0.1262 Acc: 0.9647
+
+Epoch 39/199
+----------
+train Loss: 0.8792 Acc: 0.5974
+val Loss: 0.1138 Acc: 0.9597
+
+Epoch 40/199
+----------
+train Loss: 0.8604 Acc: 0.6152
+val Loss: 0.1210 Acc: 0.9597
+
+Epoch 41/199
+----------
+train Loss: 0.9069 Acc: 0.5856
+val Loss: 0.1125 Acc: 0.9647
+
+Epoch 42/199
+----------
+train Loss: 0.8837 Acc: 0.6053
+val Loss: 0.1124 Acc: 0.9597
+
+Epoch 43/199
+----------
+train Loss: 0.8765 Acc: 0.5964
+val Loss: 0.1227 Acc: 0.9521
+
+Epoch 44/199
+----------
+train Loss: 0.8924 Acc: 0.6044
+val Loss: 0.1154 Acc: 0.9547
+
+Epoch 45/199
+----------
+train Loss: 0.9013 Acc: 0.5767
+val Loss: 0.1125 Acc: 0.9572
+
+Epoch 46/199
+----------
+train Loss: 0.8862 Acc: 0.5826
+val Loss: 0.1223 Acc: 0.9547
+
+Epoch 47/199
+----------
+train Loss: 0.8988 Acc: 0.5865
+val Loss: 0.1159 Acc: 0.9622
+
+Epoch 48/199
+----------
+train Loss: 0.8861 Acc: 0.5955
+val Loss: 0.1095 Acc: 0.9647
+
+Epoch 49/199
+----------
+train Loss: 0.8977 Acc: 0.6014
+val Loss: 0.1058 Acc: 0.9622
+
+Epoch 50/199
+----------
+train Loss: 0.8995 Acc: 0.6044
+val Loss: 0.1186 Acc: 0.9622
+
+Epoch 51/199
+----------
+train Loss: 0.8957 Acc: 0.6004
+val Loss: 0.1227 Acc: 0.9597
+
+Epoch 52/199
+----------
+train Loss: 0.8635 Acc: 0.6093
+val Loss: 0.1058 Acc: 0.9622
+
+Epoch 53/199
+----------
+train Loss: 0.8831 Acc: 0.6083
+val Loss: 0.1290 Acc: 0.9597
+
+Epoch 54/199
+----------
+train Loss: 0.8769 Acc: 0.5935
+val Loss: 0.1247 Acc: 0.9547
+
+Epoch 55/199
+----------
+train Loss: 0.9173 Acc: 0.5945
+val Loss: 0.1186 Acc: 0.9547
+
+Epoch 56/199
+----------
+train Loss: 0.8983 Acc: 0.5796
+val Loss: 0.1212 Acc: 0.9647
+
+Epoch 57/199
+----------
+train Loss: 0.8880 Acc: 0.5776
+val Loss: 0.1062 Acc: 0.9673
+
+Epoch 58/199
+----------
+train Loss: 0.9188 Acc: 0.5707
+val Loss: 0.1136 Acc: 0.9597
+
+Epoch 59/199
+----------
+train Loss: 0.8655 Acc: 0.6044
+val Loss: 0.1199 Acc: 0.9597
+
+Epoch 60/199
+----------
+train Loss: 0.8843 Acc: 0.5945
+val Loss: 0.1119 Acc: 0.9622
+
+Epoch 61/199
+----------
+train Loss: 0.8786 Acc: 0.5984
+val Loss: 0.1064 Acc: 0.9622
+
+Epoch 62/199
+----------
+train Loss: 0.8453 Acc: 0.5935
+val Loss: 0.1080 Acc: 0.9673
+
+Epoch 63/199
+----------
+train Loss: 0.8596 Acc: 0.6024
+val Loss: 0.1179 Acc: 0.9622
+
+Epoch 64/199
+----------
+train Loss: 0.8781 Acc: 0.6004
+val Loss: 0.1173 Acc: 0.9597
+
+Epoch 65/199
+----------
+train Loss: 0.9010 Acc: 0.6083
+val Loss: 0.1115 Acc: 0.9597
+
+Epoch 66/199
+----------
+train Loss: 0.8985 Acc: 0.5846
+val Loss: 0.1177 Acc: 0.9547
+
+Epoch 67/199
+----------
+train Loss: 0.8833 Acc: 0.5806
+val Loss: 0.1157 Acc: 0.9572
+
+Epoch 68/199
+----------
+train Loss: 0.8882 Acc: 0.5915
+val Loss: 0.1234 Acc: 0.9572
+
+Epoch 69/199
+----------
+train Loss: 0.8855 Acc: 0.6113
+val Loss: 0.1075 Acc: 0.9572
+
+Epoch 70/199
+----------
+train Loss: 0.8887 Acc: 0.5816
+val Loss: 0.1115 Acc: 0.9622
+
+Epoch 71/199
+----------
+train Loss: 0.9320 Acc: 0.5776
+val Loss: 0.1115 Acc: 0.9622
+
+Epoch 72/199
+----------
+train Loss: 0.8783 Acc: 0.5994
+val Loss: 0.1135 Acc: 0.9572
+
+Epoch 73/199
+----------
+train Loss: 0.8760 Acc: 0.5885
+val Loss: 0.1144 Acc: 0.9622
+
+Epoch 74/199
+----------
+train Loss: 0.9160 Acc: 0.5935
+val Loss: 0.1169 Acc: 0.9572
+
+Epoch 75/199
+----------
+train Loss: 0.8864 Acc: 0.5935
+val Loss: 0.1237 Acc: 0.9597
+
+Epoch 76/199
+----------
+train Loss: 0.9023 Acc: 0.5747
+val Loss: 0.1225 Acc: 0.9547
+
+Epoch 77/199
+----------
+train Loss: 0.8721 Acc: 0.5955
+val Loss: 0.1243 Acc: 0.9572
+
+Epoch 78/199
+----------
+train Loss: 0.8750 Acc: 0.5974
+val Loss: 0.1110 Acc: 0.9622
+
+Epoch 79/199
+----------
+train Loss: 0.9074 Acc: 0.5984
+val Loss: 0.1071 Acc: 0.9622
+
+Epoch 80/199
+----------
+train Loss: 0.9149 Acc: 0.5717
+val Loss: 0.1114 Acc: 0.9622
+
+Epoch 81/199
+----------
+train Loss: 0.8902 Acc: 0.5945
+val Loss: 0.1259 Acc: 0.9622
+
+Epoch 82/199
+----------
+train Loss: 0.9025 Acc: 0.5994
+val Loss: 0.1099 Acc: 0.9597
+
+Epoch 83/199
+----------
+train Loss: 0.8833 Acc: 0.6083
+val Loss: 0.1208 Acc: 0.9597
+
+Epoch 84/199
+----------
+train Loss: 0.8770 Acc: 0.5846
+val Loss: 0.1148 Acc: 0.9597
+
+Epoch 85/199
+----------
+train Loss: 0.8892 Acc: 0.6004
+val Loss: 0.1131 Acc: 0.9572
+
+Epoch 86/199
+----------
+train Loss: 0.9046 Acc: 0.5885
+val Loss: 0.1130 Acc: 0.9597
+
+Epoch 87/199
+----------
+train Loss: 0.8810 Acc: 0.6083
+val Loss: 0.1170 Acc: 0.9597
+
+Epoch 88/199
+----------
+train Loss: 0.8867 Acc: 0.5955
+val Loss: 0.1120 Acc: 0.9647
+
+Epoch 89/199
+----------
+train Loss: 0.8471 Acc: 0.6142
+val Loss: 0.1335 Acc: 0.9597
+
+Epoch 90/199
+----------
+train Loss: 0.9258 Acc: 0.5875
+val Loss: 0.1211 Acc: 0.9597
+
+Epoch 91/199
+----------
+train Loss: 0.8812 Acc: 0.5786
+val Loss: 0.1172 Acc: 0.9622
+
+Epoch 92/199
+----------
+train Loss: 0.8761 Acc: 0.5856
+val Loss: 0.1122 Acc: 0.9622
+
+Epoch 93/199
+----------
+train Loss: 0.8593 Acc: 0.6172
+val Loss: 0.1072 Acc: 0.9622
+
+Epoch 94/199
+----------
+train Loss: 0.9000 Acc: 0.5895
+val Loss: 0.1203 Acc: 0.9597
+
+Epoch 95/199
+----------
+train Loss: 0.8615 Acc: 0.6044
+val Loss: 0.1156 Acc: 0.9572
+
+Epoch 96/199
+----------
+train Loss: 0.8907 Acc: 0.5885
+val Loss: 0.1063 Acc: 0.9622
+
+Epoch 97/199
+----------
+train Loss: 0.9120 Acc: 0.5806
+val Loss: 0.1264 Acc: 0.9547
+
+Epoch 98/199
+----------
+train Loss: 0.8884 Acc: 0.5915
+val Loss: 0.1115 Acc: 0.9647
+
+Epoch 99/199
+----------
+train Loss: 0.8977 Acc: 0.5945
+val Loss: 0.1356 Acc: 0.9647
+
+Epoch 100/199
+----------
+train Loss: 0.9087 Acc: 0.6073
+val Loss: 0.1238 Acc: 0.9547
+
+Epoch 101/199
+----------
+train Loss: 0.8757 Acc: 0.6014
+val Loss: 0.1288 Acc: 0.9521
+
+Epoch 102/199
+----------
+train Loss: 0.9352 Acc: 0.5638
+val Loss: 0.1229 Acc: 0.9547
+
+Epoch 103/199
+----------
+train Loss: 0.8934 Acc: 0.5974
+val Loss: 0.1144 Acc: 0.9572
+
+Epoch 104/199
+----------
+train Loss: 0.8865 Acc: 0.5875
+val Loss: 0.1086 Acc: 0.9647
+
+Epoch 105/199
+----------
+train Loss: 0.9004 Acc: 0.5796
+val Loss: 0.1155 Acc: 0.9622
+
+Epoch 106/199
+----------
+train Loss: 0.8791 Acc: 0.5994
+val Loss: 0.1184 Acc: 0.9622
+
+Epoch 107/199
+----------
+train Loss: 0.8786 Acc: 0.5925
+val Loss: 0.1187 Acc: 0.9572
+
+Epoch 108/199
+----------
+train Loss: 0.8938 Acc: 0.5747
+val Loss: 0.1062 Acc: 0.9698
+
+Epoch 109/199
+----------
+train Loss: 0.8951 Acc: 0.5945
+val Loss: 0.1058 Acc: 0.9597
+
+Epoch 110/199
+----------
+train Loss: 0.8848 Acc: 0.6034
+val Loss: 0.1166 Acc: 0.9597
+
+Epoch 111/199
+----------
+train Loss: 0.8898 Acc: 0.6063
+val Loss: 0.1216 Acc: 0.9572
+
+Epoch 112/199
+----------
+train Loss: 0.8956 Acc: 0.5974
+val Loss: 0.1180 Acc: 0.9622
+
+Epoch 113/199
+----------
+train Loss: 0.9015 Acc: 0.5945
+val Loss: 0.1198 Acc: 0.9597
+
+Epoch 114/199
+----------
+train Loss: 0.9135 Acc: 0.5668
+val Loss: 0.1163 Acc: 0.9572
+
+Epoch 115/199
+----------
+train Loss: 0.8840 Acc: 0.5925
+val Loss: 0.1156 Acc: 0.9622
+
+Epoch 116/199
+----------
+train Loss: 0.8766 Acc: 0.5935
+val Loss: 0.1127 Acc: 0.9622
+
+Epoch 117/199
+----------
+train Loss: 0.8901 Acc: 0.5895
+val Loss: 0.1106 Acc: 0.9622
+
+Epoch 118/199
+----------
+train Loss: 0.8903 Acc: 0.5865
+val Loss: 0.1217 Acc: 0.9597
+
+Epoch 119/199
+----------
+train Loss: 0.8740 Acc: 0.5974
+val Loss: 0.1194 Acc: 0.9572
+
+Epoch 120/199
+----------
+train Loss: 0.8461 Acc: 0.6162
+val Loss: 0.1224 Acc: 0.9597
+
+Epoch 121/199
+----------
+train Loss: 0.8851 Acc: 0.6004
+val Loss: 0.1198 Acc: 0.9521
+
+Epoch 122/199
+----------
+train Loss: 0.8812 Acc: 0.5994
+val Loss: 0.1098 Acc: 0.9622
+
+Epoch 123/199
+----------
+train Loss: 0.8886 Acc: 0.5836
+val Loss: 0.1220 Acc: 0.9547
+
+Epoch 124/199
+----------
+train Loss: 0.8764 Acc: 0.6024
+val Loss: 0.1207 Acc: 0.9597
+
+Epoch 125/199
+----------
+train Loss: 0.8898 Acc: 0.5925
+val Loss: 0.1167 Acc: 0.9547
+
+Epoch 126/199
+----------
+train Loss: 0.8737 Acc: 0.5994
+val Loss: 0.1254 Acc: 0.9622
+
+Epoch 127/199
+----------
+train Loss: 0.8938 Acc: 0.6034
+val Loss: 0.1201 Acc: 0.9622
+
+Epoch 128/199
+----------
+train Loss: 0.8680 Acc: 0.6044
+val Loss: 0.1095 Acc: 0.9572
+
+Epoch 129/199
+----------
+train Loss: 0.8716 Acc: 0.6014
+val Loss: 0.1154 Acc: 0.9547
+
+Epoch 130/199
+----------
+train Loss: 0.9062 Acc: 0.5974
+val Loss: 0.1153 Acc: 0.9597
+
+Epoch 131/199
+----------
+train Loss: 0.9035 Acc: 0.5816
+val Loss: 0.1186 Acc: 0.9597
+
+Epoch 132/199
+----------
+train Loss: 0.8666 Acc: 0.5875
+val Loss: 0.1163 Acc: 0.9597
+
+Epoch 133/199
+----------
+train Loss: 0.8771 Acc: 0.5865
+val Loss: 0.1107 Acc: 0.9572
+
+Epoch 134/199
+----------
+train Loss: 0.9067 Acc: 0.5806
+val Loss: 0.1102 Acc: 0.9597
+
+Epoch 135/199
+----------
+train Loss: 0.8995 Acc: 0.5776
+val Loss: 0.1160 Acc: 0.9572
+
+Epoch 136/199
+----------
+train Loss: 0.8852 Acc: 0.5925
+val Loss: 0.1093 Acc: 0.9622
+
+Epoch 137/199
+----------
+train Loss: 0.9248 Acc: 0.5767
+val Loss: 0.1107 Acc: 0.9622
+
+Epoch 138/199
+----------
+train Loss: 0.8666 Acc: 0.5895
+val Loss: 0.1194 Acc: 0.9597
+
+Epoch 139/199
+----------
+train Loss: 0.9085 Acc: 0.5786
+val Loss: 0.1196 Acc: 0.9597
+
+Epoch 140/199
+----------
+train Loss: 0.8871 Acc: 0.5945
+val Loss: 0.1046 Acc: 0.9647
+
+Epoch 141/199
+----------
+train Loss: 0.8901 Acc: 0.5935
+val Loss: 0.1230 Acc: 0.9622
+
+Epoch 142/199
+----------
+train Loss: 0.8825 Acc: 0.5727
+val Loss: 0.1204 Acc: 0.9521
+
+Epoch 143/199
+----------
+train Loss: 0.9223 Acc: 0.5757
+val Loss: 0.1153 Acc: 0.9572
+
+Epoch 144/199
+----------
+train Loss: 0.8875 Acc: 0.5885
+val Loss: 0.1121 Acc: 0.9622
+
+Epoch 145/199
+----------
+train Loss: 0.8864 Acc: 0.5935
+val Loss: 0.1233 Acc: 0.9622
+
+Epoch 146/199
+----------
+train Loss: 0.9172 Acc: 0.5865
+val Loss: 0.1104 Acc: 0.9597
+
+Epoch 147/199
+----------
+train Loss: 0.9100 Acc: 0.5915
+val Loss: 0.1234 Acc: 0.9622
+
+Epoch 148/199
+----------
+train Loss: 0.8868 Acc: 0.5875
+val Loss: 0.1157 Acc: 0.9622
+
+Epoch 149/199
+----------
+train Loss: 0.8661 Acc: 0.6034
+val Loss: 0.1183 Acc: 0.9622
+
+Epoch 150/199
+----------
+train Loss: 0.8814 Acc: 0.5895
+val Loss: 0.1221 Acc: 0.9521
+
+Epoch 151/199
+----------
+train Loss: 0.9255 Acc: 0.5806
+val Loss: 0.1350 Acc: 0.9597
+
+Epoch 152/199
+----------
+train Loss: 0.8806 Acc: 0.5806
+val Loss: 0.1165 Acc: 0.9597
+
+Epoch 153/199
+----------
+train Loss: 0.8751 Acc: 0.6083
+val Loss: 0.1201 Acc: 0.9547
+
+Epoch 154/199
+----------
+train Loss: 0.9093 Acc: 0.5816
+val Loss: 0.1191 Acc: 0.9597
+
+Epoch 155/199
+----------
+train Loss: 0.9033 Acc: 0.5945
+val Loss: 0.1091 Acc: 0.9597
+
+Epoch 156/199
+----------
+train Loss: 0.8855 Acc: 0.6063
+val Loss: 0.1106 Acc: 0.9698
+
+Epoch 157/199
+----------
+train Loss: 0.8987 Acc: 0.5905
+val Loss: 0.1174 Acc: 0.9521
+
+Epoch 158/199
+----------
+train Loss: 0.9162 Acc: 0.5786
+val Loss: 0.1069 Acc: 0.9673
+
+Epoch 159/199
+----------
+train Loss: 0.8763 Acc: 0.6014
+val Loss: 0.1131 Acc: 0.9521
+
+Epoch 160/199
+----------
+train Loss: 0.9099 Acc: 0.5865
+val Loss: 0.1247 Acc: 0.9496
+
+Epoch 161/199
+----------
+train Loss: 0.9120 Acc: 0.5875
+val Loss: 0.1069 Acc: 0.9647
+
+Epoch 162/199
+----------
+train Loss: 0.8794 Acc: 0.6034
+val Loss: 0.1217 Acc: 0.9597
+
+Epoch 163/199
+----------
+val Loss: 0.1229 Acc: 0.9521
+
+Epoch 164/199
+----------
+train Loss: 0.8898 Acc: 0.5826
+val Loss: 0.1070 Acc: 0.9622
+
+Epoch 165/199
+----------
+train Loss: 0.8858 Acc: 0.6103
+val Loss: 0.1113 Acc: 0.9647
+
+Epoch 166/199
+----------
+train Loss: 0.8812 Acc: 0.6034
+val Loss: 0.1140 Acc: 0.9597
+
+Epoch 167/199
+----------
+train Loss: 0.9102 Acc: 0.5816
+val Loss: 0.1137 Acc: 0.9597
+
+Epoch 168/199
+----------
+train Loss: 0.8772 Acc: 0.5915
+val Loss: 0.1171 Acc: 0.9572
+
+Epoch 169/199
+----------
+train Loss: 0.8892 Acc: 0.5945
+val Loss: 0.1219 Acc: 0.9572
+
+Epoch 170/199
+----------
+train Loss: 0.9102 Acc: 0.5846
+val Loss: 0.1220 Acc: 0.9572
+
+Epoch 171/199
+----------
+train Loss: 0.9158 Acc: 0.5707
+val Loss: 0.1172 Acc: 0.9521
+
+Epoch 172/199
+----------
+train Loss: 0.8818 Acc: 0.5935
+val Loss: 0.1198 Acc: 0.9597
+
+Epoch 173/199
+----------
+train Loss: 0.8871 Acc: 0.5875
+val Loss: 0.1080 Acc: 0.9622
+
+Epoch 174/199
+----------
+train Loss: 0.8736 Acc: 0.5865
+val Loss: 0.1101 Acc: 0.9622
+
+Epoch 175/199
+----------
+train Loss: 0.9026 Acc: 0.6004
+val Loss: 0.1217 Acc: 0.9547
+
+Epoch 176/199
+----------
+train Loss: 0.9031 Acc: 0.5964
+val Loss: 0.1163 Acc: 0.9597
+
+Epoch 177/199
+----------
+train Loss: 0.9072 Acc: 0.5816
+val Loss: 0.1181 Acc: 0.9547
+
+Epoch 178/199
+----------
+train Loss: 0.8847 Acc: 0.6024
+val Loss: 0.1322 Acc: 0.9547
+
+Epoch 179/199
+----------
+train Loss: 0.8992 Acc: 0.5727
+val Loss: 0.1178 Acc: 0.9572
+
+Epoch 180/199
+----------
+train Loss: 0.8892 Acc: 0.5885
+val Loss: 0.1240 Acc: 0.9622
+
+Epoch 181/199
+----------
+train Loss: 0.8673 Acc: 0.5846
+val Loss: 0.1155 Acc: 0.9597
+
+Epoch 182/199
+----------
+train Loss: 0.8793 Acc: 0.5895
+val Loss: 0.1096 Acc: 0.9597
+
+Epoch 183/199
+----------
+train Loss: 0.8798 Acc: 0.5984
+val Loss: 0.1254 Acc: 0.9572
+
+Epoch 184/199
+----------
+train Loss: 0.8781 Acc: 0.6063
+val Loss: 0.1195 Acc: 0.9547
+
+Epoch 185/199
+----------
+train Loss: 0.8896 Acc: 0.5786
+val Loss: 0.1189 Acc: 0.9496
+
+Epoch 186/199
+----------
+train Loss: 0.8625 Acc: 0.6083
+val Loss: 0.1179 Acc: 0.9572
+
+Epoch 187/199
+----------
+train Loss: 0.8665 Acc: 0.6014
+val Loss: 0.1196 Acc: 0.9597
+
+Epoch 188/199
+----------
+train Loss: 0.9121 Acc: 0.5776
+val Loss: 0.1165 Acc: 0.9547
+
+Epoch 189/199
+----------
+train Loss: 0.8945 Acc: 0.5826
+val Loss: 0.1153 Acc: 0.9622
+
+Epoch 190/199
+----------
+train Loss: 0.9077 Acc: 0.5747
+val Loss: 0.1121 Acc: 0.9622
+
+Epoch 191/199
+----------
+train Loss: 0.8897 Acc: 0.5945
+val Loss: 0.1122 Acc: 0.9622
+
+Epoch 192/199
+----------
+train Loss: 0.8744 Acc: 0.6004
+val Loss: 0.1190 Acc: 0.9547
+
+Epoch 193/199
+----------
+train Loss: 0.8889 Acc: 0.6142
+val Loss: 0.1056 Acc: 0.9673
+
+Epoch 194/199
+----------
+train Loss: 0.8780 Acc: 0.5905
+val Loss: 0.1231 Acc: 0.9547
+
+Epoch 195/199
+----------
+train Loss: 0.8780 Acc: 0.5935
+val Loss: 0.1187 Acc: 0.9597
+
+Epoch 196/199
+----------
+train Loss: 0.8845 Acc: 0.5974
+val Loss: 0.1110 Acc: 0.9572
+
+Epoch 197/199
+----------
+train Loss: 0.8832 Acc: 0.6014
+val Loss: 0.1248 Acc: 0.9521
+
+Epoch 198/199
+----------
+train Loss: 0.8841 Acc: 0.6034
+val Loss: 0.1292 Acc: 0.9572
+
+Epoch 199/199
+----------
+train Loss: 0.8821 Acc: 0.6172
+val Loss: 0.1106 Acc: 0.9597
+
+Training complete in 25m 8s
+Best val Acc: 0.969773
