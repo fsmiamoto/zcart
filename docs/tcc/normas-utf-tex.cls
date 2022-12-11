@@ -206,6 +206,14 @@
 			\textbf{\MakeUppercase{\ABNTlocaldata}}\par
 			\textbf{\ABNTdatadata}
 		\end{center}
+         \begin{tabular}{|p{.9\textwidth}|}
+         \hline
+        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+         \begin{center}
+         \includegraphics[scale=.2]{./images/cc-by-sa.png}
+         \end{center}\\
+         \hline
+         \end{tabular}
 	\end{titlepage}
 }
 

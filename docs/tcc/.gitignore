@@ -1,6 +1,7 @@
 out
 *.aux
 *.pdf
+!FolhaAprovacao.pdf
 *.log
 *.dvi
 *.lof
