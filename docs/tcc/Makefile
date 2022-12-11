@@ -1,14 +1,16 @@
 SHELL = /bin/bash
+DATE = $(shell date +"%Y-%m-%d" )
 MAIN = main
+OUTPUT = zCart-$(DATE)
 
-all: clean $(MAIN).pdf
+all: clean $(OUTPUT).pdf
 
-$(MAIN).pdf: $(MAIN).tex
+$(OUTPUT).pdf: $(MAIN).tex
 	pdflatex $(MAIN)
 	bibtex $(MAIN)
 	pdflatex $(MAIN)
 	pdflatex $(MAIN)
-	mv $(MAIN).pdf out/
+	mv $(MAIN).pdf out/$(OUTPUT).pdf
 
 clean:
 	-rm -f $(MAIN).{aux,dvi,lof,log,lot,lsb,lsg,pdf,toc,bbl,blg}
