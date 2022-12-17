@@ -32,6 +32,7 @@
 \usepackage{pdfpages}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{tikz,amsmath}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -142,13 +143,14 @@ carts} to their physical retail stores, allowing customers to have an
 improved shopping experience, including better product information and a
 seamless checkout process. In that regard, this work analyses the current
 market and describes the development of a prototype that achieves similar
-functionality to the ones currently available by using the same building
+functionality to the ones currently available, using the same building
 blocks such as computer vision and sensor data. A \textit{Deep Learning}
 model was developed for product detection and deployed to a single board
-computer capable of running inferences at around 4 FPS with an average
-precision higher than  80\%. Finally, this work discusses the challenges and
-practical constraints of developing such a prototype and also lay the basis
-for future work to improve the solution into a commercial product.
+computer capable of running inferences at 4 FPS with an average precision 
+higher than  80\%. Finally, this work discusses the challenges and
+practical constraints of developing such a prototype and also presents 
+suggestions for future work to improve the solution into a commercial 
+product.
 \end{abstract}
 
 \begin{resumo}
@@ -196,10 +198,9 @@ comercial.
 
 With the advancement of high speed mobile networks and smartphone penetration,
 customer demands are on an ever increasing trajectory for more personalized and
-digital experiences. In that regard, companies worldwide are fighting for
-customer attention in the digital era by developing products and services that
-bring state-of-the-art technologies to the masses in the so called smart
-devices and systems \cite{Shafique2020}.
+digital experiences. Companies worldwide are fighting for customer attention in 
+the digital era by developing products and services that bring state-of-the-art 
+technologies to the masses in the so called smart devices and systems \cite{Shafique2020}.
 
 As an example of such advancements, smart speakers such as the Amazon Echo
 \cite{GaoPanWangChen2018}, shown on Figure \ref{fig:echodot4}, include the latest and greatest in terms of Natural
@@ -274,9 +275,9 @@ from Amazon for the Brazilian customer base.
 \end{figure}
 
 According to the research company IDC Brasil, the Brazilian home automation
-market -- in which smart speakers are included -- would have reached US\$ 298
+market -- in which smart speakers are included -- would have reached US\$ 291
 million on 2021, an impressive figure that might explain the attractiveness of
-our market.
+our market \cite{IDCBrasil}.
 
 But even with all of these innovations impacting customer behaviors day by day, one
 important aspect of consumer life still has not had any significant changes in
@@ -292,7 +293,7 @@ Domestic Product}. About \textbf{28 million} customers visit one of the more tha
 
 Despite all the technological advancement seen over the last few years and the
 economic relevance of such sector, retail grocery shopping still exhibits the
-same pain points found a decade ago. In a survey conducted in 2019, Capgemini
+same limitations found a decade ago. In a survey conducted in 2019, Capgemini
 has found out five key pain problems related to physical stores in general
 \cite{Capgemini2020}:
 
@@ -412,7 +413,7 @@ In addition to the item accounting capabilities, the user interface provided by
 the Cart also allows customers to search for the location of items  in the
 store and see more information about them, improving the customer experience.
 
-One of its quirks is that it requires the download and usage of an mobile phone
+One of its particularities is that it requires the download and usage of an mobile phone
 app for using the cart, something not required by Caper's Cart.
 
 As of October 2022, the Amazon Dash Cart is exclusively available at the Amazon
@@ -718,6 +719,29 @@ of interest with the highest probability scores and ultimately get to a single
 bounding box for each prediction. 
 An example of the technique is shown in Figure \ref{fig:nmsObjectDetection}.
 
+In this sense, two important metrics used for evaluating Object Detection models
+are the Intersection over Union (\sigla{IoU}{Intersection over Union}), which measures 
+the overlap between the predicted bounding box and the actual bounding box, 
+as shown in Equation \ref{eq:IoU}; and the Average Precision, which measures the percentage 
+of correct predictions made by the object detection model, as shown in Equation 
+\ref{eq:AP}, where \textbf{True Positives} indicates the number of correct predictions and
+\textbf{False Positives} measures the number of incorrect predictions made by the model.
+
+\begin{equation}
+\label{eq:IoU}
+IoU = \frac{\text{Area of Overlap}}{\text{Area of Union}}=
+\frac{
+    \tikz{\fill[draw=blue, very thick, fill=blue!20] (0,0) rectangle (1,1) (0.5,-0.5) rectangle (1.5,0.5);
+    \fill[draw=blue, very thick, fill=white, even odd rule] (0,0) rectangle (1,1) (0.5,-0.5) rectangle (1.5,0.5);}}
+{\tikz{\fill[draw=blue, fill=blue!20, very thick] (0,0) rectangle (1,1) (0.5,-0.5) rectangle (1.5,0.5);}}
+\end{equation}
+
+\begin{equation}
+	\label{eq:AP}
+	AP = \frac{\text{True Positives}}{\text{True Positives + False Positives}}
+\end{equation}
+
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/nms-object-detection.png }
@@ -729,11 +753,11 @@ An example of the technique is shown in Figure \ref{fig:nmsObjectDetection}.
 \section{Tensor Processing Unit}
 \label{sec:TPU}
 
-With the increased adoption of DNNs in various workloads and their specialized
-and heavy compute nature, Google started the development of a domain specific
-architecture (\sigla{DSA}{Domain Specific Architecture}) which resulted in a
-first generation custom chip, named Tensor Processing Unit (\sigla{TPU}{Tensor
-Processing Unit}), deployed to their data centers since 2015 \cite{Google2015}.
+With the increased adoption of Deep Neural Networks (\sigla{DNN}{Deep Neural Networks}) 
+in various workloads and their specialized and heavy compute nature, Google started the 
+development of a domain specific architecture (\sigla{DSA}{Domain Specific Architecture}) 
+which resulted in a first generation custom chip, named Tensor Processing Unit 
+(\sigla{TPU}{Tensor Processing Unit}), deployed to their data centers since 2015 \cite{Google2015}.
 The developed TPU had the target of improving the inference phase of DNNs and
 achieved a performance improvement of \textbf{15-30 times} when compared to
 contemporary hardware of paired or reduced power consumption. A block diagram of the TPU
@@ -877,8 +901,9 @@ from other applications and will display the information to end users and allow
 them to interact with the cart using a touch enabled LCD display. 
 
 The \textit{Cart Service} will be in charge of the second goal,
-handling requests from the \textit{User App} that request data or incur in any
-side effects, such as completing a purchase. The \textit{Cart Service} uses a
+handling requests from the \textit{User App}, which asks for data 
+on the products that are detected and notifies the completion of a purchase order 
+when the user completes the checkout. The \textit{Cart Service} uses a
 \textbf{relational database} \cite{Silberschatz2010} as its primary database. Namely
 \textbf{SQLite}, considered to be the world's most deployed database due to its
 massive adoption on mobile
@@ -1533,7 +1558,7 @@ Table \ref{tbl:imageSetsTab} describes the data sets created for training and ev
 Finally, we defined a programming loop to train different models using the EfficientDet-D0,
 EfficientDet-D1, EfficientDet-D2, EfficientDet-D3 and EfficientDet-D4 architectures; both by
 applying Transfer Learning on the top of pre-trained weights from training with the COCO-2017 dataset 
-and by training the entire networks based in our custom data. 
+\footnote{https://cocodataset.org/\#home} and by training the entire networks based in our custom data. 
 
 We ran this entire loop using the cropped images first; and then executed it using resized images with the EfficientDet-D0,
 EfficientDet-D1 and EfficientDet-D2 architectures too, as they were the ones who offered better
@@ -1659,13 +1684,21 @@ Single and Multi label classification examples respectively.
 \end{figure}
 
 The accuracy metrics were also inferred in our Test data set by using the TensorFlow Lite's 
-Object Detector \textit{"evaluate"} method\footnote{https://www.tensorflow.org/lite/api\_docs/python/tflite\_model\_maker/object\_detector/ObjectDetector\#evaluate}
+Object Detector \textit{evaluate} method\footnote{https://www.tensorflow.org/lite/api\_docs/python/tflite\_model\_maker/object\_detector/ObjectDetector\#evaluate}
 for all different model configurations that were applied. 
 The main evaluation metrics for the models considered for our product, which were the ones based 
 in the EfficientDet-D0, D1 and D2 architectures -- as the D3 and D4 architectures were too 
 computationally expensive for our device -- are listed in Table 4. 
 
+The numbers exhibited in the table consist of the classification Average Precision 
+(\sigla{AP}{Average Precision}), which measures the percentage of correctly labeled 
+predictions amongst all predictions; the AP with an IoU of 50\%, which means that
+there is at least 50\% of overlap between the predicted and the actual bounding boxes; 
+the AP with an IoU of 75\%; and the individual classification APs for each label that 
+was forecasted. 
+
 \begin{table}[H]
+	\label{tab:modelPerformance}
 	\centering
 	\begin{adjustbox}{width=1\textwidth}
 	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
@@ -1677,7 +1710,7 @@ computationally expensive for our device -- are listed in Table 4.
 		Efficientdet\-D2 & Resizing & Transfer Learning & \texttt{0.653} & \texttt{0.799} & \texttt{0.774} & \texttt{0.587} & \texttt{0.659} & \texttt{0.825} & \texttt{0.669} & \texttt{0.524} \\
 		Efficientdet\-D0 & Resizing & Whole & \texttt{0.813} & \texttt{0.978} & \texttt{0.906} & \texttt{0.752} & \texttt{0.765} & \texttt{0.891} & \texttt{0.921} & \texttt{0.736} \\
 		Efficientdet\-D1 & Resizing & Whole & \texttt{0.802} & \texttt{0.939} & \texttt{0.875} & \texttt{0.719} & \texttt{0.675} & \texttt{0.903} & \texttt{0.928} & \texttt{0.785} \\
-		Efficientdet\-D2 & Resizing & Whole & \texttt{0.826} & \texttt{0.967} & \texttt{0.922} & \texttt{0.763} & \texttt{0.776} & \texttt{0.910} & \texttt{0.895} & \texttt{0.784} \\
+		\textbf{Efficientdet\-D2} & \textbf{Resizing} & \textbf{Whole} & \textbf{0.826} & \textbf{0.967} & \textbf{0.922} & \textbf{0.763} & \textbf{0.776} & \textbf{0.910} & \textbf{0.895} & \textbf{0.784} \\
 		Efficientdet\-D0 & Cropping & Transfer Learning & \texttt{0.490} & \texttt{0.668} & \texttt{0.592} & \texttt{0.357} & \texttt{0.422} & \texttt{0.595} & \texttt{0.633} & \texttt{0.443} \\
 		Efficientdet\-D1 & Cropping & Transfer Learning & \texttt{0.580} & \texttt{0.730} & \texttt{0.686} & \texttt{0.312} & \texttt{0.605} & \texttt{0.716} & \texttt{0.736} & \texttt{0.531} \\
 		Efficientdet\-D2 & Cropping & Transfer Learning & \texttt{0.562} & \texttt{0.722} & \texttt{0.699} & \texttt{0.463} & \texttt{0.569} & \texttt{0.576} & \texttt{0.661} & \texttt{0.539} \\
@@ -1692,24 +1725,21 @@ computationally expensive for our device -- are listed in Table 4.
 	\fonte{Own work}
 \end{table}
 
-These numbers consist on the Average Precision (\sigla{AP}{Average Precision}), which provides us with 
-a percentage that is directly proportional to the number of correctly labeled predictions
-among the predictions made in the Test set; the AP considering an 
-Intersection over Union(\sigla{IoU}{Intersection over Union}) of 50\%, which means that there is 
-50\% of overlap between the predicted and the actual bounding boxes (this is measured by 
-taking the area of the intersection of the two bounding boxes divided by the area of their union, 
-hence the name); the AP considering an IoU of 75\%; and the individual APs for each label that 
-we wanted to forecast. 
-
 We could clearly see that, while the Transfer Learning models were much faster to train,
 in our particular case, the Whole-trained models outperformed them. This could be 
 due to the fact that our pictures and objects are different from the
 ones that are present in the COCO-2017 dataset; or because a custom feature extractor- 
 with custom hidden layer weights and biases- could have better performance with our pictures. 
-In terms of the architectures, as expected, the D2 architecture offered more robust results, at least in
-our models that applied resizing as a preprocessing strategy. We could not see much superior metrics for
-the models that used cropping for the images preprocessing, and that might be because most of the 
-bounding boxes ended up being cropped as well and, with that, we lost a portion of valuable label data. 
+In terms of the architectures, as expected, the D2 architecture offered more robust results, specially
+amongst the models that applied resizing as a preprocessing strategy. 
+
+We could not see much superior metrics for the models that used cropping for the images preprocessing, 
+and that might be because most of the bounding boxes ended up being cropped as well and, with that, we lost
+a portion of valuable label data. Altough the EfficientDet-D0 model that was Whole-Trained with Cropped images
+had a comparable performance in our Test Data evaluation, considering the end-to-end usability tests that we executed 
+with the assembled prototype and the overall better performance presented by the D2 architecture, as shown in
+figure \ref{fig:yoloefficientdet}, we selected the EfficientDet-D2 model that was Whole-Trained with Resized
+images as our champion model.
 
 The loss (error) metrics during training were also computed for our Train and Validation sets during the 
 200 epochs that were used for training our models using batches of 16 images, for all different 
