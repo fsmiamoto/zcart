@@ -919,7 +919,7 @@
 % REFERENCIAS 
 
 % \providecommand{\ABNTbibliographyname}{}
-\renewcommand{\ABNTbibliographyname}{Bibliography}
+\renewcommand{\ABNTbibliographyname}{References}
 
 
 %%% Outros Ajustes:

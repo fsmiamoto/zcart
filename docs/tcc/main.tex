@@ -30,6 +30,8 @@
 \usepackage{xcolor}
 \usepackage{adjustbox}
 \usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -200,7 +202,7 @@ bring state-of-the-art technologies to the masses in the so called smart
 devices and systems \cite{Shafique2020}.
 
 As an example of such advancements, smart speakers such as the Amazon Echo
-\cite{GaoPanWangChen2018} include the latest and greatest in terms of Natural
+\cite{GaoPanWangChen2018}, shown on Figure \ref{fig:echodot4}, include the latest and greatest in terms of Natural
 Language Processing and Deep Learning \cite{Young2018}, allowing customers to
 interact with the product in an conversational manner that was considered to be
 science fiction material until a couple of years ago.
@@ -227,9 +229,13 @@ These skills function much like mobile phone apps, extending and enhancing the
 functionality of the device and can be sold to end users.
 
 Developers can then easily leverage the highly advanced machine learning models
--- which can be notoriously expensive to develop and maintain \cite{Phdata2021}
--- through Application Programming Interfaces (\sigla{API}{Application
-Programming Interface}) and focus exclusively on their business logic.
+through Application Programming Interfaces (\sigla{API}{Application Programming
+Interface}) and focus exclusively on their business logic, as shown on Figure
+\ref{fig:alexaskill}.
+
+This can be valuable as Machine Learning models are considered to be
+expensive to develop and maintain, with some sources mentioning a minimum expenditure 
+of US\$ 60.000 over a five year period considering both tasks \cite{Phdata2021}.
 
 \begin{figure}[htb!]
 	\centering
@@ -241,7 +247,7 @@ Programming Interface}) and focus exclusively on their business logic.
 
 More impressively, such technological advancements have been able to reach a
 considerable amount of households in a short period of time in developed
-countries like the United States. 
+countries like the United States, as shown on Figure \ref{fig:smartspeaker}.
 
 \begin{figure}[H]
 	\centering
@@ -256,6 +262,9 @@ have delayed arrivals due to historical economic barriers but the potential
 customer base has attracted big tech companies like Amazon, which are able
 to shorten the arrival delay with their economic power.
 
+In Figure \ref{fig:alexabr}, we can see an example of a smart speaker advertisement 
+from Amazon for the Brazilian customer base.
+
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\textwidth]{./images/alexabr.jpg} % <- formatos PNG, JPG e PDF
@@ -268,16 +277,6 @@ According to the research company IDC Brasil, the Brazilian home automation
 market -- in which smart speakers are included -- would have reached US\$ 298
 million on 2021, an impressive figure that might explain the attractiveness of
 our market.
-
-% Although these advancements might seem entirely beneficial at first, countless
-% challenges have been found regarding privacy, ethical handling of personal
-% customer data and overall negative experiences caused by increased
-% dependencies, e.g what happens when you lose internet connection?
-%
-% These discussions are of the utter most importance given our current scenario
-% and have been brought up by recent literature \cite{Echoes2022,He2019}
-% but will be out of the scope of this work.
-
 
 But even with all of these innovations impacting customer behaviors day by day, one
 important aspect of consumer life still has not had any significant changes in
@@ -304,6 +303,8 @@ has found out five key pain problems related to physical stores in general
         \item Not being able to find a store associate to help
         \item Lack of product information when I select products
 \end{enumerate}
+
+The survey results can be seen in more detail in Figure \ref{fig:capgemini}.
 
 \begin{figure}[H]
 	\centering
@@ -336,14 +337,8 @@ Developed by the Caper\footnote{https://caper.ai} company, the Caper Cart was th
 
 The first version was launched in 2017 and offered grocer's the
 great advantage of not requiring any infrastructure overhaul for deployment.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{./images/capercartui.png}
-	\caption[Caper Cart user interface]{Caper Cart user interface}
-    \fonte{Caper (2020)}
-	\label{fig:caperui}
-\end{figure}
+In Figure \ref{fig:caperatretail}, we can see the cart deployed at American
+retail store.
 
 \begin{figure}[H]
 	\centering
@@ -356,28 +351,39 @@ great advantage of not requiring any infrastructure overhaul for deployment.
 For end users, it offered visual product recognition and a payment terminal,
 allowing them to avoid the dreaded queues by the end of their shopping session.
 Additionally, customers were able to search products, get discounts and locate
-items more easily with the help of the interactive user interface provided by the cart.
+items more easily with the help of the interactive user interface provided by the cart that 
+can be seen on Figure \ref{fig:caperui}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\textwidth]{./images/capercartui.png}
+	\caption[Caper Cart user interface]{Caper Cart user interface}
+    \fonte{Caper (2020)}
+	\label{fig:caperui}
+\end{figure}
 
 Although Caper does not publicize the cost of each cart, it is estimated that each unit costs between
 \textbf{US\$ 5,000 and 10,000} \cite{TWP2021}.
 
-Acquired by Instacart\footnote{https://instacart.com} in 2021 for US\$ 350 million, Caper is developing in 2022 the 
-third version of its Smart Shopping Cart, advertising an increase of \textbf{65\% in the basket
-volume} and a \textbf{10 month} break even period.
+Acquired by Instacart\footnote{https://instacart.com} in 2021 for US\$ 350
+million, Caper is developing in 2022 the third version of its Smart Shopping
+Cart, advertising an increase of \textbf{65\% in the basket volume} and a
+\textbf{10 month} break even period, as shown on Figure \ref{fig:caperad}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\textwidth]{./images/capercart3.png}
 	\caption[Caper Cart 3 promotional material]{Caper Cart 3 promotional material}
     \fonte{Caper (2022)}
-	\label{fig:nextop}
+	\label{fig:caperad}
 \end{figure}
 
 
 \subsection{Amazon Dash Cart}
 
 Available at the Amazon Fresh\footnote{https://www.amazon.com/fmc/m/30003175?almBrandId=QW1hem9uIEZyZXNo} retail chain, the
-Amazon Dash Cart is the company's first smart cart available to end users.
+Amazon Dash Cart is the company's first smart cart available to end users and is shown in
+Figure \ref{fig:dashcart}.
 
 According to Amazon, it uses computer vision and sensors to allow customers to
 simply add items to their cart like they usually would. The cart accounts all
@@ -419,9 +425,10 @@ Founded in 1997, Nextop\footnote{https://nextop.com.br} is a Brazilian company
 that develops products with a focus on the grocery stores market, with an emphasis on
 loss prevention.
 
-According to the company, the Smart Cart Nextop is the first smart cart
-deployed in Brazil and Latin America and was initially rolled out to the Enxuto
-supermarket chain in 2022 \cite{Paraiba2022}.
+Their smart cart offering, shown in Figure \ref{fig:nextop}, is the first
+deployed in Brazil and Latin America according to the company and was
+initially rolled out to the Enxuto supermarket chain in 2022
+\cite{Paraiba2022}.
 
 \begin{figure}[H]
 	\centering
@@ -431,11 +438,11 @@ supermarket chain in 2022 \cite{Paraiba2022}.
 	\label{fig:nextop}
 \end{figure}
 
-In contrast to the carts developed by Amazon and Caper, Nextop's cart
-requires customers to first scan the product using the integrated bar code
-reader, as shown on Figure \ref{fig:nextopui}. This way, the product advertises for a
-\textit{triple validation} system, using the cameras, sensors and the barcode scanner 
-to prevent losses \cite{Nextop2022}.
+In contrast to the carts developed by Amazon and Caper, Nextop's cart requires
+an additional step of scanning the product using the integrated barcode reader,
+shown in Figure \ref{fig:nextopui}, before adding it to the cart. With that, the
+Nextop advertises for a \textit{triple validation} system, using the cameras,
+sensors and the barcode scanner to prevent losses \cite{Nextop2022}.
 
 \begin{figure}[H]
 	\centering
@@ -445,17 +452,29 @@ to prevent losses \cite{Nextop2022}.
 	\label{fig:nextopui}
 \end{figure}
 
-Although loss prevention is an important selling point in the Brazilian market,
+Although loss prevention is an important selling point for the Brazilian market,
 the usage of the barcode scanner creates, in our opinion, a worse customer
 experience, becoming a \textit{mobile checkout station}. Also, the product does not
 include additional features such as product location search and item details. 
 
+Figure \ref{fig:nextopad} shows an advertisement, in Portuguese, that lists the following
+benefits:
+
+\begin{itemize}
+    \item Innovative supermarkets sell 20\% more
+    \item Loss prevention
+    \item Triple validation
+    \item Freedom and agility
+    \item New self checkout using artificial intelligence
+    \item No queues
+\end{itemize}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./images/nextoppromo.png}
-    \caption[Smart Cart Nextop® promotional material targetting supermarket owners]{Smart Cart Nextop® promotinal material targetting supermarket owners. It advertises for improved sales, loss prevention and reduced queues.}
+    \caption[Smart Cart Nextop® promotional material targetting supermarket owners]{Smart Cart Nextop® promotional material targeting supermarket owners. It advertises for improved sales, loss prevention and reduced queues.}
     \fonte{\cite{Nextop2022}}
-	\label{fig:nextopui}
+	\label{fig:nextopad}
 \end{figure}
 
 Offering a solution to the main end user pain point of having to go through
@@ -487,7 +506,7 @@ objectives of this work.
 Develop a prototype of a smart shopping cart that utilizes computer
 vision and sensor data for product recognition.
 
-\subsection{Granular objectives}
+\subsection{Specific objectives}
 \begin{itemize}
     \item Build a mechanical assembly for the prototype
     \item Develop an interactive user interface for the prototype
@@ -497,7 +516,7 @@ vision and sensor data for product recognition.
     \item Understand the economic viability of such a project in the Brazilian context
 \end{itemize}
 
-\chapter{Theoretical Background}
+\chapter{Background}
 
 In this section, we'll define in greater detail the theory behind some most
 relevant techniques used in the development of the prototype.
@@ -524,7 +543,7 @@ to tune (or train) Networks of Neurons using real world or synthetic data \cite{
 \subsection{Neurons}
 
 One of the most popular types of Neurons is the Perceptron, introduced by 
-\cite{Rosenblatt1958}. 
+\cite{Rosenblatt1958} and is shown in Figure \ref{fig:perceptron}. 
 A perceptron takes one or more binary inputs and produces a single binary output.
 
 \begin{figure}[H]
@@ -535,10 +554,12 @@ A perceptron takes one or more binary inputs and produces a single binary output
 	\label{fig:perceptron}
 \end{figure}
 
-A Neuron does not necessarily have binary inputs and outputs. In fact, 
-contemporary systems commonly use a different type of Neuron known as the Sigmoid Neuron, 
-which take real numbers as inputs and also produces continuous outputs 
-within the boundaries of the sigmoid curve instead of discrete zeroes and ones. 
+A Neuron does not necessarily have binary inputs and outputs. In fact,
+contemporary systems commonly use a different type of Neuron known as the
+Sigmoid Neuron, which take real numbers as inputs and also produces continuous
+outputs within the boundaries of the sigmoid curve, shown in Figure
+\ref{fig:sigmoid}, instead of discrete zeroes and ones.
+
 This is particularly useful for learning, since in Perceptrons small differences in the 
 weights or biases could yield to different outputs without a full transparency 
 on how close the output would have been to a different one \cite{Nielsen2015}.
@@ -592,7 +613,7 @@ Deep Learning defines a group of AI algorithms that use advanced learning techni
 top of ANNs to train models that allow systems to forecast and clusterize data 
 efficiently \cite{IBMDeepLearning}.
 Deep Learning algorithms use Neural Networks that have three types of layers:
-Input Layer, Hidden Layer and Output Layer.
+Input Layer, Hidden Layer and Output Layer, shown in Figure \ref{fig:threeLayeredAnn}.
         
 \begin{figure}[H]
 	\centering
@@ -647,9 +668,12 @@ within each image. For the purpose of our project and considering our proposed
 product's specifications, we will focus on Object Detection, as it needs to be
 able to recognize multiple objects within an image. 
 
-To feed supervised Deep Learning algorithms to detect multiple objects in an image, we need to provide our AI Models with 
-images that have one or more labels, the specification on what labels are there, and their coordinates.
-To specify the coordinates of an object within an image, we use Bounding Boxes.
+To feed supervised Deep Learning algorithms to detect multiple objects in an
+image, we need to provide our AI Models with images that have one or more
+labels, the specification on what labels are there, and their coordinates. To
+specify the coordinates of an object within an image, we use Bounding Boxes,
+shown in Figure \ref{fig:boundingBoxes}. The Bounding Box also describes the
+width and height of the object.
 
 \begin{figure}[H]
 	\centering
@@ -678,6 +702,8 @@ and those activation functions allow us to determine the Bounding Box
 coordinates, the confidence score of the inference and the labels of the image
 themselves. 
 
+An example of that process is shown in Figure \ref{fig:convolutionActivation}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/convolution-activation.png}
@@ -689,7 +715,8 @@ themselves.
 Finally, a technique known as the Non-Maximum Suppression
 (\sigla{NMS}{Non-Maximum Suppression}) is commonly used to filter the regions
 of interest with the highest probability scores and ultimately get to a single
-bounding box for each prediction.
+bounding box for each prediction. 
+An example of the technique is shown in Figure \ref{fig:nmsObjectDetection}.
 
 \begin{figure}[H]
 	\centering
@@ -709,14 +736,15 @@ first generation custom chip, named Tensor Processing Unit (\sigla{TPU}{Tensor
 Processing Unit}), deployed to their data centers since 2015 \cite{Google2015}.
 The developed TPU had the target of improving the inference phase of DNNs and
 achieved a performance improvement of \textbf{15-30 times} when compared to
-contemporary hardware of paired or reduced power consumption.
+contemporary hardware of paired or reduced power consumption. A block diagram of the TPU
+architecture is shown in Figure \ref{fig:tpuarch}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{./images/tpublock.png}
 	\caption[TPU block diagram]{TPU block diagram. The main computation, matrix multiplication, is done by the yellow units.}
     \fonte{\cite{Google2015}}
-	\label{fig:gauge1}
+	\label{fig:tpuarch}
 \end{figure}
 
 Since the first generation TPU described in a 2018 paper \cite{Google2015},
@@ -725,19 +753,24 @@ parties. Most notably, the Google Coral\footnote{https://coral.ai} initiative
 offers ready-to-use development boards that embedded TPU chips, allowing
 developers to leverage the improved DNN performance in their applications.
 
+The Coral Dev Board Micro, an example of those ready-to-use boards is shown in
+Figure \ref{fig:coraldev}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/coralboard.png}
 	\caption[Coral Dev Board Micro]{Coral Dev Board Micro. It includes a microphone, camera and the Coral Edge TPU in a single board package.}
     \fonte{Coral.ai}
+    \label{fig:coraldev}
 \end{figure}
 
 \section{Strain Gauge}
 
 For measuring weight, one of the most common transducers used is the strain
-gauge. A strain gauge is a device whose measured electrical
-resistance varies with changes in its applied force, as a consequence of the
-mechanical deformation \cite{Stefanescu}.
+gauge. A strain gauge is a device whose measured electrical resistance varies
+with changes in its applied force, as a consequence of the mechanical
+deformation \cite{Stefanescu}. A typical construction is shown in Figure 
+\ref{fig:gauge1}.
 
 \begin{figure}[H]
 	\centering
@@ -751,7 +784,7 @@ In practice, however, the resistance variations observed after applying a
 mechanical strain are minute and can be difficult to measure. To solve that issue,
 and to also provide a signal which can be later used as the input of an
 Analog-to-Digital Converter (\sigla{ADC}{Analog-to-Digital Converter}), the Wheatstone
-Bridge circuit can be used \cite{Michigan2020}.
+Bridge circuit, shown in Figure \ref{fig:gauge2}, can be used \cite{Michigan2020}.
 
 \begin{figure}[H]
 	\centering
@@ -874,6 +907,8 @@ being able to leverage its concurrency capabilities, having built-in drivers
 for readily available hardware and leveraging open source projects are some 
 worth mentioning.
 
+An End-to-End sequence diagram of an example action is shown in Figure \ref{fig:e2eseq}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/E2E.png}
@@ -926,13 +961,12 @@ a challenge.
 	\label{fig:userapp}
 \end{figure}
 
-As shown on Figure \ref{fig:userapp}, the main objective of the User App is to
-provide a visual feedback mechanism for end users of the zCart.
-
-It displays the current products added to the cart, their amounts and also the
-price for each item. The subtotal price for all products added to the cart is
-calculated and also displayed on the interface. Notifications are also
-displayed when the user adds or removes a product from the cart. 
+As shown in Figure \ref{fig:userapp}, the main objective of the User App is to
+provide a visual feedback mechanism for end users of the zCart. It displays the
+current products added to the cart, their amounts and also the price for each
+item. The subtotal price for all products added to the cart is calculated and
+also displayed on the interface. Notifications are also displayed when the user
+adds or removes a product from the cart. 
 
 Finally, the User App provides a \textit{Checkout} button to simulate the payment process
 and act as a Proof-of-Concept (\sigla{PoC}{Proof-of-Concept}), since a functional
@@ -940,34 +974,28 @@ implementation of a payment mechanism is out of scope for our prototype.
 
 More screenshots showing the user experience are available in Appendix \ref{ap:userapp}.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\textwidth]{./images/lcddisplay.jpeg}
-	\caption[LCD Display showing the User App during development]{LCD Display showing the User App during development}
-	\fonte{Own work}
-	\label{fig:dummy}
-\end{figure}
-
-In terms of the data flow, the User App requests all data from the Cart Service, which exposes API endpoints for
-getting the list of products of a given cart, establishing a WebSocket connection for notifications and performing
-the PoC checkout.
+In terms of the data flow, the User App requests all data from the Cart
+Service, which exposes API endpoints for getting the list of products of a
+given cart, establishing a WebSocket connection for notifications and
+performing the PoC checkout. Figure \ref{fig:userappdataflow} displays the
+endpoints of the Cart Service used by User App.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{./images/diagrams/UserApp.png}
 	\caption[User App and Cart Service interactions]{User App and Cart Service interactions}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:userappdataflow}
 \end{figure}
 
 \section{Cart Service}
 
 As described in Section \ref{sec:design}, the Cart Service will act as a
-centralized \textit{source of truth}, storing the overall \textbf{state} of the
-cart.
+centralized storage of the overall \textbf{state} of the cart.
 
 For that, it will responsible for managing the SQLite database and exposing API
-endpoints for the required state changes e.g. adding a product.
+endpoints for the required state changes e.g. adding a product, as shown in 
+Figure \ref{fig:cartservicearch}.
 
 \begin{figure}[H]
 	\centering
@@ -976,17 +1004,17 @@ endpoints for the required state changes e.g. adding a product.
     is contained withing the Cart Service boundary and it is not exposed in the
     public APIs}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:cartservicearch}
 \end{figure}
 
 For the HTTP endpoints, the application uses the REST \cite{Roy2000} pattern
 with JavaScript Object Notation (\sigla{JSON}{JavaScript Object
 Notation})\footnote{https://json.org} as the data-interchange format, both
-being widely employed in the software industry.
+being widely employed in the software industry. Table \ref{tab:cartendpoints} displays all the API
+endpoints created.
 
 \begin{table}[H]
 	\centering
-	\label{tab:correlacao}
 	\begin{tabular}{c | c|c}
 		\hline 
         HTTP Method & URI & Description \\
@@ -998,7 +1026,11 @@ being widely employed in the software industry.
 	\end{tabular}
     \caption[Cart Service API endpoints]{Cart Service API Endpoints.}
 	\fonte{Own work}
+    \label{tab:cartendpoints}
 \end{table}
+
+An example response of the \texttt{GET /cart/:cartId} endpoint is shown in
+Listing \ref{lst:response}.
 
 \begin{lstlisting}[caption={Example response for the \texttt{GET /cart/:cartId} endpoint using JSON},label={lst:response}]
 {
@@ -1035,13 +1067,15 @@ At the core of the zCart prototype is the Product Recognizer application,
 responsible for the product detection based on computer vision and weight
 sensing.
 
-For achieving its goal, the Product Recognizer has three main components, as shown below:
+For achieving its goal, the Product Recognizer has three main components, as shown in Figure
+\ref{fig:productrecognizerarch}.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\textwidth]{./images/diagrams/ProductRecognizer.png}
 	\caption[Product Recognizer Components]{Product Recognizer Components. Detected events will be communicated to the Cart Service for persistence}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:productrecognizerarch}
 \end{figure}
 
 Each of these components will be described in more detail in the next subsections.
@@ -1058,7 +1092,8 @@ The HX711 is a 24-bit analog-to-digital converter (\sigla{ADC}{Analog-to-Digital
 capable of outputting data in a serial interface \cite{Avia2022}.
 
 It has two channels for analog input with channel A having programmable gains of 128 or 64 and
-can function using both 3.3V and 5V standard digital voltage levels.
+can function using both 3.3V and 5V standard digital voltage levels. The pinout is shown
+in Figure \ref{fig:hx711pinout}.
 
 One of its advantages is is that there's no need to program internal registers,
 all controls to the chip are through its pins. Additionally, it consumes only
@@ -1070,7 +1105,7 @@ load cell, making it a great choice for our prototype.
 	\includegraphics[width=0.9\textwidth]{./images/hx711-pinout.png}
 	\caption[HX711 Pinout for the SOP-16L package]{HX711 Pinout for the SOP-16L package}
     \fonte{\cite{Avia2022}}
-	\label{fig:architecture}
+	\label{fig:hx711pinout}
 \end{figure}
 
 \begin{figure}[H]
@@ -1081,14 +1116,17 @@ load cell, making it a great choice for our prototype.
 	\label{fig:weighttesting}
 \end{figure}
 
-The HX711 integrated circuited comes in a breakout board that contains the necessary passive components
-and includes the pin headers for connecting with other boards.
+The HX711 integrated circuit comes in a breakout board, shown in Figure
+\ref{fig:weighttesting}, that contains the necessary passive components and
+includes the pin headers for connecting with other boards. The typical application 
+circuit of the HX711 integrated circuit is shown in Figure \ref{fig:hx711circuit}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{./images/hx711circuit.png}
 	\caption[Typical HX711 circuit]{Typical HX711 circuit}
     \fonte{\cite{Ross2019}}
+    \label{fig:hx711circuit}
 \end{figure}
 
 The Raspberry Pi board was connected to the HX711 through its GPIO pins,
@@ -1100,7 +1138,7 @@ protocol}\footnote{https://github.com/queuetue/Q2-HX711-Arduino-Library}.
 An open-source driver implementation was used\footnote{https://github.com/tatobari/hx711py}, 
 which included all the necessary features for the prototype.
 
-As shown on Figure \ref{fig:weighttesting}, the load cell requires a minimal
+As shown on Figure \ref{fig:devassembly}, the load cell requires a minimal
 mechanical assembly to be tested properly, and for that two small wood plates
 were used to secure the load cell and breakout board during development.
 
@@ -1109,7 +1147,7 @@ were used to secure the load cell and breakout board during development.
 	\includegraphics[width=0.7\textwidth]{./images/raspberrypiwithloadcell.jpeg}
     \caption[Assembly used during development, including the Raspberry Pi, HX711 and load cell assembly]{Assembly used during development, including the Raspberry Pi, HX711 and load cell assembly}
 	\fonte{Own work}
-	\label{fig:dummy}
+	\label{fig:devassembly}
 \end{figure}
 
 \subsection{Camera}
@@ -1120,7 +1158,7 @@ and good operating system driver support.
 
 The webcam used was a Microsoft LifeCam
 Cinema\footnote{https://www.microsoft.com/pt-BR/accessories/products/webcams/lifecam-cinema},
-capable of capturing video in 720p up to 30\sigla{FPS}{Frames Per Second}, more
+ shown in Figure \ref{fig:camera}, capable of capturing video in 720p up to 30\sigla{FPS}{Frames Per Second}, more
 than enough for our prototyping requirements.
 
 \begin{figure}[H]
@@ -1128,6 +1166,7 @@ than enough for our prototyping requirements.
 	\includegraphics[width=0.3\textwidth]{./images/webcam.jpg}
     \caption[Microsoft LifeCam Cinema Webcam used]{Microsoft LifeCam Cinema Webcam used}
 	\fonte{Microsoft}
+    \label{fig:camera}
 \end{figure}
 
 \subsection{Application}
@@ -1188,11 +1227,12 @@ while True:
     frame_objects_queue.put(filtered_objects)
 \end{lstlisting}
 
-As shown on Listing \ref{lst:main} and on Figure \ref{fig:threads}, the Main
+As shown on Listing \ref{lst:main} and in Figure \ref{fig:threads}, the Main
 thread will do the computational work to fetch the frames from the camera that
 were read by the Frame Reader thread, pre-process and run the object detection
 model in it. The objects are then filtered and then added to a message queue
-that will be used by the Product Recognizer thread to apply our business logic.
+that will be used by the Product Recognizer thread to apply our product
+detection rules.
 
 \subsection{Product Recognizer Thread}
 
@@ -1289,15 +1329,16 @@ in our Project's Repository
 \footnote{https://github.com/fsmiamoto/zcart/blob/master/product\_recognizer/model/notebooks/}.
 It can be used for reference and for performing a further deep dive into this section.
 
-5 products were chosen for the purpose of setting up and demonstrating the Object Recognition 
+Five products were chosen for the purpose of setting up and demonstrating the Object Recognition 
 capability of our product: a Blue Pens Packet; a Card Deck; a Coke Can; a Guarana Soda Can; 
 and a Post It Pack. 
 The data used for training our custom Object Detection model was collected and labelled by us
 using Edge Impulse\footnote{https://www.edgeimpulse.com/}, a development platform for Machine 
 Learning on Edge devices.
-A total of 1000 photos were taken using the Data Collection feature of the Edge Impulse Studio,
-using the same webcam that is used for the inference in our final product.
-Our photos included images showing each one of the products in different scenarios and positions, 
+A total of \textbf{1000 photos} were taken using the Data Collection feature of
+the Edge Impulse Studio, shown in Figure \ref{fig:edgeimpulse1}, using the same
+webcam that is used for the inference in our final product. Our photos included
+images showing each one of the products in different scenarios and positions,
 and also images where more than one product was present.
 
 \begin{figure}[H]
@@ -1305,18 +1346,20 @@ and also images where more than one product was present.
 	\includegraphics[width=0.8\textwidth]{./images/edge-impulse-collect-data.png}
 	\caption[Collecting Data in Edge Impulse]{Collecting Data in Edge Impulse}
 	\fonte{Edge Impulse}
-    \label{fig:diff}
+    \label{fig:edgeimpulse1}
 \end{figure}
 
-The pictures were then were labelled using the Labelling Queue\footnote{https://docs.edgeimpulse.com/docs/edge-impulse-studio/data-acquisition/labeling-queue}
-feature of Edge Impulse, which allowed us to draw Bounding Boxes around the desired objects for detection.
+The pictures were then were labeled using the Labeling
+Queue\footnote{https://docs.edgeimpulse.com/docs/edge-impulse-studio/data-acquisition/labeling-queue}
+feature of Edge Impulse, which allowed us to draw Bounding Boxes around the
+desired objects for detection, as shown in Figure \ref{fig:edgeimpulse2}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./images/edge-impulse-labelling-queue.png}
-	\caption[Labelling Queue in Edge Impulse]{Labelling Queue in Edge Impulse}
+	\caption[Labelling Queue in Edge Impulse]{Labeling Queue in Edge Impulse}
 	\fonte{Edge Impulse}
-    \label{fig:diff}
+    \label{fig:edgeimpulse2}
 \end{figure}
 
 The raw pictures and bounding boxes were then exported from Edge Impulse such
@@ -1330,6 +1373,9 @@ image using programming instructions. The files were then loaded to a Cloud
 Object Storage Bucket in AWS \footnote{https://aws.amazon.com/}, making it
 easier for us to access the data by importing it from the web using any
 programming language.
+
+Listing \ref{lst:boundingBoxCoordinates} shows a section of an example JSON file containing
+the bounding boxes.
 
 \begin{lstlisting}[caption={Bounding boxes coordinates file exported from Edge Impulse},label={lst:boundingBoxCoordinates}]
 	{
@@ -1359,18 +1405,19 @@ programming language.
 	}
 \end{lstlisting}
 
-The development environment used for writing the code for training our custom model
-was Google Colab\footnote{https://colab.research.google.com/}, and the programming language 
-of choice was Python. 
-Google Colab consists on a web-based interface that allows developers
-to use Google's infrastructure (with GPUs and TPUs) for writing and executing code.
+The development environment used for writing the code for training our custom
+model was Google Colab\footnote{https://colab.research.google.com/}, and the
+programming language of choice was Python. Google Colab consists on a web-based
+interface, shown in Figure \ref{fig:googlecollab}, that allows developers to
+use Google's infrastructure (with GPUs and TPUs) for writing and executing
+code.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/google-colab.png}
 	\caption[Google Colab - Overview of Colaboratory Features]{Google Colab - Overview of Colaboratory Features}
 	\fonte{Google\footnote{https://colab.research.google.com/notebooks/basic\_features\_overview.ipynb}}
-    \label{fig:diff}
+    \label{fig:googlecollab}
 \end{figure}
 
 The Edge Impulse files were loaded from our cloud object storage bucket, and then manipulated in Python
@@ -1393,14 +1440,14 @@ As of writing this work, the ModelMaker API only has compatibility
 with the EfficientDet family of architectures \cite{Mingxing2020} for training
 Deep Learning models for Object Detection. The EfficientDet family is efficient
 for object recognition in edge devices, altough contemporany architectures,
-such as the YOLOv5 and its successors, can have better performance.
+such as the YOLOv5 and its successors, can have better performance, as shown in Figure \ref{fig:yoloefficientdet}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\textwidth]{./images/yolo-efficientdet-comparison.png}
 	\caption[YOLOv5 vs EfficientDet - Performance Comparison]{YOLOv5 vs EfficientDet - Performance Comparison}
 	\fonte{YOLOv5 Release Notes\footnote{https://github.com/ultralytics/yolov5/releases/tag/v4.0}}
-    \label{fig:diff}
+    \label{fig:yoloefficientdet}
 \end{figure}
 
 Our initial plan was to use the YOLOv5 architecture, but since its
@@ -1423,20 +1470,22 @@ Since our original images were saved in the 640x480 resolution and the expected
 input of the EfficientDet network is of 320x320 px, two pre-processing
 approaches were tried out for the training dataset: resizing and cropping the
 images. The bounding box coordinates and dimensions were also adjusted
-accordingly such that the data integrity was preserved. 
+accordingly such that the data integrity was preserved. Figure
+\ref{fig:preprocess} illustrates both of the approaches used.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth]{./images/image_preprocessing.png}
 	\caption[Image Preprocessing Strategies]{Image Preprocessing Strategies}
 	\fonte{Own work}
+    \label{fig:preprocess}
 \end{figure}
 
 Once the images and bounding boxes were pre-processed, the images were split
 into Train, Validation and Test sets; and saved in the standardized format
 required by the TensorFlow Lite's Model Maker for Object Detection API for
-training, which consists on a Comma Separated Values (\sigla{CSV}{Comma
-Separated Values}) in the following structure:
+training, which consists of a Comma Separated Values (\sigla{CSV}{Comma
+Separated Values}) file with the structure shown in Listing \ref{lst:csvFormatTrain}.
 
 \begin{lstlisting}[caption={CSV format for specifying the Train, Test and Validation 
 	image sets for training models using the TensorFlow's Model Maker API for Object 
@@ -1527,14 +1576,17 @@ With that, we came to have 16 distinct custom models for experimenting, as shown
 
 A foldable utility cart was selected as a core
 component with two additional wood plates, used for creating a \textit{false
-bottom}. Between the plates, the load cell and Raspberry Pi board were secured
+bottom} shown in Figure \ref{fig:falsebottom}. Between the plates, the load cell and Raspberry Pi board were secured
 in place using bolts, screws and velcro.
+
+Figures \ref{fig:prototype1} and \ref{fig:prototype2} show an overview of the structure built.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.75\textwidth]{./images/cart.jpeg}
 	\caption[Overall mechanical assembly including the LCD and Camera]{Overall mechanical assembly including the LCD and Camera}
 	\fonte{Own work}
+    \label{fig:prototype1}
 \end{figure}
 
 \begin{figure}[H]
@@ -1542,6 +1594,7 @@ in place using bolts, screws and velcro.
 	\includegraphics[width=0.5\textwidth]{./images/carttop.jpeg}
 	\caption[Top view of the assembly showing the false bottom]{Top view of the assembly showing the false bottom}
 	\fonte{Own work}
+    \label{fig:prototype2}
 \end{figure}
 
 Considering the objectives of the prototype, the shape of the mechanical
@@ -1554,6 +1607,7 @@ to keep a shape that would represent the overall idea of a smart cart.
 	\includegraphics[width=0.6\textwidth]{./images/cartbase2.jpeg}
 	\caption[False bottom structure with the load cell and Raspberry Pi board in between]{False bottom structure with the load cell and Raspberry Pi board in between}
 	\fonte{Own work}
+    \label{fig:falsebottom}
 \end{figure}
 
 Additional photos of the prototype can be seen on Appendix \ref{app:photos}.
@@ -1569,47 +1623,51 @@ therefore the models were evaluated with test images, which were never introduce
 during training, to make sure that they were efficient on the what they are ultimately supposed to do, 
 which is to detect products.
 
-Below you can find some examples of inferences executed in test images. 
+Figures \ref{fig:singleclassification} and \ref{fig:multiclassification} show examples of 
+Single and Multi label classification examples respectively.
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/singlelabel-classification-1.png}
-	\caption[Single-Label Classification Example 1]{Single-Label Classification Example 1}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{./images/singlelabel-classification-1.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{./images/singlelabel-classification-2.png}
+        \caption{}
+    \end{subfigure}
+	\caption[Single-Label Classification Examples]{Single-Label Classification Examples}
 	\fonte{Own work}
+    \label{fig:singleclassification}
 \end{figure}
 
 \begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/singlelabel-classification-2.png}
-	\caption[Single-Label Classification Example 2]{Single-Label Classification Example 2}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{./images/multilabel-classification-1.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}{0.5\textwidth}
+        \centering
+        \includegraphics[width=.95\textwidth]{./images/multilabel-classification-2.png}
+        \caption{}
+    \end{subfigure}
+	\caption[Multi-Label Classification Examples]{Multi-Label Classification Examples}
 	\fonte{Own work}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/multilabel-classification-1.png}
-	\caption[Multi-Label Classification Example 1]{Multi-Label Classification Example 1}
-	\fonte{Own work}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{./images/multilabel-classification-2.png}
-	\caption[Multi-Label Classification Example 2]{Multi-Label Classification Example 2}
-	\fonte{Own work}
+    \label{fig:multiclassification}
 \end{figure}
 
 The accuracy metrics were also inferred in our Test data set by using the TensorFlow Lite's 
 Object Detector \textit{"evaluate"} method\footnote{https://www.tensorflow.org/lite/api\_docs/python/tflite\_model\_maker/object\_detector/ObjectDetector\#evaluate}
 for all different model configurations that were applied. 
 The main evaluation metrics for the models considered for our product, which were the ones based 
-in the EfficientDet-D0, D1 and D2 architectures- as the D3 and D4 architectures were too 
-computationally expensive for our device- are listed below. 
+in the EfficientDet-D0, D1 and D2 architectures -- as the D3 and D4 architectures were too 
+computationally expensive for our device -- are listed in Table 4. 
 
 \begin{table}[H]
 	\centering
 	\begin{adjustbox}{width=1\textwidth}
-	\label{tab:modelPerformance}
 	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c}
 		\hline 
 		Architecture & Preprocessing Strategy & Training Strategy & AP & AP 50 IoU & AP 75 IoU & AP (post\_it) & AP (guarana) & AP (coke) & AP (card\_deck) & AP (blue\_pens) \\
@@ -1629,6 +1687,7 @@ computationally expensive for our device- are listed below.
 		\hline 
 	\end{tabular}
 	\end{adjustbox}
+	\label{tab:modelPerformance}
 	\caption[Test Evaluation Metrics for the Different Strategies and Models Applied for Inference]{Test Evaluation Metrics for the Different Strategies and Models Applied for Inference}
 	\fonte{Own work}
 \end{table}
@@ -1658,18 +1717,31 @@ settings that were employed to train them. We can clearly state that the model s
 improvement as the epochs progressed, and maybe more epochs would even have brought greater performance,
 as the weights would have been even more fine-tuned. The trade-off, though, is that it would have 
 taken more time and computer power to train the models.
-Below you can find the Classification Loss chart for our three top models of choice, which were
+In Figure \ref{fig:training}, you can find the Classification Loss chart for our three top models of choice, which were
 the EfficientDet-D0, D1 and D2, whole-trained and that used resizing as a preprocessing strategy.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
-	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
-	\includegraphics[width=0.65\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/efficientdet-d0-resized-whole-loss.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/efficientdet-d1-resized-whole-loss.png}
+        \caption{}
+    \end{subfigure}
+    \begin{subfigure}{0.65\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/efficientdet-d2-resized-whole-loss.png}
+        \caption{}
+    \end{subfigure}
 	\caption[Train and Validation Classification Loss for the EfficientDet Models that 
 		was whole-trained and took resized images as an input]{Train and Validation Classification Loss 
 		for the EfficientDet Models that was whole-trained and took resized images as an input}
 	\fonte{Own work}
+    \label{fig:training}
 \end{figure}
 
 Note that those spikes in the loss values are probably due to the batch size, as it could be 
@@ -1698,10 +1770,14 @@ usage with an Edge TPU, which further reduced our inference times.
 	\fonte{Own work}
 \end{table}
 
+Figure \ref{fig:framecount} displays an example frame from the camera feed displaying the 
+current FPS count.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/frameratemeasurement.png}
     \caption[Frame from camera feed with FPS count]{Frame from camera feed with FPS count}
+    \label{fig:framecount}
 \end{figure}
 
 The inference speed has thoroughly improved - about 50\% on average - resulting
@@ -1724,18 +1800,19 @@ the best precision, improving the overall experience of the prototype.
 \section{Power Consumption}
 
 For estimating the overall power consumption, a commercial wattmeter was used
-to observe the total power required by the power adapter used to supply energy
-to the hardware components.
+to observe the total power required by the power adapter used, as shown in
+Figure \ref{fig:wattmeter}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{./images/powerconsumption.jpeg}
 	\caption[Power consumption measurement using a wattmeter]{Power consumption measurement using a wattmeter}
 	\fonte{Own work}
+    \label{fig:wattmeter}
 \end{figure}
 
 During our tests, we have observed an average consumption of \textbf{10,4W}
-when running the all the software and hardware components of the protype
+when running the all the software and hardware components of the prototype
 through an external power adapter. 
 
 The tests were performed on a 220V power line using the following equipment:
@@ -1767,6 +1844,7 @@ A more detailed overview of the items and their costs is shown on Table \ref{tbl
         Item & Quantity & Cost per item (BRL/USD) \\
 		\hline
         Raspberry Pi 4 8GB Board &  1 & R\$ 1072,40 / US\$ 201,94 \\
+        Coral Edge TPU &  1 & R\$ 318,51 / US\$ 59,99 \\
         HX711 with breakout board &  1  & R\$ 2,55 / US\$ 0.48 \\
         10Kg Load Cell & 1 & R\$ 6,89 / US\$ 1,30 \\
         MDF Board &  2  & R\$ 10,00 / US\$ 1,89 \\
@@ -1877,7 +1955,6 @@ Additionally, we were able to present some of the challenges and future work
 discussions related to the current state of the prototype and also its cost
 structure.
 
-
 %---------- Referencias ----------
 \clearpage
 \label{bibstart}
@@ -1904,7 +1981,6 @@ structure.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=1\textwidth]{./images/userapp3.png}
 	\includegraphics[width=1\textwidth]{./images/userapp3.png}
 	\caption[]{Item removal notification}
 \end{figure}
@@ -1965,9 +2041,13 @@ structure.
 \begin{figure}[H]
 	\centering
     \includegraphics[width=0.7\textwidth]{./images/20221204_164249.jpg}
-    \includegraphics[width=0.7\textwidth]{./images/20221204_164237.jpg}
-	\caption[]{Product addition and removal notifications}
+	\caption[]{Product addition notification}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+    \includegraphics[width=0.7\textwidth]{./images/20221204_164237.jpg}
+	\caption[]{Product removal notification}
+\end{figure}
 
 \end{document}
