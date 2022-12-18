@@ -206,14 +206,13 @@
 			\textbf{\MakeUppercase{\ABNTlocaldata}}\par
 			\textbf{\ABNTdatadata}
 		\end{center}
-         \begin{tabular}{|p{.9\textwidth}|}
-         \hline
-        This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-         \begin{center}
-         \includegraphics[scale=.2]{./images/cc-by-sa.png}
-         \end{center}\\
-         \hline
-         \end{tabular}
+        \begin{tabular}{c p{0.8\textwidth}}
+            \includegraphics[width=.15\textwidth]{./images/cc-by-sa.png} &
+            \begin{minipage}[c]{0.8\textwidth}
+                 This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+                 Third party content that is cited or referenced in this work is not covered by this license.
+            \end{minipage} 
+        \end{tabular}
 	\end{titlepage}
 }
 
