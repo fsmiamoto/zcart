@@ -3,8 +3,9 @@
 [![Compile TCC document](https://github.com/fsmiamoto/zcart/actions/workflows/compile_tcc.yaml/badge.svg?branch=master)](https://github.com/fsmiamoto/zcart/actions/workflows/compile_tcc.yaml)
 [![Check Cart Service](https://github.com/fsmiamoto/zcart/actions/workflows/check_cart_service.yaml/badge.svg)](https://github.com/fsmiamoto/zcart/actions/workflows/check_cart_service.yaml)
 
-
 Repository for our final undergraduate project.
+
+The latest version of the thesis can be seen [here](https://zcart-tcc.s3.sa-east-1.amazonaws.com/latest.pdf)
 
 This README is still a WIP.
 
