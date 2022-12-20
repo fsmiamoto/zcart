@@ -1,0 +1,17 @@
+out
+*.aux
+*.pdf
+!FolhaAprovacao.pdf
+*.log
+*.dvi
+*.lof
+*.lot
+*.lsb
+*.lsg
+*.toc
+*.bbl
+*.blg
+*.eps
+main.*
+!main.tex
+*.xmpi

@@ -1,0 +1,24 @@
+@startuml Product Recognizer Thread communication
+
+participant "Frame Reader Thread" as FrameReader
+participant "Main Thread" as Main
+queue "Frame Object Queue" as Queue
+participant "Product Recognizer Thread" as Product
+boundary "Cart Service" as CartService
+
+activate Main
+Main -> FrameReader: Read frame from camera
+activate FrameReader
+Main <- FrameReader:
+deactivate FrameReader
+Main -> Main: Run frame object detection
+Main -> Queue: Add detected objects on to queue
+Main <- Queue
+deactivate Main
+Product -> Queue: Get objects detected on the frame
+Product <- Queue
+activate Product
+Product -> CartService: Send request with objects removed or added
+Product <-- CartService 
+deactivate Product
+@enduml

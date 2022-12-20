@@ -1,0 +1,28 @@
+@startuml zCart
+
+skinparam component {
+  componentStyle rectangle
+  backgroundColor<<hardware>> Materia
+}
+
+node "Single Board Computer - Raspberry Pi 4" {
+    [Cart Service] -left- SQLite3
+    [Product Recognizer] -up- [Cart Service] : " HTTP/REST"
+    [User App] -right- [Cart Service] : HTTP/REST + WebSockets
+    database SQLite3 {
+        folder Products
+        folder Cart
+    }
+}
+
+[Camera] <<hardware>>
+[Load Cell] <<hardware>>
+[HX711 Integrated Circuit] <<hardware>>
+[LCD Display] <<hardware>>
+
+[Product Recognizer] -down- [Camera]
+[Product Recognizer] -down- [HX711 Integrated Circuit]
+[HX711 Integrated Circuit] -down- [Load Cell]
+[User App] -left- [LCD Display]
+
+@enduml

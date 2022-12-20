@@ -1,0 +1,22 @@
+@startuml Product Recognizer Activity
+start
+:Read frame objects from queue;
+
+:Calculate difference between last frame objects and current frame objects;
+
+:Calculate expected weight change given frame object difference;
+
+:Read weight sensor;
+
+:Compare weight reading with last reading;
+
+if (Weight change within tolerance of the expected one? ) then (yes)
+    :Call Cart Service with the Product update;
+    :Store frame objects for next comparison;
+    :Store weight reading for next comparison;
+else (no)
+    :Ignore frame object difference;
+endif
+
+end
+@enduml

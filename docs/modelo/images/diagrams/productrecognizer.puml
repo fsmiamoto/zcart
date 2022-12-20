@@ -1,0 +1,13 @@
+@startuml ProductRecognizer
+component "Product Recognizer" as ProductRecognizer {
+    component Camera <<hardware>>
+    component "Weight Sensor" <<hardware>> as WeightSensor
+    component Application 
+}
+
+interface "Cart Service" as CartService
+
+Application -left-> Camera
+Application -right-> WeightSensor
+Application -down-( CartService : Add or remove product from Cart
+@enduml
